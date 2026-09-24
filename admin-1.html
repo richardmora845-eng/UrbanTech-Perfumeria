@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UrbanTech · Administración</title>
+<style>
+:root{--g:#16a34a;--b:#38bdf8;--ink:#0f172a;--muted:#64748b;--bg:#f8fafc;--card:#fff;--line:#e2e8f0;--danger:#dc2626}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:linear-gradient(135deg,#f0fdf4,#f0f9ff);color:var(--ink)}
+.wrap{max-width:1100px;margin:auto;padding:20px}.brand{font-weight:900;letter-spacing:.12em;font-size:22px}.brand span{color:var(--g)}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}.btn{border:0;border-radius:12px;padding:11px 15px;font-weight:800;cursor:pointer}.primary{background:var(--ink);color:white}.green{background:var(--g);color:white}.light{background:white;border:1px solid var(--line)}.danger{background:#fee2e2;color:#991b1b}.hidden{display:none!important}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 10px 30px #0f172a0b;margin-bottom:18px}.login{max-width:430px;margin:8vh auto}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{font-size:13px;font-weight:800;display:block;margin-bottom:6px}input{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:11px;font-size:16px}input[type=checkbox]{width:auto}.full{grid-column:1/-1}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.msg{padding:12px;border-radius:12px;background:#eff6ff;margin:12px 0}.error{background:#fef2f2;color:#991b1b}.success{background:#f0fdf4;color:#166534}.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}.prod{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:white}.prod img{width:100%;height:210px;object-fit:contain;background:#f8fafc}.prod .p{padding:14px}.brandtxt{font-size:12px;color:var(--muted);font-weight:800;text-transform:uppercase}.name{font-weight:900;margin:4px 0}.price{font-weight:900;font-size:19px;margin:8px 0}.small{font-size:12px;color:var(--muted)}.topline{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.wrap{padding:14px}.card{padding:16px}}
+</style>
+</head>
+<body>
+<div id="loginView" class="wrap login">
+  <div class="card">
+    <div class="brand">URBAN<span>TECH</span></div><h1>Administración</h1>
+    <p class="small">Panel privado de productos. Inicia sesión con el usuario administrador de Supabase.</p>
+    <form id="loginForm">
+      <label>Correo</label><input id="email" type="email" required autocomplete="username">
+      <label style="margin-top:12px">Contraseña</label><input id="password" type="password" required autocomplete="current-password">
+      <button class="btn primary" style="width:100%;margin-top:16px">Entrar</button>
+    </form><div id="loginMsg"></div>
+  </div>
+</div>
+<div id="appView" class="wrap hidden">
+<header><div><div class="brand">URBAN<span>TECH</span></div><div class="small">Panel de perfumería</div></div><button id="logout" class="btn light">Cerrar sesión</button></header>
+<div id="notice"></div>
+<div class="card" id="seedCard" style="display:none"><div class="topline"><div><h2 style="margin:0 0 5px">Catálogo inicial</h2><div class="small">Tu catálogo está vacío. Puedes cargar los 25 perfumes iniciales de UrbanTech con un toque.</div></div><button id="seedBtn" class="btn green">Cargar 25 perfumes</button></div></div>
+<div class="card"><h2 id="formTitle">Agregar perfume</h2><form id="productForm" class="grid">
+<input id="productId" type="hidden">
+<div><label>Marca</label><input id="brand" required placeholder="Lattafa"></div>
+<div><label>Nombre</label><input id="name" required placeholder="Khamrah"></div>
+<div><label>Precio (₡)</label><input id="price" type="number" min="0" step="500" required placeholder="32500"></div>
+<div><label>Imagen por URL (opcional)</label><input id="imageUrl" type="url" placeholder="https://..."></div>
+<div class="full"><label>O subir imagen desde tu teléfono (opcional)</label><input id="imageFile" type="file" accept="image/*"></div>
+<div><label><input id="active" type="checkbox" checked> Mostrar en la tienda</label></div>
+<div class="actions full"><button class="btn green" type="submit">Guardar perfume</button><button id="cancelBtn" type="button" class="btn light hidden">Cancelar edición</button></div>
+</form></div>
+<div class="card"><div class="topline"><h2 style="margin:0">Productos</h2><input id="search" style="max-width:300px" placeholder="Buscar perfume..."></div><div id="products" class="products" style="margin-top:15px"></div></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL='https://khvrpnfgkikgysludpod.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY='sb_publishable_nHvdaVoYINUMmTUwmST2LQ_q4O02VnY';
+const db=supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+const WA='50670461262';
+const INITIAL=[
+['Calvin Klein','CK One',18000,'https://i.makeupstore.de/d/dz/dza3dawryb54.jpg'],['Nautica','Voyage',20000,'https://impressivestore.pk/cdn/shop/files/Nautica_Voyage_For_Men_Edt_100ml_bottle.jpg?v=1772439388'],['Armaf','Club de Nuit Intense Man',30000,'https://perfumes.ec/cdn/shop/files/ArmafClubDeNuitIntenseMan150ml.png?v=1700769337'],['Afnan','9PM',27500,'https://down-my.img.susercontent.com/file/my-11134207-7rash-m42oujwd6is98d'],['Lattafa','Asad',22500,'https://perfumy.pl/hpeciai/09b3a8c68311f1ebb52114dc6d452226/pol_pl_Lattafa-Asad-woda-perfumowana-100-ml-14337_1.jpg'],['Lattafa','Fakhar Black',22500,'https://dxbperfume.co.uk/cdn/shop/files/fakharblack2.jpg?v=1728996571&width=2000'],['Lattafa','Oud for Glory',25000,'https://houseofniche.nl/cdn/shop/products/OudForGlory3.png?v=1697401731&width=1946'],['Lattafa','Khamrah',30000,'https://gulfscents.co.uk/cdn/shop/files/khamrah_lattafa.jpeg-1.jpg?v=1726680261&width=1024'],['Rasasi','Hawas',35000,'https://thearabicscent.com/wp-content/uploads/2025/07/Hawas-For-Him-Rasasi-Eau-de-Parfum-Para-Hombre-600x697.jpg'],['Lattafa','Yara',27500,'https://fathyibrahim.com/cdn/shop/files/s-l1200-1_f17ea1f8-64b1-4246-ab73-5eec33481f05.webp?v=1742215995'],['Lattafa','Yara Candy',27500,'https://reseller.wfragrances.com/cdn/shop/files/yara-candy-bottle.jpg?v=1777540659&width=1445'],['Lattafa','Mayar',26500,'https://fragarabic.com/cdn/shop/files/Mayar_Lattafa_Eau_de_Parfum_Para_Mujer.webp?v=1782724070&width=2048'],['Armaf','Odyssey Mandarin Sky',27500,'https://orioudh.com/cdn/shop/files/odyssey-mandarin-sky-eau-de-parfum-200ml-by-armaf-men-perfume-edp-200ml-armaf-309858-1191457745.jpg?crop=center&height=2048&v=1757063988&width=2048'],['Carolina Herrera','212 VIP Men',35000,'https://theperfumewarehouse.com.au/cdn/shop/files/B2543M.jpg?v=1768209611'],['Carolina Herrera','212 NYC',35000,'https://img.tatacliq.com/images/i8/1348Wx2000H/MP000000013933922_1348Wx2000H_202207271339401.jpeg'],['Carolina Herrera','Good Girl',40000,'https://www.flannels.com/images/products/75163591_l.jpg'],['Ariana Grande','Cloud',35000,'https://ultrafemme.com/media/catalog/product/3/4/349829_812256023289_01_8ce2.png?canvas=500%3A500&fit=bounds&format=jpeg&height=500&optimize=medium&width=500'],['Versace','Bright Crystal',35000,'https://cazanovaonline.mx/cdn/shop/files/2_b5ca7ae9-73cc-4972-923d-4028ec8cc4c4.png?v=1692920591&width=1445'],['Dolce & Gabbana','Light Blue Pour Femme',35000,'https://media.marionnaud.fr/medias/sys_master/prd-images/hfb/h9b/11658578165790/MFR-103508190-front/MFR-103508190-front.png'],['Yves Saint Laurent','Libre',40000,'https://www.sephora.pl/on/demandware.static/-/Sites-masterCatalog_Sephora/default/dw2e04790f/images/hi-res/SKU/SKU_897/483047_swatch.jpg'],['Yves Saint Laurent','Black Opium',40000,'https://www.yslbeauty.de/dw/image/v2/AAQP_PRD/on/demandware.static/-/Sites-ysl-master-catalog/default/dw57601925/Fragrance/Black_Opium/Black%20Opium%20Refresh%20Assets/3614271969477%20BO%20EDP%20150ML.jpg'],['Valentino','Donna Born in Roma',40000,'https://felix.com.pa/cdn/shop/files/1137-LB040200.png?v=1704918319'],['Maison Alhambra','Kismet Angel',22500,'https://muscorient.com/1564-medium_default/kismet-angel-maison-al-hambra.jpg'],['Lattafa','Ana Abiyedh Rouge',25000,'https://dxbperfume.co.uk/cdn/shop/files/abiyedhrouge1.jpg?v=1738075484&width=1600'],['Armaf','Club de Nuit Untold',32500,'https://www.lileparfumee.ca/cdn/shop/files/30_66da2f1d-56b3-4fdc-bdde-73e008d196c9.png?v=1762458452&width=1200']
+];
+const money=n=>new Intl.NumberFormat('es-CR',{style:'currency',currency:'CRC',maximumFractionDigits:0}).format(n);
+const $=id=>document.getElementById(id);
+function notice(t,kind=''){ $('notice').innerHTML=t?`<div class="msg ${kind}">${t}</div>`:''; }
+async function load(){
+ const {data,error}=await db.from('products').select('*').order('created_at',{ascending:false});
+ if(error){notice('No se pudieron cargar los productos. Verifica que la sesión sea de administrador.','error');return []}
+ $('seedCard').style.display=data.length?'none':'block'; render(data); return data;
+}
+let all=[];
+function render(data){all=data;const q=$('search').value.toLowerCase();const rows=data.filter(x=>(x.brand+' '+x.name).toLowerCase().includes(q));$('products').innerHTML=rows.map(p=>`<article class="prod"><img src="${p.image_url||'https://placehold.co/600x600?text=UrbanTech'}" onerror="this.src='https://placehold.co/600x600?text=UrbanTech'"><div class="p"><div class="brandtxt">${esc(p.brand)}</div><div class="name">${esc(p.name)}</div><div class="price">${money(p.price)}</div><div class="small">${p.active?'Visible en la tienda':'Oculto'}</div><div class="actions"><button class="btn light" onclick="edit('${p.id}')">Editar</button><button class="btn ${p.active?'danger':'green'}" onclick="toggle('${p.id}',${!p.active})">${p.active?'Ocultar':'Mostrar'}</button><button class="btn danger" onclick="del('${p.id}')">Eliminar</button></div></div></article>`).join('')||'<p class="small">No hay coincidencias.</p>'}
+function esc(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+window.edit=id=>{const p=all.find(x=>x.id===id);if(!p)return;$('productId').value=p.id;$('brand').value=p.brand;$('name').value=p.name;$('price').value=p.price;$('imageUrl').value=p.image_url||'';$('active').checked=p.active;$('formTitle').textContent='Editar perfume';$('cancelBtn').classList.remove('hidden');scrollTo({top:0,behavior:'smooth'})};
+window.toggle=async(id,val)=>{const {error}=await db.from('products').update({active:val}).eq('id',id);if(error)notice(error.message,'error');else await load()};
+window.del=async id=>{if(!confirm('¿Eliminar este perfume?'))return;const {error}=await db.from('products').delete().eq('id',id);if(error)notice(error.message,'error');else await load()};
+$('search').addEventListener('input',()=>render(all));
+$('cancelBtn').onclick=()=>reset();function reset(){$('productForm').reset();$('productId').value='';$('active').checked=true;$('formTitle').textContent='Agregar perfume';$('cancelBtn').classList.add('hidden')}
+$('productForm').onsubmit=async e=>{e.preventDefault();notice('Guardando...');let image=$('imageUrl').value.trim()||null;const file=$('imageFile').files[0];if(file){const ext=(file.name.split('.').pop()||'jpg').toLowerCase();const path=`products/${crypto.randomUUID()}.${ext}`;const up=await db.storage.from('UrbanTech').upload(path,file,{contentType:file.type||'image/jpeg'});if(up.error){notice('Error al subir la imagen: '+up.error.message,'error');return}image=db.storage.from('UrbanTech').getPublicUrl(path).data.publicUrl}
+const payload={brand:$('brand').value.trim(),name:$('name').value.trim(),price:Number($('price').value),image_url:image,active:$('active').checked};const id=$('productId').value;const res=id?await db.from('products').update(payload).eq('id',id):await db.from('products').insert(payload);if(res.error){notice(res.error.message,'error');return}notice('Producto guardado correctamente.','success');reset();await load()};
+$('seedBtn').onclick=async()=>{if(!confirm('¿Cargar los 25 perfumes iniciales?'))return;$('seedBtn').disabled=true;const rows=INITIAL.map(x=>({brand:x[0],name:x[1],price:x[2],image_url:x[3],active:true}));const {error}=await db.from('products').insert(rows);if(error)notice(error.message,'error');else{notice('Los 25 perfumes fueron cargados.','success');await load()}$('seedBtn').disabled=false};
+$('logout').onclick=()=>db.auth.signOut();
+async function start(){const {data:{session}}=await db.auth.getSession();if(session){$('loginView').classList.add('hidden');$('appView').classList.remove('hidden');await load()}else{$('loginView').classList.remove('hidden');$('appView').classList.add('hidden')}}
+$('loginForm').onsubmit=async e=>{e.preventDefault();$('loginMsg').innerHTML='';const {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error){$('loginMsg').innerHTML='<div class="msg error">Correo o contraseña incorrectos.</div>'}else start()};
+db.auth.onAuthStateChange(()=>setTimeout(start,0));start();
+</script></body></html>
