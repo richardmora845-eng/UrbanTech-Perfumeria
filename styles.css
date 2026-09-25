@@ -1,9 +1,31 @@
 /* =========================================================
-   URBANTECH PERFUMERÍA
-   AJUSTE DE PROPORCIONES Y PANTALLA
-   ========================================================= */
+   URBANTECH PERFUMERÍA — ESTILO COMPLETO
+   Diseño premium + responsive
+========================================================= */
 
-* {
+:root {
+  --bg: #06110e;
+  --bg-soft: #0a1713;
+  --bg-card: #0d1d18;
+  --bg-card-2: #10251f;
+  --text: #f5f1e8;
+  --muted: #93a29b;
+  --muted-2: #64736c;
+  --cyan: #50ead3;
+  --cyan-bright: #6ff7e3;
+  --cyan-dark: #1aa995;
+  --line: rgba(102, 239, 216, .18);
+  --line-soft: rgba(255,255,255,.08);
+  --gold: #d8bd78;
+  --danger: #ff7272;
+  --shadow: 0 22px 70px rgba(0,0,0,.38);
+  --radius: 18px;
+  --container: 1180px;
+}
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -11,197 +33,14 @@
 
 html {
   scroll-behavior: smooth;
-  width: 100%;
-  overflow-x: hidden;
+  background: var(--bg);
 }
 
 body {
   width: 100%;
   min-width: 0;
-  overflow-x: hidden;
-  background: #031b16;
-  color: #f5f5f5;
-  font-family: "Montserrat", sans-serif;
-}
-
-/* =========================================================
-   IMÁGENES
-   ========================================================= */
-
-img {
   max-width: 100%;
-  height: auto;
-}
-
-/* =========================================================
-   HEADER
-   ========================================================= */
-
-.header {
-  width: 100%;
-  min-height: 76px;
-  padding: 14px clamp(18px, 4vw, 60px);
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-
-  position: relative;
-  z-index: 20;
-
-  background: rgba(2, 24, 20, 0.96);
-  border-bottom: 1px solid rgba(75, 220, 203, 0.16);
-}
-
-.logo {
-  flex-shrink: 0;
-  text-align: center;
-}
-
-.logo a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.logo span {
-  display: block;
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(25px, 3vw, 38px);
-  font-weight: 600;
-  line-height: 0.9;
-  color: #ffffff;
-}
-
-.logo small {
-  display: block;
-  margin-top: 5px;
-  font-family: "Montserrat", sans-serif;
-  font-size: 8px;
-  letter-spacing: 4px;
-  color: #55d8c7;
-}
-
-/* =========================================================
-   NAVEGACIÓN
-   ========================================================= */
-
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(14px, 3vw, 38px);
-
-  flex: 1;
-}
-
-.nav a {
-  color: #f3f3f3;
-  text-decoration: none;
-
-  font-size: clamp(11px, 1.2vw, 14px);
-  font-weight: 500;
-  letter-spacing: 1px;
-
-  white-space: nowrap;
-
-  transition: 0.25s ease;
-}
-
-.nav a:hover {
-  color: #55d8c7;
-}
-
-.cart-button {
-  flex-shrink: 0;
-
-  border: 1px solid rgba(85, 216, 199, 0.35);
-  background: rgba(85, 216, 199, 0.08);
-  color: white;
-
-  border-radius: 30px;
-
-  padding: 10px 15px;
-
-  font-size: 15px;
-}
-
-/* =========================================================
-   HERO
-   ========================================================= */
-
-.hero {
-  width: 100%;
-  min-height: calc(100vh - 76px);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: clamp(55px, 9vw, 120px) 20px;
-
-  position: relative;
-  overflow: hidden;
-
+  overflow-x: hidden;
   background:
     radial-gradient(
-      circle at 50% 35%,
-      rgba(35, 148, 130, 0.16),
-      transparent 48%
-    ),
-    linear-gradient(
-      135deg,
-      #031b16 0%,
-      #062821 50%,
-      #021712 100%
-    );
-}
-
-.hero-content {
-  width: min(900px, 100%);
-  text-align: center;
-  margin: auto;
-}
-
-.hero-small {
-  margin-bottom: 15px;
-
-  font-size: 11px;
-  letter-spacing: 5px;
-  color: #55d8c7;
-}
-
-.hero h1 {
-  max-width: 900px;
-  margin: 0 auto 22px;
-
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(48px, 8vw, 92px);
-  font-weight: 500;
-  line-height: 0.95;
-
-  color: #ffffff;
-}
-
-.hero h1 span {
-  display: block;
-  color: #55d8c7;
-}
-
-.hero p {
-  max-width: 650px;
-  margin: 0 auto 32px;
-
-  font-size: clamp(13px, 1.6vw, 17px);
-  line-height: 1.8;
-
-  color: rgba(255,255,255,0.72);
-}
-
-/* =========================================================
-   BOTONES
-   ========================================================= */
-
-.hero-buttons {
-  display: flex;
-  align-items: center
+     
