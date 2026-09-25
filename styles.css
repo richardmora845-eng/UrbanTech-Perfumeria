@@ -1,33 +1,25 @@
 /* =========================================================
    URBANTECH PERFUMERÍA
-   DISEÑO BOTÁNICO PREMIUM
-   Verde oscuro + esmeralda + cian + tipografía elegante
+   NUEVA ESTÉTICA — MISMA ESTRUCTURA Y FUNCIONALIDAD
 ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap');
-
 :root {
-  --black: #020807;
-  --dark: #04110d;
-  --dark-2: #071914;
-  --dark-3: #0b211a;
-  --green: #0d3a2d;
-  --emerald: #126653;
-  --cyan: #42ead0;
-  --cyan-light: #76f6e2;
-  --white: #f5f3eb;
-  --cream: #ddd9ca;
-  --gray: #9aa9a2;
-  --gray-dark: #62736b;
-  --gold: #cdbb7b;
+  --negro: #050b09;
+  --verde: #071713;
+  --verde-2: #0b211a;
+  --verde-3: #103027;
 
-  --container: 1220px;
+  --turquesa: #48e5ce;
+  --turquesa-suave: #7af1df;
 
-  --shadow:
-    0 25px 80px rgba(0,0,0,.55);
+  --blanco: #f5f2e9;
+  --gris: #a8b2ad;
+  --gris-oscuro: #68756f;
 
-  --transition:
-    .3s ease;
+  --borde: rgba(72, 229, 206, .20);
+  --borde-suave: rgba(255,255,255,.08);
+
+  --sombra: 0 20px 60px rgba(0,0,0,.35);
 }
 
 
@@ -42,40 +34,46 @@
 }
 
 html {
-  width: 100%;
-  min-width: 0;
   scroll-behavior: smooth;
-  background: var(--black);
+  background: var(--negro);
 }
 
 body {
   width: 100%;
-  min-width: 0;
   max-width: 100%;
+  min-width: 0;
+
   overflow-x: hidden;
 
   background:
     radial-gradient(
-      circle at 50% 0%,
-      rgba(17,92,73,.22),
-      transparent 38%
+      circle at 15% 20%,
+      rgba(39, 153, 129, .10),
+      transparent 28%
     ),
-    var(--black);
+    radial-gradient(
+      circle at 85% 40%,
+      rgba(36, 181, 155, .08),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #030806,
+      #071612 45%,
+      #030907
+    );
 
-  color: var(--white);
+  color: var(--blanco);
 
   font-family: "Montserrat", sans-serif;
 }
 
 img {
-  display: block;
   max-width: 100%;
 }
 
 button,
-input,
-select,
-textarea {
+input {
   font-family: inherit;
 }
 
@@ -88,14 +86,9 @@ a {
   text-decoration: none;
 }
 
-::selection {
-  background: var(--cyan);
-  color: var(--black);
-}
-
 
 /* =========================================================
-   DECORACIÓN BOTÁNICA
+   DECORACIÓN BOTÁNICA DEL SITIO
 ========================================================= */
 
 body::before,
@@ -103,65 +96,67 @@ body::after {
   position: fixed;
   z-index: -1;
 
-  width: 280px;
-  height: 520px;
-
-  pointer-events: none;
+  width: 260px;
+  height: 420px;
 
   content: "";
 
-  opacity: .12;
+  pointer-events: none;
 
-  background:
-    radial-gradient(
-      ellipse at center,
-      #237b61 0%,
-      transparent 65%
-    );
+  opacity: .32;
 
-  filter: blur(30px);
+  filter: blur(.2px);
 }
 
 body::before {
-  left: -180px;
-  top: 20%;
+  left: -210px;
+  top: 18%;
+
+  background:
+    radial-gradient(
+      ellipse at 70% 15%,
+      rgba(40, 132, 103, .55) 0 8%,
+      transparent 9%
+    ),
+    radial-gradient(
+      ellipse at 45% 32%,
+      rgba(35, 120, 94, .45) 0 9%,
+      transparent 10%
+    ),
+    radial-gradient(
+      ellipse at 65% 50%,
+      rgba(39, 140, 108, .42) 0 9%,
+      transparent 10%
+    ),
+    radial-gradient(
+      ellipse at 35% 68%,
+      rgba(35, 116, 91, .38) 0 9%,
+      transparent 10%
+    );
+
+  transform: rotate(-20deg);
 }
 
 body::after {
-  right: -180px;
-  top: 55%;
-}
-
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-
-  width: 100%;
-
-  min-height: 78px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 25px;
-
-  padding:
-    12px clamp(18px, 5vw, 70px);
+  right: -210px;
+  top: 42%;
 
   background:
-    linear-gradient(
-      90deg,
-      rgba(1,9,7,.97),
-      rgba(3,19,14,.94),
-      rgba(1,9,7,.97)
-    );
-
-  border-bottom:
-    1px solid
+    radial-gradient(
+      ellipse at 30% 18%,
+      rgba(40, 142, 109, .50) 0 8%,
+      transparent 9%
+    ),
+    radial-gradient(
+      ellipse at 60% 35%,
+      rgba(35, 122, 94, .46) 0 9%,
+      transparent 10%
+    ),
+    radial-gradient(
+      ellipse at 35% 55%,
+      rgba(42, 151, 115, .42) 0 9%,
+      transparent 10%
+    ),
+    radial-gradient(
+      ellipse at 70% 
+      
