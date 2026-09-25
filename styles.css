@@ -1,646 +1,2090 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+/* =========================================================
+   URBANTECH PERFUMERÍA
+   DISEÑO NEGRO + VERDE/CELeste
+========================================================= */
 
-  <title>UrbanTech | Perfumería</title>
+:root {
 
-  <meta
-    name="description"
-    content="UrbanTech Perfumería - Fragancias, perfumes y productos de perfumería."
-  >
+  --black: #030607;
+  --black-2: #070b0c;
+  --black-3: #0b1112;
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  --cyan: #00f5e9;
+  --cyan-dark: #00cfc7;
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&family=Great+Vibes&display=swap"
-    rel="stylesheet"
-  >
+  --green: #00d982;
+  --green-bright: #00ff9d;
 
-  <link rel="stylesheet" href="styles.css">
-</head>
+  --white: #ffffff;
+  --gray: #a7afb0;
+  --gray-dark: #5d6768;
 
-<body>
+  --border: rgba(0,245,233,.22);
 
-<!-- =========================================================
-     BARRA SUPERIOR
-========================================================= -->
+}
 
-<div class="topbar">
-  <div class="topbar-content">
 
-    <span>
-      🚚 Entregas a todo Costa Rica
-    </span>
+* {
 
-    <span class="top-separator">|</span>
+  box-sizing: border-box;
 
-    <span>
-      💬 Pedidos por WhatsApp
-    </span>
+  margin: 0;
 
-    <span class="top-separator">|</span>
+  padding: 0;
 
-    <span>
-      ✦ UrbanTech Perfumería
-    </span>
+}
 
-  </div>
-</div>
 
+html {
 
-<!-- =========================================================
-     NAVEGACIÓN
-========================================================= -->
+  scroll-behavior: smooth;
 
-<nav class="navbar">
+}
 
-  <a href="#inicio" class="brand-logo">
 
-    <div class="logo-bottle">
-      <span></span>
-    </div>
+body {
 
-    <div class="logo-text">
+  background:
+    radial-gradient(
+      circle at 50% -20%,
+      rgba(0,245,233,.07),
+      transparent 40%
+    ),
+    var(--black);
 
-      <strong>
-        URBAN<span>TECH</span>
-      </strong>
+  color: var(--white);
 
-      <small>
-        PERFUMERÍA
-      </small>
+  font-family:
+    'Montserrat',
+    Arial,
+    sans-serif;
 
-    </div>
+  line-height: 1.5;
 
-  </a>
+  overflow-x: hidden;
 
+}
 
-  <div class="nav-links">
 
-    <a href="#inicio" class="active">
-      Inicio
-    </a>
+/* =========================================================
+   BARRA SUPERIOR
+========================================================= */
 
-    <a href="#perfumes">
-      Perfumes
-    </a>
+.topbar {
 
-    <a href="#categorias">
-      Categorías
-    </a>
+  background: #020404;
 
-    <a href="#contacto">
-      Contacto
-    </a>
+  border-bottom:
+    1px solid
+    rgba(0,245,233,.15);
 
-  </div>
+  color: #d8dddd;
 
+  font-size: 11px;
 
-  <div class="nav-actions">
+  letter-spacing: 1px;
 
-    <button
-      class="icon-button"
-      id="searchButton"
-      aria-label="Buscar"
-    >
-      <svg viewBox="0 0 24 24">
-        <circle cx="11" cy="11" r="7"></circle>
-        <path d="M20 20l-4-4"></path>
-      </svg>
-    </button>
+}
 
-    <a
-      href="#perfumes"
-      class="cart-button"
-      aria-label="Ver catálogo"
-    >
-      <svg viewBox="0 0 24 24">
-        <path d="M3 4h2l2.2 11h10.5l2-8H7"></path>
-        <circle cx="9" cy="19" r="1.5"></circle>
-        <circle cx="17" cy="19" r="1.5"></circle>
-      </svg>
 
-      <span id="cartCount">
-        0
-      </span>
+.topbar-content {
 
-    </a>
+  min-height: 34px;
 
-  </div>
+  display: flex;
 
-</nav>
+  justify-content: center;
 
+  align-items: center;
 
-<!-- =========================================================
-     BUSCADOR
-========================================================= -->
+  gap: 14px;
 
-<div
-  class="search-panel"
-  id="searchPanel"
->
+  padding: 5px 15px;
 
-  <div class="search-inner">
+}
 
-    <div class="search-icon">
-      <svg viewBox="0 0 24 24">
-        <circle cx="11" cy="11" r="7"></circle>
-        <path d="M20 20l-4-4"></path>
-      </svg>
-    </div>
 
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="Buscar perfume, marca o fragancia..."
-      autocomplete="off"
-    >
+.top-separator {
 
-    <button id="closeSearch">
-      ×
-    </button>
+  color: var(--cyan);
 
-  </div>
+  opacity: .6;
 
-</div>
+}
 
 
-<!-- =========================================================
-     HERO
-========================================================= -->
+/* =========================================================
+   NAVBAR
+========================================================= */
 
-<header
-  class="hero"
-  id="inicio"
->
+.navbar {
 
-  <div class="hero-overlay"></div>
+  height: 78px;
 
-  <div class="hero-content">
+  padding:
+    0
+    5.5%;
 
-    <div class="hero-small-title">
-      FRAGANCIAS QUE DEJAN
-      <span>HUELLA</span>
-    </div>
+  display: flex;
 
+  align-items: center;
 
-    <h1>
-      PERFUMES
-      <em>Originales</em>
-    </h1>
+  justify-content: space-between;
 
+  gap: 25px;
 
-    <p class="hero-description">
-      Las mejores marcas, los mejores aromas.
-      <br>
-      Todo en un solo lugar.
-    </p>
+  position: sticky;
 
+  top: 0;
 
-    <div class="hero-buttons">
+  z-index: 100;
 
-      <a
-        href="#perfumes"
-        class="main-button"
-      >
-        VER CATÁLOGO
-        <span>→</span>
-      </a>
+  background:
+    rgba(3,6,7,.94);
 
+  backdrop-filter:
+    blur(15px);
 
-      <a
-        href="#categorias"
-        class="secondary-button"
-      >
-        EXPLORAR
-      </a>
+  border-bottom:
+    1px solid
+    rgba(0,245,233,.12);
 
-    </div>
+}
 
-  </div>
 
+.brand-logo {
 
-  <div class="hero-products">
+  display: flex;
 
-    <div class="glow"></div>
+  align-items: center;
 
-    <div class="hero-bottle bottle-one">
-      <div class="cap"></div>
-      <div class="bottle-body">
-        <small>URBAN</small>
-        <strong>TECH</strong>
-      </div>
-    </div>
+  gap: 12px;
 
-    <div class="hero-bottle bottle-two">
-      <div class="cap"></div>
-      <div class="bottle-body">
-        <small>EAU</small>
-        <strong>DE PARFUM</strong>
-      </div>
-    </div>
+  text-decoration: none;
 
-    <div class="hero-bottle bottle-three">
-      <div class="cap"></div>
-      <div class="bottle-body">
-        <strong>ELIXIR</strong>
-      </div>
-    </div>
+  color: white;
 
-  </div>
+}
 
 
-  <div class="hero-bottom-glow"></div>
+.logo-bottle {
 
-</header>
+  width: 37px;
 
+  height: 45px;
 
-<!-- =========================================================
-     BENEFICIOS
-========================================================= -->
+  border:
+    2px solid
+    var(--cyan);
 
-<section class="benefits">
+  border-radius: 7px;
 
-  <div class="benefit">
+  position: relative;
 
-    <div class="benefit-icon">
-      ✓
-    </div>
+  box-shadow:
+    0 0 12px
+    rgba(0,245,233,.25);
 
-    <div>
-      <strong>
-        Productos originales
-      </strong>
+}
 
-      <span>
-        Calidad y confianza
-      </span>
-    </div>
 
-  </div>
+.logo-bottle::before {
 
+  content: '';
 
-  <div class="benefit">
+  position: absolute;
 
-    <div class="benefit-icon">
-      🚚
-    </div>
+  width: 17px;
 
-    <div>
-      <strong>
-        Envíos a todo el país
-      </strong>
+  height: 7px;
 
-      <span>
-        Rápido y seguro
-      </span>
-    </div>
+  border:
+    2px solid
+    var(--cyan);
 
-  </div>
+  border-radius: 5px 5px 0 0;
 
+  top: -9px;
 
-  <div class="benefit">
+  left: 8px;
 
-    <div class="benefit-icon">
-      🔒
-    </div>
+}
 
-    <div>
-      <strong>
-        Compra segura
-      </strong>
 
-      <span>
-        Atención personalizada
-      </span>
-    </div>
+.logo-bottle span {
 
-  </div>
+  position: absolute;
 
+  left: 6px;
 
-  <div class="benefit">
+  right: 6px;
 
-    <div class="benefit-icon">
-      💬
-    </div>
+  bottom: 7px;
 
-    <div>
-      <strong>
-        Atención por WhatsApp
-      </strong>
+  height: 2px;
 
-      <span>
-        Estamos para ayudarte
-      </span>
-    </div>
+  background:
+    var(--cyan);
 
-  </div>
+  box-shadow:
+    0 0 8px
+    var(--cyan);
 
-</section>
+}
 
 
-<!-- =========================================================
-     CATEGORÍAS
-========================================================= -->
+.logo-text {
 
-<section
-  class="section categories-section"
-  id="categorias"
->
+  display: flex;
 
-  <div class="section-heading">
+  flex-direction: column;
 
-    <div class="heading-line"></div>
+  line-height: 1;
 
-    <div class="heading-label">
-      DESCUBRE TU AROMA
-    </div>
+}
 
-    <div class="heading-line"></div>
 
-  </div>
+.logo-text strong {
 
+  font-size: 21px;
 
-  <h2>
-    Nuestras <span>Categorías</span>
-  </h2>
+  font-weight: 800;
 
+  letter-spacing: 1px;
 
-  <p class="section-description">
-    Encuentra una fragancia que vaya contigo.
-  </p>
+}
 
 
-  <div class="categories-grid">
+.logo-text strong span {
 
-    <button
-      class="category-card"
-      data-category="hombres"
-    >
+  color: var(--cyan);
 
-      <div class="category-image men">
-        <div class="category-bottle"></div>
-      </div>
+}
 
-      <strong>
-        Hombres
-      </strong>
 
-      <span>
-        Fragancias masculinas
-      </span>
+.logo-text small {
 
-    </button>
+  margin-top: 5px;
 
+  font-size: 8px;
 
-    <button
-      class="category-card"
-      data-category="mujeres"
-    >
+  letter-spacing: 5px;
 
-      <div class="category-image women">
-        <div class="category-bottle"></div>
-      </div>
+  color: #b8c0c0;
 
-      <strong>
-        Mujeres
-      </strong>
+  text-align: center;
 
-      <span>
-        Fragancias femeninas
-      </span>
+}
 
-    </button>
 
+.nav-links {
 
-    <button
-      class="category-card"
-      data-category="unisex"
-    >
+  display: flex;
 
-      <div class="category-image unisex">
-        <div class="category-bottle"></div>
-      </div>
+  align-items: center;
 
-      <strong>
-        Unisex
-      </strong>
+  gap: 36px;
 
-      <span>
-        Para todos los estilos
-      </span>
+}
 
-    </button>
 
+.nav-links a {
 
-    <button
-      class="category-card"
-      data-category="regalos"
-    >
+  color: #e8eeee;
 
-      <div class="category-image gifts">
-        <div class="gift-box">
-          🎁
-        </div>
-      </div>
+  text-decoration: none;
 
-      <strong>
-        Sets / Regalos
-      </strong>
+  font-size: 13px;
 
-      <span>
-        Para ocasiones especiales
-      </span>
+  font-weight: 600;
 
-    </button>
+  position: relative;
 
+  padding: 28px 0;
 
-    <button
-      class="category-card"
-      data-category="todos"
-    >
+  transition: .25s;
 
-      <div class="category-image fresh">
-        <div class="category-bottle"></div>
-      </div>
+}
 
-      <strong>
-        Ver todo
-      </strong>
 
-      <span>
-        Todo nuestro catálogo
-      </span>
+.nav-links a:hover,
+.nav-links a.active {
 
-    </button>
+  color: var(--cyan);
 
-  </div>
+}
 
-</section>
 
+.nav-links a.active::after {
 
-<!-- =========================================================
-     PRODUCTOS
-========================================================= -->
+  content: '';
 
-<section
-  class="section products-section"
-  id="perfumes"
->
+  position: absolute;
 
-  <div class="section-heading">
+  left: 0;
 
-    <div class="heading-line"></div>
+  right: 0;
 
-    <div class="heading-label">
-      SELECCIÓN URBANTECH
-    </div>
+  bottom: 17px;
 
-    <div class="heading-line"></div>
+  height: 2px;
 
-  </div>
+  background:
+    var(--cyan);
 
+  box-shadow:
+    0 0 10px
+    var(--cyan);
 
-  <div class="products-title-row">
+}
 
-    <div>
 
-      <h2>
-        Los <span>más buscados</span>
-      </h2>
+.nav-actions {
 
-      <p class="section-description">
-        Descubre las fragancias disponibles.
-      </p>
+  display: flex;
 
-    </div>
+  align-items: center;
 
+  gap: 18px;
 
-    <div class="product-count" id="count">
-      Cargando catálogo...
-    </div>
+}
 
-  </div>
 
+.icon-button,
+.cart-button {
 
-  <!-- FILTROS -->
+  width: 38px;
 
-  <div class="filters">
+  height: 38px;
 
-    <button
-      class="filter active"
-      data-filter="todos"
-    >
-      Todos
-    </button>
+  display: flex;
 
-    <button
-      class="filter"
-      data-filter="hombres"
-    >
-      Hombres
-    </button>
+  align-items: center;
 
-    <button
-      class="filter"
-      data-filter="mujeres"
-    >
-      Mujeres
-    </button>
+  justify-content: center;
 
-    <button
-      class="filter"
-      data-filter="unisex"
-    >
-      Unisex
-    </button>
+  border: 0;
 
-  </div>
+  background: transparent;
 
+  color: white;
 
-  <!-- PRODUCTOS SUPABASE -->
+  cursor: pointer;
 
-  <div
-    class="products-grid"
-    id="products"
-  >
+  position: relative;
 
-    <div class="loading-card">
+}
 
-      <div class="loading-spinner"></div>
 
-      <p>
-        Cargando perfumes...
-      </p>
+.icon-button svg,
+.cart-button svg {
 
-    </div>
+  width: 22px;
 
-  </div>
+  height: 22px;
 
+  stroke: currentColor;
 
-  <div
-    class="empty-products"
-    id="emptyProducts"
-    style="display:none;"
-  >
+  fill: none;
 
-    <div>
-      ✦
-    </div>
+  stroke-width: 1.8;
 
-    <h3>
-      Próximamente
-    </h3>
+}
 
-    <p>
-      Estamos preparando nuevos perfumes para ti.
-    </p>
 
-  </div>
+.icon-button:hover,
+.cart-button:hover {
 
-</section>
+  color: var(--cyan);
 
+}
 
-<!-- =========================================================
-     BANNER
-========================================================= -->
 
-<section class="promo-section">
+.cart-button span {
 
-  <div class="promo-content">
+  position: absolute;
 
-    <div class="promo-script">
-      Tu aroma.
-    </div>
+  top: -2px;
 
-    <h2>
-      TU MEJOR
-      <span>VERSIÓN</span>
-    </h2>
+  right: -5px;
 
-    <p>
-      Porque un buen perfume no es un lujo,
-      <br>
-      es una actitud.
-    </p>
+  width: 18px;
 
-    <a
-      href="#perfumes"
-      class="promo-button"
-    >
-      VER TODOS LOS PERFUMES
-      <span>→</span>
-    </a>
+  height: 18px;
 
-  </div>
+  display: flex;
 
+  align-items: center;
 
-  <div class="promo-bottle">
+  justify-content: center;
 
-    <div class="promo-bottle-cap"></div>
+  border-radius: 50%;
+
+  background:
+    var(--green);
+
+  color:
+    #00140c;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-panel {
+
+  position: fixed;
+
+  left: 0;
+
+  right: 0;
+
+  top: 112px;
+
+  z-index: 90;
+
+  transform:
+    translateY(-150%);
+
+  transition: .35s;
+
+  background:
+    rgba(3,6,7,.97);
+
+  border-bottom:
+    1px solid
+    var(--border);
+
+  padding: 20px 6%;
+
+}
+
+
+.search-panel.open {
+
+  transform:
+    translateY(0);
+
+}
+
+
+.search-inner {
+
+  max-width: 900px;
+
+  margin: auto;
+
+  display: flex;
+
+  align-items: center;
+
+  border-bottom:
+    1px solid
+    var(--cyan);
+
+  padding: 5px 0;
+
+}
+
+
+.search-icon svg {
+
+  width: 24px;
+
+  height: 24px;
+
+  stroke: var(--cyan);
+
+  fill: none;
+
+  stroke-width: 1.5;
+
+}
+
+
+.search-inner input {
+
+  flex: 1;
+
+  background: transparent;
+
+  border: 0;
+
+  outline: 0;
+
+  color: white;
+
+  font-size: 18px;
+
+  padding: 12px 15px;
+
+}
+
+
+.search-inner input::placeholder {
+
+  color: #687272;
+
+}
+
+
+.search-inner button {
+
+  background: transparent;
+
+  color: white;
+
+  border: 0;
+
+  font-size: 30px;
+
+  cursor: pointer;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+  min-height: 570px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: center;
+
+  padding:
+    75px 6%;
+
+  background:
+
+    radial-gradient(
+      ellipse at 75% 55%,
+      rgba(0,245,233,.18),
+      transparent 30%
+    ),
+
+    radial-gradient(
+      ellipse at 90% 90%,
+      rgba(0,217,130,.14),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      110deg,
+      #020404 0%,
+      #030809 55%,
+      #061415 100%
+    );
+
+}
+
+
+.hero::before {
+
+  content: '';
+
+  position: absolute;
+
+  width: 700px;
+
+  height: 700px;
+
+  right: -250px;
+
+  top: -250px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0,245,233,.15),
+      transparent 65%
+    );
+
+  filter: blur(20px);
+
+}
+
+
+.hero-overlay {
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(3,6,7,.98) 0%,
+      rgba(3,6,7,.9) 38%,
+      rgba(3,6,7,.15) 100%
+    );
+
+}
+
+
+.hero-content {
+
+  position: relative;
+
+  z-index: 3;
+
+  width: 52%;
+
+  max-width: 650px;
+
+}
+
+
+.hero-small-title {
+
+  font-size: 13px;
+
+  letter-spacing: 5px;
+
+  color: #e5eded;
+
+  margin-bottom: 14px;
+
+  font-weight: 500;
+
+}
+
+
+.hero-small-title span {
+
+  color: var(--cyan);
+
+}
+
+
+.hero h1 {
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(65px, 8vw, 105px);
+
+  line-height: .8;
+
+  letter-spacing: 1px;
+
+  font-weight: 500;
+
+}
+
+
+.hero h1 em {
+
+  display: block;
+
+  margin-top: 12px;
+
+  color: var(--cyan);
+
+  font-family:
+    'Great Vibes',
+    cursive;
+
+  font-size:
+    clamp(58px, 7vw, 88px);
+
+  font-style: normal;
+
+  font-weight: 400;
+
+  line-height: .9;
+
+  text-shadow:
+    0 0 25px
+    rgba(0,245,233,.22);
+
+}
+
+
+.hero-description {
+
+  margin-top: 27px;
+
+  color: #b6c0c0;
+
+  font-size: 15px;
+
+  line-height: 1.8;
+
+}
+
+
+.hero-buttons {
+
+  display: flex;
+
+  gap: 12px;
+
+  margin-top: 30px;
+
+}
+
+
+.main-button,
+.secondary-button {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 14px;
+
+  min-height: 48px;
+
+  padding:
+    0 27px;
+
+  border-radius: 30px;
+
+  text-decoration: none;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+  transition: .3s;
+
+}
+
+
+.main-button {
+
+  color: white;
+
+  border:
+    1px solid
+    var(--cyan);
+
+  box-shadow:
+    0 0 18px
+    rgba(0,245,233,.12);
+
+}
+
+
+.main-button:hover {
+
+  background:
+    var(--cyan);
+
+  color:
+    #001414;
+
+  box-shadow:
+    0 0 30px
+    rgba(0,245,233,.3);
+
+}
+
+
+.main-button span {
+
+  font-size: 18px;
+
+}
+
+
+.secondary-button {
+
+  color: #c5cece;
+
+  border:
+    1px solid
+    rgba(255,255,255,.2);
+
+}
+
+
+.secondary-button:hover {
+
+  border-color:
+    var(--cyan);
+
+  color:
+    var(--cyan);
+
+}
+
+
+.hero-products {
+
+  position: absolute;
+
+  z-index: 2;
+
+  right: 4%;
+
+  bottom: 0;
+
+  width: 50%;
+
+  height: 100%;
+
+}
+
+
+.glow {
+
+  position: absolute;
+
+  width: 500px;
+
+  height: 500px;
+
+  right: 5%;
+
+  top: 8%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0,245,233,.18),
+      transparent 65%
+    );
+
+  filter:
+    blur(15px);
+
+}
+
+
+.hero-bottle {
+
+  position: absolute;
+
+  bottom: 30px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  filter:
+    drop-shadow(
+      0 25px 25px
+      rgba(0,0,0,.7)
+    );
+
+}
+
+
+.hero-bottle .cap {
+
+  background:
+    linear-gradient(
+      90deg,
+      #080a0a,
+      #303637,
+      #050606
+    );
+
+  border-radius:
+    5px 5px 1px 1px;
+
+}
+
+
+.hero-bottle .bottle-body {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: white;
+
+  text-align: center;
+
+  border:
+    1px solid
+    rgba(255,255,255,.3);
+
+  box-shadow:
+    inset 0 0 25px
+    rgba(255,255,255,.05),
+    0 0 20px
+    rgba(0,245,233,.08);
+
+}
+
+
+.bottle-one {
+
+  left: 2%;
+
+  transform:
+    rotate(-3deg);
+
+  z-index: 2;
+
+}
+
+
+.bottle-one .cap {
+
+  width: 68px;
+
+  height: 50px;
+
+}
+
+
+.bottle-one .bottle-body {
+
+  width: 155px;
+
+  height: 255px;
+
+  border-radius: 15px 15px 22px 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #101e22,
+      #061014
+    );
+
+}
+
+
+.bottle-one .bottle-body small {
+
+  font-size: 8px;
+
+  letter-spacing: 4px;
+
+}
+
+
+.bottle-one .bottle-body strong {
+
+  margin-top: 8px;
+
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size: 25px;
+
+}
+
+
+.bottle-two {
+
+  left: 34%;
+
+  z-index: 3;
+
+}
+
+
+.bottle-two .cap {
+
+  width: 70px;
+
+  height: 65px;
+
+}
+
+
+.bottle-two .bottle-body {
+
+  width: 165px;
+
+  height: 295px;
+
+  border-radius: 18px 18px 30px 30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #061318,
+      #101f25,
+      #020608
+    );
+
+}
+
+
+.bottle-two .bottle-body small {
+
+  font-size: 8px;
+
+  letter-spacing: 3px;
+
+}
+
+
+.bottle-two .bottle-body strong {
+
+  margin-top: 8px;
+
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size: 17px;
+
+}
+
+
+.bottle-three {
+
+  right: 1%;
+
+  z-index: 2;
+
+  transform:
+    rotate(4deg);
+
+}
+
+
+.bottle-three .cap {
+
+  width: 100px;
+
+  height: 45px;
+
+}
+
+
+.bottle-three .bottle-body {
+
+  width: 220px;
+
+  height: 180px;
+
+  border-radius: 12px 12px 25px 25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #13231f,
+      #07100e
+    );
+
+}
+
+
+.bottle-three .bottle-body strong {
+
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size: 24px;
+
+}
+
+
+.hero-bottom-glow {
+
+  position: absolute;
+
+  bottom: 0;
+
+  left: 0;
+
+  right: 0;
+
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--cyan),
+      var(--green),
+      transparent
+    );
+
+  box-shadow:
+    0 0 20px
+    var(--cyan);
+
+}
+
+
+/* =========================================================
+   BENEFICIOS
+========================================================= */
+
+.benefits {
+
+  min-height: 105px;
+
+  padding:
+    22px 6%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  align-items: center;
+
+  background:
+    #05090a;
+
+  border-bottom:
+    1px solid
+    rgba(0,245,233,.1);
+
+}
+
+
+.benefit {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 13px;
+
+  min-height: 55px;
+
+  border-right:
+    1px solid
+    rgba(255,255,255,.12);
+
+}
+
+
+.benefit:last-child {
+
+  border-right: 0;
+
+}
+
+
+.benefit-icon {
+
+  width: 38px;
+
+  height: 38px;
+
+  border:
+    1px solid
+    var(--cyan);
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: var(--cyan);
+
+  font-size: 16px;
+
+}
+
+
+.benefit strong {
+
+  display: block;
+
+  font-size: 12px;
+
+}
+
+
+.benefit span {
+
+  display: block;
+
+  color: #788283;
+
+  font-size: 10px;
+
+  margin-top: 3px;
+
+}
+
+
+/* =========================================================
+   SECCIONES
+========================================================= */
+
+.section {
+
+  width: min(
+    1250px,
+    90%
+  );
+
+  margin:
+    0 auto;
+
+  padding:
+    95px 0;
+
+}
+
+
+.section-heading {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 18px;
+
+}
+
+
+.heading-line {
+
+  width: 90px;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--cyan)
+    );
+
+}
+
+
+.heading-line:last-child {
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--cyan),
+      transparent
+    );
+
+}
+
+
+.heading-label {
+
+  color: var(--cyan);
+
+  font-size: 10px;
+
+  letter-spacing: 5px;
+
+  font-weight: 600;
+
+}
+
+
+.section h2 {
+
+  margin-top: 17px;
+
+  text-align: center;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(42px, 5vw, 60px);
+
+  font-weight: 500;
+
+  line-height: 1;
+
+}
+
+
+.section h2 span {
+
+  color: var(--cyan);
+
+}
+
+
+.section-description {
+
+  text-align: center;
+
+  color: #727c7d;
+
+  font-size: 13px;
+
+  margin-top: 10px;
+
+}
+
+
+/* =========================================================
+   CATEGORÍAS
+========================================================= */
+
+.categories-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, 1fr);
+
+  gap: 17px;
+
+  margin-top: 45px;
+
+}
+
+
+.category-card {
+
+  background:
+    linear-gradient(
+      145deg,
+      #0b1112,
+      #050808
+    );
+
+  border:
+    1px solid
+    rgba(0,245,233,.18);
+
+  border-radius: 14px;
+
+  padding: 12px;
+
+  cursor: pointer;
+
+  color: white;
+
+  transition: .3s;
+
+}
+
+
+.category-card:hover {
+
+  transform:
+    translateY(-7px);
+
+  border-color:
+    var(--cyan);
+
+  box-shadow:
+    0 15px 35px
+    rgba(0,0,0,.35),
+    0 0 20px
+    rgba(0,245,233,.08);
+
+}
+
+
+.category-image {
+
+  height: 160px;
+
+  border-radius: 9px;
+
+  overflow: hidden;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+
+.category-image.men {
+
+  background:
+    radial-gradient(
+      circle,
+      #163a4a,
+      #071116
+    );
+
+}
+
+
+.category-image.women {
+
+  background:
+    radial-gradient(
+      circle,
+      #4d1937,
+      #14080f
+    );
+
+}
+
+
+.category-image.unisex {
+
+  background:
+    radial-gradient(
+      circle,
+      #134d46,
+      #071310
+    );
+
+}
+
+
+.category-image.gifts {
+
+  background:
+    radial-gradient(
+      circle,
+      #06453d,
+      #07100f
+    );
+
+}
+
+
+.category-image.fresh {
+
+  background:
+    radial-gradient(
+      circle,
+      #0a5060,
+      #061116
+    );
+
+}
+
+
+.category-bottle {
+
+  width: 65px;
+
+  height: 105px;
+
+  border-radius:
+    10px 10px 15px 15px;
+
+  background:
+    linear-gradient(
+      130deg,
+      #142d35,
+      #050a0c
+    );
+
+  border:
+    1px solid
+    rgba(255,255,255,.3);
+
+  box-shadow:
+    0 20px 35px
+    rgba(0,0,0,.5);
+
+  position: relative;
+
+}
+
+
+.category-bottle::before {
+
+  content: '';
+
+  position: absolute;
+
+  width: 27px;
+
+  height: 27px;
+
+  background: #111;
+
+  top: -27px;
+
+  left: 18px;
+
+  border-radius:
+    5px 5px 0 0;
+
+}
+
+
+.gift-box {
+
+  font-size: 65px;
+
+  filter:
+    drop-shadow(
+      0 20px 20px
+      rgba(0,0,0,.5)
+    );
+
+}
+
+
+.category-card strong {
+
+  display: block;
+
+  margin-top: 14px;
+
+  font-size: 13px;
+
+}
+
+
+.category-card > span {
+
+  display: block;
+
+  color: #6e797a;
+
+  font-size: 10px;
+
+  margin-top: 4px;
+
+  padding-bottom: 7px;
+
+}
+
+
+/* =========================================================
+   PRODUCTOS
+========================================================= */
+
+.products-section {
+
+  padding-top: 30px;
+
+}
+
+
+.products-title-row {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: end;
+
+  margin-top: 15px;
+
+}
+
+
+.products-title-row h2 {
+
+  text-align: left;
+
+}
+
+
+.products-title-row
+.section-description {
+
+  text-align: left;
+
+}
+
+
+.product-count {
+
+  color: #667071;
+
+  font-size: 11px;
+
+}
+
+
+.filters {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin:
+    38px 0
+    30px;
+
+}
+
+
+.filter {
+
+  padding:
+    9px 20px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.15);
+
+  border-radius: 25px;
+
+  color: #8f9999;
+
+  background:
+    transparent;
+
+  cursor: pointer;
+
+  font-family:
+    'Montserrat',
+    sans-serif;
+
+  font-size: 10px;
+
+  transition: .25s;
+
+}
+
+
+.filter:hover,
+.filter.active {
+
+  color: #001514;
+
+  background:
+    var(--cyan);
+
+  border-color:
+    var(--cyan);
+
+}
+
+
+.products-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 18px;
+
+}
+
+
+.product-card {
+
+  background:
+    linear-gradient(
+      150deg,
+      #0b1213,
+      #050808
+    );
+
+  border:
+    1px solid
+    rgba(0,245,233,.18);
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  transition:
+    transform .3s,
+    border-color .3s,
+    box-shadow .3s;
+
+}
+
+
+.product-card:hover {
+
+  transform:
+    translateY(-7px);
+
+  border-color:
+    rgba(0,245,233,.7);
+
+  box-shadow:
+    0 20px 45px
+    rgba(0,0,0,.45);
+
+}
+
+
+.product-image {
+
+  height: 300px;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(0,245,233,.08),
+      transparent 45%
+    ),
+    #070c0d;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 18px;
+
+}
+
+
+.product-image::after {
+
+  content: '';
+
+  position: absolute;
+
+  left: 15%;
+
+  right: 15%;
+
+  bottom: 12px;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(0,245,233,.4),
+      transparent
+    );
+
+}
+
+
+.product-image img {
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: contain;
+
+  position: relative;
+
+  z-index: 2;
+
+  filter:
+    drop-shadow(
+      0 18px 20px
+      rgba(0,0,0,.7)
+    );
+
+  transition:
+    transform .4s;
+
+}
+
+
+.product-card:hover
+.product-image img {
+
+  transform:
+    scale(1.06);
+
+}
+
+
+.product-number {
+
+  position: absolute;
+
+  top: 14px;
+
+  left: 15px;
+
+  font-size: 9px;
+
+  color: #526060;
+
+  letter-spacing: 1px;
+
+  z-index: 5;
+
+}
+
+
+.favorite {
+
+  position: absolute;
+
+  right: 13px;
+
+  top: 10px;
+
+  width: 31px;
+
+  height: 31px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.15);
+
+  background:
+    rgba(0,0,0,.25);
+
+  border-radius: 50%;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 18px;
+
+  z-index: 5;
+
+}
+
+
+.favorite:hover,
+.favorite.selected {
+
+  color:
+    var(--cyan);
+
+  border-color:
+    var(--cyan);
+
+}
+
+
+.product-info {
+
+  padding:
+    17px 17px 18px;
+
+}
+
+
+.product-brand {
+
+  color:
+    var(--cyan);
+
+  font-size: 9px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 2px;
+
+  font-weight: 700;
+
+}
+
+
+.product-info h3 {
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size: 26px;
+
+  font-weight: 600;
+
+  margin-top: 4px;
+
+  line-height: 1.1;
+
+}
+
+
+.product-bottom {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin:
+    15px 0;
+
+}
+
+
+.product-price {
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  color: white;
+
+}
+
+
+.buy-button {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  width: 100%;
+
+  height: 42px;
+
+  border:
+    1px solid
+    var(--green);
+
+  border-radius: 25px;
+
+  color:
+    white;
+
+  text-decoration: none;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  transition: .3s;
+
+}
+
+
+.buy-button:hover {
+
+  background:
+    var(--green);
+
+  color:
+    #00130c;
+
+  box-shadow:
+    0 0 20px
+    rgba(0,217,130,.2);
+
+}
+
+
+.loading-card {
+
+  grid-column:
+    1 / -1;
+
+  min-height: 300px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #687373;
+
+}
+
+
+.loading-spinner {
+
+  width: 35px;
+
+  height: 35px;
+
+  border:
+    2px solid
+    rgba(0,245,233,.15);
+
+  border-top-color:
+    var(--cyan);
+
+  border-radius: 50%;
+
+  animation:
+    spin .8s linear infinite;
+
+  margin-bottom: 15px;
+
+}
+
+
+@keyframes spin {
+
+  to {
+    transform:
+      rotate(360deg);
+  }
+
+}
+
+
+.error-card {
+
+  grid-column:
+    1 / -1;
+
+  padding: 70px 20px;
+
+  text-align: center;
+
+  border:
+    1px solid
+    rgba(255,80,80,.2);
+
+  border-radius: 15px;
+
+}
+
+
+.error-icon {
+
+  width: 45px;
+
+  height: 45px;
+
+  border:
+    1px solid
+    #ff60o-bottle-cap"></div>
 
     <div class="promo-bottle-body">
       <span>URBAN</span>
