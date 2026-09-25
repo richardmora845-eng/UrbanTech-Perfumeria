@@ -1,156 +1,848 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>UrbanTech | Perfumería</title>
+<meta charset="UTF-8">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<title>UrbanTech | Perfumería</title>
 
-  <link rel="stylesheet" href="styles.css">
+<meta
+  name="description"
+  content="UrbanTech Perfumería - Perfumes y fragancias. Envíos a todo Costa Rica."
+>
+
+<meta name="theme-color" content="#061a16">
+
+<!-- =========================
+     VISTA PREVIA DEL ENLACE
+========================= -->
+
+<meta property="og:type" content="website">
+
+<meta
+  property="og:title"
+  content="UrbanTech | Perfumería"
+>
+
+<meta
+  property="og:description"
+  content="Descubre perfumes y fragancias en UrbanTech Perfumería."
+>
+
+<meta
+  property="og:url"
+  content="https://richardmora845-eng.github.io/UrbanTech-Perfumeria/"
+>
+
+<meta
+  property="og:image"
+  content="https://richardmora845-eng.github.io/UrbanTech-Perfumeria/og-image.png"
+>
+
+<meta property="og:image:type" content="image/png">
+
+<meta property="og:image:width" content="1200">
+
+<meta property="og:image:height" content="630">
+
+<meta property="og:site_name" content="UrbanTech Perfumería">
+
+<meta
+  name="twitter:card"
+  content="summary_large_image"
+>
+
+<meta
+  name="twitter:title"
+  content="UrbanTech | Perfumería"
+>
+
+<meta
+  name="twitter:description"
+  content="Perfumes y fragancias en UrbanTech."
+>
+
+<meta
+  name="twitter:image"
+  content="https://richardmora845-eng.github.io/UrbanTech-Perfumeria/og-image.png"
+>
+
+
+<!-- FUENTES -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin
+>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&display=swap"
+  rel="stylesheet"
+>
+
+
+<!-- CSS -->
+
+<link rel="stylesheet" href="styles.css">
+
+
+<style>
+
+/* =====================================================
+   AJUSTES PARA QUE LOS BOTONES Y SECCIONES FUNCIONEN
+===================================================== */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+a {
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   MENSAJE DE PRODUCTOS
+===================================================== */
+
+.empty-products {
+  width: 100%;
+  text-align: center;
+  padding: 50px 20px;
+  grid-column: 1 / -1;
+}
+
+.empty-products h3 {
+  margin: 15px 0 8px;
+}
+
+.empty-products p {
+  opacity: .75;
+}
+
+
+/* =====================================================
+   IMÁGENES DE PRODUCTOS
+===================================================== */
+
+.product-image {
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+
+/* =====================================================
+   BOTONES
+===================================================== */
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =====================================================
+   ANCLAJES
+===================================================== */
+
+#inicio,
+#categorias,
+#perfumes,
+#contacto {
+  scroll-margin-top: 90px;
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-  <div class="topbar">
-    🚚 Envíos a todo Costa Rica
-    <span>•</span>
-    💬 Pedidos por WhatsApp
-    <span>•</span>
-    ✦ UrbanTech Perfumería
-  </div>
 
-  <nav class="navbar">
+<!-- =====================================================
+     BARRA SUPERIOR
+===================================================== -->
 
-    <a href="#inicio" class="logo">
+<div class="topbar">
 
-      <div class="logo-symbol">U</div>
+  🚚 Envíos a todo Costa Rica
 
-      <div class="logo-text">
-        <strong>URBAN<span>TECH</span></strong>
-        <small>PERFUMERÍA</small>
-      </div>
+  <span>•</span>
 
+  💬 Pedidos por WhatsApp
+
+  <span>•</span>
+
+  ✦ UrbanTech Perfumería
+
+</div>
+
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+
+  <a
+    href="#inicio"
+    class="logo"
+  >
+
+    <div class="logo-symbol">
+      U
+    </div>
+
+    <div class="logo-text">
+
+      <strong>
+        URBAN<span>TECH</span>
+      </strong>
+
+      <small>
+        PERFUMERÍA
+      </small>
+
+    </div>
+
+  </a>
+
+
+
+  <div class="nav-links">
+
+    <a href="#inicio">
+      Inicio
     </a>
 
-    <div class="nav-links">
-      <a href="#inicio">Inicio</a>
-      <a href="#perfumes">Perfumes</a>
-      <a href="#categorias">Categorías</a>
-      <a href="#contacto">Contacto</a>
-    </div>
+    <a href="#perfumes">
+      Perfumes
+    </a>
 
-    <div class="nav-actions">
+    <a href="#categorias">
+      Categorías
+    </a>
 
-      <button id="searchButton" class="nav-icon">
-        🔍
-      </button>
-
-      <button id="cartButton" class="cart-button">
-        🛒
-        <span id="cartCount">0</span>
-      </button>
-
-    </div>
-
-  </nav>
-
-
-  <div id="searchPanel" class="search-panel">
-
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="Buscar perfume o marca..."
-    >
-
-    <button id="closeSearch">×</button>
+    <a href="#contacto">
+      Contacto
+    </a>
 
   </div>
 
 
-  <header class="hero" id="inicio">
 
-    <div class="hero-content">
+  <div class="nav-actions">
 
-      <div class="hero-small">
-        FRAGANCIAS QUE DEJAN HUELLA
+    <button
+      id="searchButton"
+      class="nav-icon"
+      type="button"
+    >
+      🔍
+    </button>
+
+
+    <button
+      id="cartButton"
+      class="cart-button"
+      type="button"
+    >
+
+      🛒
+
+      <span id="cartCount">
+        0
+      </span>
+
+    </button>
+
+  </div>
+
+
+</nav>
+
+
+
+<!-- =====================================================
+     BUSCADOR
+===================================================== -->
+
+<div
+  id="searchPanel"
+  class="search-panel"
+>
+
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Buscar perfume o marca..."
+  >
+
+  <button
+    id="closeSearch"
+    type="button"
+  >
+    ×
+  </button>
+
+</div>
+
+
+
+<!-- =====================================================
+     INICIO
+===================================================== -->
+
+<header
+  class="hero"
+  id="inicio"
+>
+
+
+  <div class="hero-content">
+
+
+    <div class="hero-small">
+      FRAGANCIAS QUE DEJAN HUELLA
+    </div>
+
+
+    <h1>
+
+      PERFUMES
+
+      <em>
+        Originales
+      </em>
+
+    </h1>
+
+
+    <p>
+      Descubre fragancias que representan tu estilo,
+      tu personalidad y tu esencia.
+    </p>
+
+
+    <div class="hero-buttons">
+
+
+      <!-- ESTE BOTÓN AHORA VA AL CATÁLOGO -->
+
+      <a
+        href="#perfumes"
+        class="button-primary"
+      >
+
+        VER CATÁLOGO
+
+        <span>
+          →
+        </span>
+
+      </a>
+
+
+      <!-- ESTE BOTÓN VA A CATEGORÍAS -->
+
+      <a
+        href="#categorias"
+        class="button-secondary"
+      >
+        EXPLORAR
+      </a>
+
+
+    </div>
+
+
+  </div>
+
+
+
+  <div class="hero-bottles">
+
+    <div class="glow"></div>
+
+
+    <div class="fake-bottle bottle1">
+
+      <div class="bottle-cap"></div>
+
+      <div class="bottle-body">
+
+        <small>
+          URBAN
+        </small>
+
+        <strong>
+          TECH
+        </strong>
+
       </div>
 
-      <h1>
-        PERFUMES
-        <em>Originales</em>
-      </h1>
+    </div>
+
+
+    <div class="fake-bottle bottle2">
+
+      <div class="bottle-cap"></div>
+
+      <div class="bottle-body">
+
+        <small>
+          EAU
+        </small>
+
+        <strong>
+          DE PARFUM
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="fake-bottle bottle3">
+
+      <div class="bottle-cap"></div>
+
+      <div class="bottle-body">
+
+        <strong>
+          ELIXIR
+        </strong>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+</header>
+
+
+
+<!-- =====================================================
+     BENEFICIOS
+===================================================== -->
+
+<section class="benefits">
+
+
+  <div class="benefit">
+
+    <span>
+      ✓
+    </span>
+
+    <div>
+
+      <strong>
+        Productos originales
+      </strong>
+
+      <small>
+        Calidad y confianza
+      </small>
+
+    </div>
+
+  </div>
+
+
+  <div class="benefit">
+
+    <span>
+      🚚
+    </span>
+
+    <div>
+
+      <strong>
+        Envíos nacionales
+      </strong>
+
+      <small>
+        A todo Costa Rica
+      </small>
+
+    </div>
+
+  </div>
+
+
+  <div class="benefit">
+
+    <span>
+      🔒
+    </span>
+
+    <div>
+
+      <strong>
+        Compra segura
+      </strong>
+
+      <small>
+        Atención personalizada
+      </small>
+
+    </div>
+
+  </div>
+
+
+  <div class="benefit">
+
+    <span>
+      💬
+    </span>
+
+    <div>
+
+      <strong>
+        WhatsApp
+      </strong>
+
+      <small>
+        Estamos para ayudarte
+      </small>
+
+    </div>
+
+  </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     CATEGORÍAS
+===================================================== -->
+
+<section
+  class="section"
+  id="categorias"
+>
+
+
+  <div class="section-title">
+
+    <span>
+      DESCUBRE TU AROMA
+    </span>
+
+  </div>
+
+
+  <h2>
+
+    Nuestras
+
+    <em>
+      Categorías
+    </em>
+
+  </h2>
+
+
+  <p class="section-description">
+
+    Encuentra una fragancia que vaya contigo.
+
+  </p>
+
+
+
+  <div class="categories">
+
+
+    <button
+      class="category"
+      data-category="hombres"
+      type="button"
+    >
+
+      <div class="category-image men">
+        🧴
+      </div>
+
+      <strong>
+        Hombres
+      </strong>
+
+      <span>
+        Fragancias masculinas
+      </span>
+
+    </button>
+
+
+
+    <button
+      class="category"
+      data-category="mujeres"
+      type="button"
+    >
+
+      <div class="category-image women">
+        🧴
+      </div>
+
+      <strong>
+        Mujeres
+      </strong>
+
+      <span>
+        Fragancias femeninas
+      </span>
+
+    </button>
+
+
+
+    <button
+      class="category"
+      data-category="unisex"
+      type="button"
+    >
+
+      <div class="category-image unisex">
+        🧴
+      </div>
+
+      <strong>
+        Unisex
+      </strong>
+
+      <span>
+        Para todos los estilos
+      </span>
+
+    </button>
+
+
+
+    <button
+      class="category"
+      data-category="regalos"
+      type="button"
+    >
+
+      <div class="category-image gifts">
+        🎁
+      </div>
+
+      <strong>
+        Sets / Regalos
+      </strong>
+
+      <span>
+        Para ocasiones especiales
+      </span>
+
+    </button>
+
+
+
+    <button
+      class="category"
+      data-category="todos"
+      type="button"
+    >
+
+      <div class="category-image all">
+        ✦
+      </div>
+
+      <strong>
+        Ver todo
+      </strong>
+
+      <span>
+        Todo nuestro catálogo
+      </span>
+
+    </button>
+
+
+  </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     CATÁLOGO
+===================================================== -->
+
+<section
+  class="section products-section"
+  id="perfumes"
+>
+
+
+  <div class="section-title">
+
+    <span>
+      SELECCIÓN URBANTECH
+    </span>
+
+  </div>
+
+
+  <h2>
+
+    Nuestros
+
+    <em>
+      Perfumes
+    </em>
+
+  </h2>
+
+
+  <p class="section-description">
+
+    Elige tu próxima fragancia favorita.
+
+  </p>
+
+
+
+  <div class="filters">
+
+
+    <button
+      class="filter active"
+      data-filter="todos"
+      type="button"
+    >
+      Todos
+    </button>
+
+
+    <button
+      class="filter"
+      data-filter="hombres"
+      type="button"
+    >
+      Hombres
+    </button>
+
+
+    <button
+      class="filter"
+      data-filter="mujeres"
+      type="button"
+    >
+      Mujeres
+    </button>
+
+
+    <button
+      class="filter"
+      data-filter="unisex"
+      type="button"
+    >
+      Unisex
+    </button>
+
+
+  </div>
+
+
+
+  <!-- PRODUCTOS -->
+
+  <div
+    id="productsGrid"
+    class="products-grid"
+  >
+
+    <div class="loading">
+
+      <div class="spinner"></div>
 
       <p>
-        Descubre fragancias que representan tu estilo,
-        tu personalidad y tu esencia.
+        Cargando perfumes...
       </p>
 
-      <div class="hero-buttons">
-
-        <a href="#perfumes" class="button-primary">
-          VER CATÁLOGO
-          <span>→</span>
-        </a>
-
-        <a href="#categorias" class="button-secondary">
-          EXPLORAR
-        </a>
-
-      </div>
-
     </div>
 
-
-    <div class="hero-bottles">
-
-      <div class="glow"></div>
-
-      <div class="fake-bottle bottle1">
-        <div class="bottle-cap"></div>
-
-        <div class="bottle-body">
-          <small>URBAN</small>
-          <strong>TECH</strong>
-        </div>
-      </div>
-
-      <div class="fake-bottle bottle2">
-        <div class="bottle-cap"></div>
-
-        <div class="bottle-body">
-          <small>EAU</small>
-          <strong>DE PARFUM</strong>
-        </div>
-      </div>
-
-      <div class="fake-bottle bottle3">
-        <div class="bottle-cap"></div>
-
-        <div class="bottle-body">
-          <strong>ELIXIR</strong>
-        </div>
-      </div>
-
-    </div>
-
-  </header>
+  </div>
 
 
-  <section class="benefits">
+</section>
 
-    <div class="benefit">
-      <span>✓</span>
 
-      <div>
-        <strong>Productos originales</strong>
-        <small>Calidad y confianza</small>
-      </div>
-    </div>
 
-    <div class="benef
+<!-- =====================================================
+     CONTACTO
+===================================================== -->
+
+<section
+  class="contact-section"
+  id="contacto"
+>
+
+
+  <div class="contact-content">
+
+
+    <span class="contact-small">
+      ¿NECESITAS AYUDA?
+    </span>
+
+
+    <h2>
+
+      Encuentra tu
+
+      <em>
+        fragancia
+      </em>
+
+    </h2>
+
+
+    <p>
+
+      Escríbenos por WhatsApp y con gusto te ayudamos
+      a encontrar el perfume ideal.
+
+    </p>
+
+
+    <a
+      href="https://wa.me/50670461262"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="whatsapp-button"
+    >
+
+      💬 ESCRIBIR
