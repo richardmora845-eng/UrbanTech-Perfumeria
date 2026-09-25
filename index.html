@@ -1,3 +1,4 @@
+    
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1194,4 +1195,1103 @@
       document
         .querySelectorAll(".category-btn")
         .forEach(
-    
+          button => {
+
+            button.classList.toggle(
+              "active",
+              button.dataset.category === category
+            );
+
+          }
+        );
+
+
+      applyFilters();
+
+
+      /*
+       * Llevar al catálogo.
+       */
+
+      const perfumes =
+        document.getElementById(
+          "perfumes"
+        );
+
+
+      if (perfumes) {
+
+        perfumes.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }
+
+    }
+
+
+    // ======================================================
+    // BUSCADOR
+    // ======================================================
+
+    function searchProducts() {
+
+      applyFilters();
+
+    }
+
+
+    // ======================================================
+    // APLICAR FILTROS
+    // ======================================================
+
+    function applyFilters() {
+
+      const searchInput =
+        document.getElementById(
+          "search"
+        );
+
+
+      const search =
+        String(
+          searchInput?.value || ""
+        )
+        .toLowerCase()
+        .trim();
+
+
+      filteredProducts =
+        catalogProducts.filter(
+          product => {
+
+            const matchesCategory =
+              currentFilter === "all" ||
+              product.category === currentFilter;
+
+
+            const searchableText =
+              [
+                product.name,
+                product.brand,
+                product.presentation,
+                product.category,
+                product.description
+              ]
+                .join(" ")
+                .toLowerCase();
+
+
+            const matchesSearch =
+              !search ||
+              searchableText.includes(
+                search
+              );
+
+
+            return (
+              matchesCategory &&
+              matchesSearch
+            );
+
+          }
+        );
+
+
+      renderProducts();
+
+    }
+
+
+    // ======================================================
+    // MOSTRAR PRODUCTOS
+    // ======================================================
+
+    function renderProducts() {
+
+      const container =
+        document.getElementById(
+          "products"
+        );
+
+
+      if (
+        !filteredProducts.length
+      ) {
+
+        container.innerHTML = `
+
+          <div class="empty">
+
+            <h3>
+              No encontramos perfumes
+            </h3>
+
+            <p>
+              Prueba con otra búsqueda
+              o categoría.
+            </p>
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        filteredProducts
+          .map(
+            createProductCard
+          )
+          .join("");
+
+    }
+
+
+    // ======================================================
+    // TARJETA DE PRODUCTO
+    // ======================================================
+
+    function createProductCard(product) {
+
+      const categoryLabel =
+        categoryName(
+          product.category
+        );
+
+
+      let imageHTML;
+
+
+      if (
+        product.image &&
+        product.image.trim() !== ""
+      ) {
+
+        imageHTML = `
+
+          <div class="product-image">
+
+            <img
+              src="${escapeAttribute(product.image)}"
+              alt="${escapeAttribute(product.name)}"
+              loading="lazy"
+              onerror="showImagePlaceholder(this)"
+            >
+
+          </div>
+
+        `;
+
+      }
+
+      else {
+
+        imageHTML = `
+
+          <div class="product-placeholder">
+
+            🌸
+
+          </div>
+
+        `;
+
+      }
+
+
+      const presentationHTML =
+        product.presentation
+          ? `
+
+              <p>
+                ${escapeHtml(
+                  product.presentation
+                )}
+              </p>
+
+            `
+          : "";
+
+
+      const descriptionHTML =
+        product.description
+          ? `
+
+              <p>
+                ${escapeHtml(
+                  product.description
+                )}
+              </p>
+
+            `
+          : "";
+
+
+      return `
+
+        <article
+          class="product-card"
+          data-product-id="${escapeAttribute(product.id)}"
+        >
+
+          ${imageHTML}
+
+
+          <div class="product-info">
+
+            <span class="product-category">
+              ${escapeHtml(categoryLabel)}
+            </span>
+
+
+            <small>
+              ${escapeHtml(product.brand)}
+            </small>
+
+
+            <h3>
+              ${escapeHtml(product.name)}
+            </h3>
+
+
+            ${presentationHTML}
+
+            ${descriptionHTML}
+
+
+            <strong class="product-price">
+              ${formatPrice(product.price)}
+            </strong>
+
+
+            <div class="product-actions">
+
+              <button
+                class="btn add-cart-btn"
+                type="button"
+                onclick="addToCart('${escapeJs(product.id)}')"
+              >
+
+                AGREGAR AL CARRITO
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }
+
+
+    // ======================================================
+    // NOMBRE DE CATEGORÍA
+    // ======================================================
+
+    function categoryName(category) {
+
+      switch (category) {
+
+        case "arabes":
+          return "Árabes";
+
+        case "disenador":
+          return "Diseñador";
+
+        case "niche":
+          return "Niche";
+
+        default:
+          return category || "Perfume";
+
+      }
+
+    }
+
+
+    // ======================================================
+    // CARRITO - AGREGAR
+    // ======================================================
+
+    function addToCart(productId) {
+
+      const product =
+        catalogProducts.find(
+          item =>
+            String(item.id) ===
+            String(productId)
+        );
+
+
+      if (!product) {
+
+        return;
+
+      }
+
+
+      const existing =
+        cart.find(
+          item =>
+            String(item.id) ===
+            String(product.id)
+        );
+
+
+      if (existing) {
+
+        existing.quantity += 1;
+
+      }
+
+      else {
+
+        cart.push({
+
+          ...product,
+
+          quantity: 1
+
+        });
+
+      }
+
+
+      updateCartCount();
+
+      renderCart();
+
+
+      /*
+       * Abrir carrito automáticamente
+       * al agregar.
+       */
+
+      openCart();
+
+    }
+
+
+    // ======================================================
+    // CARRITO - CAMBIAR CANTIDAD
+    // ======================================================
+
+    function changeQuantity(
+      productId,
+      amount
+    ) {
+
+      const item =
+        cart.find(
+          product =>
+            String(product.id) ===
+            String(productId)
+        );
+
+
+      if (!item) {
+
+        return;
+
+      }
+
+
+      item.quantity += amount;
+
+
+      if (
+        item.quantity <= 0
+      ) {
+
+        removeFromCart(
+          productId
+        );
+
+        return;
+
+      }
+
+
+      updateCartCount();
+
+      renderCart();
+
+    }
+
+
+    // ======================================================
+    // CARRITO - ELIMINAR
+    // ======================================================
+
+    function removeFromCart(
+      productId
+    ) {
+
+      cart =
+        cart.filter(
+          product =>
+            String(product.id) !==
+            String(productId)
+        );
+
+
+      updateCartCount();
+
+      renderCart();
+
+    }
+
+
+    // ======================================================
+    // CARRITO - CONTADOR
+    // ======================================================
+
+    function updateCartCount() {
+
+      const count =
+        cart.reduce(
+          (
+            total,
+            item
+          ) =>
+            total +
+            item.quantity,
+          0
+        );
+
+
+      const counter =
+        document.getElementById(
+          "cart-count"
+        );
+
+
+      if (counter) {
+
+        counter.textContent =
+          count;
+
+      }
+
+    }
+
+
+    // ======================================================
+    // CARRITO - MOSTRAR
+    // ======================================================
+
+    function renderCart() {
+
+      const container =
+        document.getElementById(
+          "cart-items"
+        );
+
+
+      const totalElement =
+        document.getElementById(
+          "cart-total"
+        );
+
+
+      const checkoutButton =
+        document.getElementById(
+          "checkout-button"
+        );
+
+
+      if (!cart.length) {
+
+        container.innerHTML = `
+
+          <div class="cart-empty">
+
+            <p>
+              Tu carrito está vacío.
+            </p>
+
+            <button
+              class="btn"
+              type="button"
+              onclick="closeCart()"
+            >
+              VER PERFUMES
+            </button>
+
+          </div>
+
+        `;
+
+
+        totalElement.textContent =
+          "₡0";
+
+
+        checkoutButton.disabled =
+          true;
+
+
+        return;
+
+      }
+
+
+      checkoutButton.disabled =
+        false;
+
+
+      container.innerHTML =
+        cart
+          .map(
+            item => `
+
+              <div class="cart-item">
+
+                <div class="cart-item-info">
+
+                  <h4>
+                    ${escapeHtml(item.name)}
+                  </h4>
+
+                  <small>
+                    ${escapeHtml(item.brand)}
+                  </small>
+
+                  <div class="cart-item-price">
+                    ${formatPrice(item.price)}
+                  </div>
+
+
+                  <div class="cart-controls">
+
+                    <button
+                      type="button"
+                      onclick="changeQuantity('${escapeJs(item.id)}', -1)"
+                    >
+                      −
+                    </button>
+
+                    <strong>
+                      ${item.quantity}
+                    </strong>
+
+                    <button
+                      type="button"
+                      onclick="changeQuantity('${escapeJs(item.id)}', 1)"
+                    >
+                      +
+                    </button>
+
+                  </div>
+
+                </div>
+
+
+                <button
+                  class="cart-remove"
+                  type="button"
+                  onclick="removeFromCart('${escapeJs(item.id)}')"
+                  aria-label="Eliminar producto"
+                >
+                  ✕
+                </button>
+
+              </div>
+
+            `
+          )
+          .join("");
+
+
+      const total =
+        calculateCartTotal();
+
+
+      totalElement.textContent =
+        formatPrice(total);
+
+    }
+
+
+    // ======================================================
+    // CARRITO - TOTAL
+    // ======================================================
+
+    function calculateCartTotal() {
+
+      return cart.reduce(
+        (
+          total,
+          item
+        ) =>
+          total +
+          (
+            Number(item.price) *
+            Number(item.quantity)
+          ),
+        0
+      );
+
+    }
+
+
+    // ======================================================
+    // ABRIR CARRITO
+    // ======================================================
+
+    function openCart() {
+
+      const modal =
+        document.getElementById(
+          "cart-modal"
+        );
+
+
+      if (!modal) {
+
+        return;
+
+      }
+
+
+      renderCart();
+
+
+      modal.style.display =
+        "flex";
+
+
+      document.body.style.overflow =
+        "hidden";
+
+    }
+
+
+    // ======================================================
+    // CERRAR CARRITO
+    // ======================================================
+
+    function closeCart() {
+
+      const modal =
+        document.getElementById(
+          "cart-modal"
+        );
+
+
+      if (!modal) {
+
+        return;
+
+      }
+
+
+      modal.style.display =
+        "none";
+
+
+      document.body.style.overflow =
+        "";
+
+    }
+
+
+    // ======================================================
+    // WHATSAPP
+    // ======================================================
+
+    function getWhatsAppNumber() {
+
+      /*
+       * Acepta varias posibilidades dentro de config.js.
+       */
+
+      return (
+        window.WHATSAPP_NUMBER ||
+        window.whatsappNumber ||
+        window.WHATSAPP ||
+        (
+          window.CONFIG &&
+          (
+            window.CONFIG.WHATSAPP_NUMBER ||
+            window.CONFIG.whatsappNumber ||
+            window.CONFIG.whatsapp
+          )
+        ) ||
+        ""
+      );
+
+    }
+
+
+    // ======================================================
+    // CONFIGURAR BOTÓN WHATSAPP
+    // ======================================================
+
+    function setupWhatsApp() {
+
+      const link =
+        document.getElementById(
+          "whatsapp-link"
+        );
+
+
+      const number =
+        getWhatsAppNumber();
+
+
+      if (
+        !link
+      ) {
+
+        return;
+
+      }
+
+
+      if (
+        number
+      ) {
+
+        const cleanNumber =
+          String(number)
+            .replace(
+              /\D/g,
+              ""
+            );
+
+
+        link.href =
+          "https://wa.me/" +
+          cleanNumber +
+          "?text=" +
+          encodeURIComponent(
+            "Hola, UrbanTech Perfumería. Quisiera información sobre los perfumes disponibles."
+          );
+
+        return;
+
+      }
+
+
+      /*
+       * Si config.js no tiene número,
+       * no inventamos uno.
+       */
+
+      link.href =
+        "#";
+
+
+      link.addEventListener(
+        "click",
+        function (event) {
+
+          event.preventDefault();
+
+          alert(
+            "Configura el número de WhatsApp en config.js."
+          );
+
+        }
+      );
+
+    }
+
+
+    // ======================================================
+    // PEDIDO POR WHATSAPP
+    // ======================================================
+
+    function checkoutWhatsApp() {
+
+      if (
+        !cart.length
+      ) {
+
+        return;
+
+      }
+
+
+      const number =
+        getWhatsAppNumber();
+
+
+      if (
+        !number
+      ) {
+
+        alert(
+          "Configura el número de WhatsApp en config.js."
+        );
+
+        return;
+
+      }
+
+
+      const cleanNumber =
+        String(number)
+          .replace(
+            /\D/g,
+            ""
+          );
+
+
+      let message =
+        "Hola, UrbanTech Perfumería.%0A%0A";
+
+
+      message +=
+        "Quiero realizar este pedido:%0A%0A";
+
+
+      cart.forEach(
+        item => {
+
+          const subtotal =
+            Number(item.price) *
+            Number(item.quantity);
+
+
+          message +=
+            "• " +
+            item.name +
+            " - " +
+            item.brand +
+            " x" +
+            item.quantity +
+            " - " +
+            formatPrice(subtotal) +
+            "%0A";
+
+        }
+      );
+
+
+      message +=
+        "%0A";
+
+
+      message +=
+        "Total: " +
+        formatPrice(
+          calculateCartTotal()
+        );
+
+
+      window.open(
+        "https://wa.me/" +
+        cleanNumber +
+        "?text=" +
+        message,
+        "_blank"
+      );
+
+    }
+
+
+    // ======================================================
+    // FORMATO DE PRECIO
+    // ======================================================
+
+    function formatPrice(value) {
+
+      const number =
+        Number(value) || 0;
+
+
+      return "₡" +
+        number.toLocaleString(
+          "es-CR",
+          {
+            maximumFractionDigits: 0
+          }
+        );
+
+    }
+
+
+    // ======================================================
+    // ID DE RESPALDO
+    // ======================================================
+
+    function createFallbackId() {
+
+      return (
+        "product-" +
+        Date.now() +
+        "-" +
+        Math.random()
+          .toString(36)
+          .slice(2, 8)
+      );
+
+    }
+
+
+    // ======================================================
+    // ESCAPAR HTML
+    // ======================================================
+
+    function escapeHtml(value) {
+
+      return String(value ?? "")
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+    // ======================================================
+    // ESCAPAR ATRIBUTOS
+    // ======================================================
+
+    function escapeAttribute(value) {
+
+      return escapeHtml(value);
+
+    }
+
+
+    // ======================================================
+    // ESCAPAR JAVASCRIPT
+    // ======================================================
+
+    function escapeJs(value) {
+
+      return String(value ?? "")
+        .replace(
+          /\\/g,
+          "\\\\"
+        )
+        .replace(
+          /'/g,
+          "\\'"
+        )
+        .replace(
+          /"/g,
+          '\\"'
+        );
+
+    }
+
+
+    // ======================================================
+    // IMAGEN CON ERROR
+    // ======================================================
+
+    function showImagePlaceholder(image) {
+
+      const wrapper =
+        image.closest(
+          ".product-image"
+        );
+
+
+      if (!wrapper) {
+
+        return;
+
+      }
+
+
+      wrapper.outerHTML = `
+
+        <div class="product-placeholder">
+
+          🌸
+
+        </div>
+
+      `;
+
+    }
+
+
+    // ======================================================
+    // CERRAR CARRITO AL HACER CLIC AFUERA
+    // ======================================================
+
+    document.addEventListener(
+      "click",
+      function (event) {
+
+        const modal =
+          document.getElementById(
+            "cart-modal"
+          );
+
+
+        if (
+          !modal ||
+          modal.style.display === "none"
+        ) {
+
+          return;
+
+        }
+
+
+        if (
+          event.target === modal
+        ) {
+
+          closeCart();
+
+        }
+
+      }
+    );
+
+
+    // ======================================================
+    // ESC PARA CERRAR CARRITO
+    // ======================================================
+
+    document.addEventListener(
+      "keydown",
+      function (event) {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closeCart();
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
