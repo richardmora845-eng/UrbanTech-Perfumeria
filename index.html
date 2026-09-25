@@ -6,25 +6,16 @@
 
   <title>UrbanTech | Perfumería</title>
 
-  <meta
-    name="description"
-    content="UrbanTech Perfumería - Descubre perfumes y fragancias para todos los estilos."
-  >
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-  <!-- BARRA SUPERIOR -->
   <div class="topbar">
     🚚 Envíos a todo Costa Rica
     <span>•</span>
@@ -33,16 +24,133 @@
     ✦ UrbanTech Perfumería
   </div>
 
-  <!-- NAVEGACIÓN -->
   <nav class="navbar">
 
     <a href="#inicio" class="logo">
+
       <div class="logo-symbol">U</div>
 
       <div class="logo-text">
         <strong>URBAN<span>TECH</span></strong>
         <small>PERFUMERÍA</small>
       </div>
+
     </a>
 
-    <div class="
+    <div class="nav-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#perfumes">Perfumes</a>
+      <a href="#categorias">Categorías</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+
+    <div class="nav-actions">
+
+      <button id="searchButton" class="nav-icon">
+        🔍
+      </button>
+
+      <button id="cartButton" class="cart-button">
+        🛒
+        <span id="cartCount">0</span>
+      </button>
+
+    </div>
+
+  </nav>
+
+
+  <div id="searchPanel" class="search-panel">
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Buscar perfume o marca..."
+    >
+
+    <button id="closeSearch">×</button>
+
+  </div>
+
+
+  <header class="hero" id="inicio">
+
+    <div class="hero-content">
+
+      <div class="hero-small">
+        FRAGANCIAS QUE DEJAN HUELLA
+      </div>
+
+      <h1>
+        PERFUMES
+        <em>Originales</em>
+      </h1>
+
+      <p>
+        Descubre fragancias que representan tu estilo,
+        tu personalidad y tu esencia.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#perfumes" class="button-primary">
+          VER CATÁLOGO
+          <span>→</span>
+        </a>
+
+        <a href="#categorias" class="button-secondary">
+          EXPLORAR
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="hero-bottles">
+
+      <div class="glow"></div>
+
+      <div class="fake-bottle bottle1">
+        <div class="bottle-cap"></div>
+
+        <div class="bottle-body">
+          <small>URBAN</small>
+          <strong>TECH</strong>
+        </div>
+      </div>
+
+      <div class="fake-bottle bottle2">
+        <div class="bottle-cap"></div>
+
+        <div class="bottle-body">
+          <small>EAU</small>
+          <strong>DE PARFUM</strong>
+        </div>
+      </div>
+
+      <div class="fake-bottle bottle3">
+        <div class="bottle-cap"></div>
+
+        <div class="bottle-body">
+          <strong>ELIXIR</strong>
+        </div>
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <section class="benefits">
+
+    <div class="benefit">
+      <span>✓</span>
+
+      <div>
+        <strong>Productos originales</strong>
+        <small>Calidad y confianza</small>
+      </div>
+    </div>
+
+    <div class="benef
