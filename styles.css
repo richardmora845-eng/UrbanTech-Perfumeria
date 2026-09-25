@@ -1,480 +1,456 @@
-* {
-  box-sizing: border-box;
+/* =========================================================
+   URBANTECH - CORRECCIÓN RESPONSIVE
+   No modifica Supabase, carrito, WhatsApp ni JavaScript.
+========================================================= */
+
+/* Evitar que cualquier elemento provoque desplazamiento lateral */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+/* Todo el contenido debe respetar el ancho de la pantalla */
+body {
   margin: 0;
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background: #080b0a;
-  color: #f4f1e9;
-  font-family: "Montserrat", sans-serif;
-}
-
-button,
-input {
-  font-family: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-
-/* =========================
-   TOPBAR
-========================= */
-
-.topbar {
-  background: #061b18;
-  border-bottom: 1px solid rgba(76, 255, 221, .15);
-  color: #9fffee;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  padding: 9px 15px;
-  text-align: center;
-}
-
-.topbar span {
-  margin: 0 10px;
-  color: #4effd8;
-}
-
-
-/* =========================
-   NAVBAR
-========================= */
-
-.navbar {
-  align-items: center;
-  background: rgba(8, 11, 10, .96);
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  display: flex;
-  justify-content: space-between;
-  min-height: 82px;
-  padding: 12px 6%;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  backdrop-filter: blur(18px);
-}
-
-.logo {
-  align-items: center;
-  display: flex;
-  gap: 12px;
-}
-
-.logo-symbol {
-  align-items: center;
-  border: 1px solid #49e9cf;
-  border-radius: 50%;
-  color: #54f0d7;
-  display: flex;
-  font-family: "Cormorant Garamond", serif;
-  font-size: 27px;
-  height: 47px;
-  justify-content: center;
-  width: 47px;
-}
-
-.logo-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.logo-text strong {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 25px;
-  letter-spacing: 2px;
-}
-
-.logo-text strong span {
-  color: #4cead2;
-}
-
-.logo-text small {
-  color: #a8aaa6;
-  font-size: 8px;
-  letter-spacing: 4px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 30px;
-}
-
-.nav-links a {
-  color: #c8cbc6;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  transition: .25s;
-}
-
-.nav-links a:hover {
-  color: #53efd7;
-}
-
-.nav-actions {
-  align-items: center;
-  display: flex;
-  gap: 12px;
-}
-
-.nav-icon,
-.cart-button {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 50%;
-  color: white;
-  height: 42px;
-  position: relative;
-  width: 42px;
-}
-
-.cart-button span {
-  align-items: center;
-  background: #42e6ce;
-  border-radius: 50%;
-  color: #03110e;
-  display: flex;
-  font-size: 9px;
-  height: 18px;
-  justify-content: center;
-  position: absolute;
-  right: -5px;
-  top: -5px;
-  width: 18px;
-}
-
-
-/* =========================
-   SEARCH
-========================= */
-
+/* Elementos principales a ancho completo */
+header,
+main,
+footer,
+section,
+.navbar,
+.topbar,
+.hero,
+.benefits,
 .search-panel {
-  background: #0b1210;
-  border-bottom: 1px solid rgba(76,255,221,.15);
-  display: none;
-  padding: 15px 6%;
-  position: sticky;
-  top: 82px;
-  z-index: 999;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-.search-panel.show {
-  display: flex;
+/* =========================================================
+   TABLETS Y CELULARES
+========================================================= */
+
+@media (max-width: 768px) {
+
+  /* -------------------------
+     NAVBAR
+  ------------------------- */
+
+  .navbar {
+    width: 100%;
+    min-height: 72px;
+    padding: 10px 16px;
+    gap: 10px;
+  }
+
+  .logo {
+    gap: 8px;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+
+  .logo-symbol {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    font-size: 24px;
+  }
+
+  .logo-text strong {
+    font-size: 20px;
+    letter-spacing: 1.5px;
+  }
+
+  .logo-text small {
+    font-size: 6px;
+    letter-spacing: 3px;
+  }
+
+  .nav-links {
+    gap: 12px;
+    flex-shrink: 1;
+  }
+
+  .nav-links a {
+    font-size: 8px;
+    letter-spacing: .8px;
+    white-space: nowrap;
+  }
+
+  .nav-actions {
+    gap: 5px;
+    flex-shrink: 0;
+  }
+
+  .nav-icon,
+  .cart-button {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+  }
+
+
+  /* -------------------------
+     SEARCH
+  ------------------------- */
+
+  .search-panel {
+    width: 100%;
+    top: 72px;
+    padding: 10px 15px;
+  }
+
+  .search-panel input {
+    min-width: 0;
+    width: 100%;
+  }
+
+
+  /* -------------------------
+     HERO
+  ------------------------- */
+
+  .hero {
+    width: 100%;
+    min-height: auto;
+    padding: 55px 24px 60px;
+    display: block;
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero h1 {
+    font-size: clamp(52px, 15vw, 82px);
+    line-height: .85;
+  }
+
+  .hero h1 em {
+    margin-left: 15px;
+  }
+
+  .hero p {
+    max-width: 100%;
+    font-size: 13px;
+    margin: 25px 0;
+  }
+
+  .hero-buttons {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .button-primary,
+  .button-secondary {
+    min-height: 48px;
+    padding: 14px 18px;
+  }
+
+  /*
+     Las botellas decorativas no deben crear
+     un ancho adicional en teléfonos.
+  */
+  .hero-bottles {
+    width: 100%;
+    max-width: 100%;
+    height: 300px;
+    margin: 30px 0 0;
+    overflow: hidden;
+  }
+
+  .fake-bottle {
+    transform: scale(.75);
+  }
+
+  .bottle1 {
+    left: 5%;
+  }
+
+  .bottle2 {
+    right: 5%;
+  }
+
+  .bottle3 {
+    left: 50%;
+    transform: translateX(-50%) scale(.85);
+  }
+
+
+  /* -------------------------
+     BENEFICIOS
+  ------------------------- */
+
+  .benefits {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0;
+  }
+
+  .benefit {
+    min-width: 0;
+    padding: 18px 10px;
+    gap: 8px;
+  }
+
+  .benefit > span {
+    font-size: 19px;
+  }
+
+  .benefit strong {
+    font-size: 9px;
+  }
+
+  .benefit small {
+    font-size: 8px;
+  }
+
+
+  /* -------------------------
+     SECCIONES
+  ------------------------- */
+
+  .section {
+    width: 100%;
+    max-width: 100%;
+    padding: 70px 20px;
+  }
+
+  .section-title {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .section-title::before,
+  .section-title::after {
+    width: 30px;
+    flex-shrink: 1;
+  }
+
+  .section h2 {
+    font-size: clamp(42px, 12vw, 55px);
+    line-height: 1;
+  }
+
+  .section-description {
+    max-width: 100%;
+    margin-bottom: 30px;
+  }
+
+
+  /* -------------------------
+     CATEGORÍAS
+  ------------------------- */
+
+  .categories {
+    width: 100%;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .category {
+    width: 100%;
+    min-width: 0;
+  }
+
+
+  /* -------------------------
+     PRODUCTOS
+  ------------------------- */
+
+  .products,
+  .product-grid,
+  .products-grid {
+    width: 100%;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .product-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .product-card img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+
+  /* -------------------------
+     BOTONES DE CATEGORÍAS
+  ------------------------- */
+
+  .category-buttons,
+  .filter-buttons,
+  .filters {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .category-buttons button,
+  .filter-buttons button,
+  .filters button {
+    max-width: 100%;
+  }
+
+
+  /* -------------------------
+     CARRITO
+  ------------------------- */
+
+  .cart,
+  .cart-panel,
+  .cart-modal {
+    max-width: 100vw;
+  }
+
+
+  /* -------------------------
+     CONTACTO
+  ------------------------- */
+
+  .contact,
+  .contact-section {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
-.search-panel input {
-  background: #111917;
-  border: 1px solid rgba(76,255,221,.25);
-  color: white;
-  flex: 1;
-  outline: none;
-  padding: 15px 18px;
-}
 
-.search-panel button {
-  background: transparent;
-  border: 0;
-  color: white;
-  font-size: 28px;
-  padding: 0 15px;
-}
+/* =========================================================
+   TELÉFONOS PEQUEÑOS
+========================================================= */
 
+@media (max-width: 480px) {
 
-/* =========================
-   HERO
-========================= */
+  .topbar {
+    padding: 7px 10px;
+    font-size: 9px;
+  }
 
-.hero {
-  align-items: center;
-  background:
-    radial-gradient(circle at 75% 50%, rgba(27,145,126,.25), transparent 35%),
-    linear-gradient(110deg, #07100e 0%, #0b1815 55%, #06120f 100%);
-  display: flex;
-  min-height: 650px;
-  overflow: hidden;
-  padding: 80px 9%;
-  position: relative;
-}
+  .navbar {
+    padding: 9px 12px;
+  }
 
-.hero-content {
-  max-width: 580px;
-  position: relative;
-  z-index: 3;
-}
+  .logo-text strong {
+    font-size: 18px;
+  }
 
-.hero-small,
-.contact-small {
-  color: #55ead4;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 4px;
-  margin-bottom: 20px;
-}
+  .logo-text small {
+    font-size: 5px;
+    letter-spacing: 2.5px;
+  }
 
-.hero h1 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(65px, 8vw, 110px);
-  font-weight: 500;
-  line-height: .78;
-}
+  .nav-links {
+    gap: 7px;
+  }
 
-.hero h1 em {
-  color: #5cf0d9;
-  display: block;
-  font-family: "Great Vibes", cursive;
-  font-size: .68em;
-  font-weight: 400;
-  margin-left: 45px;
-  margin-top: 12px;
-}
+  .nav-links a {
+    font-size: 7px;
+    letter-spacing: .5px;
+  }
 
-.hero p {
-  color: #adb6b1;
-  font-size: 14px;
-  line-height: 1.8;
-  margin: 35px 0;
-  max-width: 450px;
-}
+  .nav-icon,
+  .cart-button {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+  }
 
-.hero-buttons {
-  display: flex;
-  gap: 12px;
-}
+  .hero {
+    padding: 45px 18px 50px;
+  }
 
-.button-primary,
-.button-secondary {
-  padding: 15px 25px;
-  transition: .25s;
-}
+  .hero h1 {
+    font-size: 50px;
+  }
 
-.button-primary {
-  background: #4ce6d0;
-  color: #06100e;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-}
+  .hero-buttons {
+    gap: 8px;
+  }
 
-.button-primary span {
-  margin-left: 15px;
-}
+  .button-primary,
+  .button-secondary {
+    font-size: 9px;
+    padding: 13px 14px;
+  }
 
-.button-primary:hover {
-  background: white;
-}
+  .benefits {
+    grid-template-columns: 1fr 1fr;
+  }
 
-.button-secondary {
-  border: 1px solid rgba(255,255,255,.25);
-  color: white;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-}
+  .benefit {
+    padding: 15px 7px;
+  }
 
-.button-secondary:hover {
-  border-color: #4ce6d0;
-  color: #4ce6d0;
+  .section {
+    padding: 60px 16px;
+  }
+
+  .section h2 {
+    font-size: 43px;
+  }
+
+  .categories {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .products,
+  .product-grid,
+  .products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
 }
 
 
-/* =========================
-   HERO BOTTLES
-========================= */
+/* =========================================================
+   PROTECCIÓN CONTRA ELEMENTOS DESBORDADOS
+========================================================= */
 
-.hero-bottles {
-  align-items: center;
-  display: flex;
-  height: 500px;
-  justify-content: center;
-  margin-left: auto;
-  position: relative;
-  width: 430px;
+img,
+video,
+iframe {
+  max-width: 100%;
 }
 
-.glow {
-  background: #27c9ad;
-  border-radius: 50%;
-  filter: blur(90px);
-  height: 230px;
-  opacity: .18;
-  position: absolute;
-  width: 230px;
+table {
+  max-width: 100%;
 }
 
-.fake-bottle {
-  bottom: 100px;
-  position: absolute;
-  z-index: 2;
+input,
+button,
+select,
+textarea {
+  max-width: 100%;
 }
 
-.bottle1 {
-  left: 5px;
-  transform: rotate(-8deg);
-}
-
-.bottle2 {
-  right: 20px;
-  transform: rotate(8deg) scale(.85);
-}
-
-.bottle3 {
-  left: 160px;
-  transform: scale(1.15);
-  z-index: 3;
-}
-
-.bottle-cap {
-  background: linear-gradient(90deg,#aaa,#eee,#888);
-  height: 65px;
-  margin: auto;
-  width: 45px;
-}
-
-.bottle-body {
-  align-items: center;
-  background: linear-gradient(135deg,#d9d6c6,#6d736a);
-  border: 1px solid rgba(255,255,255,.4);
-  box-shadow: 0 20px 60px rgba(0,0,0,.5);
-  color: #17201c;
-  display: flex;
-  flex-direction: column;
-  height: 220px;
-  justify-content: center;
-  width: 120px;
-}
-
-.bottle-body small {
-  font-size: 7px;
-  letter-spacing: 3px;
-}
-
-.bottle-body strong {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 22px;
-  letter-spacing: 2px;
-}
-
-
-/* =========================
-   BENEFITS
-========================= */
-
-.benefits {
-  background: #0b1210;
-  border-bottom: 1px solid rgba(255,255,255,.06);
-  border-top: 1px solid rgba(255,255,255,.06);
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  padding: 25px 7%;
-}
-
-.benefit {
-  align-items: center;
-  border-right: 1px solid rgba(255,255,255,.08);
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  padding: 10px 20px;
-}
-
-.benefit:last-child {
-  border: 0;
-}
-
-.benefit > span {
-  font-size: 23px;
-}
-
-.benefit strong,
-.benefit small {
-  display: block;
-}
-
-.benefit strong {
-  font-size: 10px;
-  letter-spacing: 1px;
-}
-
-.benefit small {
-  color: #777f7a;
-  font-size: 9px;
-  margin-top: 5px;
-}
-
-
-/* =========================
-   SECCIONES
-========================= */
-
-.section {
-  padding: 100px 7%;
-}
-
-.section-title {
-  align-items: center;
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin-bottom: 18px;
-}
-
-.section-title::before,
-.section-title::after {
-  background: #3fd8c1;
-  content: "";
-  height: 1px;
-  opacity: .6;
-  width: 45px;
-}
-
-.section-title span {
-  color: #4de5ce;
-  font-size: 9px;
-  letter-spacing: 3px;
-}
-
-.section h2 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 55px;
-  font-weight: 500;
-  text-align: center;
-}
-
-.section h2 em {
-  color: #54ead4;
-  font-family: "Great Vibes", cursive;
-  font-size: .8em;
-}
-
-.section-description {
-  color: #7d8781;
-  font-size: 12px;
-  margin: 12px auto 45px;
-  text-align: center;
-}
-
-
-/* =========================
-   CATEGORÍAS
-========================= */
-
-.categories {
-  display: grid;
-  gap: 18px;
-  grid-template-columns: repeat(5,1fr);
-}
-
-.category {
-  background: #0
+/* Ninguna sección debe ser más ancha que la pantalla */
+section,
+header,
+footer,
+main,
+nav,
+div {
+  box-sizing: border-box;
+    }
