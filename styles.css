@@ -1,1 +1,902 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 
+  <title>UrbanTech | Perfumería</title>
+
+  <meta
+    name="description"
+    content="UrbanTech Perfumería - Fragancias, perfumes y productos de perfumería."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&family=Great+Vibes&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<!-- =========================================================
+     BARRA SUPERIOR
+========================================================= -->
+
+<div class="topbar">
+  <div class="topbar-content">
+
+    <span>
+      🚚 Entregas a todo Costa Rica
+    </span>
+
+    <span class="top-separator">|</span>
+
+    <span>
+      💬 Pedidos por WhatsApp
+    </span>
+
+    <span class="top-separator">|</span>
+
+    <span>
+      ✦ UrbanTech Perfumería
+    </span>
+
+  </div>
+</div>
+
+
+<!-- =========================================================
+     NAVEGACIÓN
+========================================================= -->
+
+<nav class="navbar">
+
+  <a href="#inicio" class="brand-logo">
+
+    <div class="logo-bottle">
+      <span></span>
+    </div>
+
+    <div class="logo-text">
+
+      <strong>
+        URBAN<span>TECH</span>
+      </strong>
+
+      <small>
+        PERFUMERÍA
+      </small>
+
+    </div>
+
+  </a>
+
+
+  <div class="nav-links">
+
+    <a href="#inicio" class="active">
+      Inicio
+    </a>
+
+    <a href="#perfumes">
+      Perfumes
+    </a>
+
+    <a href="#categorias">
+      Categorías
+    </a>
+
+    <a href="#contacto">
+      Contacto
+    </a>
+
+  </div>
+
+
+  <div class="nav-actions">
+
+    <button
+      class="icon-button"
+      id="searchButton"
+      aria-label="Buscar"
+    >
+      <svg viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="M20 20l-4-4"></path>
+      </svg>
+    </button>
+
+    <a
+      href="#perfumes"
+      class="cart-button"
+      aria-label="Ver catálogo"
+    >
+      <svg viewBox="0 0 24 24">
+        <path d="M3 4h2l2.2 11h10.5l2-8H7"></path>
+        <circle cx="9" cy="19" r="1.5"></circle>
+        <circle cx="17" cy="19" r="1.5"></circle>
+      </svg>
+
+      <span id="cartCount">
+        0
+      </span>
+
+    </a>
+
+  </div>
+
+</nav>
+
+
+<!-- =========================================================
+     BUSCADOR
+========================================================= -->
+
+<div
+  class="search-panel"
+  id="searchPanel"
+>
+
+  <div class="search-inner">
+
+    <div class="search-icon">
+      <svg viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="M20 20l-4-4"></path>
+      </svg>
+    </div>
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Buscar perfume, marca o fragancia..."
+      autocomplete="off"
+    >
+
+    <button id="closeSearch">
+      ×
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<header
+  class="hero"
+  id="inicio"
+>
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+
+    <div class="hero-small-title">
+      FRAGANCIAS QUE DEJAN
+      <span>HUELLA</span>
+    </div>
+
+
+    <h1>
+      PERFUMES
+      <em>Originales</em>
+    </h1>
+
+
+    <p class="hero-description">
+      Las mejores marcas, los mejores aromas.
+      <br>
+      Todo en un solo lugar.
+    </p>
+
+
+    <div class="hero-buttons">
+
+      <a
+        href="#perfumes"
+        class="main-button"
+      >
+        VER CATÁLOGO
+        <span>→</span>
+      </a>
+
+
+      <a
+        href="#categorias"
+        class="secondary-button"
+      >
+        EXPLORAR
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="hero-products">
+
+    <div class="glow"></div>
+
+    <div class="hero-bottle bottle-one">
+      <div class="cap"></div>
+      <div class="bottle-body">
+        <small>URBAN</small>
+        <strong>TECH</strong>
+      </div>
+    </div>
+
+    <div class="hero-bottle bottle-two">
+      <div class="cap"></div>
+      <div class="bottle-body">
+        <small>EAU</small>
+        <strong>DE PARFUM</strong>
+      </div>
+    </div>
+
+    <div class="hero-bottle bottle-three">
+      <div class="cap"></div>
+      <div class="bottle-body">
+        <strong>ELIXIR</strong>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="hero-bottom-glow"></div>
+
+</header>
+
+
+<!-- =========================================================
+     BENEFICIOS
+========================================================= -->
+
+<section class="benefits">
+
+  <div class="benefit">
+
+    <div class="benefit-icon">
+      ✓
+    </div>
+
+    <div>
+      <strong>
+        Productos originales
+      </strong>
+
+      <span>
+        Calidad y confianza
+      </span>
+    </div>
+
+  </div>
+
+
+  <div class="benefit">
+
+    <div class="benefit-icon">
+      🚚
+    </div>
+
+    <div>
+      <strong>
+        Envíos a todo el país
+      </strong>
+
+      <span>
+        Rápido y seguro
+      </span>
+    </div>
+
+  </div>
+
+
+  <div class="benefit">
+
+    <div class="benefit-icon">
+      🔒
+    </div>
+
+    <div>
+      <strong>
+        Compra segura
+      </strong>
+
+      <span>
+        Atención personalizada
+      </span>
+    </div>
+
+  </div>
+
+
+  <div class="benefit">
+
+    <div class="benefit-icon">
+      💬
+    </div>
+
+    <div>
+      <strong>
+        Atención por WhatsApp
+      </strong>
+
+      <span>
+        Estamos para ayudarte
+      </span>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     CATEGORÍAS
+========================================================= -->
+
+<section
+  class="section categories-section"
+  id="categorias"
+>
+
+  <div class="section-heading">
+
+    <div class="heading-line"></div>
+
+    <div class="heading-label">
+      DESCUBRE TU AROMA
+    </div>
+
+    <div class="heading-line"></div>
+
+  </div>
+
+
+  <h2>
+    Nuestras <span>Categorías</span>
+  </h2>
+
+
+  <p class="section-description">
+    Encuentra una fragancia que vaya contigo.
+  </p>
+
+
+  <div class="categories-grid">
+
+    <button
+      class="category-card"
+      data-category="hombres"
+    >
+
+      <div class="category-image men">
+        <div class="category-bottle"></div>
+      </div>
+
+      <strong>
+        Hombres
+      </strong>
+
+      <span>
+        Fragancias masculinas
+      </span>
+
+    </button>
+
+
+    <button
+      class="category-card"
+      data-category="mujeres"
+    >
+
+      <div class="category-image women">
+        <div class="category-bottle"></div>
+      </div>
+
+      <strong>
+        Mujeres
+      </strong>
+
+      <span>
+        Fragancias femeninas
+      </span>
+
+    </button>
+
+
+    <button
+      class="category-card"
+      data-category="unisex"
+    >
+
+      <div class="category-image unisex">
+        <div class="category-bottle"></div>
+      </div>
+
+      <strong>
+        Unisex
+      </strong>
+
+      <span>
+        Para todos los estilos
+      </span>
+
+    </button>
+
+
+    <button
+      class="category-card"
+      data-category="regalos"
+    >
+
+      <div class="category-image gifts">
+        <div class="gift-box">
+          🎁
+        </div>
+      </div>
+
+      <strong>
+        Sets / Regalos
+      </strong>
+
+      <span>
+        Para ocasiones especiales
+      </span>
+
+    </button>
+
+
+    <button
+      class="category-card"
+      data-category="todos"
+    >
+
+      <div class="category-image fresh">
+        <div class="category-bottle"></div>
+      </div>
+
+      <strong>
+        Ver todo
+      </strong>
+
+      <span>
+        Todo nuestro catálogo
+      </span>
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     PRODUCTOS
+========================================================= -->
+
+<section
+  class="section products-section"
+  id="perfumes"
+>
+
+  <div class="section-heading">
+
+    <div class="heading-line"></div>
+
+    <div class="heading-label">
+      SELECCIÓN URBANTECH
+    </div>
+
+    <div class="heading-line"></div>
+
+  </div>
+
+
+  <div class="products-title-row">
+
+    <div>
+
+      <h2>
+        Los <span>más buscados</span>
+      </h2>
+
+      <p class="section-description">
+        Descubre las fragancias disponibles.
+      </p>
+
+    </div>
+
+
+    <div class="product-count" id="count">
+      Cargando catálogo...
+    </div>
+
+  </div>
+
+
+  <!-- FILTROS -->
+
+  <div class="filters">
+
+    <button
+      class="filter active"
+      data-filter="todos"
+    >
+      Todos
+    </button>
+
+    <button
+      class="filter"
+      data-filter="hombres"
+    >
+      Hombres
+    </button>
+
+    <button
+      class="filter"
+      data-filter="mujeres"
+    >
+      Mujeres
+    </button>
+
+    <button
+      class="filter"
+      data-filter="unisex"
+    >
+      Unisex
+    </button>
+
+  </div>
+
+
+  <!-- PRODUCTOS SUPABASE -->
+
+  <div
+    class="products-grid"
+    id="products"
+  >
+
+    <div class="loading-card">
+
+      <div class="loading-spinner"></div>
+
+      <p>
+        Cargando perfumes...
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div
+    class="empty-products"
+    id="emptyProducts"
+    style="display:none;"
+  >
+
+    <div>
+      ✦
+    </div>
+
+    <h3>
+      Próximamente
+    </h3>
+
+    <p>
+      Estamos preparando nuevos perfumes para ti.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     BANNER
+========================================================= -->
+
+<section class="promo-section">
+
+  <div class="promo-content">
+
+    <div class="promo-script">
+      Tu aroma.
+    </div>
+
+    <h2>
+      TU MEJOR
+      <span>VERSIÓN</span>
+    </h2>
+
+    <p>
+      Porque un buen perfume no es un lujo,
+      <br>
+      es una actitud.
+    </p>
+
+    <a
+      href="#perfumes"
+      class="promo-button"
+    >
+      VER TODOS LOS PERFUMES
+      <span>→</span>
+    </a>
+
+  </div>
+
+
+  <div class="promo-bottle">
+
+    <div class="promo-bottle-cap"></div>
+
+    <div class="promo-bottle-body">
+      <span>URBAN</span>
+      <strong>ELIXIR</strong>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     CONTACTO
+========================================================= -->
+
+<section
+  class="contact-section"
+  id="contacto"
+>
+
+  <div class="contact-content">
+
+    <div class="contact-logo">
+
+      <div class="logo-bottle small">
+        <span></span>
+      </div>
+
+      <div class="logo-text">
+
+        <strong>
+          URBAN<span>TECH</span>
+        </strong>
+
+        <small>
+          PERFUMERÍA
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="contact-text">
+
+      <span>
+        ¿YA ENCONTRASTE TU AROMA?
+      </span>
+
+      <strong>
+        Escríbenos y haz tu pedido.
+      </strong>
+
+    </div>
+
+
+    <a
+      class="whatsapp-large"
+      id="footerWa"
+      target="_blank"
+      rel="noopener"
+    >
+
+      <span class="wa-icon">
+        ☎
+      </span>
+
+      ESCRÍBENOS POR WHATSAPP
+
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+  <div class="footer-top">
+
+    <div>
+
+      <div class="footer-brand">
+        URBAN<span>TECH</span>
+      </div>
+
+      <p>
+        Perfumería
+      </p>
+
+    </div>
+
+
+    <div>
+
+      <h4>
+        Navegación
+      </h4>
+
+      <a href="#inicio">
+        Inicio
+      </a>
+
+      <a href="#perfumes">
+        Perfumes
+      </a>
+
+      <a href="#categorias">
+        Categorías
+      </a>
+
+    </div>
+
+
+    <div>
+
+      <h4>
+        Atención
+      </h4>
+
+      <a href="#contacto">
+        Contacto
+      </a>
+
+      <a id="footerWa2" target="_blank">
+        WhatsApp
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer-bottom">
+
+    <span>
+      © <span id="year"></span> UrbanTech Perfumería
+    </span>
+
+    <span>
+      Hecho para amantes de las buenas fragancias ✦
+    </span>
+
+  </div>
+
+</footer>
+
+
+<!-- =========================================================
+     WHATSAPP FLOTANTE
+========================================================= -->
+
+<a
+  class="floating-whatsapp"
+  id="floatWa"
+  target="_blank"
+  rel="noopener"
+>
+
+  <span>
+    💬
+  </span>
+
+  <strong>
+    WhatsApp
+  </strong>
+
+</a>
+
+
+<!-- =========================================================
+     SUPABASE
+========================================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+const db = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+
+/* =========================================================
+   CONFIGURACIÓN WHATSAPP
+========================================================= */
+
+const whatsappNumber = WHATSAPP;
+
+
+/* =========================================================
+   FORMATO DE PRECIO
+========================================================= */
+
+function money(value) {
+
+  return new Intl.NumberFormat(
+    'es-CR',
+    {
+      style: 'currency',
+      currency: 'CRC',
+      maximumFractionDigits: 0
+    }
+  ).format(value);
+
+}
+
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
+function whatsappLink(message) {
+
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+}
+
+
+/* =========================================================
+   BOTONES WHATSAPP
+========================================================= */
+
+const heroMessage =
+  'Hola UrbanTech, quiero ver el catálogo de perfumes.';
+
+const generalMessage =
+  'Hola UrbanTech, quiero información sobre los perfumes.';
+
+
+document
+  .getElementById('footerWa')
+  .href = whatsappLink(generalMessage);
+
+
+document
+  .getElementById('footerWa2')
+  .href = whatsappLink(generalMessage);
+
+
+document
+  .getElementById('floatWa')
+  .href = whatsappLink(generalMessage);
+
+
+/* =========================================================
+   A
