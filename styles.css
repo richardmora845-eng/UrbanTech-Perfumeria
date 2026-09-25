@@ -1,39 +1,51 @@
 /* =========================================================
-   URBANTECH PERFUMERÍA — ESTILO COMPLETO
-   Diseño premium + responsive
+   URBANTECH PERFUMERÍA
+   DISEÑO BOTÁNICO PREMIUM
+   Verde oscuro + esmeralda + cian + tipografía elegante
 ========================================================= */
 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
 :root {
-  --bg: #06110e;
-  --bg-soft: #0a1713;
-  --bg-card: #0d1d18;
-  --bg-card-2: #10251f;
-  --text: #f5f1e8;
-  --muted: #93a29b;
-  --muted-2: #64736c;
-  --cyan: #50ead3;
-  --cyan-bright: #6ff7e3;
-  --cyan-dark: #1aa995;
-  --line: rgba(102, 239, 216, .18);
-  --line-soft: rgba(255,255,255,.08);
-  --gold: #d8bd78;
-  --danger: #ff7272;
-  --shadow: 0 22px 70px rgba(0,0,0,.38);
-  --radius: 18px;
-  --container: 1180px;
+  --black: #020807;
+  --dark: #04110d;
+  --dark-2: #071914;
+  --dark-3: #0b211a;
+  --green: #0d3a2d;
+  --emerald: #126653;
+  --cyan: #42ead0;
+  --cyan-light: #76f6e2;
+  --white: #f5f3eb;
+  --cream: #ddd9ca;
+  --gray: #9aa9a2;
+  --gray-dark: #62736b;
+  --gold: #cdbb7b;
+
+  --container: 1220px;
+
+  --shadow:
+    0 25px 80px rgba(0,0,0,.55);
+
+  --transition:
+    .3s ease;
 }
 
-*,
-*::before,
-*::after {
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 html {
+  width: 100%;
+  min-width: 0;
   scroll-behavior: smooth;
-  background: var(--bg);
+  background: var(--black);
 }
 
 body {
@@ -41,6 +53,115 @@ body {
   min-width: 0;
   max-width: 100%;
   overflow-x: hidden;
+
   background:
     radial-gradient(
-     
+      circle at 50% 0%,
+      rgba(17,92,73,.22),
+      transparent 38%
+    ),
+    var(--black);
+
+  color: var(--white);
+
+  font-family: "Montserrat", sans-serif;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--cyan);
+  color: var(--black);
+}
+
+
+/* =========================================================
+   DECORACIÓN BOTÁNICA
+========================================================= */
+
+body::before,
+body::after {
+  position: fixed;
+  z-index: -1;
+
+  width: 280px;
+  height: 520px;
+
+  pointer-events: none;
+
+  content: "";
+
+  opacity: .12;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      #237b61 0%,
+      transparent 65%
+    );
+
+  filter: blur(30px);
+}
+
+body::before {
+  left: -180px;
+  top: 20%;
+}
+
+body::after {
+  right: -180px;
+  top: 55%;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  width: 100%;
+
+  min-height: 78px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  padding:
+    12px clamp(18px, 5vw, 70px);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(1,9,7,.97),
+      rgba(3,19,14,.94),
+      rgba(1,9,7,.97)
+    );
+
+  border-bottom:
+    1px solid
