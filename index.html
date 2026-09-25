@@ -1,848 +1,1116 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+  <title>UrbanTech Perfumería | Perfumes Originales</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UrbanTech Perfumería. Descubre nuestra colección de perfumes para hombre, mujer y unisex.">
 
-<title>UrbanTech | Perfumería</title>
+  <!-- Vista previa al compartir el enlace -->
+  <meta property="og:title" content="UrbanTech Perfumería">
+  <meta property="og:description" content="Perfumes para hombre, mujer y unisex.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://richardmora845-eng.github.io/UrbanTech-Perfumeria/">
+  <meta property="og:image" content="https://richardmora845-eng.github.io/UrbanTech-Perfumeria/og-image.png">
 
-<meta
-  name="description"
-  content="UrbanTech Perfumería - Perfumes y fragancias. Envíos a todo Costa Rica."
->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="UrbanTech Perfumería">
+  <meta name="twitter:description" content="Perfumes para hombre, mujer y unisex.">
+  <meta name="twitter:image" content="https://richardmora845-eng.github.io/UrbanTech-Perfumeria/og-image.png">
 
-<meta name="theme-color" content="#061a16">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- =========================
-     VISTA PREVIA DEL ENLACE
-========================= -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<meta property="og:type" content="website">
+  <link rel="stylesheet" href="styles.css">
 
-<meta
-  property="og:title"
-  content="UrbanTech | Perfumería"
->
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
 
-<meta
-  property="og:description"
-  content="Descubre perfumes y fragancias en UrbanTech Perfumería."
->
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+    }
 
-<meta
-  property="og:url"
-  content="https://richardmora845-eng.github.io/UrbanTech-Perfumeria/"
->
+    .product-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: contain;
+      display: block;
+    }
 
-<meta
-  property="og:image"
-  content="https://richardmora845-eng.github.io/UrbanTech-Perfumeria/og-image.png"
->
+    .product-card {
+      overflow: hidden;
+    }
 
-<meta property="og:image:type" content="image/png">
+    .loading,
+    .empty,
+    .error {
+      text-align: center;
+      padding: 40px 20px;
+      width: 100%;
+    }
 
-<meta property="og:image:width" content="1200">
+    .error {
+      color: #ff6b6b;
+    }
 
-<meta property="og:image:height" content="630">
+    .category-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 25px 0;
+    }
 
-<meta property="og:site_name" content="UrbanTech Perfumería">
+    .category-buttons button {
+      cursor: pointer;
+    }
 
-<meta
-  name="twitter:card"
-  content="summary_large_image"
->
+    .search-box {
+      display: flex;
+      justify-content: center;
+      margin: 20px auto 35px;
+    }
 
-<meta
-  name="twitter:title"
-  content="UrbanTech | Perfumería"
->
+    .search-box input {
+      width: min(600px, 90%);
+      padding: 15px 20px;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.05);
+      color: white;
+      outline: none;
+    }
 
-<meta
-  name="twitter:description"
-  content="Perfumes y fragancias en UrbanTech."
->
-
-<meta
-  name="twitter:image"
-  content="https://richardmora845-eng.github.io/UrbanTech-Perfumeria/og-image.png"
->
-
-
-<!-- FUENTES -->
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link
-  rel="preconnect"
-  href="https://fonts.gstatic.com"
-  crossorigin
->
-
-<link
-  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&display=swap"
-  rel="stylesheet"
->
-
-
-<!-- CSS -->
-
-<link rel="stylesheet" href="styles.css">
-
-
-<style>
-
-/* =====================================================
-   AJUSTES PARA QUE LOS BOTONES Y SECCIONES FUNCIONEN
-===================================================== */
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 90px;
-}
-
-a {
-  cursor: pointer;
-}
-
-button {
-  cursor: pointer;
-}
-
-
-/* =====================================================
-   MENSAJE DE PRODUCTOS
-===================================================== */
-
-.empty-products {
-  width: 100%;
-  text-align: center;
-  padding: 50px 20px;
-  grid-column: 1 / -1;
-}
-
-.empty-products h3 {
-  margin: 15px 0 8px;
-}
-
-.empty-products p {
-  opacity: .75;
-}
-
-
-/* =====================================================
-   IMÁGENES DE PRODUCTOS
-===================================================== */
-
-.product-image {
-  overflow: hidden;
-}
-
-.product-image img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: contain;
-}
-
-
-/* =====================================================
-   BOTONES
-===================================================== */
-
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-
-/* =====================================================
-   ANCLAJES
-===================================================== */
-
-#inicio,
-#categorias,
-#perfumes,
-#contacto {
-  scroll-margin-top: 90px;
-}
-
-</style>
-
+    .cart-button {
+      cursor: pointer;
+    }
+  </style>
 </head>
-
 
 <body>
 
+  <!-- ================= HEADER ================= -->
 
-<!-- =====================================================
-     BARRA SUPERIOR
-===================================================== -->
+  <header class="header">
 
-<div class="topbar">
-
-  🚚 Envíos a todo Costa Rica
-
-  <span>•</span>
-
-  💬 Pedidos por WhatsApp
-
-  <span>•</span>
-
-  ✦ UrbanTech Perfumería
-
-</div>
-
-
-
-<!-- =====================================================
-     NAVBAR
-===================================================== -->
-
-<nav class="navbar">
-
-
-  <a
-    href="#inicio"
-    class="logo"
-  >
-
-    <div class="logo-symbol">
-      U
-    </div>
-
-    <div class="logo-text">
-
-      <strong>
-        URBAN<span>TECH</span>
-      </strong>
-
-      <small>
-        PERFUMERÍA
-      </small>
-
-    </div>
-
-  </a>
-
-
-
-  <div class="nav-links">
-
-    <a href="#inicio">
-      Inicio
-    </a>
-
-    <a href="#perfumes">
-      Perfumes
-    </a>
-
-    <a href="#categorias">
-      Categorías
-    </a>
-
-    <a href="#contacto">
-      Contacto
-    </a>
-
-  </div>
-
-
-
-  <div class="nav-actions">
-
-    <button
-      id="searchButton"
-      class="nav-icon"
-      type="button"
-    >
-      🔍
-    </button>
-
-
-    <button
-      id="cartButton"
-      class="cart-button"
-      type="button"
-    >
-
-      🛒
-
-      <span id="cartCount">
-        0
-      </span>
-
-    </button>
-
-  </div>
-
-
-</nav>
-
-
-
-<!-- =====================================================
-     BUSCADOR
-===================================================== -->
-
-<div
-  id="searchPanel"
-  class="search-panel"
->
-
-  <input
-    type="text"
-    id="searchInput"
-    placeholder="Buscar perfume o marca..."
-  >
-
-  <button
-    id="closeSearch"
-    type="button"
-  >
-    ×
-  </button>
-
-</div>
-
-
-
-<!-- =====================================================
-     INICIO
-===================================================== -->
-
-<header
-  class="hero"
-  id="inicio"
->
-
-
-  <div class="hero-content">
-
-
-    <div class="hero-small">
-      FRAGANCIAS QUE DEJAN HUELLA
-    </div>
-
-
-    <h1>
-
-      PERFUMES
-
-      <em>
-        Originales
-      </em>
-
-    </h1>
-
-
-    <p>
-      Descubre fragancias que representan tu estilo,
-      tu personalidad y tu esencia.
-    </p>
-
-
-    <div class="hero-buttons">
-
-
-      <!-- ESTE BOTÓN AHORA VA AL CATÁLOGO -->
-
-      <a
-        href="#perfumes"
-        class="button-primary"
-      >
-
-        VER CATÁLOGO
-
-        <span>
-          →
-        </span>
-
+    <div class="logo">
+      <a href="#inicio">
+        <span>UrbanTech</span>
+        <small>PERFUMERÍA</small>
       </a>
-
-
-      <!-- ESTE BOTÓN VA A CATEGORÍAS -->
-
-      <a
-        href="#categorias"
-        class="button-secondary"
-      >
-        EXPLORAR
-      </a>
-
-
     </div>
 
-
-  </div>
-
-
-
-  <div class="hero-bottles">
-
-    <div class="glow"></div>
-
-
-    <div class="fake-bottle bottle1">
-
-      <div class="bottle-cap"></div>
-
-      <div class="bottle-body">
-
-        <small>
-          URBAN
-        </small>
-
-        <strong>
-          TECH
-        </strong>
-
-      </div>
-
-    </div>
-
-
-    <div class="fake-bottle bottle2">
-
-      <div class="bottle-cap"></div>
-
-      <div class="bottle-body">
-
-        <small>
-          EAU
-        </small>
-
-        <strong>
-          DE PARFUM
-        </strong>
-
-      </div>
-
-    </div>
-
-
-    <div class="fake-bottle bottle3">
-
-      <div class="bottle-cap"></div>
-
-      <div class="bottle-body">
-
-        <strong>
-          ELIXIR
-        </strong>
-
-      </div>
-
-    </div>
-
-
-  </div>
-
-
-</header>
-
-
-
-<!-- =====================================================
-     BENEFICIOS
-===================================================== -->
-
-<section class="benefits">
-
-
-  <div class="benefit">
-
-    <span>
-      ✓
-    </span>
-
-    <div>
-
-      <strong>
-        Productos originales
-      </strong>
-
-      <small>
-        Calidad y confianza
-      </small>
-
-    </div>
-
-  </div>
-
-
-  <div class="benefit">
-
-    <span>
-      🚚
-    </span>
-
-    <div>
-
-      <strong>
-        Envíos nacionales
-      </strong>
-
-      <small>
-        A todo Costa Rica
-      </small>
-
-    </div>
-
-  </div>
-
-
-  <div class="benefit">
-
-    <span>
-      🔒
-    </span>
-
-    <div>
-
-      <strong>
-        Compra segura
-      </strong>
-
-      <small>
-        Atención personalizada
-      </small>
-
-    </div>
-
-  </div>
-
-
-  <div class="benefit">
-
-    <span>
-      💬
-    </span>
-
-    <div>
-
-      <strong>
-        WhatsApp
-      </strong>
-
-      <small>
-        Estamos para ayudarte
-      </small>
-
-    </div>
-
-  </div>
-
-
-</section>
-
-
-
-<!-- =====================================================
-     CATEGORÍAS
-===================================================== -->
-
-<section
-  class="section"
-  id="categorias"
->
-
-
-  <div class="section-title">
-
-    <span>
-      DESCUBRE TU AROMA
-    </span>
-
-  </div>
-
-
-  <h2>
-
-    Nuestras
-
-    <em>
-      Categorías
-    </em>
-
-  </h2>
-
-
-  <p class="section-description">
-
-    Encuentra una fragancia que vaya contigo.
-
-  </p>
-
-
-
-  <div class="categories">
-
-
-    <button
-      class="category"
-      data-category="hombres"
-      type="button"
-    >
-
-      <div class="category-image men">
-        🧴
-      </div>
-
-      <strong>
-        Hombres
-      </strong>
-
-      <span>
-        Fragancias masculinas
-      </span>
-
+    <nav class="nav">
+      <a href="#inicio">Inicio</a>
+      <a href="#perfumes">Perfumes</a>
+      <a href="#categorias">Categorías</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <button class="cart-button" onclick="openCart()">
+      🛒 <span id="cart-count">0</span>
     </button>
 
+  </header>
 
 
-    <button
-      class="category"
-      data-category="mujeres"
-      type="button"
-    >
+  <!-- ================= HERO ================= -->
 
-      <div class="category-image women">
-        🧴
-      </div>
+  <section id="inicio" class="hero">
 
-      <strong>
-        Mujeres
-      </strong>
+    <div class="hero-content">
 
-      <span>
-        Fragancias femeninas
-      </span>
+      <p class="hero-small">URBAN TECH</p>
 
-    </button>
-
-
-
-    <button
-      class="category"
-      data-category="unisex"
-      type="button"
-    >
-
-      <div class="category-image unisex">
-        🧴
-      </div>
-
-      <strong>
-        Unisex
-      </strong>
-
-      <span>
-        Para todos los estilos
-      </span>
-
-    </button>
-
-
-
-    <button
-      class="category"
-      data-category="regalos"
-      type="button"
-    >
-
-      <div class="category-image gifts">
-        🎁
-      </div>
-
-      <strong>
-        Sets / Regalos
-      </strong>
-
-      <span>
-        Para ocasiones especiales
-      </span>
-
-    </button>
-
-
-
-    <button
-      class="category"
-      data-category="todos"
-      type="button"
-    >
-
-      <div class="category-image all">
-        ✦
-      </div>
-
-      <strong>
-        Ver todo
-      </strong>
-
-      <span>
-        Todo nuestro catálogo
-      </span>
-
-    </button>
-
-
-  </div>
-
-
-</section>
-
-
-
-<!-- =====================================================
-     CATÁLOGO
-===================================================== -->
-
-<section
-  class="section products-section"
-  id="perfumes"
->
-
-
-  <div class="section-title">
-
-    <span>
-      SELECCIÓN URBANTECH
-    </span>
-
-  </div>
-
-
-  <h2>
-
-    Nuestros
-
-    <em>
-      Perfumes
-    </em>
-
-  </h2>
-
-
-  <p class="section-description">
-
-    Elige tu próxima fragancia favorita.
-
-  </p>
-
-
-
-  <div class="filters">
-
-
-    <button
-      class="filter active"
-      data-filter="todos"
-      type="button"
-    >
-      Todos
-    </button>
-
-
-    <button
-      class="filter"
-      data-filter="hombres"
-      type="button"
-    >
-      Hombres
-    </button>
-
-
-    <button
-      class="filter"
-      data-filter="mujeres"
-      type="button"
-    >
-      Mujeres
-    </button>
-
-
-    <button
-      class="filter"
-      data-filter="unisex"
-      type="button"
-    >
-      Unisex
-    </button>
-
-
-  </div>
-
-
-
-  <!-- PRODUCTOS -->
-
-  <div
-    id="productsGrid"
-    class="products-grid"
-  >
-
-    <div class="loading">
-
-      <div class="spinner"></div>
+      <h1>
+        El aroma que
+        <span>te representa</span>
+      </h1>
 
       <p>
-        Cargando perfumes...
+        Descubre nuestra colección de perfumes
+        para cada estilo y personalidad.
       </p>
+
+      <div class="hero-buttons">
+
+        <a href="#perfumes" class="btn">
+          VER CATÁLOGO
+        </a>
+
+        <a href="#categorias" class="btn secondary">
+          CATEGORÍAS
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= CATEGORÍAS ================= -->
+
+  <section id="categorias" class="section">
+
+    <div class="section-title">
+
+      <p>DESCUBRE</p>
+
+      <h2>
+        Nuestras
+        <span>categorías</span>
+      </h2>
+
+    </div>
+
+
+    <div class="category-buttons">
+
+      <button class="btn category-btn" onclick="filterCategory('all')">
+        Todos
+      </button>
+
+      <button class="btn category-btn" onclick="filterCategory('hombres')">
+        Hombre
+      </button>
+
+      <button class="btn category-btn" onclick="filterCategory('mujeres')">
+        Mujer
+      </button>
+
+      <button class="btn category-btn" onclick="filterCategory('unisex')">
+        Unisex
+      </button>
+
+      <button class="btn category-btn" onclick="filterCategory('regalos')">
+        Regalos
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PERFUMES ================= -->
+
+  <section id="perfumes" class="section products-section">
+
+    <div class="section-title">
+
+      <p>COLECCIÓN</p>
+
+      <h2>
+        Nuestros
+        <span>perfumes</span>
+      </h2>
+
+    </div>
+
+
+    <!-- BUSCADOR -->
+
+    <div class="search-box">
+
+      <input
+        type="search"
+        id="search"
+        placeholder="Buscar perfume..."
+        oninput="searchProducts()"
+      >
+
+    </div>
+
+
+    <!-- PRODUCTOS -->
+
+    <div id="products" class="products-grid">
+
+      <div class="loading">
+        Cargando perfumes...
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= CONTACTO ================= -->
+
+  <section id="contacto" class="section contact-section">
+
+    <div class="section-title">
+
+      <p>¿TIENES ALGUNA DUDA?</p>
+
+      <h2>
+        Contáctanos
+      </h2>
+
+    </div>
+
+    <div class="contact-content">
+
+      <p>
+        Escríbenos por WhatsApp para consultar
+        disponibilidad, precios y realizar tu pedido.
+      </p>
+
+      <a
+        id="whatsapp-link"
+        class="btn"
+        href="#"
+        target="_blank"
+      >
+        ESCRIBIR POR WHATSAPP
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+
+    <div class="logo">
+      <span>UrbanTech</span>
+      <small>PERFUMERÍA</small>
+    </div>
+
+    <p>
+      © 2026 UrbanTech Perfumería
+    </p>
+
+  </footer>
+
+
+  <!-- ================= CARRITO ================= -->
+
+  <div id="cart-modal" class="cart-modal" style="display:none;">
+
+    <div class="cart-box">
+
+      <button onclick="closeCart()" class="close-cart">
+        ✕
+      </button>
+
+      <h2>
+        Tu carrito
+      </h2>
+
+      <div id="cart-items"></div>
+
+      <div class="cart-total">
+        Total:
+        <strong id="cart-total">₡0</strong>
+      </div>
+
+      <button
+        class="btn"
+        onclick="checkoutWhatsApp()"
+      >
+        PEDIR POR WHATSAPP
+      </button>
 
     </div>
 
   </div>
 
 
-</section>
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script src="config.js"></script>
+
+  <script>
+
+    let products = [];
+    let filteredProducts = [];
+    let cart = [];
+
+    let currentFilter = "all";
 
 
+    // ==========================================
+    // INICIAR
+    // ==========================================
 
-<!-- =====================================================
-     CONTACTO
-===================================================== -->
+    document.addEventListener("DOMContentLoaded", () => {
 
-<section
-  class="contact-section"
-  id="contacto"
->
+      loadProducts();
 
+      const whatsappLink =
+        document.getElementById("whatsapp-link");
 
-  <div class="contact-content">
+      if (whatsappLink && typeof WHATSAPP !== "undefined") {
 
+        whatsappLink.href =
+          "https://wa.me/" + WHATSAPP;
 
-    <span class="contact-small">
-      ¿NECESITAS AYUDA?
-    </span>
+      }
 
-
-    <h2>
-
-      Encuentra tu
-
-      <em>
-        fragancia
-      </em>
-
-    </h2>
+    });
 
 
-    <p>
+    // ==========================================
+    // CARGAR PRODUCTOS DESDE SUPABASE
+    // ==========================================
 
-      Escríbenos por WhatsApp y con gusto te ayudamos
-      a encontrar el perfume ideal.
+    async function loadProducts() {
 
-    </p>
+      const container =
+        document.getElementById("products");
+
+      try {
+
+        if (
+          typeof SUPABASE_URL === "undefined" ||
+          typeof SUPABASE_PUBLISHABLE_KEY === "undefined"
+        ) {
+
+          container.innerHTML = `
+            <div class="error">
+              No se encontró la configuración de Supabase.
+            </div>
+          `;
+
+          return;
+        }
 
 
-    <a
-      href="https://wa.me/50670461262"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="whatsapp-button"
-    >
+        // Cargar librería Supabase
 
-      💬 ESCRIBIR
+        if (!window.supabase) {
+
+          const script =
+            document.createElement("script");
+
+          script.src =
+            "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+
+          document.head.appendChild(script);
+
+          await new Promise(resolve => {
+
+            script.onload = resolve;
+
+          });
+
+        }
+
+
+        const supabaseClient =
+          window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY
+          );
+
+
+        console.log("Conectando con Supabase...");
+
+
+        const result =
+          await supabaseClient
+            .from("products")
+            .select("*");
+
+
+        console.log("RESPUESTA SUPABASE:", result);
+
+
+        if (result.error) {
+
+          console.error(
+            "Error Supabase:",
+            result.error
+          );
+
+          container.innerHTML = `
+            <div class="error">
+              <h3>Error cargando productos</h3>
+              <p>${escapeHtml(result.error.message)}</p>
+            </div>
+          `;
+
+          return;
+        }
+
+
+        products = result.data || [];
+
+        console.log(
+          "PRODUCTOS ENCONTRADOS:",
+          products
+        );
+
+
+        if (!products.length) {
+
+          container.innerHTML = `
+            <div class="empty">
+              <h3>No hay productos para mostrar</h3>
+              <p>Agrega productos desde el panel de administración.</p>
+            </div>
+          `;
+
+          return;
+        }
+
+
+        filteredProducts =
+          [...products];
+
+
+        renderProducts();
+
+      } catch (error) {
+
+        console.error(error);
+
+        container.innerHTML = `
+          <div class="error">
+            <h3>No se pudieron cargar los productos</h3>
+            <p>${escapeHtml(error.message)}</p>
+          </div>
+        `;
+
+      }
+
+    }
+
+
+    // ==========================================
+    // MOSTRAR PRODUCTOS
+    // ==========================================
+
+    function renderProducts() {
+
+      const container =
+        document.getElementById("products");
+
+
+      if (!filteredProducts.length) {
+
+        container.innerHTML = `
+          <div class="empty">
+            <h3>No encontramos perfumes</h3>
+            <p>Prueba con otra búsqueda o categoría.</p>
+          </div>
+        `;
+
+        return;
+      }
+
+
+      container.innerHTML =
+        filteredProducts
+          .map(product => createProductCard(product))
+          .join("");
+
+    }
+
+
+    // ==========================================
+    // TARJETA DE PRODUCTO
+    // ==========================================
+
+    function createProductCard(product) {
+
+      const name =
+        product.name ||
+        product.nombre ||
+        "Perfume";
+
+
+      const brand =
+        product.brand ||
+        product.marca ||
+        "";
+
+
+      const price =
+        product.price ??
+        product.precio ??
+        0;
+
+
+      const category =
+        product.category ||
+        product.categoria ||
+        "";
+
+
+      const image =
+        product.image_url ||
+        product.image ||
+        product.imageUrl ||
+        product.photo_url ||
+        product.photo ||
+        product.img ||
+        product.url_image ||
+        "";
+
+
+      const formattedPrice =
+        formatPrice(price);
+
+
+      return `
+
+        <article class="product-card">
+
+          ${
+            image
+              ? `
+                <img
+                  src="${escapeAttribute(image)}"
+                  alt="${escapeAttribute(name)}"
+                  loading="lazy"
+                  onerror="this.style.display='none'"
+                >
+              `
+              : `
+                <div
+                  style="
+                    height:280px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:60px;
+                  "
+                >
+                  🌸
+                </div>
+              `
+          }
+
+
+          <div class="product-info">
+
+            ${
+              brand
+                ? `<small>${escapeHtml(brand)}</small>`
+                : ""
+            }
+
+            <h3>
+              ${escapeHtml(name)}
+            </h3>
+
+            ${
+              category
+                ? `<p>${escapeHtml(category)}</p>`
+                : ""
+            }
+
+            <strong>
+              ${formattedPrice}
+            </strong>
+
+            <button
+              class="btn"
+              onclick='addToCart(${JSON.stringify(product).replace(/'/g, "&apos;")})'
+            >
+              AGREGAR
+            </button>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }
+
+
+    // ==========================================
+    // FILTRAR CATEGORÍA
+    // ==========================================
+
+    function filterCategory(category) {
+
+      currentFilter =
+        category;
+
+      const perfumesSection =
+        document.getElementById("perfumes");
+
+      if (perfumesSection) {
+
+        perfumesSection.scrollIntoView({
+          behavior: "smooth"
+        });
+
+      }
+
+
+      if (category === "all") {
+
+        filteredProducts =
+          [...products];
+
+      } else {
+
+        filteredProducts =
+          products.filter(product => {
+
+            const productCategory =
+              String(
+                product.category ||
+                product.categoria ||
+                ""
+              )
+              .toLowerCase()
+              .trim();
+
+
+            return productCategory === category;
+
+          });
+
+      }
+
+
+      renderProducts();
+
+    }
+
+
+    // ==========================================
+    // BUSCAR
+    // ==========================================
+
+    function searchProducts() {
+
+      const search =
+        document
+          .getElementById("search")
+          .value
+          .toLowerCase()
+          .trim();
+
+
+      let result =
+        [...products];
+
+
+      // Categoría
+
+      if (currentFilter !== "all") {
+
+        result =
+          result.filter(product => {
+
+            const category =
+              String(
+                product.category ||
+                product.categoria ||
+                ""
+              )
+              .toLowerCase()
+              .trim();
+
+            return category === currentFilter;
+
+          });
+
+      }
+
+
+      // Texto
+
+      if (search) {
+
+        result =
+          result.filter(product => {
+
+            const name =
+              String(
+                product.name ||
+                product.nombre ||
+                ""
+              )
+              .toLowerCase();
+
+
+            const brand =
+              String(
+                product.brand ||
+                product.marca ||
+                ""
+              )
+              .toLowerCase();
+
+
+            return (
+              name.includes(search) ||
+              brand.includes(search)
+            );
+
+          });
+
+      }
+
+
+      filteredProducts =
+        result;
+
+
+      renderProducts();
+
+    }
+
+
+    // ==========================================
+    // CARRITO
+    // ==========================================
+
+    function addToCart(product) {
+
+      const existing =
+        cart.find(
+          item =>
+            item.id === product.id
+        );
+
+
+      if (existing) {
+
+        existing.quantity++;
+
+      } else {
+
+        cart.push({
+
+          ...product,
+
+          quantity: 1
+
+        });
+
+      }
+
+
+      updateCart();
+
+    }
+
+
+    function updateCart() {
+
+      const count =
+        cart.reduce(
+          (total, item) =>
+            total + item.quantity,
+          0
+        );
+
+
+      const countElement =
+        document.getElementById("cart-count");
+
+
+      if (countElement) {
+
+        countElement.textContent =
+          count;
+
+      }
+
+
+      renderCart();
+
+    }
+
+
+    function renderCart() {
+
+      const container =
+        document.getElementById("cart-items");
+
+      const totalElement =
+        document.getElementById("cart-total");
+
+
+      if (!container) return;
+
+
+      if (!cart.length) {
+
+        container.innerHTML = `
+          <p>Tu carrito está vacío.</p>
+        `;
+
+        if (totalElement) {
+
+          totalElement.textContent =
+            "₡0";
+
+        }
+
+        return;
+
+      }
+
+
+      let total = 0;
+
+
+      container.innerHTML =
+        cart.map(item => {
+
+          const price =
+            Number(
+              item.price ??
+              item.precio ??
+              0
+            );
+
+
+          total +=
+            price * item.quantity;
+
+
+          const name =
+            item.name ||
+            item.nombre ||
+            "Producto";
+
+
+          return `
+
+            <div
+              style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                gap:10px;
+                margin-bottom:15px;
+              "
+            >
+
+              <div>
+
+                <strong>
+                  ${escapeHtml(name)}
+                </strong>
+
+                <br>
+
+                <small>
+                  ${item.quantity} ×
+                  ${formatPrice(price)}
+                </small>
+
+              </div>
+
+              <button
+                onclick="removeFromCart('${escapeAttribute(item.id)}')"
+              >
+                ✕
+              </button>
+
+            </div>
+
+          `;
+
+        }).join("");
+
+
+      if (totalElement) {
+
+        totalElement.textContent =
+          formatPrice(total);
+
+      }
+
+    }
+
+
+    function removeFromCart(id) {
+
+      const index =
+        cart.findIndex(
+          item =>
+            String(item.id) === String(id)
+        );
+
+
+      if (index === -1) return;
+
+
+      cart[index].quantity--;
+
+
+      if (cart[index].quantity <= 0) {
+
+        cart.splice(index, 1);
+
+      }
+
+
+      updateCart();
+
+    }
+
+
+    function openCart() {
+
+      const modal =
+        document.getElementById("cart-modal");
+
+      if (modal) {
+
+        modal.style.display =
+          "flex";
+
+      }
+
+    }
+
+
+    function closeCart() {
+
+      const modal =
+        document.getElementById("cart-modal");
+
+      if (modal) {
+
+        modal.style.display =
+          "none";
+
+      }
+
+    }
+
+
+    // ==========================================
+    // WHATSAPP
+    // ==========================================
+
+    function checkoutWhatsApp() {
+
+      if (!cart.length) {
+
+        alert("Tu carrito está vacío.");
+
+        return;
+
+      }
+
+
+      let message =
+        "Hola UrbanTech Perfumería 👋%0A%0A";
+
+      message +=
+        "Quiero realizar el siguiente pedido:%0A%0A";
+
+
+      let total = 0;
+
+
+      cart.forEach(item => {
+
+        const name =
+          item.name ||
+          item.nombre ||
+          "Producto";
+
+
+        const price =
+          Number(
+            item.price ??
+            item.precio ??
+            0
+          );
+
+
+        total +=
+          price * item.quantity;
+
+
+        message +=
+          "• " +
+          encodeURIComponent(name) +
+          " × " +
+          item.quantity +
+          " — " +
+          encodeURIComponent(formatPrice(price)) +
+          "%0A";
+
+      });
+
+
+      message +=
+        "%0ATotal: " +
+        encodeURIComponent(formatPrice(total));
+
+
+      const number =
+        typeof WHATSAPP !== "undefined"
+          ? WHATSAPP
+          : "50670461262";
+
+
+      window.open(
+        "https://wa.me/" +
+        number +
+        "?text=" +
+        message,
+        "_blank"
+      );
+
+    }
+
+
+    // ==========================================
+    // FORMATO DE PRECIO
+    // ==========================================
+
+    function formatPrice(price) {
+
+      const number =
+        Number(price) || 0;
+
+
+      return "₡" +
+        number.toLocaleString("es-CR");
+
+    }
+
+
+    // ==========================================
+    // SEGURIDAD
+    // ==========================================
+
+    function escapeHtml(value) {
+
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    function escapeAttribute(value) {
+
+      return escapeHtml(value);
+
+    }
+
+  </script>
+
+</body>
+</html>
