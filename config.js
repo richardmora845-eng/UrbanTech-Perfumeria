@@ -1,3 +1,3 @@
-const SUPABASE_URL = "https://khvrpnfgkikgysludpod.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_nHvdaVoYINUMmTUwmST2LQ_q4O02VnY";
-const WHATSAPP = "50670461262";
+window.SUPABASE_URL = "https://khvrpnfgkikgysludpod.supabase.co";
+window.SUPABASE_PUBLISHABLE_KEY = "sb_publishable_nHvdaVoYINUMmTUwmST2LQ_q4O02VnY";
+window.WHATSAPP_NUMBER = "50670461262";
