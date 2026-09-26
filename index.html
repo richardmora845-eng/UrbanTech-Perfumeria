@@ -118,16 +118,139 @@
       color: #ff7777;
     }
 
+    /* ================= CATEGORÍAS PREMIUM ================= */
     .category-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin: 25px 0;
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 980px;
+      margin: 30px auto 8px;
+      padding: 0;
     }
 
-    .category-buttons button {
-      cursor: pointer;
+    .category-buttons::before {
+      content: "";
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(32,223,197,.18), transparent);
+      pointer-events: none;
+    }
+
+    .category-btn {
+      position: relative;
+      z-index: 1;
+      min-height: 88px;
+      padding: 16px 18px 15px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(32,223,197,.09), transparent 55%),
+        linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+      color: rgba(244,241,232,.72);
+      box-shadow: 0 10px 30px rgba(0,0,0,.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.8px;
+      line-height: 1.15;
+      text-transform: uppercase;
+      transition: transform .25s ease, border-color .25s ease, color .25s ease, background .25s ease, box-shadow .25s ease;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .category-btn .category-icon {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(32,223,197,.20);
+      border-radius: 50%;
+      color: rgba(114,244,223,.78);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1;
+      background: rgba(32,223,197,.035);
+      transition: transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease;
+    }
+
+    .category-btn:hover {
+      transform: translateY(-4px);
+      border-color: rgba(32,223,197,.38);
+      color: #f4f1e8;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(32,223,197,.15), transparent 60%),
+        linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
+      box-shadow: 0 16px 38px rgba(0,0,0,.22), 0 0 24px rgba(32,223,197,.06);
+    }
+
+    .category-btn:hover .category-icon {
+      transform: scale(1.08);
+      border-color: rgba(32,223,197,.45);
+      color: #72f4df;
+      background: rgba(32,223,197,.08);
+    }
+
+    .category-btn.active {
+      color: #00100b;
+      border-color: rgba(114,244,223,.70);
+      background: linear-gradient(145deg, #72f4df 0%, #20dfc5 58%, #16bca6 100%);
+      box-shadow: 0 14px 36px rgba(32,223,197,.16), 0 0 0 1px rgba(114,244,223,.10);
+    }
+
+    .category-btn.active::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -7px;
+      width: 34px;
+      height: 2px;
+      border-radius: 999px;
+      background: #72f4df;
+      transform: translateX(-50%);
+      box-shadow: 0 0 12px rgba(114,244,223,.55);
+    }
+
+    .category-btn.active .category-icon {
+      border-color: rgba(0,16,11,.20);
+      color: #00100b;
+      background: rgba(255,255,255,.22);
+    }
+
+    @media (max-width: 760px) {
+      .category-buttons {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .category-buttons::before {
+        display: none;
+      }
+
+      .category-btn {
+        min-height: 78px;
+        padding: 12px 10px;
+        border-radius: 16px;
+        font-size: 9px;
+        letter-spacing: 1.35px;
+      }
+
+      .category-btn .category-icon {
+        width: 27px;
+        height: 27px;
+        font-size: 15px;
+      }
     }
 
     .search-box {
@@ -474,6 +597,57 @@
     }
 
   </style>
+
+<style id="urbantech-tops-styles">
+.urban-tops-section{position:relative;padding:52px clamp(18px,6vw,75px) 28px;overflow:hidden}
+.urban-tops-wrap{width:100%;max-width:1180px;margin:0 auto}
+.urban-tops-heading{text-align:center;margin-bottom:24px}
+.urban-tops-heading p{margin:0 0 8px;color:var(--teal,#20dfc5);font-size:9px;font-weight:700;letter-spacing:4px}
+.urban-tops-heading h2{margin:0;color:var(--cream,#e8e1d1);font-family:"Cormorant Garamond",serif;font-size:clamp(34px,5vw,52px);font-weight:500;line-height:.95}
+.urban-tops-heading h2 span{color:var(--teal,#20dfc5)}
+.urban-tops-tabs{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.urban-top-tab{border:1px solid rgba(32,223,197,.22);border-radius:999px;padding:10px 14px;background:rgba(255,255,255,.025);color:#c3cdc8;font-size:10px;font-weight:600;letter-spacing:.5px;transition:.25s ease}
+.urban-top-tab:hover,.urban-top-tab.active{border-color:rgba(32,223,197,.55);background:rgba(32,223,197,.10);color:var(--teal-light,#72f4df);transform:translateY(-1px)}
+.urban-tops-stage{position:relative;display:grid;grid-template-columns:46px minmax(0,1fr) 46px;align-items:center;gap:10px}
+.urban-tops-viewport{min-width:0;overflow:hidden;border:1px solid rgba(32,223,197,.18);border-radius:28px;background:radial-gradient(circle at 50% 15%,rgba(32,223,197,.10),transparent 35%),linear-gradient(135deg,rgba(7,26,20,.96),rgba(2,8,6,.96));box-shadow:0 18px 55px rgba(0,0,0,.22)}
+.urban-top-card{display:grid;grid-template-columns:minmax(180px,38%) 1fr;min-height:360px}
+.urban-top-image{position:relative;min-height:360px;display:flex;align-items:center;justify-content:center;padding:30px;background:radial-gradient(circle at 50% 50%,rgba(32,223,197,.15),transparent 58%)}
+.urban-top-image img{width:100%;max-width:300px;height:300px;object-fit:contain;filter:drop-shadow(0 22px 22px rgba(0,0,0,.42))}
+.urban-top-rank{position:absolute;top:18px;left:18px;min-width:58px;padding:8px 11px;border:1px solid rgba(32,223,197,.35);border-radius:999px;background:rgba(2,8,6,.72);color:var(--teal-light,#72f4df);font-size:10px;font-weight:800;letter-spacing:1px;text-align:center}
+.urban-top-info{display:flex;flex-direction:column;justify-content:center;padding:38px clamp(24px,5vw,58px)}
+.urban-top-kicker{margin-bottom:8px;color:var(--teal,#20dfc5);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+.urban-top-brand{color:var(--gray,#9ba9a3);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.urban-top-name{margin:5px 0 12px;color:var(--cream,#e8e1d1);font-family:"Cormorant Garamond",serif;font-size:clamp(34px,5vw,54px);font-weight:500;line-height:.92}
+.urban-top-meta{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+.urban-top-meta span{padding:7px 10px;border:1px solid rgba(255,255,255,.09);border-radius:999px;color:#c3cdc8;font-size:9px}
+.urban-top-price{margin:4px 0 18px;color:var(--teal-light,#72f4df);font-size:22px;font-weight:800}
+.urban-top-description{max-width:560px;margin:0 0 20px;color:var(--gray,#9ba9a3);font-size:11px;line-height:1.7}
+.urban-top-actions{display:flex;gap:9px;flex-wrap:wrap}
+.urban-top-action{border:1px solid rgba(32,223,197,.35);border-radius:999px;padding:11px 16px;background:rgba(32,223,197,.08);color:var(--teal-light,#72f4df);font-size:9px;font-weight:800;letter-spacing:.7px;text-transform:uppercase}
+.urban-top-arrow{width:46px;height:46px;flex:0 0 46px;border:1px solid rgba(32,223,197,.25);border-radius:50%;background:rgba(255,255,255,.025);color:var(--teal-light,#72f4df);font-size:20px;transition:.25s ease}
+.urban-top-arrow:hover{border-color:var(--teal,#20dfc5);background:rgba(32,223,197,.10);transform:scale(1.04)}
+.urban-tops-empty{min-height:300px;display:flex;align-items:center;justify-content:center;padding:40px;text-align:center;color:var(--gray,#9ba9a3);font-size:11px;line-height:1.7}
+.urban-tops-dots{display:flex;justify-content:center;gap:7px;margin-top:14px}
+.urban-top-dot{width:7px;height:7px;border:0;border-radius:50%;padding:0;background:rgba(255,255,255,.16)}
+.urban-top-dot.active{background:var(--teal,#20dfc5);box-shadow:0 0 0 4px rgba(32,223,197,.08)}
+@media(max-width:760px){
+.urban-tops-section{padding-top:38px}
+.urban-tops-tabs{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}
+.urban-tops-tabs::-webkit-scrollbar{display:none}
+.urban-top-tab{flex:0 0 auto;white-space:nowrap}
+.urban-tops-stage{grid-template-columns:1fr}
+.urban-top-arrow{display:none}
+.urban-tops-viewport{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.urban-tops-viewport::-webkit-scrollbar{display:none}
+.urban-top-card{grid-template-columns:1fr;min-height:0;scroll-snap-align:center}
+.urban-top-image{min-height:270px;padding:24px 30px 8px}
+.urban-top-image img{height:235px}
+.urban-top-info{padding:18px 24px 28px}
+.urban-top-name{font-size:39px}
+.urban-tops-dots{margin-top:12px}
+}
+</style>
+
 </head>
 
 <body>
@@ -540,6 +714,23 @@
   </section>
 
 
+  <section id="urban-tops" class="urban-tops-section">
+    <div class="urban-tops-wrap">
+      <div class="urban-tops-heading">
+        <p>SELECCIÓN URBAN TECH</p>
+        <h2>Los <span>TOPS</span> de la casa</h2>
+      </div>
+      <div id="urban-top-tabs" class="urban-tops-tabs" role="tablist" aria-label="Categorías TOPS"></div>
+      <div class="urban-tops-stage">
+        <button id="urban-top-prev" class="urban-top-arrow" type="button" aria-label="TOP anterior" onclick="urbanTopMove(-1)">‹</button>
+        <div id="urban-top-viewport" class="urban-tops-viewport"><div id="urban-top-card"></div></div>
+        <button id="urban-top-next" class="urban-top-arrow" type="button" aria-label="TOP siguiente" onclick="urbanTopMove(1)">›</button>
+      </div>
+      <div id="urban-top-dots" class="urban-tops-dots" aria-label="Posiciones TOP"></div>
+    </div>
+  </section>
+
+
   <section id="categorias" class="section">
 
     <div class="section-title">
@@ -553,7 +744,7 @@
 
     </div>
 
-    <div class="category-buttons">
+    <div class="category-buttons" aria-label="Filtrar perfumes por categoría">
 
       <button
         class="btn category-btn active"
@@ -561,7 +752,8 @@
         data-category="all"
         onclick="filterCategory('all')"
       >
-        Todos
+        <span class="category-icon" aria-hidden="true">✦</span>
+        <span>Todos</span>
       </button>
 
       <button
@@ -570,7 +762,8 @@
         data-category="arabes"
         onclick="filterCategory('arabes')"
       >
-        Árabes
+        <span class="category-icon" aria-hidden="true">◈</span>
+        <span>Árabes</span>
       </button>
 
       <button
@@ -579,7 +772,8 @@
         data-category="disenador"
         onclick="filterCategory('disenador')"
       >
-        Diseñador
+        <span class="category-icon" aria-hidden="true">◇</span>
+        <span>Diseñador</span>
       </button>
 
       <button
@@ -588,7 +782,8 @@
         data-category="niche"
         onclick="filterCategory('niche')"
       >
-        Niche
+        <span class="category-icon" aria-hidden="true">⌁</span>
+        <span>Niche</span>
       </button>
 
     </div>
@@ -820,6 +1015,15 @@
     };
 
 
+    function escapeAttribute(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/'/g, "&#39;");
+    }
+
     function escapeHtml(value) {
 
       return String(value ?? "")
@@ -1010,12 +1214,189 @@
     }
 
 
+
+    const URBAN_TOP_CONFIG = [
+      { key: "mas-vendidos", label: "⭐ Más vendidos", limit: 5 },
+      { key: "hombre", label: "👨 Hombre", limit: 3 },
+      { key: "mujer", label: "👩 Mujer", limit: 3 },
+      { key: "frescos", label: "❄️ Frescos", limit: 3 },
+      { key: "dulces", label: "🍯 Dulces", limit: 3 },
+      { key: "amaderados", label: "🌲 Amaderados", limit: 3 }
+    ];
+    let urbanTopSelections = {};
+    let urbanTopCategory = "mas-vendidos";
+    let urbanTopIndex = 0;
+
+    function urbanTopConfig() {
+      return URBAN_TOP_CONFIG.find(function(item) {
+        return item.key === urbanTopCategory;
+      }) || URBAN_TOP_CONFIG[0];
+    }
+
+    function urbanTopProducts() {
+      const config = urbanTopConfig();
+      const selected = urbanTopSelections[urbanTopCategory] || [];
+      return selected.slice(0, config.limit).map(function(id) {
+        return catalogProducts.find(function(product) {
+          return String(product.id) === String(id);
+        });
+      }).filter(Boolean);
+    }
+
+    function urbanTopTabs() {
+      const tabs = document.getElementById("urban-top-tabs");
+      if (!tabs) return;
+      tabs.innerHTML = URBAN_TOP_CONFIG.map(function(item) {
+        return `<button class="urban-top-tab ${item.key === urbanTopCategory ? "active" : ""}" type="button" role="tab" aria-selected="${item.key === urbanTopCategory ? "true" : "false"}" onclick="urbanTopSelect('${item.key}')">${escapeHtml(item.label)}</button>`;
+      }).join("");
+    }
+
+    function urbanTopRender() {
+      const card = document.getElementById("urban-top-card");
+      const dots = document.getElementById("urban-top-dots");
+      if (!card || !dots) return;
+
+      const products = urbanTopProducts();
+      if (!products.length) {
+        card.innerHTML = `<div class="urban-tops-empty"><div><strong>Aún no hay perfumes seleccionados en esta categoría.</strong><br>Puedes administrarlos desde el panel de Administración.</div></div>`;
+        dots.innerHTML = "";
+        urbanTopTabs();
+        return;
+      }
+
+      if (urbanTopIndex >= products.length) urbanTopIndex = products.length - 1;
+      if (urbanTopIndex < 0) urbanTopIndex = 0;
+
+      const product = products[urbanTopIndex];
+      const config = urbanTopConfig();
+      const meta = [];
+      if (product.presentation) meta.push(product.presentation);
+      if (product.category) meta.push(product.category);
+      const image = getProductImage(product) || "https://placehold.co/700x700?text=UrbanTech";
+
+      card.innerHTML = `
+        <article class="urban-top-card">
+          <div class="urban-top-image">
+            <div class="urban-top-rank">TOP ${urbanTopIndex + 1}</div>
+            <img src="${escapeAttribute(image)}" alt="${escapeAttribute(product.name)}" onerror="this.src='https://placehold.co/700x700?text=UrbanTech'">
+          </div>
+          <div class="urban-top-info">
+            <div class="urban-top-kicker">${escapeHtml(config.label)}</div>
+            <div class="urban-top-brand">${escapeHtml(product.brand || "UrbanTech")}</div>
+            <h3 class="urban-top-name">${escapeHtml(product.name)}</h3>
+            ${meta.length ? `<div class="urban-top-meta">${meta.map(function(value){return `<span>${escapeHtml(value)}</span>`;}).join("")}</div>` : ""}
+            <div class="urban-top-price">${money(product.price)}</div>
+            ${product.description ? `<p class="urban-top-description">${escapeHtml(product.description)}</p>` : ""}
+            <div class="urban-top-actions">
+              <button class="urban-top-action" type="button" onclick="urbanTopOpenProduct('${escapeAttribute(String(product.id))}')">Ver perfume</button>
+              <button class="urban-top-action" type="button" onclick="urbanTopAddToCart('${escapeAttribute(String(product.id))}')">Agregar al carrito</button>
+            </div>
+          </div>
+        </article>`;
+
+      dots.innerHTML = products.map(function(_, index) {
+        return `<button class="urban-top-dot ${index === urbanTopIndex ? "active" : ""}" type="button" aria-label="Ir al TOP ${index + 1}" onclick="urbanTopGoTo(${index})"></button>`;
+      }).join("");
+      urbanTopTabs();
+    }
+
+    function urbanTopSelect(key) {
+      urbanTopCategory = key;
+      urbanTopIndex = 0;
+      urbanTopRender();
+    }
+
+    function urbanTopGoTo(index) {
+      const products = urbanTopProducts();
+      if (!products.length) return;
+      urbanTopIndex = Math.max(0, Math.min(index, products.length - 1));
+      urbanTopRender();
+    }
+
+    function urbanTopMove(direction) {
+      const products = urbanTopProducts();
+      if (!products.length) return;
+      urbanTopIndex += direction;
+      if (urbanTopIndex < 0) urbanTopIndex = products.length - 1;
+      if (urbanTopIndex >= products.length) urbanTopIndex = 0;
+      urbanTopRender();
+    }
+
+    function urbanTopOpenProduct(productId) {
+      const index = catalogProducts.findIndex(function(product) {
+        return String(product.id) === String(productId);
+      });
+      if (index >= 0 && typeof openProductDetail === "function") openProductDetail(index);
+    }
+
+    function urbanTopAddToCart(productId) {
+      const product = catalogProducts.find(function(item) {
+        return String(item.id) === String(productId);
+      });
+      if (product && typeof addToCart === "function") addToCart(product);
+    }
+
+
+    let urbanTopTouchX = null;
+
+    function urbanTopTouchStart(event) {
+      if (!event.touches || !event.touches.length) return;
+      urbanTopTouchX = event.touches[0].clientX;
+    }
+
+    function urbanTopTouchEnd(event) {
+      if (urbanTopTouchX === null || !event.changedTouches || !event.changedTouches.length) return;
+      const endX = event.changedTouches[0].clientX;
+      const distance = endX - urbanTopTouchX;
+      urbanTopTouchX = null;
+      if (Math.abs(distance) < 45) return;
+      urbanTopMove(distance < 0 ? 1 : -1);
+    }
+
+    async function loadUrbanTops() {
+      try {
+        const response = await fetch(
+          SUPABASE_URL + "/rest/v1/perfume_tops?select=category,position,product_id&order=position.asc",
+          {
+            method: "GET",
+            headers: {
+              "apikey": SUPABASE_KEY,
+              "Authorization": "Bearer " + SUPABASE_KEY,
+              "Content-Type": "application/json"
+            }
+          }
+        );
+        if (!response.ok) throw new Error("Supabase respondió " + response.status);
+        const rows = await response.json();
+        urbanTopSelections = {};
+        if (Array.isArray(rows)) {
+          rows.forEach(function(row) {
+            if (!urbanTopSelections[row.category]) urbanTopSelections[row.category] = [];
+            urbanTopSelections[row.category][Number(row.position) - 1] = String(row.product_id);
+          });
+        }
+        urbanTopRender();
+      } catch (error) {
+        console.warn("UrbanTech TOPS:", error.message);
+        urbanTopSelections = {};
+        urbanTopRender();
+      }
+    }
+
+
     document.addEventListener(
       "DOMContentLoaded",
       function() {
 
         loadCart();
-        loadProducts();
+        loadProducts().then(function() {
+          loadUrbanTops();
+        });
+        const urbanTopViewport = document.getElementById("urban-top-viewport");
+        if (urbanTopViewport) {
+          urbanTopViewport.addEventListener("touchstart", urbanTopTouchStart, { passive: true });
+          urbanTopViewport.addEventListener("touchend", urbanTopTouchEnd, { passive: true });
+        }
         setupWhatsApp();
         updateCartCount();
 
