@@ -1,3 +1,4 @@
-window.SUPABASE_URL = "https://khvrpnfgkikgysludpod.supabase.co";
-window.SUPABASE_PUBLISHABLE_KEY = "sb_publishable_nHvdaVoYINUMmTUwmST2LQ_q4O02VnY";
-window.WHATSAPP_NUMBER = "50670461262";
+
+window.SUPABASE_URL = "https://ydoaecomodsazhetuwzi.supabase.co";
+
+window.SUPABASE_ANON_KEY = "sb_publishable_Rt6LzmCoAkxXjOAjKDuQ-Q_GeWmwcj9";
