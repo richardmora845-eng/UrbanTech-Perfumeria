@@ -1,22 +1,26 @@
 
-/* =====================================================
+/* ======================================================
    URBAN TECH CR02 PERFUMERÍA
-   SCRIPT.JS COMPLETO
-   Catálogo, filtros, galería, ofertas,
-   TOP 5 y carrito con pedidos por WhatsApp.
-===================================================== */
+   SCRIPT.JS OFICIAL
+
+   CATÁLOGO + SUPABASE
+   MÁS VENDIDOS + NOVEDADES
+   PROMOCIONES DINÁMICAS
+   CARRITO + WHATSAPP
+   FILTROS + GALERÍA DE PRODUCTOS
+====================================================== */
 
 (() => {
   "use strict";
 
-  const WHATSAPP_NUMBER = "50670461262";
-
   const STORE_NAME = "Urban Tech CR02 Perfumería";
+  const WHATSAPP_NUMBER = "50670461262";
 
   const state = {
     client: null,
     products: [],
     categories: [],
+    promotions: [],
     cart: [],
     search: "",
     category: "",
@@ -30,7 +34,14 @@
   const $ = (selector, root = document) =>
     root.querySelector(selector);
 
-  function escapeHTML(value = "") {
+  const $$ = (selector, root = document) =>
+    Array.from(root.querySelectorAll(selector));
+
+  /* ==================================================
+     FUNCIONES GENERALES
+  ================================================== */
+
+  function esc(value) {
     return String(value ?? "").replace(
       /[&<>"']/g,
       character => ({
@@ -49,7 +60,7 @@
     ).toLocaleString("es-CR");
   }
 
-  function normalize(value) {
+  function slug(value) {
     return String(value || "")
       .toLowerCase()
       .normalize("NFD")
@@ -96,10 +107,6 @@
       )?.slug || "";
   }
 
-  /* ================================================
-     FOTOGRAFÍAS DEL PRODUCTO
-  ================================================ */
-
   function photosOf(product) {
     const images = Array.isArray(product.images)
       ? product.images.filter(
@@ -113,16 +120,56 @@
       product.image_url || ""
     ).trim();
 
-    const all = main
-      ? [main, ...images]
-      : images;
-
-    return [...new Set(all)].slice(0, 5);
+    return [...new Set(
+      main ? [main, ...images] : images
+    )].slice(0, 5);
   }
 
   function imageURL(product) {
     return photosOf(product)[0] || "";
   }
+
+  /* ==================================================
+     NOTIFICACIONES
+  ================================================== */
+
+  let toastTimer;
+
+  function notify(message, cartAction = false) {
+    const node = $("#toast-message");
+
+    if (!node) return;
+
+    clearTimeout(toastTimer);
+
+    node.replaceChildren();
+
+    const span = document.createElement("span");
+    span.textContent = message;
+    node.append(span);
+
+    if (cartAction) {
+      const button = document.createElement("button");
+
+      button.type = "button";
+      button.dataset.action = "open-cart";
+      button.textContent = "Ver carrito →";
+
+      node.append(button);
+    }
+
+    node.hidden = false;
+    node.classList.add("show");
+
+    toastTimer = setTimeout(() => {
+      node.classList.remove("show");
+      node.hidden = true;
+    }, 5000);
+  }
+
+  /* ==================================================
+     IMÁGENES DE PRODUCTOS
+  ================================================== */
 
   function imageHTML(product) {
     const url = imageURL(product);
@@ -137,8 +184,8 @@
 
     return `
       <img
-        src="${escapeHTML(url)}"
-        alt="${escapeHTML(product.name)}"
+        src="${esc(url)}"
+        alt="${esc(product.name)}"
         loading="lazy"
         onerror="this.hidden=true;this.nextElementSibling.hidden=false"
       >
@@ -148,50 +195,19 @@
     `;
   }
 
-  /* ================================================
-     NOTIFICACIONES
-  ================================================ */
-
-  let toastTimer;
-
-  function notify(message, cartAction = false) {
-    const element = $("#toast-message");
-
-    if (!element) return;
-
-    clearTimeout(toastTimer);
-
-    element.innerHTML = `
-      <span>${escapeHTML(message)}</span>
-      ${
-        cartAction
-          ? `<button
-              type="button"
-              data-action="open-cart">
-              Ver carrito →
-            </button>`
-          : ""
-      }
-    `;
-
-    element.hidden = false;
-    element.classList.add("show");
-
-    toastTimer = setTimeout(() => {
-      element.classList.remove("show");
-      element.hidden = true;
-    }, 5200);
-  }
-
-  /* ================================================
+  /* ==================================================
      TARJETAS DE PRODUCTOS
-  ================================================ */
+  ================================================== */
 
-  function productCard(product) {
-    const id = escapeHTML(product.id);
-    const sold = (Number(product.stock) || 0) <= 0;
+  function card(product) {
+    const id = esc(product.id);
 
-    const regular = Number(product.price) || 0;
+    const sold =
+      (Number(product.stock) || 0) <= 0;
+
+    const regular =
+      Number(product.price) || 0;
+
     const price = effectivePrice(product);
 
     return `
@@ -200,18 +216,18 @@
         data-product-id="${id}">
 
         <button
-          class="product-card-image"
           type="button"
+          class="product-card-image"
           data-action="details"
           data-id="${id}"
-          aria-label="Ver ${escapeHTML(product.name)}">
+          aria-label="Ver ${esc(product.name)}">
 
           ${imageHTML(product)}
 
           ${
             price < regular
               ? `<span class="product-badge">
-                   Oferta
+                   OFERTA
                  </span>`
               : ""
           }
@@ -219,7 +235,7 @@
           ${
             sold
               ? `<span class="product-badge sold-badge">
-                   Agotado
+                   AGOTADO
                  </span>`
               : ""
           }
@@ -229,13 +245,15 @@
         <div class="product-info">
 
           <p class="product-brand">
-            ${escapeHTML(product.brand || "")}
+            ${esc(product.brand || "")}
           </p>
 
-          <h3>${escapeHTML(product.name)}</h3>
+          <h3>
+            ${esc(product.name)}
+          </h3>
 
           <p class="product-category">
-            ${escapeHTML(categoryName(product))}
+            ${esc(categoryName(product))}
           </p>
 
           <p class="product-prices">
@@ -275,24 +293,39 @@
     `;
   }
 
-  function renderItems(container, products, message) {
+  function renderItems(container, products, empty) {
     if (!container) return;
 
     container.innerHTML = products.length
-      ? products.map(productCard).join("")
+      ? products.map(card).join("")
       : `<p class="empty-products">
-           ${escapeHTML(message)}
+           ${esc(empty)}
          </p>`;
   }
 
-  /* ================================================
-     TOP 5 DAMA Y CABALLERO
-  ================================================ */
+  /* ==================================================
+     MÁS VENDIDOS
+  ================================================== */
 
-  function renderTop() {
+  function renderBestsellers() {
+    const featured = state.products.filter(
+      product =>
+        product.is_bestseller ||
+        Number(product.top_women_order) > 0 ||
+        Number(product.top_men_order) > 0
+    );
+
+    renderItems(
+      $("#bestsellers-products"),
+      featured,
+      "Pronto tendremos nuestros perfumes más vendidos."
+    );
+
+    // Compatibilidad con la estructura anterior.
     const women = state.products
       .filter(
-        product => Number(product.top_women_order) > 0
+        product =>
+          Number(product.top_women_order) > 0
       )
       .sort(
         (a, b) =>
@@ -303,7 +336,8 @@
 
     const men = state.products
       .filter(
-        product => Number(product.top_men_order) > 0
+        product =>
+          Number(product.top_men_order) > 0
       )
       .sort(
         (a, b) =>
@@ -315,19 +349,156 @@
     renderItems(
       $("#top-women"),
       women,
-      "Pronto tendremos nuestros favoritos para dama."
+      "Todavía no hay perfumes destacados."
     );
 
     renderItems(
       $("#top-men"),
       men,
-      "Pronto tendremos nuestros favoritos para caballero."
+      "Todavía no hay perfumes destacados."
     );
   }
 
-  /* ================================================
-     OFERTAS
-  ================================================ */
+  /* ==================================================
+     NOVEDADES
+  ================================================== */
+
+  function renderNewProducts() {
+    const newest = [...state.products]
+      .sort((a, b) =>
+        new Date(b.created_at || 0) -
+        new Date(a.created_at || 0)
+      )
+      .slice(0, 12);
+
+    renderItems(
+      $("#new-products"),
+      newest,
+      "Pronto tendremos nuevas fragancias."
+    );
+  }
+
+  /* ==================================================
+     PROMOCIONES DINÁMICAS
+  ================================================== */
+
+  function renderPromotions() {
+    const container = $("#offers-banner-area");
+
+    if (!container) return;
+
+    const promotions = state.promotions.filter(
+      promotion =>
+        promotion.is_active &&
+        byId(promotion.product_id)
+    );
+
+    if (!promotions.length) {
+      container.innerHTML = `
+        <p class="empty-products">
+          Pronto tendremos promociones especiales.
+        </p>
+      `;
+      return;
+    }
+
+    container.innerHTML = promotions.map(
+      promotion => {
+
+        const product = byId(
+          promotion.product_id
+        );
+
+        const original =
+          Number(promotion.original_price) || 0;
+
+        const offer =
+          Number(promotion.offer_price) || 0;
+
+        const image = promotion.image_url ||
+          imageURL(product);
+
+        const percentage =
+          original > 0 && offer < original
+            ? Math.round(
+                (1 - offer / original) * 100
+              )
+            : 0;
+
+        return `
+          <article class="offer-banner">
+
+            <div class="offer-banner-info">
+
+              <span class="offer-banner-brand">
+                ${esc(product.brand || STORE_NAME)}
+              </span>
+
+              <strong class="offer-banner-name">
+                ${esc(promotion.name)}
+              </strong>
+
+              <span class="offer-banner-description">
+                Promoción especial por tiempo limitado
+              </span>
+
+            </div>
+
+            <div class="offer-banner-image">
+
+              ${
+                image
+                  ? `<img
+                       src="${esc(image)}"
+                       alt="${esc(promotion.name)}"
+                       loading="lazy">`
+                  : `<span class="product-image-placeholder">
+                       Imagen próximamente
+                     </span>`
+              }
+
+            </div>
+
+            <div class="offer-banner-price">
+
+              ${
+                percentage > 0
+                  ? `<span class="offer-label">
+                       ${percentage}% DESCUENTO
+                     </span>`
+                  : ""
+              }
+
+              <del>${money(original)}</del>
+
+              <strong>${money(offer)}</strong>
+
+              <button
+                type="button"
+                data-action="details"
+                data-id="${esc(product.id)}"
+                style="
+                  display:block;
+                  width:100%;
+                  margin-top:8px;
+                  padding:8px;
+                  border:0;
+                  border-radius:7px;
+                  background:#ffc12b;
+                  color:#140a02;
+                  font-weight:800;
+                  font-size:11px;
+                  cursor:pointer;">
+                Ver perfume
+              </button>
+
+            </div>
+
+          </article>
+        `;
+      }
+    ).join("");
+  }
 
   function renderOffers() {
     const offers = state.products.filter(
@@ -340,67 +511,66 @@
     renderItems(
       $("#offers-products"),
       offers,
-      "Pronto tendremos nuevas ofertas."
+      "Pronto tendremos ofertas."
     );
   }
 
-  /* ================================================
-     FILTROS DEL CATÁLOGO
-  ================================================ */
+  /* ==================================================
+     FILTROS
+  ================================================== */
 
   function filteredProducts() {
-    let products = [...state.products];
+    let list = [...state.products];
 
     if (state.category) {
-      products = products.filter(product => {
-        return (
-          normalize(categorySlug(product)) ===
-            normalize(state.category) ||
-          normalize(categoryName(product)) ===
-            normalize(state.category)
-        );
-      });
+      list = list.filter(
+        product =>
+          slug(categorySlug(product)) ===
+            slug(state.category) ||
+          slug(categoryName(product)) ===
+            slug(state.category)
+      );
     }
 
     if (state.gender) {
-      products = products.filter(
+      list = list.filter(
         product =>
-          normalize(product.gender) ===
-          normalize(state.gender)
+          slug(product.gender) ===
+          slug(state.gender)
       );
     }
 
     if (state.search) {
-      const term = normalize(state.search);
+      const term = slug(state.search);
 
-      products = products.filter(product => {
-        const searchable = [
+      list = list.filter(
+        product => slug([
           product.name,
           product.brand,
           product.description,
           categoryName(product)
-        ].join(" ");
-
-        return normalize(searchable).includes(term);
-      });
+        ].join(" ")).includes(term)
+      );
     }
 
     if (state.sort === "price-asc") {
-      products.sort(
+      list.sort(
         (a, b) =>
-          effectivePrice(a) - effectivePrice(b)
+          effectivePrice(a) -
+          effectivePrice(b)
       );
     }
 
     if (state.sort === "price-desc") {
-      products.sort(
+      list.sort(
         (a, b) =>
-          effectivePrice(b) - effectivePrice(a)
+          effectivePrice(b) -
+          effectivePrice(a)
       );
     }
 
     if (state.sort === "name") {
-      products.sort(
+      list.sort(
         (a, b) =>
           String(a.name).localeCompare(
             String(b.name), "es"
@@ -408,7 +578,7 @@
       );
     }
 
-    return products;
+    return list;
   }
 
   function renderCatalog() {
@@ -419,9 +589,31 @@
     );
   }
 
-  /* ================================================
-     VISUALIZADOR DE PRODUCTOS
-  ================================================ */
+  function applyCategory(category = "", gender = "") {
+    state.category = category;
+    state.gender = gender;
+
+    const categorySelect = $("#category-filter");
+    const genderSelect = $("#gender-filter");
+
+    if (categorySelect) {
+      categorySelect.value = category;
+    }
+
+    if (genderSelect) {
+      genderSelect.value = gender;
+    }
+
+    renderCatalog();
+
+    $("#catalogo")?.scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+
+  /* ==================================================
+     DETALLES DEL PRODUCTO
+  ================================================== */
 
   function openDetails(id) {
     const product = byId(id);
@@ -470,24 +662,32 @@
     if (!content || !product) return;
 
     const photos = photosOf(product);
-    const sold = (Number(product.stock) || 0) <= 0;
+    const sold =
+      (Number(product.stock) || 0) <= 0;
 
     state.activePhoto = Math.min(
       state.activePhoto,
       Math.max(photos.length - 1, 0)
     );
 
-    const currentPhoto = photos[state.activePhoto];
+    const currentPhoto =
+      photos[state.activePhoto];
 
     const mainImage = currentPhoto
       ? `
         <img
-          src="${escapeHTML(currentPhoto)}"
-          alt="${escapeHTML(product.name)}"
-          style="width:100%;height:100%;max-height:430px;object-fit:contain"
-          onerror="this.hidden=true;this.nextElementSibling.hidden=false"
-        >
-        <span class="product-image-placeholder" hidden>
+          src="${esc(currentPhoto)}"
+          alt="${esc(product.name)}"
+          style="
+            width:100%;
+            height:100%;
+            max-height:430px;
+            object-fit:contain;"
+          onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+
+        <span
+          class="product-image-placeholder"
+          hidden>
           Imagen no disponible
         </span>
       `
@@ -499,35 +699,42 @@
 
     const thumbnails = photos.length > 1
       ? `
-        <div class="perfume-gallery-thumbnails">
+        <div class="perfume-gallery-thumbnails"
+             style="
+               display:flex;
+               flex-wrap:wrap;
+               justify-content:center;
+               gap:9px;
+               margin-top:12px;">
 
           ${photos.map((url, index) => `
             <button
               type="button"
               data-action="select-photo"
               data-photo="${index}"
-              aria-label="Ver fotografía ${index + 1}"
+              aria-label="Fotografía ${index + 1}"
               aria-pressed="${
                 index === state.activePhoto
               }"
               style="
                 width:65px;
                 height:65px;
-                padding:4px;
-                background:#fff;
-                cursor:pointer;
                 border:${
                   index === state.activePhoto
-                    ? "2px solid #00d9ff"
+                    ? "2px solid #00dfff"
                     : "1px solid #ddd"
                 };
-              ">
+                border-radius:8px;
+                background:white;
+                cursor:pointer;">
 
               <img
-                src="${escapeHTML(url)}"
+                src="${esc(url)}"
                 alt="Fotografía ${index + 1}"
-                loading="lazy"
-                style="width:100%;height:100%;object-fit:contain">
+                style="
+                  width:100%;
+                  height:100%;
+                  object-fit:contain;">
 
             </button>
           `).join("")}
@@ -536,32 +743,29 @@
       `
       : "";
 
-    const photoControls = photos.length > 1
+    const controls = photos.length > 1
       ? `
         <div style="
           display:flex;
-          align-items:center;
           justify-content:center;
+          align-items:center;
           gap:15px;
-          margin:8px 0 12px;
-        ">
+          margin:12px 0;">
 
           <button
             type="button"
-            data-action="prev-photo"
-            aria-label="Fotografía anterior">
+            data-action="prev-photo">
             ‹
           </button>
 
-          <span style="font-size:13px">
+          <span style="font-size:12px">
             Foto ${state.activePhoto + 1}
             de ${photos.length}
           </span>
 
           <button
             type="button"
-            data-action="next-photo"
-            aria-label="Fotografía siguiente">
+            data-action="next-photo">
             ›
           </button>
 
@@ -578,7 +782,7 @@
             ${mainImage}
           </div>
 
-          ${photoControls}
+          ${controls}
           ${thumbnails}
 
         </div>
@@ -586,21 +790,17 @@
         <div class="viewer-info">
 
           <p class="viewer-brand">
-            ${escapeHTML(
-              product.brand || STORE_NAME
-            )}
+            ${esc(product.brand || STORE_NAME)}
           </p>
 
-          <h2>
-            ${escapeHTML(product.name)}
-          </h2>
+          <h2>${esc(product.name)}</h2>
 
           <p class="viewer-category">
-            ${escapeHTML(categoryName(product))}
+            ${esc(categoryName(product))}
           </p>
 
           <p class="viewer-description">
-            ${escapeHTML(
+            ${esc(
               product.description ||
               "Descubrí esta fragancia y consultá su disponibilidad."
             )}
@@ -614,7 +814,7 @@
             type="button"
             class="viewer-buy"
             data-action="add"
-            data-id="${escapeHTML(product.id)}"
+            data-id="${esc(product.id)}"
             ${sold ? "disabled" : ""}>
 
             ${
@@ -706,7 +906,7 @@
   function closeDetails() {
     const dialog = $("#product-dialog");
 
-    if (!dialog || !dialog.open) return;
+    if (!dialog?.open) return;
 
     if (typeof dialog.close === "function") {
       dialog.close();
@@ -715,18 +915,18 @@
     }
   }
 
-  /* ================================================
-     CARRITO DE COMPRAS
-  ================================================ */
+  /* ==================================================
+     CARRITO
+  ================================================== */
 
   function addToCart(id) {
     const product = byId(id);
 
     if (!product) return;
 
-    const stock = Number(product.stock) || 0;
+    const max = Number(product.stock) || 0;
 
-    if (stock < 1) {
+    if (max < 1) {
       notify("Este perfume está agotado.");
       return;
     }
@@ -736,29 +936,26 @@
     );
 
     if (item) {
-      if (item.quantity >= stock) {
+      if (item.quantity >= max) {
         notify("No hay más unidades disponibles.");
         return;
       }
 
       item.quantity++;
     } else {
-      item = {
+      state.cart.push({
         id: product.id,
         name: product.name,
         price: effectivePrice(product),
-        stock,
+        stock: max,
         quantity: 1
-      };
-
-      state.cart.push(item);
+      });
     }
 
     renderCart();
 
     const count = state.cart.reduce(
-      (total, entry) =>
-        total + entry.quantity,
+      (sum, entry) => sum + entry.quantity,
       0
     );
 
@@ -767,7 +964,7 @@
         count === 1
           ? "producto"
           : "productos"
-      } al carrito! Ya podés verlo en nuestro carrito.`,
+      } al carrito!`,
       true
     );
   }
@@ -801,54 +998,48 @@
     );
 
     renderCart();
-    notify("Producto eliminado del carrito.");
   }
 
   function cartTotal() {
     return state.cart.reduce(
-      (total, item) =>
-        total + item.price * item.quantity,
+      (sum, item) =>
+        sum + item.price * item.quantity,
       0
     );
   }
 
-  /* ================================================
-     MENSAJE DE PEDIDO POR WHATSAPP
-  ================================================ */
+  /* ==================================================
+     PEDIDO DE WHATSAPP
+  ================================================== */
 
   function orderText() {
     const total = cartTotal();
 
-    const lines = [
+    return [
       "Hola, buenas. 👋",
       "",
-      "Me gustaría realizar un pedido en Urban Tech CR02 Perfumería.",
+      `Me gustaría realizar un pedido en ${STORE_NAME}.`,
       "",
       "🛍️ Mi pedido:",
       "",
-      ...state.cart.map(item => {
-        return (
-          `• ${item.name} — ` +
-          `${item.quantity} ${
-            item.quantity === 1
-              ? "unidad"
-              : "unidades"
-          } × ${money(item.price)} = ` +
+      ...state.cart.map(item =>
+        `• ${item.name} — ${item.quantity} ${
+          item.quantity === 1
+            ? "unidad"
+            : "unidades"
+        } × ${money(item.price)} = ${
           money(item.price * item.quantity)
-        );
-      }),
+        }`
+      ),
       "",
       `💰 Subtotal: ${money(total)}`,
       `💰 Total de productos: ${money(total)}`,
       "",
-      "🚚 Deseo coordinar el envío de mi pedido.",
-      "",
-      "¿Podrían confirmarme la disponibilidad, el costo de envío y el tiempo estimado de entrega?",
+      "🚚 Deseo coordinar el envío.",
+      "¿Me podrían confirmar disponibilidad, costo de envío y tiempo de entrega?",
       "",
       "¡Muchas gracias!"
-    ];
-
-    return lines.join("\n");
+    ].join("\n");
   }
 
   function checkout() {
@@ -857,115 +1048,99 @@
       return;
     }
 
-    const url =
+    window.location.href =
       `https://wa.me/${WHATSAPP_NUMBER}` +
       `?text=${encodeURIComponent(orderText())}`;
-
-    window.location.href = url;
   }
 
-  /* ================================================
-     MOSTRAR CARRITO
-  ================================================ */
-
   function renderCart() {
-    const list = $("#cart-items");
+    const node = $("#cart-items");
     const count = $("#cart-count");
     const total = $("#cart-total");
-    const checkoutLink = $("#checkout-whatsapp");
+    const link = $("#checkout-whatsapp");
 
     const units = state.cart.reduce(
       (sum, item) => sum + item.quantity,
       0
     );
 
-    const amount = cartTotal();
-
     if (count) {
       count.textContent = units;
     }
 
     if (total) {
-      total.textContent = money(amount);
+      total.textContent = money(cartTotal());
     }
 
-    if (checkoutLink) {
-      checkoutLink.href = units
+    if (link) {
+      link.href = units
         ? `https://wa.me/${WHATSAPP_NUMBER}` +
           `?text=${encodeURIComponent(orderText())}`
         : "#";
 
-      checkoutLink.setAttribute(
+      link.setAttribute(
         "aria-disabled",
         String(!units)
       );
     }
 
-    if (!list) return;
+    if (!node) return;
 
-    if (!units) {
-      list.innerHTML = `
-        <p class="cart-empty">
-          Tu carrito está vacío.
-        </p>
-      `;
+    node.innerHTML = units
+      ? state.cart.map(item => `
+          <div class="cart-item">
 
-      return;
-    }
+            <div class="cart-item-info">
 
-    list.innerHTML = state.cart.map(item => `
-      <div class="cart-item">
+              <strong>
+                ${esc(item.name)}
+              </strong>
 
-        <div class="cart-item-info">
+              <span>
+                ${money(item.price)} cada uno
+              </span>
 
-          <strong>
-            ${escapeHTML(item.name)}
-          </strong>
+            </div>
 
-          <span>
-            ${money(item.price)} cada uno
-          </span>
+            <div class="cart-item-controls">
 
-        </div>
+              <button
+                type="button"
+                data-action="quantity"
+                data-id="${esc(item.id)}"
+                data-amount="-1">
+                −
+              </button>
 
-        <div class="cart-item-controls">
+              <span>${item.quantity}</span>
 
-          <button
-            type="button"
-            data-action="quantity"
-            data-id="${escapeHTML(item.id)}"
-            data-amount="-1"
-            aria-label="Restar cantidad">
-            −
-          </button>
+              <button
+                type="button"
+                data-action="quantity"
+                data-id="${esc(item.id)}"
+                data-amount="1">
+                +
+              </button>
 
-          <span>${item.quantity}</span>
+            </div>
 
-          <button
-            type="button"
-            data-action="quantity"
-            data-id="${escapeHTML(item.id)}"
-            data-amount="1"
-            aria-label="Sumar cantidad">
-            +
-          </button>
+            <strong>
+              ${money(item.price * item.quantity)}
+            </strong>
 
-        </div>
+            <button
+              type="button"
+              data-action="remove"
+              data-id="${esc(item.id)}"
+              aria-label="Eliminar">
+              ×
+            </button>
 
-        <strong>
-          ${money(item.price * item.quantity)}
-        </strong>
-
-        <button
-          type="button"
-          data-action="remove"
-          data-id="${escapeHTML(item.id)}"
-          aria-label="Eliminar producto">
-          ×
-        </button>
-
-      </div>
-    `).join("");
+          </div>
+        `).join("")
+      : `<p class="cart-empty">
+           Tu carrito está vacío.
+         </p>`;
   }
 
   function openCart() {
@@ -988,42 +1163,112 @@
     panel.classList.remove("is-open");
     panel.hidden = true;
     panel.setAttribute("aria-hidden", "true");
-
-    $("#cart-toggle")?.focus();
   }
 
-  /* ================================================
-     APLICAR CATEGORÍAS
-  ================================================ */
+  /* ==================================================
+     CARRUSELES
+  ================================================== */
 
-  function applyCategory(category = "", gender = "") {
-    state.category = category;
-    state.gender = gender;
+  function moveCarousel(id, direction) {
+    const element = document.getElementById(id);
 
-    const categorySelect = $("#category-filter");
-    const genderSelect = $("#gender-filter");
+    if (!element) return;
 
-    if (categorySelect) {
-      categorySelect.value = category;
-    }
+    const cardElement =
+      element.querySelector(".product-card");
 
-    if (genderSelect) {
-      genderSelect.value = gender;
-    }
+    const amount = cardElement
+      ? cardElement.getBoundingClientRect().width + 15
+      : 250;
 
-    renderCatalog();
-
-    $("#catalogo")?.scrollIntoView({
+    element.scrollBy({
+      left: amount * direction,
       behavior: "smooth"
     });
   }
 
-  /* ================================================
-     EVENTOS Y BOTONES
-  ================================================ */
+  /* ==================================================
+     BUSCADOR
+  ================================================== */
+
+  function updateSearch(value) {
+    state.search = value.trim();
+
+    const desktop = $("#search-input");
+    const mobile = $("#mobile-search-input");
+
+    if (desktop && desktop.value !== value) {
+      desktop.value = value;
+    }
+
+    if (mobile && mobile.value !== value) {
+      mobile.value = value;
+    }
+
+    renderCatalog();
+  }
+
+  /* ==================================================
+     SUSCRIPCIÓN
+  ================================================== */
+
+  async function subscribeNewsletter(event) {
+    event.preventDefault();
+
+    const input = $("#newsletter-email");
+    const message = $("#newsletter-message");
+
+    if (!input || !message) return;
+
+    const email = input.value.trim().toLowerCase();
+
+    if (!email || !input.checkValidity()) {
+      message.textContent =
+        "Ingresá un correo electrónico válido.";
+
+      message.hidden = false;
+      return;
+    }
+
+    const button = $("#newsletter-form button");
+    if (button) button.disabled = true;
+
+    try {
+      const { error } = await state.client
+        .from("newsletter_subscribers")
+        .insert({ email });
+
+      if (error) throw error;
+
+      message.textContent =
+        "¡Gracias! Tu solicitud de suscripción fue recibida.";
+
+      message.hidden = false;
+      input.value = "";
+
+    } catch (error) {
+      console.error(
+        "Suscripción no disponible:",
+        error
+      );
+
+      message.textContent =
+        "No se pudo completar la suscripción en este momento.";
+
+      message.hidden = false;
+
+    } finally {
+      if (button) button.disabled = false;
+    }
+  }
+
+  /* ==================================================
+     EVENTOS
+  ================================================== */
 
   function setupEvents() {
     document.addEventListener("click", event => {
+
       const target = event.target.closest(
         "[data-action]"
       );
@@ -1033,44 +1278,26 @@
 
         if (action === "details") {
           openDetails(id);
-        }
-
-        if (action === "add") {
+        } else if (action === "add") {
           addToCart(id);
-        }
-
-        if (action === "quantity") {
+        } else if (action === "quantity") {
           changeQuantity(
             id,
             Number(target.dataset.amount) || 0
           );
-        }
-
-        if (action === "remove") {
+        } else if (action === "remove") {
           removeFromCart(id);
-        }
-
-        if (action === "open-cart") {
+        } else if (action === "open-cart") {
           openCart();
-        }
-
-        if (action === "prev-product") {
+        } else if (action === "prev-product") {
           moveProduct(-1);
-        }
-
-        if (action === "next-product") {
+        } else if (action === "next-product") {
           moveProduct(1);
-        }
-
-        if (action === "prev-photo") {
+        } else if (action === "prev-photo") {
           movePhoto(-1);
-        }
-
-        if (action === "next-photo") {
+        } else if (action === "next-photo") {
           movePhoto(1);
-        }
-
-        if (action === "select-photo") {
+        } else if (action === "select-photo") {
           selectPhoto(Number(target.dataset.photo));
         }
 
@@ -1113,6 +1340,30 @@
         return;
       }
 
+      const previous = event.target.closest(
+        "[data-carousel-prev]"
+      );
+
+      if (previous) {
+        moveCarousel(
+          previous.dataset.carouselPrev,
+          -1
+        );
+        return;
+      }
+
+      const next = event.target.closest(
+        "[data-carousel-next]"
+      );
+
+      if (next) {
+        moveCarousel(
+          next.dataset.carouselNext,
+          1
+        );
+        return;
+      }
+
       if (event.target.closest("#cart-toggle")) {
         openCart();
       }
@@ -1136,7 +1387,7 @@
           panel.hidden = !panel.hidden;
 
           if (!panel.hidden) {
-            $("#search-input")?.focus();
+            $("#mobile-search-input")?.focus();
           }
         }
       }
@@ -1144,9 +1395,7 @@
       if (event.target.closest("#search-close")) {
         const panel = $("#search-panel");
 
-        if (panel) {
-          panel.hidden = true;
-        }
+        if (panel) panel.hidden = true;
       }
 
       if (
@@ -1154,13 +1403,11 @@
           "#mobile-menu-toggle"
         )
       ) {
-        const navigation = $(".main-nav");
+        const nav = $(".main-nav");
 
-        if (navigation) {
+        if (nav) {
           const expanded =
-            navigation.classList.toggle(
-              "mobile-open"
-            );
+            nav.classList.toggle("mobile-open");
 
           $("#mobile-menu-toggle")?.setAttribute(
             "aria-expanded",
@@ -1183,9 +1430,8 @@
           "false"
         );
       }
-    });
 
-    /* PEDIDO POR WHATSAPP */
+    });
 
     $("#checkout-whatsapp")?.addEventListener(
       "click",
@@ -1194,8 +1440,6 @@
         checkout();
       }
     );
-
-    /* BUSCADOR */
 
     $("#search-form")?.addEventListener(
       "submit",
@@ -1211,12 +1455,16 @@
     $("#search-input")?.addEventListener(
       "input",
       event => {
-        state.search = event.target.value.trim();
-        renderCatalog();
+        updateSearch(event.target.value);
       }
     );
 
-    /* FILTRO DE CATEGORÍAS */
+    $("#mobile-search-input")?.addEventListener(
+      "input",
+      event => {
+        updateSearch(event.target.value);
+      }
+    );
 
     $("#category-filter")?.addEventListener(
       "change",
@@ -1226,8 +1474,6 @@
       }
     );
 
-    /* FILTRO DE PÚBLICO */
-
     $("#gender-filter")?.addEventListener(
       "change",
       event => {
@@ -1235,8 +1481,6 @@
         renderCatalog();
       }
     );
-
-    /* ORDENAR PRODUCTOS */
 
     $("#sort-products")?.addEventListener(
       "change",
@@ -1246,7 +1490,10 @@
       }
     );
 
-    /* CERRAR MODAL */
+    $("#newsletter-form")?.addEventListener(
+      "submit",
+      subscribeNewsletter
+    );
 
     const dialog = $("#product-dialog");
 
@@ -1258,8 +1505,6 @@
         }
       }
     );
-
-    /* NAVEGACIÓN CON TECLADO */
 
     document.addEventListener(
       "keydown",
@@ -1293,8 +1538,6 @@
         }
       }
     );
-
-    /* DESLIZAMIENTO EN CELULAR */
 
     let startX = null;
 
@@ -1336,9 +1579,9 @@
     );
   }
 
-  /* ================================================
-     CONEXIÓN CON SUPABASE
-  ================================================ */
+  /* ==================================================
+     INICIALIZAR SUPABASE
+  ================================================== */
 
   async function init() {
     const toast = $("#toast-message");
@@ -1360,51 +1603,42 @@
       !window.SUPABASE_URL ||
       !window.SUPABASE_ANON_KEY
     ) {
-      const catalog = $("#catalog-products");
-
-      if (catalog) {
-        catalog.innerHTML = `
-          <p class="empty-products">
-            No se pudo conectar con Supabase.
-            Revisá config.js.
-          </p>
-        `;
-      }
+      renderItems(
+        $("#catalog-products"),
+        [],
+        "No se pudo conectar con Supabase. Revisá config.js."
+      );
 
       return;
     }
 
     try {
-      state.client =
-        window.supabase.createClient(
-          window.SUPABASE_URL,
-          window.SUPABASE_ANON_KEY
-        );
+      state.client = window.supabase.createClient(
+        window.SUPABASE_URL,
+        window.SUPABASE_ANON_KEY
+      );
 
-      /* CARGAR CATEGORÍAS */
-
-      const categoryResult = await state.client
+      // Cargar categorías
+      const categoriesResult = await state.client
         .from("categories")
         .select("*")
         .eq("is_active", true)
-        .order(
-          "sort_order",
-          { ascending: true }
-        );
+        .order("sort_order", {
+          ascending: true
+        });
 
-      if (categoryResult.error) {
+      if (categoriesResult.error) {
         console.warn(
-          "Error cargando categorías:",
-          categoryResult.error
+          "Categorías:",
+          categoriesResult.error
         );
       } else {
         state.categories =
-          categoryResult.data || [];
+          categoriesResult.data || [];
       }
 
-      /* CARGAR PRODUCTOS */
-
-      const productResult = await state.client
+      // Cargar productos
+      const productsResult = await state.client
         .from("products")
         .select(`
           id,
@@ -1423,75 +1657,94 @@
           is_bestseller,
           top_women_order,
           top_men_order,
+          created_at,
           categories(name,slug)
         `)
         .eq("is_active", true)
-        .order(
-          "created_at",
-          { ascending: false }
-        );
+        .order("created_at", {
+          ascending: false
+        });
 
-      if (productResult.error) {
-        throw productResult.error;
+      if (productsResult.error) {
+        throw productsResult.error;
       }
 
       state.products =
-        productResult.data || [];
+        productsResult.data || [];
 
-      renderTop();
+      // Cargar promociones
+      const promotionsResult = await state.client
+        .from("promotions")
+        .select("*")
+        .eq("is_active", true)
+        .order("sort_order", {
+          ascending: true
+        });
+
+      if (promotionsResult.error) {
+        console.warn(
+          "Promociones:",
+          promotionsResult.error
+        );
+      } else {
+        state.promotions =
+          promotionsResult.data || [];
+      }
+
+      renderBestsellers();
+      renderNewProducts();
+      renderPromotions();
       renderOffers();
       renderCatalog();
 
       console.log(
-        STORE_NAME +
-        ": catálogo cargado correctamente."
+        STORE_NAME + ": catálogo cargado."
       );
 
     } catch (error) {
       console.error(
-        "Error cargando productos:",
+        "Error cargando la tienda:",
         error
       );
 
-      const catalog = $("#catalog-products");
+      const message =
+        "No se pudieron cargar los perfumes. Revisá Supabase.";
 
-      if (catalog) {
-        catalog.innerHTML = `
+      renderItems(
+        $("#catalog-products"),
+        [],
+        message
+      );
+
+      renderItems(
+        $("#bestsellers-products"),
+        [],
+        message
+      );
+
+      renderItems(
+        $("#new-products"),
+        [],
+        message
+      );
+
+      const offers = $("#offers-banner-area");
+
+      if (offers) {
+        offers.innerHTML = `
           <p class="empty-products">
-            No pudimos cargar los perfumes.
-            Verificá la conexión y los permisos
-            de Supabase.
+            No se pudieron cargar las promociones.
           </p>
         `;
       }
 
-      renderItems(
-        $("#top-women"),
-        [],
-        "No se pudieron cargar los productos."
-      );
-
-      renderItems(
-        $("#top-men"),
-        [],
-        "No se pudieron cargar los productos."
-      );
-
-      renderItems(
-        $("#offers-products"),
-        [],
-        "No se pudieron cargar las ofertas."
-      );
-
-      notify(
-        "No se pudieron cargar los perfumes."
-      );
+      notify(message);
     }
   }
 
-  /* ================================================
-     INICIALIZACIÓN
-  ================================================ */
+  /* ==================================================
+     INICIO
+  ================================================== */
 
   if (document.readyState === "loading") {
     document.addEventListener(
