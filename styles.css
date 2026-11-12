@@ -1,10 +1,9 @@
 
-/* ===================================================
+/* =====================================================
    URBAN TECH CR02 PERFUMERÍA
    STYLES.CSS COMPLETO
-   DISEÑO PC + CELULAR
-   NEGRO / CIAN / VERDE NEÓN / FUCSIA / DORADO
-=================================================== */
+   EDICIÓN CON 6 PERFUMES TRANSPARENTES
+===================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&display=swap');
 
@@ -12,34 +11,25 @@
   --black: #030506;
   --background: #050709;
   --panel: #0c1216;
-  --panel-light: #101c22;
-
   --cyan: #00dfff;
-  --cyan-light: #8bf3ff;
   --green: #b5ff00;
   --pink: #ff35c4;
   --gold: #ffc12b;
   --purple: #ad65ff;
-
   --white: #ffffff;
   --muted: #b7c3c8;
-
   --border: rgba(0,223,255,.4);
-
-  --font: 'Montserrat', Arial, sans-serif;
-  --title: 'Cormorant Garamond', Georgia, serif;
-  --script: 'Great Vibes', cursive;
+  --font: 'Montserrat',Arial,sans-serif;
+  --title: 'Cormorant Garamond',Georgia,serif;
+  --script: 'Great Vibes',cursive;
 }
 
-*,
-*::before,
-*::after {
+*,*::before,*::after {
   box-sizing: border-box;
 }
 
 html {
   width: 100%;
-  max-width: 100%;
   scroll-behavior: smooth;
   scroll-padding-top: 115px;
   -webkit-text-size-adjust: 100%;
@@ -47,25 +37,20 @@ html {
 
 body {
   margin: 0;
-  width: 100%;
-  max-width: 100%;
   min-width: 0;
+  width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
   background: var(--background);
-  color: var(--white);
+  color: white;
   font-family: var(--font);
 }
 
 main {
   width: 100%;
-  min-width: 0;
 }
 
-button,
-input,
-select,
-textarea {
+button,input,select,textarea {
   font: inherit;
 }
 
@@ -92,17 +77,14 @@ img {
   outline-offset: 3px;
 }
 
-/* ===================================================
-   HEADER
-=================================================== */
+/* ================= HEADER ================= */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  width: 100%;
   background: #020304;
-  border-bottom: 1px solid rgba(0,223,255,.4);
+  border-bottom: 1px solid var(--border);
   box-shadow: 0 3px 20px #0008;
 }
 
@@ -119,27 +101,26 @@ img {
 .brand {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   gap: 10px;
   min-width: 0;
-  flex-shrink: 0;
 }
 
 .brand-symbol {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  display: grid;
+  place-items: center;
   width: 51px;
   height: 51px;
+  flex-shrink: 0;
+  overflow: hidden;
   border: 2px solid var(--cyan);
   border-radius: 50%;
   background-color: #040608;
   background-image: url("portada-movil.jpg");
+  background-repeat: no-repeat;
   background-position: center -6px;
   background-size: 210px auto;
-  background-repeat: no-repeat;
   box-shadow: 0 0 14px #00dfff44;
-  overflow: hidden;
 }
 
 .brand-fallback {
@@ -155,21 +136,16 @@ img {
 }
 
 .brand-name > span {
-  color: white;
   font-size: 21px;
   font-weight: 900;
-  letter-spacing: -.8px;
 }
 
 .brand-name b {
-  background: linear-gradient(
-    90deg,
-    var(--cyan),
-    var(--green)
-  );
-  color: transparent;
+  color: var(--cyan);
+  background: linear-gradient(90deg,var(--cyan),var(--green));
   -webkit-background-clip: text;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .brand-name small {
@@ -182,19 +158,16 @@ img {
 
 .brand-name em {
   margin-top: 3px;
-  color: white;
   font-size: 9px;
   font-style: normal;
   font-weight: 600;
   letter-spacing: 4px;
 }
 
-/* HEADER SEARCH */
-
 .header-search {
   flex: 1;
-  max-width: 450px;
   min-width: 0;
+  max-width: 450px;
 }
 
 .header-search form {
@@ -206,13 +179,10 @@ img {
   border: 1px solid var(--cyan);
   border-radius: 25px;
   background: #05090d;
-  box-shadow:
-    inset 0 0 9px #00dfff15,
-    0 0 14px #00dfff45;
+  box-shadow: 0 0 14px #00dfff45;
 }
 
 .header-search form > span {
-  color: white;
   font-size: 25px;
 }
 
@@ -233,8 +203,8 @@ img {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 22px;
   flex-shrink: 0;
+  gap: 22px;
 }
 
 .account-link {
@@ -265,14 +235,6 @@ img {
   font-size: 21px;
 }
 
-.cart-toggle {
-  position: relative;
-}
-
-.cart-label {
-  font-size: 12px;
-}
-
 .cart-count {
   position: absolute;
   top: -3px;
@@ -288,22 +250,23 @@ img {
   font-weight: 900;
 }
 
+.cart-label {
+  font-size: 12px;
+}
+
 .mobile-menu-button,
 .mobile-search {
   display: none;
 }
 
-/* ===================================================
-   NAVEGACIÓN SEGUNDO NIVEL
-=================================================== */
+/* ================= NAVEGACIÓN ================= */
 
 .main-nav {
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 100%;
-  min-height: 40px;
+  align-items: center;
   gap: clamp(12px,4vw,65px);
+  min-height: 40px;
   padding: 0 15px;
   border-top: 1px solid #17323a;
   background: #030506;
@@ -317,22 +280,18 @@ img {
   gap: 7px;
   min-height: 39px;
   padding: 5px 8px;
-  color: white;
   font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
 }
 
 .nav-link > span {
-  font-size: 22px;
   color: #e4f9fc;
+  font-size: 22px;
 }
 
 .nav-link:hover,
-.nav-link.active {
-  color: var(--green);
-}
-
+.nav-link.active,
 .nav-link:hover > span,
 .nav-link.active > span {
   color: var(--green);
@@ -341,18 +300,16 @@ img {
 .nav-link.active::after {
   content: "";
   position: absolute;
-  left: 0;
   right: 0;
   bottom: 0;
+  left: 0;
   height: 3px;
   border-radius: 5px;
   background: var(--green);
   box-shadow: 0 0 10px var(--green);
 }
 
-/* ===================================================
-   BUSCADOR MÓVIL
-=================================================== */
+/* ================= BÚSQUEDA MÓVIL ================= */
 
 .search-panel {
   position: sticky;
@@ -389,26 +346,18 @@ img {
   border: 1px solid var(--cyan);
   border-radius: 8px;
   background: var(--cyan);
-  color: black;
+  color: #000;
   font-size: 23px;
 }
 
-/* ===================================================
-   PORTADA
-=================================================== */
+/* ================= PORTADA ================= */
 
-.hero {
-  position: relative;
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-  background: black;
-}
-
+.hero,
 .hero picture {
   display: block;
   width: 100%;
   height: auto;
+  background: #000;
 }
 
 .hero-reference-art {
@@ -418,24 +367,20 @@ img {
   object-fit: contain;
 }
 
-/* ===================================================
-   BENEFICIOS
-=================================================== */
+/* ================= BENEFICIOS ================= */
 
 .store-benefits {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 0;
-  width: 100%;
+  align-items: center;
   padding: 12px 5%;
   background: #030607;
 }
 
 .benefit {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 12px;
   min-width: 0;
   padding: 0 25px;
@@ -451,12 +396,9 @@ img {
 .benefit-icon {
   color: var(--cyan);
   font-size: 30px;
-  font-weight: 700;
 }
 
-/* ===================================================
-   BOTÓN VER CATÁLOGO
-=================================================== */
+/* ================= VER CATÁLOGO ================= */
 
 .hero-cta-wrapper {
   display: flex;
@@ -478,18 +420,15 @@ img {
   border-radius: 40px;
   background: linear-gradient(
     90deg,
-    var(--cyan) 0%,
+    var(--cyan),
     #00efde 45%,
-    var(--green) 100%
+    var(--green)
   );
   color: black;
   font-size: 17px;
   font-weight: 900;
   text-align: center;
-  box-shadow:
-    0 0 19px #00dfff65,
-    0 0 15px #b5ff0020;
-  transition: filter .2s;
+  box-shadow: 0 0 19px #00dfff65;
 }
 
 .hero-reference-action:hover {
@@ -500,20 +439,22 @@ img {
   content: none !important;
 }
 
-/* ===================================================
-   CATEGORÍAS
-=================================================== */
+/* ==================================================
+   LAS SEIS CATEGORÍAS
+   AHORA CON PNG TRANSPARENTES
+================================================== */
 
 .categories-section {
   width: 100%;
-  padding: 0 4% 15px;
+  padding: 4px 4% 19px;
   background: #030607;
 }
 
 .categories {
   display: grid;
   grid-template-columns: repeat(6,minmax(0,1fr));
-  gap: 13px;
+  gap: 17px;
+  width: 100%;
   max-width: 1450px;
   margin: auto;
 }
@@ -523,20 +464,14 @@ img {
   display: flex;
   align-items: center;
   min-width: 0;
-  min-height: 94px;
+  min-height: 112px;
+  padding: 12px;
   overflow: hidden;
-  padding: 12px 9px;
   border: 2px solid var(--cyan);
   border-radius: 16px;
-  background: linear-gradient(
-    120deg,
-    #061115,
-    #020405
-  );
-  box-shadow:
-    inset 0 0 12px #00dfff14,
-    0 0 12px #00dfff40;
-  transition: transform .2s;
+  background: linear-gradient(120deg,#061115,#020405);
+  box-shadow: 0 0 12px #00dfff40;
+  transition: transform .2s,box-shadow .2s;
 }
 
 .category-item:hover {
@@ -576,14 +511,14 @@ img {
 .category-decoration {
   position: absolute;
   z-index: 2;
-  top: 15px;
-  left: 14px;
+  top: 11px;
+  left: 11px;
   color: var(--cyan);
-  font-size: 29px;
+  font-size: 26px;
 }
 
 .category-dama .category-decoration {
-  color: #ffdbf3;
+  color: var(--pink);
 }
 
 .category-unisex .category-decoration {
@@ -594,6 +529,10 @@ img {
   color: var(--gold);
 }
 
+.category-disenador .category-decoration {
+  color: var(--cyan);
+}
+
 .category-nicho .category-decoration {
   color: var(--gold);
 }
@@ -602,60 +541,76 @@ img {
   position: relative;
   z-index: 3;
   align-self: center;
-  max-width: 65%;
+  max-width: 64%;
   padding-top: 31px;
   color: white;
-  font-size: clamp(11px,1.3vw,16px);
+  font-size: clamp(11px,1.2vw,16px);
   font-weight: 800;
+  text-shadow: 0 2px 5px black;
 }
+
+/* LAS BOTELLAS, SIN RECUADROS NI FONDO */
 
 .category-photo {
   position: absolute;
-  top: 0;
-  right: 6%;
-  bottom: 0;
+  z-index: 1;
+  top: 4%;
+  right: 3%;
+  bottom: 4%;
   width: 49%;
-  background-image: url("portada-franja.jpg");
-  background-repeat: no-repeat;
-  background-size: 700% auto;
   background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 0 7px #ffffff30);
 }
+
+/* 1. CABALLERO */
 
 .photo-caballero {
-  background-position: 63% 53%;
+  background-image: url("caballero-invictus.png");
 }
+
+/* 2. DAMA */
 
 .photo-dama {
-  background-position: 99% 53%;
+  background-image: url("dama-miss-dior.png");
 }
+
+/* 3. UNISEX */
 
 .photo-unisex {
-  background-position: 79% 55%;
+  background-image: url("unisex-sublime.png");
 }
+
+/* 4. ÁRABE */
 
 .photo-arabe {
-  background-position: 79% 55%;
+  background-image: url("arabe-khamrah.png");
 }
+
+/* 5. DISEÑADOR */
 
 .photo-disenador {
-  background-position: 99% 55%;
+  background-image: url("disenador-le-male-elixir.png");
 }
 
+/* 6. NICHO */
+
 .photo-nicho {
-  background-position: 64% 55%;
+  background-image: url("nicho-baccarat-rouge-540.png");
 }
 
 .category-arrow {
   position: absolute;
   z-index: 3;
-  right: 5px;
+  right: 6px;
   color: var(--green);
   font-size: 17px;
 }
 
-/* ===================================================
-   SECCIONES
-=================================================== */
+/* ================= SECCIONES ================= */
 
 .featured-section,
 .offers-section,
@@ -663,7 +618,7 @@ img {
 .catalog-section {
   width: min(1450px,96%);
   margin: auto;
-  padding: 12px 0 17px;
+  padding: 13px 0 19px;
 }
 
 .section-top {
@@ -712,9 +667,7 @@ img {
   white-space: nowrap;
 }
 
-/* ===================================================
-   CARRUSELES
-=================================================== */
+/* ================= CARRUSELES ================= */
 
 .carousel-wrapper {
   position: relative;
@@ -756,17 +709,14 @@ img {
   background: #071116;
   color: white;
   font-size: 29px;
-  line-height: 1;
 }
 
 .carousel-arrow:hover {
   background: var(--cyan);
-  color: black;
+  color: #000;
 }
 
-/* ===================================================
-   TARJETAS DE PRODUCTO
-=================================================== */
+/* ================= PRODUCTOS ================= */
 
 .product-grid {
   display: grid;
@@ -786,11 +736,7 @@ img {
   overflow: hidden;
   border: 1px solid var(--cyan);
   border-radius: 12px;
-  background: linear-gradient(
-    155deg,
-    #08151a,
-    #020405
-  );
+  background: linear-gradient(155deg,#08151a,#020405);
   box-shadow: 0 0 10px #00dfff25;
   transition: transform .2s;
 }
@@ -855,8 +801,8 @@ img {
   flex: 1;
   flex-direction: column;
   align-items: flex-start;
-  min-width: 0;
   gap: 5px;
+  min-width: 0;
   padding: 11px 12px;
   text-align: left;
 }
@@ -869,7 +815,6 @@ img {
 
 .product-info h3 {
   margin: 0;
-  color: white;
   font-size: 12px;
   font-weight: 700;
   line-height: 1.4;
@@ -917,7 +862,7 @@ img {
 
 .product-buy-button:hover:not(:disabled) {
   background: var(--green);
-  color: #050900;
+  color: #000;
 }
 
 .product-buy-button:disabled,
@@ -926,9 +871,7 @@ img {
   cursor: not-allowed;
 }
 
-/* ===================================================
-   ANUNCIOS DE OFERTAS
-=================================================== */
+/* ================= OFERTAS ================= */
 
 .offers-banner-area {
   display: grid;
@@ -950,9 +893,14 @@ img {
   border-radius: 17px;
   background:
     radial-gradient(
-      ellipse at 50% 110%,
-      #ff9a0040,
+      ellipse at 55% 105%,
+      #ff9a0045,
       transparent 65%
+    ),
+    radial-gradient(
+      ellipse at 85% 10%,
+      #7f320035,
+      transparent 55%
     ),
     linear-gradient(
       100deg,
@@ -1002,7 +950,6 @@ img {
 .offer-banner-description {
   display: block;
   margin-top: 7px;
-  color: white;
   font-size: 12px;
 }
 
@@ -1030,12 +977,7 @@ img {
   padding: 10px 14px;
   border: 1px solid #ff8e47;
   border-radius: 14px;
-  background: linear-gradient(
-    140deg,
-    #4d1005,
-    #a51b16,
-    #420805
-  );
+  background: linear-gradient(140deg,#4d1005,#a51b16,#420805);
   text-align: center;
 }
 
@@ -1062,9 +1004,7 @@ img {
   font-weight: 900;
 }
 
-/* ===================================================
-   CATÁLOGO COMPLETO
-=================================================== */
+/* ================= CATÁLOGO ================= */
 
 .catalog-toolbar {
   display: flex;
@@ -1095,9 +1035,7 @@ img {
   font-size: 12px;
 }
 
-/* ===================================================
-   SUSCRIPCIÓN
-=================================================== */
+/* ================= SUSCRIPCIÓN ================= */
 
 .newsletter-section {
   display: flex;
@@ -1109,11 +1047,7 @@ img {
   padding: 15px 5%;
   border-top: 1px solid var(--cyan);
   border-bottom: 1px solid var(--cyan);
-  background: linear-gradient(
-    100deg,
-    #071117,
-    #030608
-  );
+  background: linear-gradient(100deg,#071117,#030608);
 }
 
 .newsletter-info {
@@ -1144,8 +1078,8 @@ img {
   display: flex;
   flex: 1;
   align-items: center;
-  max-width: 460px;
   gap: 0;
+  max-width: 460px;
   padding: 3px;
   border: 1px solid var(--cyan);
   border-radius: 30px;
@@ -1168,11 +1102,7 @@ img {
   padding: 10px 19px;
   border: 0;
   border-radius: 25px;
-  background: linear-gradient(
-    90deg,
-    var(--cyan),
-    var(--green)
-  );
+  background: linear-gradient(90deg,var(--cyan),var(--green));
   color: #000;
   font-size: 12px;
   font-weight: 900;
@@ -1184,14 +1114,11 @@ img {
   font-size: 12px;
 }
 
-/* ===================================================
-   FOOTER
-=================================================== */
+/* ================= FOOTER ================= */
 
 .site-footer {
   padding: 18px 4% 0;
   background: #020405;
-  color: white;
 }
 
 .footer-columns {
@@ -1252,7 +1179,6 @@ img {
 .footer-brand > span:last-child {
   display: flex;
   flex-direction: column;
-  color: white;
   font-size: 16px;
   font-weight: 900;
 }
@@ -1286,9 +1212,7 @@ img {
   font-size: 10px;
 }
 
-/* ===================================================
-   CARRITO
-=================================================== */
+/* ================= CARRITO ================= */
 
 .cart-panel {
   position: fixed;
@@ -1395,9 +1319,7 @@ img {
   pointer-events: none;
 }
 
-/* ===================================================
-   DETALLES
-=================================================== */
+/* ================= DETALLE PRODUCTO ================= */
 
 .product-dialog {
   position: fixed;
@@ -1463,7 +1385,6 @@ img {
 
 .viewer-info h2 {
   margin: 8px 0;
-  color: white;
   font: 600 37px var(--title);
 }
 
@@ -1495,9 +1416,9 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 8px;
   margin-top: 17px;
   padding-top: 14px;
-  gap: 8px;
   border-top: 1px solid var(--border);
 }
 
@@ -1510,9 +1431,7 @@ img {
   font-size: 12px;
 }
 
-/* ===================================================
-   WHATSAPP Y NOTIFICACIONES
-=================================================== */
+/* ================= WHATSAPP ================= */
 
 .whatsapp-float {
   position: fixed;
@@ -1559,12 +1478,9 @@ img {
   font-size: 11px;
 }
 
-/* ===================================================
-   TABLETAS
-=================================================== */
+/* ================= TABLET ================= */
 
 @media(max-width:1100px) {
-
   .header-top {
     gap: 12px;
   }
@@ -1582,11 +1498,11 @@ img {
   }
 
   .categories {
-    gap: 8px;
+    gap: 11px;
   }
 
   .category-item {
-    min-height: 90px;
+    min-height: 100px;
   }
 
   .category-decoration {
@@ -1600,15 +1516,11 @@ img {
   .catalog-grid {
     grid-template-columns: repeat(4,minmax(0,1fr));
   }
-
 }
 
-/* ===================================================
-   CELULARES
-=================================================== */
+/* ================= CELULAR ================= */
 
 @media(max-width:900px) {
-
   html {
     scroll-padding-top: 75px;
   }
@@ -1637,13 +1549,12 @@ img {
     flex: 1;
     justify-content: center;
     gap: 8px;
-    min-width: 0;
   }
 
   .brand-symbol {
     width: 47px;
     height: 47px;
-    flex: 0 0 47px;
+    flex-basis: 47px;
     background-size: 195px auto;
     background-position: center -5px;
   }
@@ -1686,10 +1597,6 @@ img {
     font-size: 24px;
   }
 
-  .cart-toggle {
-    font-size: 22px;
-  }
-
   .cart-count {
     left: 23px;
   }
@@ -1703,7 +1610,6 @@ img {
     display: none;
     flex-direction: column;
     align-items: stretch;
-    width: 100%;
     gap: 3px;
     padding: 10px;
     background: #030608;
@@ -1720,21 +1626,12 @@ img {
     font-size: 14px;
   }
 
-  /* PORTADA MÓVIL */
-
-  .hero {
-    width: 100%;
-    aspect-ratio: auto;
-    height: auto;
-  }
-
+  .hero,
   .hero picture,
   .hero-reference-art {
     width: 100%;
     height: auto;
   }
-
-  /* BENEFICIOS */
 
   .store-benefits {
     justify-content: space-around;
@@ -1743,16 +1640,14 @@ img {
 
   .benefit {
     flex: 1;
-    padding: 0 7px;
     gap: 6px;
+    padding: 0 7px;
     font-size: clamp(9px,2.7vw,13px);
   }
 
   .benefit-icon {
     font-size: 25px;
   }
-
-  /* CTA */
 
   .hero-cta-wrapper {
     padding: 10px 12px 19px;
@@ -1764,22 +1659,19 @@ img {
     font-size: 19px;
   }
 
-  /* CATEGORÍAS 2 FILAS DE 3 */
+  /* CATEGORÍAS: DOS FILAS DE TRES */
 
   .categories-section {
-    padding: 0 12px 12px;
+    padding: 4px 12px 15px;
   }
 
   .categories {
     grid-template-columns: repeat(3,minmax(0,1fr));
-    gap: 10px;
+    gap: 13px;
   }
 
   .category-item {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    min-height: clamp(100px,18vw,145px);
+    min-height: clamp(110px,18vw,145px);
     padding: 9px;
     border-radius: 16px;
   }
@@ -1791,19 +1683,19 @@ img {
   }
 
   .category-label {
-    align-self: flex-start;
-    max-width: 70%;
+    align-self: center;
+    max-width: 67%;
     padding-top: 38px;
     font-size: clamp(11px,3vw,19px);
   }
 
   .category-photo {
-    width: 60%;
-    right: 0;
-    background-size: 850% auto;
+    top: 3%;
+    right: 3%;
+    bottom: 3%;
+    width: 52%;
+    background-size: contain;
   }
-
-  /* SECCIONES */
 
   .featured-section,
   .offers-section,
@@ -1820,8 +1712,6 @@ img {
   .view-all {
     font-size: 11px;
   }
-
-  /* PRODUCTOS HORIZONTALES */
 
   .product-carousel {
     gap: 10px;
@@ -1865,8 +1755,6 @@ img {
     font-size: 22px;
   }
 
-  /* OFERTAS */
-
   .offer-banner {
     gap: 9px;
     min-height: 115px;
@@ -1903,8 +1791,6 @@ img {
     font-size: 9px;
   }
 
-  /* CATÁLOGO */
-
   .catalog-grid {
     grid-template-columns: repeat(2,minmax(0,1fr));
   }
@@ -1926,8 +1812,6 @@ img {
     grid-column: 1/-1;
   }
 
-  /* NEWSLETTER */
-
   .newsletter-section {
     padding: 15px 12px;
   }
@@ -1945,12 +1829,10 @@ img {
   }
 
   .newsletter-form {
-    max-width: 100%;
     width: 100%;
+    max-width: 100%;
     flex: 1 0 100%;
   }
-
-  /* FOOTER */
 
   .footer-columns {
     grid-template-columns: 1.1fr 1fr 1fr;
@@ -1963,8 +1845,8 @@ img {
 
   .footer-column:last-child {
     grid-column: 1/-1;
-    border-top: 1px solid #34454d;
     padding-top: 12px;
+    border-top: 1px solid #34454d;
   }
 
   .footer-column h3 {
@@ -1975,8 +1857,6 @@ img {
   .footer-column > a {
     font-size: 10px;
   }
-
-  /* DETALLES */
 
   .product-dialog {
     width: 96vw;
@@ -2004,8 +1884,6 @@ img {
     font-size: 29px;
   }
 
-  /* CARRITO */
-
   .cart-item {
     grid-template-columns: minmax(0,1fr) auto auto;
   }
@@ -2013,15 +1891,11 @@ img {
   .cart-item > button {
     grid-column: 3;
   }
-
 }
 
-/* ===================================================
-   CELULARES PEQUEÑOS
-=================================================== */
+/* ================= CELULAR PEQUEÑO ================= */
 
 @media(max-width:430px) {
-
   .header-top {
     padding: 5px 7px;
     gap: 5px;
@@ -2061,6 +1935,10 @@ img {
     font-size: 21px;
   }
 
+  .categories {
+    gap: 11px;
+  }
+
   .category-item {
     min-height: 105px;
     padding: 6px;
@@ -2073,12 +1951,14 @@ img {
   }
 
   .category-label {
+    max-width: 67%;
     padding-top: 37px;
     font-size: 11px;
   }
 
   .category-photo {
-    background-size: 1000% auto;
+    width: 54%;
+    background-size: contain;
   }
 
   .product-carousel > .product-card {
@@ -2123,8 +2003,8 @@ img {
 
   .footer-column:nth-child(3) {
     grid-column: 1;
-    border-top: 1px solid #34454d;
     padding-top: 10px;
+    border-top: 1px solid #34454d;
   }
 
   .footer-column:last-child {
@@ -2132,18 +2012,12 @@ img {
     border-top: 1px solid #34454d;
     border-right: 0;
   }
-
 }
 
-/* ===================================================
-   ACCESIBILIDAD
-=================================================== */
+/* ================= ACCESIBILIDAD ================= */
 
 @media(prefers-reduced-motion:reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
+  html,
   .product-carousel {
     scroll-behavior: auto;
   }
