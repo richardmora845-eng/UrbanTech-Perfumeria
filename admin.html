@@ -6,472 +6,372 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#05090c">
-
-<title>Administración | Urban Tech CR02 Perfumería</title>
-
+<title>Administración | Urban Tech CR02</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --black:#05090c;
-  --panel:#101b21;
-  --cyan:#00d9ff;
-  --green:#a7fa18;
-  --pink:#ff38bd;
-  --white:#f7fafb;
-  --muted:#aab9c2;
-  --border:#26444d;
+  --bg:#071014;--panel:#101b21;--field:#081115;
+  --cyan:#00dfff;--green:#b5ff00;--gold:#ffc12b;
+  --muted:#b3c3cb;--border:#294b55;--red:#e35a70;
 }
 *{box-sizing:border-box}
 body{
-  margin:0;
-  background:#071014;
-  color:var(--white);
-  font-family:Montserrat,Arial,sans-serif;
-  font-size:14px;
+  margin:0;background:var(--bg);color:white;
+  font:13px Montserrat,Arial,sans-serif;
 }
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-[hidden],.hidden{display:none!important}
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  flex-wrap:wrap;
-  padding:22px 5%;
-  background:linear-gradient(110deg,#030506,#10212a);
-  border-bottom:1px solid var(--cyan);
+[hidden]{display:none!important}
+header{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;padding:20px 4%;
+  background:#030608;border-bottom:1px solid var(--cyan);
 }
-.header h1{
-  margin:0;
-  font-size:24px;
-  font-weight:800;
-  background:linear-gradient(90deg,#fff,var(--cyan),var(--green));
-  background-clip:text;
-  -webkit-background-clip:text;
-  color:transparent;
-}
-.header p{
-  margin:7px 0 0;
-  color:var(--muted);
-  font-size:12px;
-}
-.container{
-  width:min(1120px,94%);
-  margin:25px auto;
-}
+header h1{margin:0;color:var(--cyan);font-size:21px}
+header p{margin:5px 0 0;color:var(--muted)}
+main{width:min(1100px,95%);margin:22px auto}
 .panel{
-  margin-bottom:23px;
-  padding:25px;
-  border:1px solid var(--border);
-  border-radius:15px;
+  margin:0 0 22px;padding:23px;
+  border:1px solid var(--border);border-radius:14px;
   background:var(--panel);
-  box-shadow:0 8px 30px #0004;
 }
-h2{
-  margin:0 0 17px;
-  font-size:23px;
-  color:var(--cyan);
+h2{margin:0 0 15px;color:var(--cyan);font-size:21px}
+h3{margin:0 0 9px;font-size:15px}
+.note{color:var(--muted);font-size:12px;line-height:1.7}
+.login{max-width:450px;margin:55px auto}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.field{margin:0 0 13px;min-width:0}
+.field label{display:block;margin:0 0 7px;font-size:12px;font-weight:700}
+.field input,.field select,.field textarea{
+  display:block;width:100%;min-width:0;padding:12px;
+  color:white;background:var(--field);
+  border:1px solid var(--border);border-radius:8px;
 }
-.login-panel{
-  max-width:440px;
-  margin:65px auto;
+.field textarea{min-height:90px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:1px solid var(--cyan);
 }
-.field{margin-bottom:16px}
-.field label{
-  display:block;
-  margin-bottom:8px;
-  color:#e1ecf0;
-  font-size:12px;
-  font-weight:700;
+.checks,.actions,.tabs{
+  display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:13px 0;
 }
-.field input,
-.field select,
-.field textarea{
-  display:block;
-  width:100%;
-  min-width:0;
-  padding:13px;
-  border:1px solid var(--border);
-  border-radius:9px;
-  outline:none;
-  background:#081115;
-  color:#fff;
-}
-.field input:focus,
-.field select:focus,
-.field textarea:focus{
-  border-color:var(--cyan);
-}
-.field textarea{
-  min-height:105px;
-  resize:vertical;
-}
-.form-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  column-gap:18px;
-}
-.actions,.checks{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
-  margin:13px 0;
-}
-.checks label{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-size:12px;
-}
+.checks label{display:flex;align-items:center;gap:6px}
 .checks input{accent-color:var(--green)}
-.button{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:42px;
-  padding:11px 18px;
-  border:1px solid var(--cyan);
-  border-radius:9px;
-  background:var(--cyan);
-  color:#071014;
-  font-size:12px;
-  font-weight:800;
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:39px;padding:10px 15px;border:1px solid var(--cyan);
+  border-radius:8px;background:var(--cyan);color:#001216;
+  font-weight:800;font-size:12px;
 }
-.button:hover{background:var(--green);border-color:var(--green)}
-.button.secondary{
-  background:#1a2b32;
-  color:var(--white);
-  border-color:#34515c;
+.btn.secondary{background:#192e37;color:white;border-color:#46707d}
+.btn.gold{background:var(--gold);border-color:var(--gold)}
+.btn.danger{background:#a52943;border-color:#a52943;color:white}
+.btn.small{min-height:31px;padding:7px 10px;font-size:11px}
+.btn:disabled{opacity:.55;cursor:wait}
+.tabs{margin:0 0 17px}
+.tabs .btn.active{background:var(--green);border-color:var(--green);color:#000}
+.msg{
+  margin:12px 0;padding:12px;border:1px solid var(--border);
+  border-radius:8px;background:#061014;
+  color:white;overflow-wrap:anywhere;line-height:1.6;
 }
-.button.danger{
-  background:#9c2947;
-  border-color:#9c2947;
-  color:white;
+.msg.error{border-color:var(--red);color:#ffd0d6}
+.msg.ok{border-color:var(--green);color:#d8ffb9}
+.list{display:grid;gap:11px}
+.item{
+  display:grid;grid-template-columns:75px minmax(0,1fr) auto;
+  align-items:center;gap:13px;padding:12px;
+  border:1px solid var(--border);border-radius:10px;
+  background:#071115;
 }
-.button:disabled{
-  opacity:.5;
-  cursor:wait;
-}
-.small-button{
-  min-height:34px;
-  padding:8px 11px;
-  font-size:11px;
-}
-.message{
-  margin:12px 0;
-  padding:13px;
-  border:1px solid var(--border);
-  border-radius:9px;
-  background:#0b1418;
-  color:#e8f4f7;
-  font-size:12px;
-  line-height:1.6;
-  overflow-wrap:anywhere;
-}
-.top-note{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.7;
-}
-.product-list{display:grid;gap:12px}
-.product-row{
-  display:grid;
-  grid-template-columns:80px minmax(0,1fr) auto;
-  align-items:center;
-  gap:15px;
-  padding:13px;
-  border:1px solid var(--border);
-  border-radius:11px;
-  background:#081115;
-}
-.product-row img{
-  width:80px;
-  height:80px;
-  object-fit:contain;
-  border-radius:8px;
-  background:#f0f1f1;
-}
-.product-row h3{
-  margin:0 0 7px;
-  font-size:14px;
-}
-.product-row p{
-  margin:4px 0;
-  color:var(--muted);
-  font-size:11px;
-}
+.item img{width:75px;height:75px;object-fit:contain}
+.item h3{margin:0 0 6px;overflow-wrap:anywhere}
+.item p{margin:4px 0;color:var(--muted);font-size:11px}
+.item .actions{margin:0}
 .photos{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
-  gap:12px;
-  margin:15px 0;
+  display:flex;flex-wrap:wrap;gap:10px;margin:12px 0;
 }
-.photo-card{
-  padding:9px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  text-align:center;
+.photo{
+  width:115px;padding:8px;border:1px solid var(--border);
+  border-radius:8px;text-align:center;
 }
-.photo-card img{
-  width:100%;
-  height:115px;
-  object-fit:contain;
-  background:white;
-  border-radius:6px;
+.photo img{width:100%;height:105px;object-fit:contain}
+.photo button{width:100%;margin-top:5px}
+.preview{
+  display:grid;place-items:center;min-height:155px;
+  border:1px dashed var(--border);border-radius:10px;
 }
-.photo-card p{
-  font-size:11px;
-  color:var(--muted);
-}
-.photo-card button{margin:3px}
-@media(max-width:650px){
-  .header{padding:17px 4%}
-  .header h1{font-size:19px}
-  .panel{padding:17px}
-  .form-grid{grid-template-columns:1fr}
-  .product-row{
-    grid-template-columns:60px minmax(0,1fr);
-  }
-  .product-row img{width:60px;height:60px}
-  .product-row .actions{grid-column:1/-1}
-  .button{font-size:11px}
+.preview img{max-width:100%;max-height:180px;object-fit:contain}
+.category-status{color:var(--muted)}
+a{color:var(--cyan)}
+@media(max-width:680px){
+  header{padding:16px}
+  header h1{font-size:18px}
+  .panel{padding:15px}
+  .grid{grid-template-columns:1fr}
+  .item{grid-template-columns:58px minmax(0,1fr)}
+  .item img{width:58px;height:65px}
+  .item .actions{grid-column:1/-1}
+  .btn{font-size:11px}
 }
 </style>
 </head>
-
 <body>
 
-<header class="header">
+<header>
   <div>
     <h1>URBAN TECH CR02 PERFUMERÍA</h1>
-    <p>Panel privado de administración</p>
+    <p>Administración de productos y promociones</p>
   </div>
-
-  <button
-    id="logout-button"
-    class="button secondary hidden"
-    type="button">
-    Cerrar sesión
-  </button>
+  <div class="actions">
+    <a href="index.html" class="btn secondary">Ver tienda</a>
+    <button id="logout" class="btn secondary" type="button" hidden>
+      Cerrar sesión
+    </button>
+  </div>
 </header>
 
-<main class="container">
+<main>
 
-<!-- INICIO DE SESIÓN -->
-
-<section id="login-section" class="panel login-panel">
-
+<section id="login-panel" class="panel login">
   <h2>Iniciar sesión</h2>
-  <p class="top-note">
-    Ingresá con la cuenta autorizada de Urban Tech.
-  </p>
-
   <form id="login-form">
-
     <div class="field">
-      <label for="login-email">Correo electrónico</label>
-      <input
-        id="login-email"
-        type="email"
-        required
-        autocomplete="username">
+      <label for="email">Correo electrónico</label>
+      <input id="email" type="email" autocomplete="username" required>
     </div>
-
     <div class="field">
-      <label for="login-password">Contraseña</label>
-      <input
-        id="login-password"
-        type="password"
-        required
-        autocomplete="current-password">
+      <label for="password">Contraseña</label>
+      <input id="password" type="password" autocomplete="current-password" required>
     </div>
-
-    <button id="login-button" class="button" type="submit">
-      Entrar al panel
-    </button>
-
+    <button class="btn" type="submit">Entrar</button>
   </form>
-
-  <div id="login-message" class="message hidden" role="status"></div>
+  <p id="login-message" class="msg" hidden></p>
 </section>
 
-<!-- ADMINISTRACIÓN -->
+<section id="admin-panel" hidden>
 
-<section id="admin-section" class="hidden">
+  <nav class="tabs">
+    <button class="btn active" data-tab="products" type="button">
+      Productos
+    </button>
+    <button class="btn secondary" data-tab="promotions" type="button">
+      Promociones
+    </button>
+    <button class="btn secondary" data-tab="categories" type="button">
+      Categorías
+    </button>
+  </nav>
 
-<section class="panel">
+  <!-- PRODUCTOS -->
+  <div id="tab-products">
+    <section class="panel">
+      <h2 id="product-title">Agregar perfume</h2>
+      <form id="product-form">
+        <input id="product-id" type="hidden">
 
-  <h2 id="form-title">Agregar perfume</h2>
+        <div class="grid">
+          <div class="field">
+            <label>Nombre del perfume *</label>
+            <input id="product-name" required>
+          </div>
+          <div class="field">
+            <label>Marca</label>
+            <input id="product-brand">
+          </div>
+          <div class="field">
+            <label>Categoría *</label>
+            <select id="product-category" required>
+              <option value="">Cargando categorías...</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Público</label>
+            <select id="product-gender">
+              <option value="">Sin especificar</option>
+              <option value="caballero">Caballero</option>
+              <option value="dama">Dama</option>
+              <option value="unisex">Unisex</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Precio regular ₡ *</label>
+            <input id="product-price" type="number" min="0" step="1" required>
+          </div>
+          <div class="field">
+            <label>Precio de oferta ₡</label>
+            <input id="product-offer-price" type="number" min="0" step="1">
+          </div>
+          <div class="field">
+            <label>Existencias</label>
+            <input id="product-stock" type="number" min="0" step="1" value="0">
+          </div>
+          <div class="field">
+            <label>URL de fotografía principal (opcional)</label>
+            <input id="product-image" type="url" placeholder="https://...">
+          </div>
+          <div class="field">
+            <label>Posición Top 5 dama</label>
+            <select id="top-women">
+              <option value="">No incluir</option>
+              <option>1</option><option>2</option><option>3</option>
+              <option>4</option><option>5</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Posición Top 5 caballero</label>
+            <select id="top-men">
+              <option value="">No incluir</option>
+              <option>1</option><option>2</option><option>3</option>
+              <option>4</option><option>5</option>
+            </select>
+          </div>
+        </div>
 
-  <p class="top-note">
-    Agregá perfumes, precios y fotografías directamente
-    desde tu celular o computadora.
-  </p>
+        <div class="field">
+          <label>Fotografías (hasta 5)</label>
+          <input id="product-files" type="file"
+                 accept="image/png,image/jpeg,image/webp" multiple>
+          <p class="note">
+            Podés subir fotografías desde el celular o computadora.
+            Se conservan las imágenes guardadas al editar.
+          </p>
+          <div id="product-photos-preview" class="photos"></div>
+        </div>
 
-  <form id="product-form">
+        <div class="field">
+          <label>Descripción</label>
+          <textarea id="product-description"></textarea>
+        </div>
 
-    <input id="product-id" type="hidden">
+        <div class="checks">
+          <label><input id="product-active" type="checkbox" checked>
+            Visible</label>
+          <label><input id="product-offer" type="checkbox">
+            Es oferta</label>
+          <label><input id="product-bestseller" type="checkbox">
+            Más vendido</label>
+        </div>
 
-    <div class="form-grid">
+        <div class="actions">
+          <button id="save-product" class="btn" type="submit">
+            Guardar perfume
+          </button>
+          <button id="reset-product" class="btn secondary"
+                  type="button">Limpiar formulario</button>
+        </div>
 
-      <div class="field">
-        <label for="product-name">Nombre del perfume *</label>
-        <input id="product-name" maxlength="150" required>
-      </div>
+        <p id="product-message" class="msg" hidden></p>
+      </form>
+    </section>
 
-      <div class="field">
-        <label for="product-brand">Marca</label>
-        <input id="product-brand" maxlength="100">
-      </div>
+    <section class="panel">
+      <h2>Productos de la tienda</h2>
+      <div id="products-list" class="list"></div>
+      <p id="products-message" class="msg" hidden></p>
+    </section>
+  </div>
 
-      <div class="field">
-        <label for="product-category">Categoría *</label>
-        <select id="product-category" required>
-          <option value="">Cargando categorías...</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label for="product-gender">Público</label>
-        <select id="product-gender">
-          <option value="">Sin especificar</option>
-          <option value="dama">Dama</option>
-          <option value="caballero">Caballero</option>
-          <option value="unisex">Unisex</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label for="product-price">Precio regular (₡) *</label>
-        <input id="product-price"
-               type="number" min="0" step="1" required>
-      </div>
-
-      <div class="field">
-        <label for="product-offer-price">Precio de oferta (₡)</label>
-        <input id="product-offer-price"
-               type="number" min="0" step="1">
-      </div>
-
-      <div class="field">
-        <label for="product-stock">Existencias</label>
-        <input id="product-stock"
-               type="number" min="0" step="1" value="0">
-      </div>
-
-      <div class="field">
-        <label for="product-image">
-          Enlace de fotografía (opcional)
-        </label>
-        <input id="product-image"
-               type="url"
-               placeholder="https://...">
-      </div>
-
-      <div class="field">
-        <label for="top-women-order">Posición TOP 5 dama</label>
-        <select id="top-women-order">
-          <option value="">No incluir</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label for="top-men-order">Posición TOP 5 caballero</label>
-        <select id="top-men-order">
-          <option value="">No incluir</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </div>
-
-    </div>
-
-    <!-- FOTOGRAFÍAS -->
-
-    <div class="field">
-      <label for="product-photos">
-        Fotografías desde tu galería (máximo 5)
-      </label>
-
-      <input id="product-photos"
-             type="file"
-             accept="image/jpeg,image/png,image/webp"
-             multiple>
-
-      <p class="top-note">
-        Las fotografías se comprimen automáticamente a WebP.
-        Tamaño máximo por imagen: 15 MB.
+  <!-- PROMOCIONES -->
+  <div id="tab-promotions" hidden>
+    <section class="panel">
+      <h2 id="promotion-title">Crear promoción</h2>
+      <p class="note">
+        El fondo negro con humo dorado y bordes neón es fijo.
+        Aquí solo cambiás el perfume, la fotografía, los precios
+        y su visibilidad.
       </p>
 
-      <div id="photos-preview" class="photos"></div>
-    </div>
+      <form id="promotion-form">
+        <input id="promotion-id" type="hidden">
+        <input id="promotion-image-url" type="hidden">
 
-    <div class="field">
-      <label for="product-description">Descripción</label>
-      <textarea id="product-description"></textarea>
-    </div>
+        <div class="grid">
+          <div class="field">
+            <label>Producto al que dirige el anuncio *</label>
+            <select id="promotion-product" required>
+              <option value="">Seleccioná un perfume</option>
+            </select>
+          </div>
 
-    <div class="checks">
-      <label>
-        <input id="product-active" type="checkbox" checked>
-        Producto visible
-      </label>
+          <div class="field">
+            <label>Nombre del anuncio *</label>
+            <input id="promotion-name" required
+                   placeholder="Ejemplo: Lattafa Khamrah">
+          </div>
 
-      <label>
-        <input id="product-offer" type="checkbox">
-        Es una oferta
-      </label>
+          <div class="field">
+            <label>Precio original ₡ *</label>
+            <input id="promotion-original" type="number"
+                   min="1" step="1" required>
+          </div>
 
-      <label>
-        <input id="product-bestseller" type="checkbox">
-        Es más vendido
-      </label>
-    </div>
+          <div class="field">
+            <label>Precio de oferta ₡ *</label>
+            <input id="promotion-offer" type="number"
+                   min="1" step="1" required>
+          </div>
 
-    <div class="actions">
-      <button id="save-button" class="button" type="submit">
-        Guardar perfume
+          <div class="field">
+            <label>Orden del anuncio</label>
+            <input id="promotion-order" type="number"
+                   min="0" step="1" value="0">
+          </div>
+
+          <div class="field">
+            <label>Foto del perfume (PNG transparente recomendado)</label>
+            <input id="promotion-file" type="file"
+                   accept="image/png,image/webp,image/jpeg">
+          </div>
+        </div>
+
+        <div id="promotion-preview" class="preview">
+          <span class="note">Fotografía del anuncio</span>
+        </div>
+
+        <div class="checks">
+          <label>
+            <input id="promotion-active" type="checkbox" checked>
+            Promoción activa
+          </label>
+        </div>
+
+        <div class="actions">
+          <button id="save-promotion" type="submit" class="btn gold">
+            Guardar promoción
+          </button>
+          <button id="reset-promotion" type="button" class="btn secondary">
+            Limpiar formulario
+          </button>
+        </div>
+
+        <p id="promotion-message" class="msg" hidden></p>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>Promociones guardadas</h2>
+      <div id="promotions-list" class="list"></div>
+      <p id="promotions-message" class="msg" hidden></p>
+    </section>
+  </div>
+
+  <!-- DIAGNÓSTICO DE CATEGORÍAS -->
+  <div id="tab-categories" hidden>
+    <section class="panel">
+      <h2>Categorías de Supabase</h2>
+      <p class="note">
+        Aquí aparecen las categorías que realmente devuelve
+        la base de datos. Si hay un error de permisos,
+        se mostrará su mensaje.
+      </p>
+      <button id="reload-categories" class="btn" type="button">
+        Recargar categorías
       </button>
-
-      <button
-        id="cancel-edit"
-        class="button secondary hidden"
-        type="button">
-        Cancelar edición
-      </button>
-    </div>
-
-    <div id="form-message"
-         class="message hidden"
-         role="status"></div>
-
-  </form>
-</section>
-
-<!-- LISTA DE PRODUCTOS -->
-
-<section class="panel">
-
-  <h2>Productos de la tienda</h2>
-
-  <div id="products-message"
-       class="message hidden"
-       role="status"></div>
-
-  <div id="products-list" class="product-list"></div>
-
-</section>
+      <p id="categories-message" class="msg" hidden></p>
+      <div id="categories-list" class="list"></div>
+    </section>
+  </div>
 
 </section>
 </main>
@@ -483,774 +383,812 @@ h2{
 (() => {
 "use strict";
 
-const $ = selector => document.querySelector(selector);
+const $ = s => document.querySelector(s);
 const BUCKET = "Perfumes";
 
-let db = null;
+let db;
 let categories = [];
 let products = [];
+let promotions = [];
 let savedPhotos = [];
-let newPhotos = [];
+let selectedFiles = [];
 
-const loginMessage = $("#login-message");
-const formMessage = $("#form-message");
-const productsMessage = $("#products-message");
-
-function showMessage(element, message) {
-  element.textContent = message;
-  element.classList.remove("hidden");
-}
-
-function hideMessage(element) {
-  element.textContent = "";
-  element.classList.add("hidden");
-}
-
-function escapeHTML(value = "") {
-  return String(value ?? "").replace(
-    /[&<>"']/g,
-    character => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;"
-    })[character]
-  );
+function safe(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",
+    '"':"&quot;","'":"&#39;"
+  })[c]);
 }
 
 function money(value) {
-  return "₡" + Math.round(
-    Number(value) || 0
-  ).toLocaleString("es-CR");
+  return "₡" + Math.round(Number(value)||0)
+    .toLocaleString("es-CR");
 }
 
-function setLoggedIn(ok) {
-  $("#login-section").classList.toggle("hidden", ok);
-  $("#admin-section").classList.toggle("hidden", !ok);
-  $("#logout-button").classList.toggle("hidden", !ok);
+function message(id, text, isError=false) {
+  const element = $(id);
+  if (!element) return;
+  element.textContent = text;
+  element.className = "msg " + (isError ? "error" : "ok");
+  element.hidden = !text;
 }
 
-/* ==========================================
+function setPanel(authorized) {
+  $("#login-panel").hidden = authorized;
+  $("#admin-panel").hidden = !authorized;
+  $("#logout").hidden = !authorized;
+}
+
+function switchTab(name) {
+  for (const tab of ["products","promotions","categories"]) {
+    $("#tab-" + tab).hidden = tab !== name;
+  }
+  document.querySelectorAll("[data-tab]").forEach(button => {
+    const active = button.dataset.tab === name;
+    button.className = "btn " + (active ? "active" : "secondary");
+  });
+}
+
+function errorMessage(error) {
+  return error?.message || String(error);
+}
+
+/* ====================================================
    CATEGORÍAS
-========================================== */
+==================================================== */
 
 async function loadCategories() {
-  const { data, error } = await db
+  const select = $("#product-category");
+  const listing = $("#categories-list");
+
+  select.innerHTML = '<option value="">Cargando...</option>';
+  listing.textContent = "Consultando Supabase...";
+  message("#categories-message", "");
+
+  const {data,error} = await db
     .from("categories")
-    .select("id,name,is_active,sort_order")
-    .eq("is_active", true)
-    .order("sort_order", { ascending: true });
+    .select("id,name,slug,is_active,sort_order")
+    .order("sort_order",{ascending:true});
+
+  if (error) {
+    categories = [];
+    select.innerHTML =
+      '<option value="">Error al cargar categorías</option>';
+    listing.textContent = "";
+    message(
+      "#categories-message",
+      "Error de Supabase: " + error.message +
+      ". Revisá las políticas SELECT de public.categories.",
+      true
+    );
+    return;
+  }
+
+  categories = data || [];
+  const active = categories.filter(c=>c.is_active);
+
+  select.innerHTML =
+    '<option value="">Seleccioná una categoría</option>' +
+    active.map(c=>
+      `<option value="${safe(c.id)}">${safe(c.name)}</option>`
+    ).join("");
+
+  if (!active.length) {
+    message(
+      "#categories-message",
+      categories.length
+        ? "Hay categorías guardadas, pero ninguna está activa."
+        : "La consulta funcionó, pero no hay categorías registradas.",
+      true
+    );
+  } else {
+    message(
+      "#categories-message",
+      "Se encontraron " + active.length + " categorías activas."
+    );
+  }
+
+  listing.innerHTML = categories.length
+    ? categories.map(c=>`
+      <article class="item">
+        <div style="color:#00dfff;font-size:27px;text-align:center">▦</div>
+        <div>
+          <h3>${safe(c.name)}</h3>
+          <p>${safe(c.slug)} · ${c.is_active?"Activa":"Inactiva"}</p>
+        </div>
+      </article>
+    `).join("")
+    : '<p class="note">No hay categorías.</p>';
+}
+
+/* ====================================================
+   COMPRESIÓN Y STORAGE
+==================================================== */
+
+async function compressImage(file, maxDimension=1200) {
+  if (!file.type.startsWith("image/")) {
+    throw new Error("El archivo debe ser una imagen.");
+  }
+
+  if (file.size > 15*1024*1024) {
+    throw new Error("La imagen supera 15 MB.");
+  }
+
+  const bitmap = await createImageBitmap(file);
+  const scale = Math.min(
+    1,
+    maxDimension/Math.max(bitmap.width,bitmap.height)
+  );
+  const canvas = document.createElement("canvas");
+
+  canvas.width = Math.max(1,Math.round(bitmap.width*scale));
+  canvas.height = Math.max(1,Math.round(bitmap.height*scale));
+
+  const context = canvas.getContext("2d");
+  context.clearRect(0,0,canvas.width,canvas.height);
+  context.drawImage(bitmap,0,0,canvas.width,canvas.height);
+
+  bitmap.close();
+
+  const blob = await new Promise(resolve=>
+    canvas.toBlob(resolve,"image/webp",0.88)
+  );
+
+  if (!blob) throw new Error("No se pudo procesar la imagen.");
+  return blob;
+}
+
+async function uploadImage(file,folder) {
+  const blob = await compressImage(file);
+  const path = folder+"/"+crypto.randomUUID()+".webp";
+
+  const {error} = await db.storage
+    .from(BUCKET)
+    .upload(path,blob,{
+      contentType:"image/webp",
+      upsert:false
+    });
 
   if (error) throw error;
 
-  categories = data || [];
+  const {data} = db.storage
+    .from(BUCKET)
+    .getPublicUrl(path);
 
-  $("#product-category").innerHTML =
-    '<option value="">Seleccioná una categoría</option>' +
-    categories.map(category => `
-      <option value="${escapeHTML(category.id)}">
-        ${escapeHTML(category.name)}
-      </option>
-    `).join("");
+  return data.publicUrl;
 }
 
-/* ==========================================
-   LISTAR PRODUCTOS
-========================================== */
+/* ====================================================
+   PRODUCTOS
+==================================================== */
 
 async function loadProducts() {
-  hideMessage(productsMessage);
+  $("#products-list").textContent = "Cargando productos...";
+  message("#products-message","");
 
-  const list = $("#products-list");
-  list.textContent = "Cargando productos...";
-
-  const { data, error } = await db
+  const {data,error} = await db
     .from("products")
     .select("*")
-    .order("created_at", { ascending: false });
+    .order("created_at",{ascending:false});
 
   if (error) {
-    list.textContent = "";
-    showMessage(productsMessage, error.message);
+    $("#products-list").textContent = "";
+    message("#products-message",error.message,true);
     return;
   }
 
   products = data || [];
 
-  if (!products.length) {
-    list.textContent = "Todavía no hay productos.";
-    return;
-  }
+  const promotionSelect = $("#promotion-product");
+  const currentPromotion = promotionSelect.value;
 
-  list.innerHTML = products.map(product => {
-    const category = categories.find(
-      item => item.id === product.category_id
-    );
+  promotionSelect.innerHTML =
+    '<option value="">Seleccioná un perfume</option>' +
+    products.map(p=>`
+      <option value="${safe(p.id)}">
+        ${safe(p.brand||"")} — ${safe(p.name)}
+      </option>
+    `).join("");
 
-    const image = product.image_url
-      ? `<img src="${escapeHTML(product.image_url)}"
-              alt="${escapeHTML(product.name)}">`
-      : `<div style="width:75px;height:75px;background:#27343a;border-radius:7px"></div>`;
+  promotionSelect.value = currentPromotion;
 
-    return `
-      <article class="product-row">
-
-        ${image}
-
-        <div>
-          <h3>${escapeHTML(product.name)}</h3>
-          <p>${escapeHTML(product.brand || "")}</p>
-          <p>
-            ${escapeHTML(category?.name || "Sin categoría")}
-            · ${money(product.price)}
-          </p>
-          <p>
-            Existencias: ${Number(product.stock) || 0}
-            · ${product.is_active ? "Visible" : "Oculto"}
-          </p>
-        </div>
-
-        <div class="actions">
-          <button
-            class="button small-button"
-            type="button"
-            data-edit="${escapeHTML(product.id)}">
-            Editar
-          </button>
-
-          <button
-            class="button danger small-button"
-            type="button"
-            data-delete="${escapeHTML(product.id)}">
-            Eliminar
-          </button>
-        </div>
-
-      </article>
-    `;
-  }).join("");
+  $("#products-list").innerHTML = products.length
+    ? products.map(p=>{
+      const cat = categories.find(c=>c.id===p.category_id);
+      return `
+        <article class="item">
+          ${
+            p.image_url
+              ? `<img src="${safe(p.image_url)}" alt="">`
+              : `<div class="note">Sin foto</div>`
+          }
+          <div>
+            <h3>${safe(p.name)}</h3>
+            <p>${safe(p.brand||"")}</p>
+            <p>${safe(cat?.name||"Sin categoría")} · ${money(p.price)}</p>
+            <p>Existencias: ${Number(p.stock)||0}
+               · ${p.is_active?"Visible":"Oculto"}</p>
+          </div>
+          <div class="actions">
+            <button class="btn small"
+              data-edit-product="${safe(p.id)}"
+              type="button">Editar</button>
+            <button class="btn danger small"
+              data-delete-product="${safe(p.id)}"
+              type="button">Eliminar</button>
+          </div>
+        </article>
+      `;
+    }).join("")
+    : '<p class="note">Todavía no hay perfumes.</p>';
 }
 
-/* ==========================================
-   FOTOGRAFÍAS
-========================================== */
+function photoPreview() {
+  const area = $("#product-photos-preview");
+  area.replaceChildren();
 
-function clearNewPhotos() {
-  newPhotos.forEach(photo => {
-    URL.revokeObjectURL(photo.preview);
-  });
-
-  newPhotos = [];
-  $("#product-photos").value = "";
-}
-
-function renderPhotos() {
-  const area = $("#photos-preview");
-  area.innerHTML = "";
-
-  savedPhotos.forEach((url, index) => {
+  savedPhotos.forEach((url,index)=>{
     const card = document.createElement("div");
-    card.className = "photo-card";
+    card.className="photo";
 
-    const img = document.createElement("img");
-    img.src = url;
-    img.alt = "Fotografía del producto";
+    const img=document.createElement("img");
+    img.src=url;
     card.append(img);
 
-    const title = document.createElement("p");
-    title.textContent =
-      index === 0 ? "Principal" : "Fotografía " + (index + 1);
+    const caption=document.createElement("p");
+    caption.textContent=index===0?"Principal":"Foto "+(index+1);
+    card.append(caption);
 
-    card.append(title);
-
-    if (index !== 0) {
-      const main = document.createElement("button");
-      main.type = "button";
-      main.className = "button secondary small-button";
-      main.textContent = "Principal";
-
-      main.onclick = () => {
-        savedPhotos.splice(index, 1);
-        savedPhotos.unshift(url);
-        $("#product-image").value = savedPhotos[0] || "";
-        renderPhotos();
-      };
-
-      card.append(main);
-    }
-
-    const remove = document.createElement("button");
-    remove.type = "button";
-    remove.className = "button danger small-button";
-    remove.textContent = "Quitar";
-
-    remove.onclick = () => {
-      savedPhotos.splice(index, 1);
-      $("#product-image").value = savedPhotos[0] || "";
-      renderPhotos();
+    const remove=document.createElement("button");
+    remove.type="button";
+    remove.className="btn danger small";
+    remove.textContent="Quitar";
+    remove.onclick=()=>{
+      savedPhotos.splice(index,1);
+      photoPreview();
     };
-
     card.append(remove);
+
     area.append(card);
   });
 
-  newPhotos.forEach((photo, index) => {
-    const card = document.createElement("div");
-    card.className = "photo-card";
-
-    const img = document.createElement("img");
-    img.src = photo.preview;
-    img.alt = "Nueva fotografía";
+  selectedFiles.forEach((file,index)=>{
+    const card=document.createElement("div");
+    card.className="photo";
+    const img=document.createElement("img");
+    const url=URL.createObjectURL(file);
+    img.src=url;
+    img.onload=()=>URL.revokeObjectURL(url);
     card.append(img);
 
-    const title = document.createElement("p");
-    title.textContent = "Nueva fotografía";
-    card.append(title);
+    const caption=document.createElement("p");
+    caption.textContent="Nueva foto";
+    card.append(caption);
 
-    const remove = document.createElement("button");
-    remove.type = "button";
-    remove.className = "button danger small-button";
-    remove.textContent = "Quitar";
-
-    remove.onclick = () => {
-      URL.revokeObjectURL(photo.preview);
-      newPhotos.splice(index, 1);
-      renderPhotos();
+    const remove=document.createElement("button");
+    remove.type="button";
+    remove.className="btn danger small";
+    remove.textContent="Quitar";
+    remove.onclick=()=>{
+      selectedFiles.splice(index,1);
+      photoPreview();
     };
-
     card.append(remove);
     area.append(card);
   });
 }
 
-$("#product-photos").addEventListener("change", event => {
-  const files = Array.from(event.target.files);
-
-  if (
-    savedPhotos.length +
-    newPhotos.length +
-    files.length > 5
-  ) {
-    showMessage(
-      formMessage,
-      "Máximo cinco fotografías por perfume."
-    );
-    event.target.value = "";
-    return;
-  }
-
-  for (const file of files) {
-    if (
-      !["image/jpeg", "image/png", "image/webp"]
-        .includes(file.type)
-    ) {
-      showMessage(
-        formMessage,
-        "Solo se permiten imágenes JPG, PNG o WebP."
-      );
-      continue;
-    }
-
-    if (file.size > 15 * 1024 * 1024) {
-      showMessage(
-        formMessage,
-        "Una fotografía supera los 15 MB."
-      );
-      continue;
-    }
-
-    newPhotos.push({
-      file,
-      preview: URL.createObjectURL(file)
-    });
-  }
-
-  event.target.value = "";
-  renderPhotos();
-});
-
-/* ==========================================
-   COMPRIMIR Y SUBIR IMÁGENES
-========================================== */
-
-async function compressPhoto(file) {
-  if (file.size > 15 * 1024 * 1024) {
-    throw new Error("Una fotografía supera los 15 MB.");
-  }
-
-  const bitmap = await createImageBitmap(file);
-
-  const scale = Math.min(
-    1,
-    1200 / Math.max(bitmap.width, bitmap.height)
-  );
-
-  const canvas = document.createElement("canvas");
-
-  canvas.width = Math.max(
-    1,
-    Math.round(bitmap.width * scale)
-  );
-
-  canvas.height = Math.max(
-    1,
-    Math.round(bitmap.height * scale)
-  );
-
-  canvas.getContext("2d").drawImage(
-    bitmap,
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
-
-  bitmap.close();
-
-  const blob = await new Promise(resolve => {
-    canvas.toBlob(resolve, "image/webp", 0.78);
-  });
-
-  if (!blob) {
-    throw new Error("No se pudo comprimir la fotografía.");
-  }
-
-  return blob;
-}
-
-async function uploadPhotos(photos) {
-  const urls = [];
-
-  for (const photo of photos) {
-    const blob = await compressPhoto(photo.file);
-
-    const path =
-      "catalogo/" + crypto.randomUUID() + ".webp";
-
-    const { error } = await db.storage
-      .from(BUCKET)
-      .upload(path, blob, {
-        contentType: "image/webp",
-        upsert: false
-      });
-
-    if (error) throw error;
-
-    const { data } = db.storage
-      .from(BUCKET)
-      .getPublicUrl(path);
-
-    urls.push(data.publicUrl);
-  }
-
-  return urls;
-}
-
-/* ==========================================
-   RESTABLECER FORMULARIO
-========================================== */
-
-function resetForm() {
+function resetProduct() {
   $("#product-form").reset();
-  $("#product-id").value = "";
-  $("#product-stock").value = "0";
-  $("#product-active").checked = true;
-
-  $("#form-title").textContent = "Agregar perfume";
-  $("#save-button").textContent = "Guardar perfume";
-  $("#cancel-edit").classList.add("hidden");
-
-  savedPhotos = [];
-  clearNewPhotos();
-  renderPhotos();
-  hideMessage(formMessage);
+  $("#product-id").value="";
+  $("#product-stock").value="0";
+  $("#product-active").checked=true;
+  $("#product-title").textContent="Agregar perfume";
+  savedPhotos=[];
+  selectedFiles=[];
+  $("#product-files").value="";
+  photoPreview();
+  message("#product-message","");
 }
 
-/* ==========================================
-   EDITAR PRODUCTO
-========================================== */
+function editProduct(id) {
+  const p=products.find(x=>String(x.id)===String(id));
+  if (!p) return;
 
-function editProduct(product) {
-  resetForm();
+  resetProduct();
+  $("#product-id").value=p.id;
+  $("#product-name").value=p.name||"";
+  $("#product-brand").value=p.brand||"";
+  $("#product-category").value=p.category_id||"";
+  $("#product-gender").value=p.gender||"";
+  $("#product-price").value=p.price??"";
+  $("#product-offer-price").value=p.offer_price??"";
+  $("#product-stock").value=p.stock??0;
+  $("#product-image").value=p.image_url||"";
+  $("#product-description").value=p.description||"";
+  $("#product-active").checked=!!p.is_active;
+  $("#product-offer").checked=!!p.is_offer;
+  $("#product-bestseller").checked=!!p.is_bestseller;
+  $("#top-women").value=p.top_women_order||"";
+  $("#top-men").value=p.top_men_order||"";
+  savedPhotos=Array.isArray(p.images)&&p.images.length
+    ? [...p.images]
+    : p.image_url?[p.image_url]:[];
+  photoPreview();
 
-  $("#product-id").value = product.id;
-  $("#product-name").value = product.name || "";
-  $("#product-brand").value = product.brand || "";
-  $("#product-category").value = product.category_id || "";
-  $("#product-gender").value = product.gender || "";
-  $("#product-price").value = product.price ?? "";
-  $("#product-offer-price").value =
-    product.offer_price ?? "";
-  $("#product-stock").value = product.stock ?? 0;
-  $("#product-image").value = product.image_url || "";
-  $("#product-description").value =
-    product.description || "";
-
-  $("#product-active").checked =
-    Boolean(product.is_active);
-
-  $("#product-offer").checked =
-    Boolean(product.is_offer);
-
-  $("#product-bestseller").checked =
-    Boolean(product.is_bestseller);
-
-  $("#top-women-order").value =
-    product.top_women_order || "";
-
-  $("#top-men-order").value =
-    product.top_men_order || "";
-
-  savedPhotos =
-    Array.isArray(product.images) && product.images.length
-      ? [...product.images]
-      : product.image_url
-        ? [product.image_url]
-        : [];
-
-  renderPhotos();
-
-  $("#form-title").textContent = "Editar perfume";
-  $("#save-button").textContent = "Guardar cambios";
-  $("#cancel-edit").classList.remove("hidden");
-
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  $("#product-title").textContent="Editar perfume";
+  switchTab("products");
+  window.scrollTo({top:0,behavior:"smooth"});
 }
-
-/* ==========================================
-   GUARDAR PRODUCTO
-========================================== */
 
 async function saveProduct(event) {
   event.preventDefault();
-  hideMessage(formMessage);
-
-  const button = $("#save-button");
-  button.disabled = true;
+  const button=$("#save-product");
+  button.disabled=true;
+  message("#product-message","");
 
   try {
-    const name = $("#product-name").value.trim();
-    const category = $("#product-category").value;
-    const price = Number($("#product-price").value);
-    const stock = Number($("#product-stock").value);
+    const name=$("#product-name").value.trim();
+    const category_id=$("#product-category").value;
+    const price=Number($("#product-price").value);
+    const stock=Number($("#product-stock").value);
+    const offerText=$("#product-offer-price").value;
+    const offer_price=offerText===""?null:Number(offerText);
+    const is_offer=$("#product-offer").checked;
 
-    const rawOffer = $("#product-offer-price").value;
-    const offerPrice =
-      rawOffer === "" ? null : Number(rawOffer);
-
-    const isOffer = $("#product-offer").checked;
-
-    if (!name) {
-      throw new Error("Ingresá el nombre del perfume.");
-    }
-
-    if (!category) {
-      throw new Error("Seleccioná una categoría.");
-    }
-
-    if (!Number.isFinite(price) || price < 0) {
-      throw new Error("Precio inválido.");
-    }
-
-    if (!Number.isInteger(stock) || stock < 0) {
+    if (!name) throw new Error("Falta el nombre.");
+    if (!category_id) throw new Error("Seleccioná una categoría.");
+    if (!Number.isFinite(price)||price<0)
+      throw new Error("Precio regular inválido.");
+    if (!Number.isInteger(stock)||stock<0)
       throw new Error("Existencias inválidas.");
-    }
+    if (offer_price!==null &&
+        (offer_price<=0||offer_price>=price))
+      throw new Error("La oferta debe ser menor al precio regular.");
+    if (is_offer && !offer_price)
+      throw new Error("Ingresá el precio de oferta.");
 
-    if (
-      offerPrice !== null &&
-      (!Number.isFinite(offerPrice) ||
-       offerPrice < 0 ||
-       offerPrice >= price)
-    ) {
-      throw new Error(
-        "El precio de oferta debe ser menor que el regular."
-      );
-    }
+    let images=[...savedPhotos];
+    const manual=$("#product-image").value.trim();
+    if (manual&&!images.includes(manual)) images.unshift(manual);
 
-    if (isOffer && (offerPrice === null || offerPrice <= 0)) {
-      throw new Error(
-        "Activá la oferta e ingresá un precio válido."
-      );
-    }
-
-    const manual = $("#product-image").value.trim();
-
-    let photos = [...savedPhotos];
-
-    if (manual && !photos.includes(manual)) {
-      photos.unshift(manual);
-    }
-
-    if (photos.length + newPhotos.length > 5) {
+    if (images.length+selectedFiles.length>5) {
       throw new Error("Máximo cinco fotografías.");
     }
 
-    if (newPhotos.length) {
-      showMessage(
-        formMessage,
-        "Comprimiendo y subiendo fotografías..."
-      );
-
-      const urls = await uploadPhotos(newPhotos);
-      photos.push(...urls);
+    if (selectedFiles.length) {
+      message("#product-message","Subiendo fotografías...");
+      for (const file of selectedFiles) {
+        images.push(await uploadImage(file,"catalogo"));
+      }
     }
 
-    const product = {
+    const payload={
       name,
-      brand: $("#product-brand").value.trim() || null,
-      description:
-        $("#product-description").value.trim() || null,
-
-      category_id: category,
-      gender: $("#product-gender").value || null,
-
+      brand:$("#product-brand").value.trim()||null,
+      description:$("#product-description").value.trim()||null,
+      category_id,
+      gender:$("#product-gender").value||null,
       price,
-      offer_price: offerPrice,
-      image_url: photos[0] || null,
-      images: photos,
+      offer_price,
       stock,
-
-      is_active: $("#product-active").checked,
-      is_offer: isOffer,
-      is_bestseller: $("#product-bestseller").checked,
-
-      top_women_order: $("#top-women-order").value
-        ? Number($("#top-women-order").value)
-        : null,
-
-      top_men_order: $("#top-men-order").value
-        ? Number($("#top-men-order").value)
-        : null
+      image_url:images[0]||null,
+      images,
+      is_active:$("#product-active").checked,
+      is_offer,
+      is_bestseller:$("#product-bestseller").checked,
+      top_women_order:$("#top-women").value
+        ?Number($("#top-women").value):null,
+      top_men_order:$("#top-men").value
+        ?Number($("#top-men").value):null
     };
 
-    const id = $("#product-id").value;
-
-    const query = db.from("products");
-
-    const { error } = id
-      ? await query.update(product).eq("id", id)
-      : await query.insert(product);
+    const id=$("#product-id").value;
+    const {error}=id
+      ?await db.from("products").update(payload).eq("id",id)
+      :await db.from("products").insert(payload);
 
     if (error) throw error;
 
-    resetForm();
+    resetProduct();
     await loadProducts();
+    message("#product-message",
+      id?"Perfume actualizado correctamente.":
+         "Perfume agregado correctamente.");
 
-    showMessage(
-      formMessage,
-      id
-        ? "Producto actualizado correctamente."
-        : "Producto agregado correctamente."
-    );
-
-  } catch (error) {
-    console.error(error);
-
-    showMessage(
-      formMessage,
-      "No se pudo guardar: " + error.message
-    );
-
+  } catch(error) {
+    message("#product-message",
+      "No se pudo guardar: "+errorMessage(error),true);
   } finally {
-    button.disabled = false;
+    button.disabled=false;
   }
 }
 
-/* ==========================================
-   ELIMINAR PRODUCTO
-========================================== */
-
 async function deleteProduct(id) {
-  if (!confirm(
-    "¿Seguro que querés eliminar este perfume?"
-  )) {
-    return;
-  }
+  if (!confirm("¿Eliminar este perfume definitivamente?")) return;
 
-  const { error } = await db
-    .from("products")
-    .delete()
-    .eq("id", id);
+  const {error}=await db.from("products")
+    .delete().eq("id",id);
 
   if (error) {
-    showMessage(productsMessage, error.message);
+    message("#products-message",error.message,true);
     return;
   }
 
   await loadProducts();
-
-  showMessage(
-    productsMessage,
-    "Producto eliminado correctamente."
-  );
+  await loadPromotions();
+  message("#products-message","Perfume eliminado.");
 }
 
-/* ==========================================
-   INICIO DE SESIÓN
-========================================== */
+/* ====================================================
+   PROMOCIONES
+==================================================== */
 
-async function handleLogin(event) {
+async function loadPromotions() {
+  message("#promotions-message","");
+  $("#promotions-list").textContent="Cargando promociones...";
+
+  const {data,error}=await db.from("promotions")
+    .select("*")
+    .order("sort_order",{ascending:true});
+
+  if (error) {
+    $("#promotions-list").textContent="";
+    message("#promotions-message",
+      "No se pudieron leer las promociones: "+error.message,
+      true);
+    return;
+  }
+
+  promotions=data||[];
+
+  $("#promotions-list").innerHTML=promotions.length
+    ?promotions.map(p=>{
+      const product=products.find(x=>x.id===p.product_id);
+      const image=p.image_url||product?.image_url||"";
+      return `
+        <article class="item">
+          ${image
+            ?`<img src="${safe(image)}" alt="">`
+            :'<div class="note">Sin foto</div>'}
+          <div>
+            <h3>${safe(p.name)}</h3>
+            <p>Producto: ${safe(product?.name||"No encontrado")}</p>
+            <p>${money(p.original_price)} → ${money(p.offer_price)}</p>
+            <p>${p.is_active?"ACTIVA":"DESACTIVADA"}</p>
+          </div>
+          <div class="actions">
+            <button class="btn small" type="button"
+              data-edit-promotion="${safe(p.id)}">Editar</button>
+            <button class="btn secondary small" type="button"
+              data-toggle-promotion="${safe(p.id)}">
+              ${p.is_active?"Desactivar":"Activar"}
+            </button>
+            <button class="btn danger small" type="button"
+              data-delete-promotion="${safe(p.id)}">Eliminar</button>
+          </div>
+        </article>
+      `;
+    }).join("")
+    :'<p class="note">Todavía no hay promociones.</p>';
+}
+
+function updatePromotionPreview(url) {
+  const area=$("#promotion-preview");
+  area.replaceChildren();
+
+  if (!url) {
+    const span=document.createElement("span");
+    span.className="note";
+    span.textContent="Fotografía del anuncio";
+    area.append(span);
+    return;
+  }
+
+  const img=document.createElement("img");
+  img.src=url;
+  img.alt="Vista previa de promoción";
+  area.append(img);
+}
+
+function resetPromotion() {
+  $("#promotion-form").reset();
+  $("#promotion-id").value="";
+  $("#promotion-image-url").value="";
+  $("#promotion-order").value="0";
+  $("#promotion-active").checked=true;
+  $("#promotion-title").textContent="Crear promoción";
+  $("#promotion-file").value="";
+  updatePromotionPreview("");
+  message("#promotion-message","");
+}
+
+function editPromotion(id) {
+  const p=promotions.find(x=>String(x.id)===String(id));
+  if (!p) return;
+
+  resetPromotion();
+  $("#promotion-id").value=p.id;
+  $("#promotion-product").value=p.product_id;
+  $("#promotion-name").value=p.name||"";
+  $("#promotion-original").value=p.original_price||"";
+  $("#promotion-offer").value=p.offer_price||"";
+  $("#promotion-order").value=p.sort_order??0;
+  $("#promotion-active").checked=!!p.is_active;
+  $("#promotion-image-url").value=p.image_url||"";
+  updatePromotionPreview(p.image_url||"");
+  $("#promotion-title").textContent="Editar promoción";
+  switchTab("promotions");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+async function savePromotion(event) {
   event.preventDefault();
-  hideMessage(loginMessage);
-
-  const button = $("#login-button");
-  button.disabled = true;
+  const button=$("#save-promotion");
+  button.disabled=true;
+  message("#promotion-message","");
 
   try {
-    const { error } = await db.auth.signInWithPassword({
-      email: $("#login-email").value.trim(),
-      password: $("#login-password").value
-    });
+    const product_id=$("#promotion-product").value;
+    const name=$("#promotion-name").value.trim();
+    const original_price=Number($("#promotion-original").value);
+    const offer_price=Number($("#promotion-offer").value);
+    const sort_order=Number($("#promotion-order").value)||0;
+
+    if (!product_id) throw new Error("Seleccioná un perfume.");
+    if (!name) throw new Error("Ingresá el nombre del anuncio.");
+    if (!(original_price>0))
+      throw new Error("Precio original inválido.");
+    if (!(offer_price>0&&offer_price<original_price))
+      throw new Error("El precio de oferta debe ser menor.");
+
+    let image_url=$("#promotion-image-url").value||null;
+    const file=$("#promotion-file").files[0];
+
+    if (file) {
+      message("#promotion-message","Subiendo imagen transparente...");
+      image_url=await uploadImage(file,"promociones");
+    }
+
+    const payload={
+      product_id,
+      name,
+      original_price,
+      offer_price,
+      image_url,
+      sort_order,
+      is_active:$("#promotion-active").checked
+    };
+
+    const id=$("#promotion-id").value;
+
+    const {error}=id
+      ?await db.from("promotions").update(payload).eq("id",id)
+      :await db.from("promotions").insert(payload);
 
     if (error) throw error;
 
-    await showAdmin();
+    resetPromotion();
+    await loadPromotions();
 
-  } catch (error) {
-    showMessage(loginMessage, error.message);
+    message("#promotion-message",
+      id?"Promoción actualizada.":"Promoción creada.");
+
+  } catch(error) {
+    message("#promotion-message",
+      "No se pudo guardar: "+errorMessage(error),true);
   } finally {
-    button.disabled = false;
+    button.disabled=false;
   }
 }
 
-/* ==========================================
-   MOSTRAR ADMINISTRACIÓN
-========================================== */
+async function togglePromotion(id) {
+  const p=promotions.find(x=>String(x.id)===String(id));
+  if (!p) return;
 
-async function showAdmin() {
-  setLoggedIn(true);
-
-  try {
-    await loadCategories();
-    await loadProducts();
-  } catch (error) {
-    showMessage(
-      productsMessage,
-      error.message
-    );
-  }
-}
-
-/* ==========================================
-   CERRAR SESIÓN
-========================================== */
-
-async function logout() {
-  const { error } = await db.auth.signOut();
+  const {error}=await db.from("promotions")
+    .update({is_active:!p.is_active})
+    .eq("id",id);
 
   if (error) {
-    alert("No se pudo cerrar sesión: " + error.message);
+    message("#promotions-message",error.message,true);
     return;
   }
 
-  resetForm();
-  setLoggedIn(false);
+  await loadPromotions();
 }
 
-/* ==========================================
-   INICIALIZAR SUPABASE
-========================================== */
+async function deletePromotion(id) {
+  if (!confirm("¿Eliminar esta promoción?")) return;
 
-async function initialize() {
-  if (
-    !window.supabase ||
-    !window.SUPABASE_URL ||
-    !window.SUPABASE_ANON_KEY
-  ) {
-    showMessage(
-      loginMessage,
-      "Falta la configuración de Supabase en config.js."
-    );
+  const {error}=await db.from("promotions")
+    .delete().eq("id",id);
+
+  if (error) {
+    message("#promotions-message",error.message,true);
     return;
   }
 
-  db = window.supabase.createClient(
+  await loadPromotions();
+  message("#promotions-message","Promoción eliminada.");
+}
+
+/* ====================================================
+   SESIÓN
+==================================================== */
+
+async function showAdmin() {
+  setPanel(true);
+  await loadCategories();
+  await loadProducts();
+  await loadPromotions();
+}
+
+async function login(event) {
+  event.preventDefault();
+  message("#login-message","");
+
+  const {error}=await db.auth.signInWithPassword({
+    email:$("#email").value.trim(),
+    password:$("#password").value
+  });
+
+  if (error) {
+    message("#login-message",error.message,true);
+    return;
+  }
+
+  await showAdmin();
+}
+
+async function logout() {
+  const {error}=await db.auth.signOut();
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  resetProduct();
+  resetPromotion();
+  setPanel(false);
+}
+
+/* ====================================================
+   EVENTOS
+==================================================== */
+
+function setupEvents() {
+  $("#login-form").addEventListener("submit",login);
+  $("#logout").addEventListener("click",logout);
+
+  $("#product-form").addEventListener("submit",saveProduct);
+  $("#reset-product").addEventListener("click",resetProduct);
+  $("#promotion-form").addEventListener("submit",savePromotion);
+  $("#reset-promotion").addEventListener("click",resetPromotion);
+
+  $("#product-files").addEventListener("change",event=>{
+    const files=Array.from(event.target.files);
+    if (files.some(f=>f.size>15*1024*1024)) {
+      message("#product-message",
+        "Una fotografía supera 15 MB.",true);
+      event.target.value="";
+      return;
+    }
+
+    if (savedPhotos.length+selectedFiles.length+files.length>5) {
+      message("#product-message",
+        "Máximo cinco fotografías por producto.",true);
+      event.target.value="";
+      return;
+    }
+
+    selectedFiles.push(...files);
+    event.target.value="";
+    photoPreview();
+  });
+
+  $("#promotion-file").addEventListener("change",event=>{
+    const file=event.target.files[0];
+    if (!file) return;
+
+    if (file.size>15*1024*1024) {
+      message("#promotion-message",
+        "La imagen supera 15 MB.",true);
+      event.target.value="";
+      return;
+    }
+
+    const url=URL.createObjectURL(file);
+    updatePromotionPreview(url);
+    $("#promotion-preview img")?.addEventListener("load",
+      ()=>URL.revokeObjectURL(url),{once:true});
+  });
+
+  $("#promotion-product").addEventListener("change",event=>{
+    const p=products.find(x=>x.id===event.target.value);
+    if (!p || $("#promotion-id").value) return;
+
+    $("#promotion-name").value=p.name||"";
+    $("#promotion-original").value=p.price??"";
+    $("#promotion-offer").value=p.offer_price??"";
+    updatePromotionPreview(p.image_url||"");
+  });
+
+  document.querySelectorAll("[data-tab]").forEach(button=>{
+    button.addEventListener("click",
+      ()=>switchTab(button.dataset.tab));
+  });
+
+  $("#reload-categories").addEventListener(
+    "click",loadCategories
+  );
+
+  $("#products-list").addEventListener("click",async event=>{
+    const edit=event.target.closest("[data-edit-product]");
+    const del=event.target.closest("[data-delete-product]");
+
+    if (edit) editProduct(edit.dataset.editProduct);
+    if (del) await deleteProduct(del.dataset.deleteProduct);
+  });
+
+  $("#promotions-list").addEventListener("click",async event=>{
+    const edit=event.target.closest("[data-edit-promotion]");
+    const toggle=event.target.closest("[data-toggle-promotion]");
+    const del=event.target.closest("[data-delete-promotion]");
+
+    if (edit) editPromotion(edit.dataset.editPromotion);
+    if (toggle) await togglePromotion(toggle.dataset.togglePromotion);
+    if (del) await deletePromotion(del.dataset.deletePromotion);
+  });
+}
+
+/* ====================================================
+   INICIAR
+==================================================== */
+
+async function init() {
+  if (!window.supabase?.createClient ||
+      !window.SUPABASE_URL ||
+      !window.SUPABASE_ANON_KEY) {
+    message("#login-message",
+      "Falta Supabase o config.js.",true);
+    return;
+  }
+
+  db=window.supabase.createClient(
     window.SUPABASE_URL,
     window.SUPABASE_ANON_KEY
   );
 
-  $("#login-form").addEventListener(
-    "submit",
-    handleLogin
-  );
+  setupEvents();
 
-  $("#product-form").addEventListener(
-    "submit",
-    saveProduct
-  );
-
-  $("#logout-button").addEventListener(
-    "click",
-    logout
-  );
-
-  $("#cancel-edit").addEventListener(
-    "click",
-    resetForm
-  );
-
-  $("#products-list").addEventListener(
-    "click",
-    async event => {
-      const edit = event.target.closest("[data-edit]");
-      const del = event.target.closest("[data-delete]");
-
-      if (edit) {
-        const { data, error } = await db
-          .from("products")
-          .select("*")
-          .eq("id", edit.dataset.edit)
-          .single();
-
-        if (error) {
-          showMessage(
-            productsMessage,
-            error.message
-          );
-        } else {
-          editProduct(data);
-        }
-      }
-
-      if (del) {
-        await deleteProduct(del.dataset.delete);
-      }
-    }
-  );
-
-  const { data, error } = await db.auth.getSession();
+  const {data,error}=await db.auth.getSession();
 
   if (error) {
-    showMessage(loginMessage, error.message);
+    message("#login-message",error.message,true);
     return;
   }
 
   if (data.session) {
     await showAdmin();
   } else {
-    setLoggedIn(false);
+    setPanel(false);
   }
 
-  db.auth.onAuthStateChange((event, session) => {
-    if (event === "SIGNED_OUT" || !session) {
-      setLoggedIn(false);
+  db.auth.onAuthStateChange((event,session)=>{
+    if (event==="SIGNED_OUT"||!session) {
+      setPanel(false);
     }
   });
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener(
-    "DOMContentLoaded",
-    initialize
-  );
+if (document.readyState==="loading") {
+  document.addEventListener("DOMContentLoaded",init);
 } else {
-  initialize();
+  init();
 }
 
 })();
 </script>
-
 </body>
 </html>
-
