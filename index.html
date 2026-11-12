@@ -2,700 +2,682 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#050607">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#030507">
 
-  <title>Urban Tech CR02 Perfumería | Fragancias que definen tu estilo</title>
+<title>Urban Tech CR02 Perfumería | Fragancias que definen tu estilo</title>
 
-  <meta name="description" content="Urban Tech CR02 Perfumería. Fragancias para dama, caballero y unisex. Perfumería árabe, diseñador y nicho. Envíos a toda Costa Rica.">
+<meta name="description" content="Urban Tech CR02 Perfumería. Perfumes de caballero, dama, unisex, árabes, diseñador y nicho. Ofertas, novedades y envíos a toda Costa Rica.">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css?v=urban-cr02-20261112-2">
+<link rel="stylesheet" href="styles.css?v=cr02-20261112-v4">
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="config.js" defer></script>
-  <script src="script.js?v=urban-cr02-20261112-2" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js" defer></script>
+<script src="script.js?v=cr02-20261112-v4" defer></script>
 
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-
-    html, body {
-      width: 100%;
-      max-width: 100%;
-      margin: 0;
-      overflow-x: hidden;
-      -webkit-text-size-adjust: 100%;
-      text-size-adjust: 100%;
-    }
-
-    [hidden] {
-      display: none !important;
-    }
-
-    .site-icon {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      vertical-align: middle;
-      flex-shrink: 0;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .hero {
-      position: relative;
-      display: block;
-      width: 100%;
-      height: auto;
-      overflow: hidden;
-      background: #000;
-    }
-
-    .hero picture,
-    .hero-reference-art {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    .hero-background,
-    .hero-content {
-      display: none !important;
-    }
-
-    .hero-reference-action {
-      position: relative;
-      left: auto;
-      top: auto;
-      width: min(340px, 85%);
-      height: auto;
-      min-height: 48px;
-      margin: 18px auto 22px;
-    }
-
-    .brand-symbol {
-      background-image: url("portada-movil.jpg");
-      background-repeat: no-repeat;
-      background-size: 290px auto;
-      background-position: center -8px;
-    }
-
-    .category-photo {
-      display: block;
-      background-image: url("portada-franja.jpg");
-      background-repeat: no-repeat;
-      background-color: #081118;
-    }
-
-    @media (max-width: 900px) {
-      .brand-symbol {
-        background-size: 205px auto;
-        background-position: center -5px;
-      }
-
-      .categories {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .bestsellers {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .catalog-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .hero-reference-action {
-        position: relative;
-        left: auto;
-        top: auto;
-      }
-    }
-  </style>
 </head>
-
 <body>
 
-<!-- =========================================
-     ICONOS DE NAVEGACIÓN
-========================================= -->
-
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  style="position:absolute;width:0;height:0;overflow:hidden"
-  aria-hidden="true">
-
-  <symbol id="ico-home" viewBox="0 0 24 24">
-    <path d="M3 10 12 3l9 7"/>
-    <path d="M5 9v12h14V9"/>
-    <path d="M9 21v-7h6v7"/>
-  </symbol>
-
-  <symbol id="ico-grid" viewBox="0 0 24 24">
-    <rect x="3" y="3" width="7" height="7" rx="1"/>
-    <rect x="14" y="3" width="7" height="7" rx="1"/>
-    <rect x="3" y="14" width="7" height="7" rx="1"/>
-    <rect x="14" y="14" width="7" height="7" rx="1"/>
-  </symbol>
-
-  <symbol id="ico-star" viewBox="0 0 24 24">
-    <path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.2-6.2 3.2 1.2-6.8-5-4.9 6.9-1z"/>
-  </symbol>
-
-  <symbol id="ico-tag" viewBox="0 0 24 24">
-    <path d="M20 13 12 21 3 12V3h9l8 8a2 2 0 0 1 0 2z"/>
-    <circle cx="7.5" cy="7.5" r="1"/>
-  </symbol>
-
-  <symbol id="ico-phone" viewBox="0 0 24 24">
-    <path d="M22 16.9v3a2 2 0 0 1-2.2 2A19 19 0 0 1 3 5.1 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.7l.7 2.8a2 2 0 0 1-.5 2.1L9 10.9a16 16 0 0 0 4.1 4.1l1.3-1.3a2 2 0 0 1 2.1-.5l2.8.7a2 2 0 0 1 2.7 3z"/>
-  </symbol>
-
-  <symbol id="ico-search" viewBox="0 0 24 24">
-    <circle cx="11" cy="11" r="7"/>
-    <path d="m20 20-4-4"/>
-  </symbol>
-
-  <symbol id="ico-cart" viewBox="0 0 24 24">
-    <circle cx="9" cy="21" r="1"/>
-    <circle cx="20" cy="21" r="1"/>
-    <path d="M1 1h4l2.5 13a2 2 0 0 0 2 1.7h10a2 2 0 0 0 2-1.7L23 6H6"/>
-  </symbol>
-
-  <symbol id="ico-whatsapp" viewBox="0 0 24 24">
-    <path d="M20.5 11.7A8.5 8.5 0 0 1 8.2 19.3L3 21l1.7-5.1A8.5 8.5 0 1 1 20.5 11.7z"/>
-    <path d="M8 8.5c.5 3 3 5.5 6 6l1.5-1.5-2-1-1 1a7 7 0 0 1-2.5-2.5l1-1-1-2z"/>
-  </symbol>
-
-</svg>
-
-<!-- =========================================
-     ENCABEZADO
-========================================= -->
+<!-- =====================================
+     HEADER SUPERIOR
+===================================== -->
 
 <header class="site-header" id="inicio">
 
-  <a
-    class="brand"
-    href="#inicio"
-    aria-label="Urban Tech CR02 Perfumería">
+  <div class="header-top">
 
-    <span
-      class="brand-symbol"
-      role="img"
-      aria-label="Símbolo original Urban Tech">
-    </span>
+    <button
+      type="button"
+      class="mobile-menu-button"
+      id="mobile-menu-toggle"
+      aria-label="Abrir menú"
+      aria-expanded="false">
+      <span>☰</span>
+    </button>
 
-    <span class="brand-name">
-      <span>URBAN TECH</span>
-      <small>CR02 PERFUMERÍA</small>
-    </span>
+    <a class="brand" href="#inicio" aria-label="Urban Tech CR02 Perfumería">
 
-  </a>
+      <span class="brand-symbol">
+        <span class="brand-fallback">UT</span>
+      </span>
 
-  <nav class="main-nav" aria-label="Navegación principal">
+      <span class="brand-name">
+        <span>URBAN <b>TECH</b></span>
+        <small>— CR02 —</small>
+        <em>PERFUMERÍA</em>
+      </span>
+
+    </a>
+
+    <div class="header-search">
+      <form id="search-form">
+        <span aria-hidden="true">⌕</span>
+        <input
+          type="search"
+          id="search-input"
+          placeholder="Buscar perfumes, marcas o referencias..."
+          aria-label="Buscar perfumes">
+      </form>
+    </div>
+
+    <div class="header-actions">
+
+      <button
+        type="button"
+        class="icon-button mobile-search"
+        id="search-toggle"
+        aria-label="Buscar">
+        <span aria-hidden="true">⌕</span>
+      </button>
+
+      <a
+        class="account-link"
+        href="admin.html"
+        aria-label="Iniciar sesión de administración">
+        <span aria-hidden="true">♙</span>
+        <span class="account-label">Iniciar sesión</span>
+      </a>
+
+      <button
+        type="button"
+        class="icon-button cart-toggle"
+        id="cart-toggle"
+        aria-label="Abrir carrito">
+
+        <span aria-hidden="true">🛒</span>
+        <span class="cart-count" id="cart-count">0</span>
+        <span class="cart-label">Carrito</span>
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- NAVEGACIÓN -->
+
+  <nav class="main-nav" aria-label="Navegación">
 
     <a class="nav-link active" href="#inicio">
-      <svg class="site-icon"><use href="#ico-home"></use></svg>
+      <span aria-hidden="true">⌂</span>
       Inicio
     </a>
 
     <a class="nav-link" href="#catalogo">
-      <svg class="site-icon"><use href="#ico-grid"></use></svg>
+      <span aria-hidden="true">▦</span>
       Catálogo
     </a>
 
-    <a class="nav-link" href="#mas-vendidos">
-      <svg class="site-icon"><use href="#ico-star"></use></svg>
-      Más vendidos
-    </a>
-
     <a class="nav-link" href="#ofertas">
-      <svg class="site-icon"><use href="#ico-tag"></use></svg>
+      <span aria-hidden="true">◇</span>
       Ofertas
     </a>
 
+    <a class="nav-link" href="#novedades">
+      <span aria-hidden="true">✧</span>
+      Novedades
+    </a>
+
+    <div class="nav-category-wrap">
+      <a class="nav-link" href="#categorias">
+        <span aria-hidden="true">▤</span>
+        Categorías
+      </a>
+    </div>
+
     <a class="nav-link" href="#contacto">
-      <svg class="site-icon"><use href="#ico-phone"></use></svg>
+      <span aria-hidden="true">◉</span>
       Contacto
     </a>
 
   </nav>
 
-  <div class="header-actions">
-
-    <button
-      class="icon-button"
-      id="search-toggle"
-      type="button"
-      aria-label="Buscar perfumes">
-
-      <svg class="site-icon">
-        <use href="#ico-search"></use>
-      </svg>
-
-    </button>
-
-    <span class="header-divider"></span>
-
-    <button
-      class="icon-button"
-      id="cart-toggle"
-      type="button"
-      aria-label="Abrir carrito">
-
-      <svg class="site-icon">
-        <use href="#ico-cart"></use>
-      </svg>
-
-      <span class="cart-count" id="cart-count">0</span>
-
-    </button>
-
-    <button
-      class="mobile-menu-button"
-      id="mobile-menu-toggle"
-      type="button"
-      aria-label="Abrir menú"
-      aria-expanded="false">
-      &#9776;
-    </button>
-
-  </div>
-
 </header>
 
-<!-- =========================================
-     BUSCADOR
-========================================= -->
+<!-- BÚSQUEDA MÓVIL -->
 
 <section class="search-panel" id="search-panel" hidden>
+  <label for="mobile-search-input">Buscar fragancia</label>
 
-  <form id="search-form">
-
+  <div class="mobile-search-row">
     <input
+      id="mobile-search-input"
       type="search"
-      id="search-input"
-      placeholder="Buscar tu perfume favorito..."
-      aria-label="Buscar perfume">
+      placeholder="Nombre, marca o referencia...">
 
-    <button type="submit">
-      Buscar
+    <button type="button" id="search-close" aria-label="Cerrar">
+      ×
     </button>
-
-    <button
-      type="button"
-      id="search-close"
-      aria-label="Cerrar búsqueda">
-      &#215;
-    </button>
-
-  </form>
-
+  </div>
 </section>
 
 <main>
 
-<!-- =========================================
+<!-- =====================================
      PORTADA OFICIAL
-     COMPUTADORA Y CELULAR
-========================================= -->
+===================================== -->
 
-<section
-  class="hero"
-  aria-label="Portada Urban Tech CR02 Perfumería">
+<section class="hero" aria-label="Portada Urban Tech">
 
   <picture>
-
     <source
-      media="(max-width: 900px)"
+      media="(max-width:900px)"
       srcset="portada-movil.jpg">
 
     <img
       class="hero-reference-art"
       src="portada-franja.jpg"
-      alt="Urban Tech CR02 Perfumería. Fragancias que definen tu estilo. Perfumes Hawas Malibu, Afnan Turathi y Versace Bright Crystal."
+      alt="Urban Tech CR02 Perfumería, fragancias que definen tu estilo"
       fetchpriority="high">
-
   </picture>
+
+</section>
+
+<!-- =====================================
+     BENEFICIOS
+===================================== -->
+
+<section class="store-benefits" aria-label="Beneficios de compra">
+
+  <div class="benefit">
+    <span class="benefit-icon" aria-hidden="true">♧</span>
+    <span>Envíos a<br>todo el país</span>
+  </div>
+
+  <div class="benefit">
+    <span class="benefit-icon" aria-hidden="true">♢</span>
+    <span>Compras<br>seguras</span>
+  </div>
+
+  <div class="benefit">
+    <span class="benefit-icon" aria-hidden="true">▣</span>
+    <span>Múltiples<br>métodos de pago</span>
+  </div>
+
+</section>
+
+<!-- =====================================
+     VER CATÁLOGO
+===================================== -->
+
+<div class="hero-cta-wrapper">
 
   <a
     class="hero-reference-action"
-    href="#catalogo"
-    aria-label="Ver nuestro catálogo">
-    VER CATÁLOGO
-    <span aria-hidden="true">&#8250;</span>
+    href="#catalogo">
+    Ver Catálogo
+    <span aria-hidden="true">❯</span>
   </a>
 
-</section>
+</div>
 
-<!-- =========================================
-     CATEGORÍAS CON FOTOGRAFÍAS
-========================================= -->
+<!-- =====================================
+     SEIS CATEGORÍAS
+===================================== -->
 
-<section
-  class="categories"
-  aria-label="Explorar categorías de perfumes">
+<section class="categories-section" id="categorias">
 
-  <!-- DAMA -->
+  <div class="categories">
 
-  <a
-    class="category-item category-dama"
-    href="#catalogo"
-    data-category="dama">
+    <a
+      class="category-item category-caballero"
+      href="#catalogo"
+      data-category="caballero">
 
-    <span
-      class="category-photo photo-dama"
-      role="img"
-      aria-label="Perfume Versace Bright Crystal">
-    </span>
+      <span class="category-decoration">♂</span>
 
-    <span class="category-label">
-      Perfumes
-      <strong>Dama</strong>
-    </span>
+      <span class="category-label">
+        Caballero
+      </span>
 
-  </a>
+      <span class="category-photo photo-caballero"
+            aria-hidden="true"></span>
 
-  <!-- CABALLERO -->
+      <span class="category-arrow">❯</span>
+    </a>
 
-  <a
-    class="category-item category-caballero"
-    href="#catalogo"
-    data-category="caballero">
+    <a
+      class="category-item category-dama"
+      href="#catalogo"
+      data-category="dama">
 
-    <span
-      class="category-photo photo-caballero"
-      role="img"
-      aria-label="Perfume Hawas Malibu">
-    </span>
+      <span class="category-decoration">♀</span>
 
-    <span class="category-label">
-      Perfumes
-      <strong>Caballero</strong>
-    </span>
+      <span class="category-label">
+        Dama
+      </span>
 
-  </a>
+      <span class="category-photo photo-dama"
+            aria-hidden="true"></span>
 
-  <!-- UNISEX -->
+      <span class="category-arrow">❯</span>
+    </a>
 
-  <a
-    class="category-item category-unisex"
-    href="#catalogo"
-    data-category="unisex">
+    <a
+      class="category-item category-unisex"
+      href="#catalogo"
+      data-category="unisex">
 
-    <span
-      class="category-photo photo-unisex"
-      role="img"
-      aria-label="Colección de perfumes">
-    </span>
+      <span class="category-decoration">⚥</span>
 
-    <span class="category-label">
-      Perfumes
-      <strong>Unisex</strong>
-    </span>
+      <span class="category-label">
+        Unisex
+      </span>
 
-  </a>
+      <span class="category-photo photo-unisex"
+            aria-hidden="true"></span>
 
-  <!-- PERFUMERÍA ÁRABE -->
+      <span class="category-arrow">❯</span>
+    </a>
 
-  <a
-    class="category-item category-arabe"
-    href="#catalogo"
-    data-category="arabe">
+    <a
+      class="category-item category-arabe"
+      href="#catalogo"
+      data-category="arabe">
 
-    <span
-      class="category-photo photo-arabe"
-      role="img"
-      aria-label="Perfume árabe Afnan Turathi">
-    </span>
+      <span class="category-decoration">♜</span>
 
-    <span class="category-label">
-      Perfumería
-      <strong>Árabe</strong>
-    </span>
+      <span class="category-label">
+        Árabe
+      </span>
 
-  </a>
+      <span class="category-photo photo-arabe"
+            aria-hidden="true"></span>
 
-  <!-- PERFUMERÍA DISEÑADOR -->
+      <span class="category-arrow">❯</span>
+    </a>
 
-  <a
-    class="category-item category-disenador"
-    href="#catalogo"
-    data-category="disenador">
+    <a
+      class="category-item category-disenador"
+      href="#catalogo"
+      data-category="disenador">
 
-    <span
-      class="category-photo photo-disenador"
-      role="img"
-      aria-label="Perfume Versace">
-    </span>
+      <span class="category-decoration">◇</span>
 
-    <span class="category-label">
-      Perfumería
-      <strong>Diseñador</strong>
-    </span>
+      <span class="category-label">
+        Diseñador
+      </span>
 
-  </a>
+      <span class="category-photo photo-disenador"
+            aria-hidden="true"></span>
 
-  <!-- PERFUMERÍA NICHO -->
+      <span class="category-arrow">❯</span>
+    </a>
 
-  <a
-    class="category-item category-nicho"
-    href="#catalogo"
-    data-category="nicho">
+    <a
+      class="category-item category-nicho"
+      href="#catalogo"
+      data-category="nicho">
 
-    <span
-      class="category-photo photo-nicho"
-      role="img"
-      aria-label="Selección de fragancias">
-    </span>
+      <span class="category-decoration">♛</span>
 
-    <span class="category-label">
-      Perfumería
-      <strong>Nicho</strong>
-    </span>
+      <span class="category-label">
+        Nicho
+      </span>
 
-  </a>
+      <span class="category-photo photo-nicho"
+            aria-hidden="true"></span>
 
-</section>
-
-<!-- =========================================
-     TOP 5 DAMA Y CABALLERO
-========================================= -->
-
-<section class="bestsellers" id="mas-vendidos">
-
-  <div class="top-five-panel">
-
-    <div class="section-heading">
-
-      <h2>
-        <span class="top-icon">&#9733;</span>
-        TOP 5 · Dama
-      </h2>
-
-      <a
-        href="#catalogo"
-        data-filter-gender="dama">
-        Ver todos &#8594;
-      </a>
-
-    </div>
-
-    <div
-      class="product-grid top-five-grid"
-      id="top-women">
-
-      <div class="loading-message">
-        Cargando perfumes...
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="top-five-panel">
-
-    <div class="section-heading">
-
-      <h2>
-        <span class="top-icon">&#9733;</span>
-        TOP 5 · Caballero
-      </h2>
-
-      <a
-        href="#catalogo"
-        data-filter-gender="caballero">
-        Ver todos &#8594;
-      </a>
-
-    </div>
-
-    <div
-      class="product-grid top-five-grid"
-      id="top-men">
-
-      <div class="loading-message">
-        Cargando perfumes...
-      </div>
-
-    </div>
+      <span class="category-arrow">❯</span>
+    </a>
 
   </div>
 
 </section>
 
-<!-- =========================================
-     OFERTAS
-========================================= -->
+<!-- =====================================
+     MÁS VENDIDOS
+===================================== -->
+
+<section class="featured-section" id="mas-vendidos">
+
+  <div class="section-top">
+
+    <div class="section-name">
+      <span class="section-accent">//</span>
+      <h2>Más Vendidos</h2>
+    </div>
+
+    <a href="#catalogo" class="view-all">
+      Ver todos →
+    </a>
+
+  </div>
+
+  <div class="carousel-wrapper">
+
+    <button
+      class="carousel-arrow"
+      type="button"
+      data-carousel-prev="bestsellers-products"
+      aria-label="Anteriores">
+      ‹
+    </button>
+
+    <div
+      class="product-carousel"
+      id="bestsellers-products"
+      aria-label="Perfumes más vendidos">
+
+      <p class="loading-message">
+        Cargando más vendidos...
+      </p>
+
+    </div>
+
+    <button
+      class="carousel-arrow"
+      type="button"
+      data-carousel-next="bestsellers-products"
+      aria-label="Siguientes">
+      ›
+    </button>
+
+  </div>
+
+</section>
+
+<!-- =====================================
+     OFERTAS ESPECIALES
+===================================== -->
 
 <section class="offers-section" id="ofertas">
 
-  <div class="section-title-row">
+  <div class="section-top">
 
-    <h2>
-      <svg class="site-icon">
-        <use href="#ico-tag"></use>
-      </svg>
-      Ofertas especiales
-    </h2>
+    <div>
+      <div class="section-name">
+        <span class="offer-symbol">◆</span>
+        <h2>Ofertas Especiales</h2>
+      </div>
 
-    <span class="gold-line"></span>
+      <p class="section-subtitle">
+        Aprovechá nuestras promociones por tiempo limitado
+      </p>
+    </div>
 
   </div>
 
-  <div
-    class="product-grid catalog-grid"
-    id="offers-products">
+  <!-- ANUNCIOS DESTACADOS DINÁMICOS -->
 
-    <div class="loading-message">
-      Cargando ofertas...
+  <div class="offers-banner-area" id="offers-banner-area">
+
+    <p class="loading-message">
+      Cargando promociones...
+    </p>
+
+  </div>
+
+  <!-- LISTADO ORIGINAL DE OFERTAS -->
+
+  <div class="offers-products-container" hidden>
+    <div
+      class="product-grid catalog-grid"
+      id="offers-products">
     </div>
+  </div>
+
+</section>
+
+<!-- =====================================
+     NOVEDADES
+===================================== -->
+
+<section class="new-arrivals-section" id="novedades">
+
+  <div class="section-top">
+
+    <div class="section-name">
+      <span class="new-symbol">☆</span>
+      <h2>Novedades</h2>
+    </div>
+
+    <a href="#catalogo" class="view-all">
+      Ver novedades →
+    </a>
+
+  </div>
+
+  <div class="carousel-wrapper">
+
+    <button
+      type="button"
+      class="carousel-arrow"
+      data-carousel-prev="new-products"
+      aria-label="Novedades anteriores">
+      ‹
+    </button>
+
+    <div
+      class="product-carousel"
+      id="new-products"
+      aria-label="Nuevos perfumes">
+
+      <p class="loading-message">
+        Cargando novedades...
+      </p>
+
+    </div>
+
+    <button
+      type="button"
+      class="carousel-arrow"
+      data-carousel-next="new-products"
+      aria-label="Siguientes novedades">
+      ›
+    </button>
 
   </div>
 
 </section>
 
-<!-- =========================================
-     CATÁLOGO
-========================================= -->
+<!-- =====================================
+     CATÁLOGO COMPLETO
+===================================== -->
 
 <section class="catalog-section" id="catalogo">
 
-  <div class="catalog-heading">
+  <div class="section-top">
 
-    <div class="section-title-row">
-
-      <h2>
-        <svg class="site-icon">
-          <use href="#ico-grid"></use>
-        </svg>
-        Nuestro Catálogo
-      </h2>
-
-      <span class="gold-line"></span>
-
+    <div class="section-name">
+      <span class="section-accent">//</span>
+      <h2>Nuestro Catálogo</h2>
     </div>
 
   </div>
-
-  <!-- FILTROS -->
 
   <div class="catalog-toolbar">
 
     <select
       id="category-filter"
-      aria-label="Filtrar por categoría">
+      aria-label="Filtrar categoría">
 
       <option value="">Todas las categorías</option>
-      <option value="dama">Dama</option>
       <option value="caballero">Caballero</option>
+      <option value="dama">Dama</option>
       <option value="unisex">Unisex</option>
-      <option value="arabe">Perfumería Árabe</option>
-      <option value="disenador">Perfumería Diseñador</option>
-      <option value="nicho">Perfumería Nicho</option>
+      <option value="arabe">Árabe</option>
+      <option value="disenador">Diseñador</option>
+      <option value="nicho">Nicho</option>
 
     </select>
 
     <select
       id="gender-filter"
-      aria-label="Filtrar por público">
+      aria-label="Filtrar público">
 
       <option value="">Todos</option>
-      <option value="dama">Dama</option>
       <option value="caballero">Caballero</option>
+      <option value="dama">Dama</option>
       <option value="unisex">Unisex</option>
 
     </select>
 
     <select
       id="sort-products"
-      aria-label="Ordenar productos">
+      aria-label="Ordenar perfumes">
 
       <option value="default">Ordenar por</option>
       <option value="price-asc">Precio: menor a mayor</option>
       <option value="price-desc">Precio: mayor a menor</option>
-      <option value="name">Nombre</option>
+      <option value="name">Nombre A-Z</option>
 
     </select>
 
   </div>
 
-  <!-- PRODUCTOS CARGADOS DESDE SUPABASE -->
-
   <div
     class="product-grid catalog-grid"
     id="catalog-products">
 
-    <div class="loading-message">
-      Cargando nuestro catálogo...
-    </div>
+    <p class="loading-message">
+      Cargando catálogo...
+    </p>
 
   </div>
 
-  <div
-    class="empty-catalog"
-    id="empty-catalog"
-    hidden>
+  <!-- COMPATIBILIDAD CON LA ESTRUCTURA ANTERIOR -->
 
-    <p>
-      Pronto tendremos más fragancias disponibles.
-    </p>
-
+  <div class="legacy-top" hidden>
+    <div id="top-women"></div>
+    <div id="top-men"></div>
   </div>
 
 </section>
 
-<!-- =========================================
-     CONTACTO
-========================================= -->
+<!-- =====================================
+     SUSCRIPCIÓN A NOVEDADES
+===================================== -->
 
-<section class="contact-section" id="contacto">
+<section class="newsletter-section">
 
-  <div class="contact-content">
+  <div class="newsletter-info">
 
-    <h2>Urban Tech CR02 Perfumería</h2>
+    <span class="newsletter-icon" aria-hidden="true">
+      ✉
+    </span>
 
-    <p class="contact-slogan">
-      Fragancias que definen tu estilo.
-    </p>
+    <div>
+      <h2>Recibe novedades y ofertas</h2>
 
-    <p>Alajuela, Costa Rica</p>
-
-    <p>Envíos a todo el país</p>
-
-    <p>Consultas y pedidos por WhatsApp</p>
-
-    <a
-      class="contact-whatsapp"
-      href="https://wa.me/50670461262?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20perfumes."
-      target="_blank"
-      rel="noopener noreferrer">
-
-      Consultar por WhatsApp
-
-    </a>
+      <p>
+        Suscribite y sé el primero en enterarte
+        de nuevos ingresos, promociones y lanzamientos.
+      </p>
+    </div>
 
   </div>
+
+  <form id="newsletter-form" class="newsletter-form">
+
+    <input
+      type="email"
+      id="newsletter-email"
+      placeholder="Tu correo electrónico"
+      autocomplete="email"
+      required>
+
+    <button type="submit">
+      Suscribirme
+    </button>
+
+  </form>
+
+  <p id="newsletter-message"
+     class="newsletter-message"
+     role="status"
+     hidden></p>
 
 </section>
 
 </main>
 
-<!-- =========================================
-     CARRITO DE COMPRAS
-========================================= -->
+<!-- =====================================
+     FOOTER
+===================================== -->
+
+<footer class="site-footer" id="contacto">
+
+  <div class="footer-columns">
+
+    <div class="footer-column footer-about">
+
+      <div class="footer-brand">
+        <span class="footer-symbol">UT</span>
+
+        <span>
+          URBAN <b>TECH</b>
+          <small>CR02 PERFUMERÍA</small>
+        </span>
+      </div>
+
+      <p>
+        Fragancias que definen
+        <em>tu estilo</em>
+      </p>
+
+    </div>
+
+    <div class="footer-column">
+
+      <h3>Enlaces</h3>
+
+      <a href="#inicio">Inicio</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#ofertas">Ofertas</a>
+      <a href="#novedades">Novedades</a>
+      <a href="#contacto">Contacto</a>
+
+    </div>
+
+    <div class="footer-column">
+
+      <h3>Información</h3>
+
+      <p>Envíos a todo el país</p>
+      <p>Consultá métodos de pago</p>
+      <p>Atención por WhatsApp</p>
+      <p>Compras seguras</p>
+
+    </div>
+
+    <div class="footer-column">
+
+      <h3>Contáctanos</h3>
+
+      <a
+        class="footer-whatsapp"
+        href="https://wa.me/50670461262"
+        target="_blank"
+        rel="noopener noreferrer">
+
+        WhatsApp: +506 7046-1262
+      </a>
+
+      <p>Urban Tech CR02 Perfumería</p>
+      <p>Costa Rica</p>
+
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © <span id="current-year">2026</span>
+    Urban Tech CR02 Perfumería.
+    Todos los derechos reservados.
+  </div>
+
+</footer>
+
+<!-- =====================================
+     CARRITO
+===================================== -->
 
 <aside
   class="cart-panel"
@@ -711,41 +693,35 @@
       type="button"
       id="cart-close"
       aria-label="Cerrar carrito">
-      &#215;
+      ×
     </button>
 
   </div>
 
   <div id="cart-items">
-
     <p>Tu carrito está vacío.</p>
-
   </div>
 
   <div class="cart-footer">
 
     <p>
       Total:
-      <strong id="cart-total">&#8353;0</strong>
+      <strong id="cart-total">₡0</strong>
     </p>
 
     <a
-      id="checkout-whatsapp"
-      href="https://wa.me/50670461262"
-      target="_blank"
-      rel="noopener noreferrer">
-
+      href="#"
+      id="checkout-whatsapp">
       Finalizar pedido por WhatsApp
-
     </a>
 
   </div>
 
 </aside>
 
-<!-- =========================================
-     DETALLES Y GALERÍA DE PRODUCTO
-========================================= -->
+<!-- =====================================
+     VENTANA DE DETALLES
+===================================== -->
 
 <dialog
   class="product-dialog"
@@ -753,69 +729,34 @@
 
   <button
     type="button"
-    class="dialog-close"
     id="product-dialog-close"
+    class="dialog-close"
     aria-label="Cerrar">
-    &#215;
+    ×
   </button>
 
   <div id="product-dialog-content"></div>
 
 </dialog>
 
-<!-- =========================================
+<!-- =====================================
      WHATSAPP FLOTANTE
-========================================= -->
+===================================== -->
 
 <a
   class="whatsapp-float"
-  href="https://wa.me/50670461262?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20un%20perfume."
+  href="https://wa.me/50670461262?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20perfumes."
   target="_blank"
   rel="noopener noreferrer"
-  aria-label="Hacer pedido por WhatsApp">
+  aria-label="Consultar por WhatsApp">
 
-  <span class="whatsapp-icon">
-
-    <svg class="site-icon">
-      <use href="#ico-whatsapp"></use>
-    </svg>
-
-  </span>
-
-  <span class="whatsapp-label">
-    ¡Haz tu pedido<br>por WhatsApp!
-  </span>
+  <span class="whatsapp-icon">☎</span>
 
 </a>
 
-<!-- =========================================
-     PIE DE PÁGINA
-========================================= -->
-
-<footer class="site-footer">
-
-  <div class="footer-brand">
-
-    <span class="footer-symbol">UT</span>
-
-    <span>URBAN TECH CR02 PERFUMERÍA</span>
-
-  </div>
-
-  <p>Fragancias que definen tu estilo.</p>
-
-  <p>
-    &#169;
-    <span id="current-year">2026</span>
-    Urban Tech CR02 Perfumería.
-    Todos los derechos reservados.
-  </p>
-
-</footer>
-
-<!-- =========================================
+<!-- =====================================
      NOTIFICACIONES
-========================================= -->
+===================================== -->
 
 <div
   class="toast-message"
