@@ -1,2573 +1,884 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-  <title>UrbanTech Perfumería</title>
+  <meta name="theme-color" content="#050607">
 
-  <meta name="description" content="UrbanTech Perfumería | Perfumes árabes, diseñador y niche.">
+  <title>Urban Tech CR02 Perfumería | Fragancias que definen tu estilo</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="description"
+        content="Urban Tech CR02 Perfumería. Perfumes para dama, caballero y unisex. Fragancias árabes, de diseñador y nicho. Envíos a toda Costa Rica.">
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect"
+        href="https://fonts.googleapis.com">
 
-  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css?v=urban20261112">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js" defer></script>
+  <script src="script.js?v=urban20261112" defer></script>
 
   <style>
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 25px;
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
     }
 
-    .product-card {
-      cursor: pointer;
-      overflow: hidden;
-      border-radius: 18px;
-      transition: transform .25s ease, box-shadow .25s ease;
-    }
-
-    .product-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .product-image {
+    html,
+    body {
       width: 100%;
-      height: 280px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+      max-width: 100%;
+      margin: 0;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
 
-    .product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
+    [hidden] {
+      display: none !important;
     }
 
-    .product-placeholder {
-      width: 100%;
-      height: 280px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 55px;
-      opacity: .5;
+    .site-icon {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      vertical-align: middle;
+      flex-shrink: 0;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
-    .product-info {
-      padding: 20px;
+    .category-icon .site-icon {
+      width: 32px;
+      height: 32px;
     }
 
-    .product-category {
-      display: block;
-      margin-bottom: 7px;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      opacity: .65;
+    .section-heading .site-icon,
+    .section-title-row .site-icon {
+      width: 23px;
+      height: 23px;
     }
 
-    .product-info small {
-      display: block;
-      opacity: .65;
-      margin-bottom: 5px;
+    .whatsapp-icon .site-icon {
+      width: 35px;
+      height: 35px;
     }
 
-    .product-info h3 {
-      margin: 5px 0;
-    }
-
-    .product-info p {
-      margin: 5px 0 12px;
-      opacity: .65;
-    }
-
-    .product-price {
-      display: block;
-      margin-bottom: 15px;
-      font-size: 1.2rem;
-    }
-
-    .product-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .add-cart-btn {
-      cursor: pointer;
-      position: relative;
-      z-index: 5;
-      border: 0;
-    }
-
-    .loading,
-    .empty,
-    .error {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 50px 20px;
-    }
-
-    .error {
-      color: #ff7777;
-    }
-
-    /* ================= CATEGORÍAS PREMIUM ================= */
-    .category-buttons {
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-      max-width: 980px;
-      margin: 30px auto 8px;
-      padding: 0;
-    }
-
-    .category-buttons::before {
-      content: "";
-      position: absolute;
-      left: 8%;
-      right: 8%;
-      top: 50%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(32,223,197,.18), transparent);
-      pointer-events: none;
-    }
-
-    .category-btn {
-      position: relative;
-      z-index: 1;
-      min-height: 88px;
-      padding: 16px 18px 15px;
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 18px;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(32,223,197,.09), transparent 55%),
-        linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
-      color: rgba(244,241,232,.72);
-      box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    .brand-name {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      font-family: inherit;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 1.8px;
-      line-height: 1.15;
-      text-transform: uppercase;
-      transition: transform .25s ease, border-color .25s ease, color .25s ease, background .25s ease, box-shadow .25s ease;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
     }
 
-    .category-btn .category-icon {
-      display: grid;
-      place-items: center;
-      width: 30px;
-      height: 30px;
-      border: 1px solid rgba(32,223,197,.20);
-      border-radius: 50%;
-      color: rgba(114,244,223,.78);
-      font-family: "Cormorant Garamond", serif;
-      font-size: 17px;
-      font-weight: 600;
-      line-height: 1;
-      background: rgba(32,223,197,.035);
-      transition: transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease;
+    .brand-name span {
+      white-space: nowrap;
     }
 
-    .category-btn:hover {
-      transform: translateY(-4px);
-      border-color: rgba(32,223,197,.38);
-      color: #f4f1e8;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(32,223,197,.15), transparent 60%),
-        linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
-      box-shadow: 0 16px 38px rgba(0,0,0,.22), 0 0 24px rgba(32,223,197,.06);
+    .brand-name small {
+      white-space: nowrap;
     }
 
-    .category-btn:hover .category-icon {
-      transform: scale(1.08);
-      border-color: rgba(32,223,197,.45);
-      color: #72f4df;
-      background: rgba(32,223,197,.08);
+    .hero {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: #050607;
     }
 
-    .category-btn.active {
-      color: #00100b;
-      border-color: rgba(114,244,223,.70);
-      background: linear-gradient(145deg, #72f4df 0%, #20dfc5 58%, #16bca6 100%);
-      box-shadow: 0 14px 36px rgba(32,223,197,.16), 0 0 0 1px rgba(114,244,223,.10);
+    .hero-reference-art {
+      display: block;
+      width: 100%;
+      height: auto;
     }
 
-    .category-btn.active::after {
-      content: "";
+    .hero-reference-action {
       position: absolute;
-      left: 50%;
-      bottom: -7px;
-      width: 34px;
-      height: 2px;
-      border-radius: 999px;
-      background: #72f4df;
-      transform: translateX(-50%);
-      box-shadow: 0 0 12px rgba(114,244,223,.55);
+      z-index: 3;
+      left: 10%;
+      top: 65%;
+      width: 28%;
+      height: 19%;
+      cursor: pointer;
     }
 
-    .category-btn.active .category-icon {
-      border-color: rgba(0,16,11,.20);
-      color: #00100b;
-      background: rgba(255,255,255,.22);
+    .hero-background,
+    .hero-content {
+      display: none;
     }
 
-    @media (max-width: 760px) {
-      .category-buttons {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-        margin-top: 24px;
-      }
-
-      .category-buttons::before {
+    @media (max-width: 900px) {
+      .main-nav {
         display: none;
       }
 
-      .category-btn {
-        min-height: 78px;
-        padding: 12px 10px;
-        border-radius: 16px;
-        font-size: 9px;
-        letter-spacing: 1.35px;
+      .main-nav.mobile-open {
+        display: flex;
       }
 
-      .category-btn .category-icon {
-        width: 27px;
-        height: 27px;
-        font-size: 15px;
+      .mobile-menu-button {
+        display: block;
       }
-    }
 
-    .search-box {
-      display: flex;
-      justify-content: center;
-      margin: 20px auto 35px;
-    }
+      .categories {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
 
-    .search-box input {
-      width: min(600px, 90%);
-      box-sizing: border-box;
-      padding: 15px 20px;
-      border-radius: 30px;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.05);
-      color: #fff;
-      outline: none;
-      font-family: inherit;
-    }
+      .bestsellers {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+      }
 
-    .search-box input::placeholder {
-      color: rgba(255,255,255,.55);
-    }
+      .top-five-panel {
+        min-width: 0;
+        max-width: 100%;
+      }
 
-    /* ================= FICHA DEL PRODUCTO ================= */
-
-    #product-detail-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      box-sizing: border-box;
-      background: rgba(0,0,0,.88);
-      backdrop-filter: blur(10px);
-    }
-
-    #product-detail-modal.open {
-      display: flex;
-    }
-
-    .product-detail-box {
-      width: min(1050px, 100%);
-      max-height: 94vh;
-      overflow-y: auto;
-      position: relative;
-      border-radius: 24px;
-      background: #0d1d18;
-      border: 1px solid rgba(80,234,211,.22);
-      box-shadow: 0 30px 100px rgba(0,0,0,.8);
-    }
-
-    .product-detail-close {
-      position: absolute;
-      right: 15px;
-      top: 15px;
-      z-index: 20;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.2);
-      background: #10251f;
-      color: #fff;
-      cursor: pointer;
-      font-size: 22px;
-    }
-
-    .product-detail-close:hover {
-      color: #50ead3;
-      border-color: #50ead3;
-    }
-
-    .product-detail-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 560px;
-    }
-
-    .detail-photo {
-      min-height: 560px;
-      padding: 45px;
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 24px 0 0 24px;
-      background:
-        radial-gradient(circle at center, rgba(80,234,211,.10), transparent 60%),
-        #091512;
-    }
-
-    .detail-photo img {
-      width: 100%;
-      height: 500px;
-      object-fit: contain;
-    }
-
-    .detail-no-photo {
-      text-align: center;
-      opacity: .55;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .detail-content {
-      padding: 65px 45px 40px;
-    }
-
-    .detail-brand {
-      color: #50ead3;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .detail-content h2 {
-      margin: 10px 0;
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(38px, 5vw, 58px);
-      line-height: .95;
-    }
-
-    .detail-presentation {
-      opacity: .65;
-      margin-bottom: 20px;
-    }
-
-    .detail-price {
-      color: #50ead3;
-      font-size: 28px;
-      font-weight: 700;
-      margin: 20px 0;
-    }
-
-    .detail-section {
-      margin-top: 25px;
-    }
-
-    .detail-section h4 {
-      margin: 0 0 8px;
-      color: #d8bd78;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-    }
-
-    .detail-section p {
-      margin: 0;
-      line-height: 1.7;
-      opacity: .78;
-    }
-
-    .detail-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 30px;
-    }
-
-    .detail-navigation {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      margin-top: 25px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255,255,255,.1);
-    }
-
-    .detail-navigation button {
-      cursor: pointer;
-      padding: 10px 15px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,.15);
-      background: rgba(255,255,255,.04);
-      color: inherit;
-      font-family: inherit;
-    }
-
-    .detail-navigation button:hover {
-      color: #50ead3;
-      border-color: #50ead3;
-    }
-
-    /* ================= CARRITO ================= */
-
-    .cart-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      box-sizing: border-box;
-      background: rgba(0,0,0,.8);
-    }
-
-    .cart-box {
-      width: min(560px, 100%);
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-      padding: 30px;
-      box-sizing: border-box;
-      border-radius: 20px;
-      background: #0d1d18;
-    }
-
-    .close-cart {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      border: 0;
-      background: transparent;
-      color: inherit;
-      cursor: pointer;
-      font-size: 22px;
-    }
-
-    .cart-item {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 15px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid rgba(255,255,255,.1);
-    }
-
-    .cart-item img {
-      width: 65px;
-      height: 65px;
-      object-fit: contain;
-      border-radius: 8px;
-      background: rgba(255,255,255,.04);
-    }
-
-    .cart-item-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .cart-item-info h4 {
-      margin: 0 0 4px;
-    }
-
-    .cart-item-info small {
-      opacity: .65;
-    }
-
-    .cart-item-price {
-      margin-top: 5px;
-      font-weight: 600;
-    }
-
-    .cart-controls {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .cart-controls button {
-      border: 0;
-      border-radius: 8px;
-      padding: 4px 9px;
-      cursor: pointer;
-      font: inherit;
-    }
-
-    .cart-remove {
-      border: 0;
-      background: transparent;
-      color: inherit;
-      cursor: pointer;
-      font-size: 18px;
-    }
-
-    .cart-total {
-      margin: 25px 0;
-      font-size: 1.2rem;
-    }
-
-    .cart-empty {
-      text-align: center;
-      padding: 25px 0;
-      opacity: .7;
-    }
-
-    @media (max-width: 700px) {
-
-      .products-grid {
+      .catalog-grid {
+        display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
       }
 
-      .product-image,
-      .product-placeholder {
-        height: 220px;
+      .hero-reference-art {
+        width: 100%;
+        height: auto;
       }
 
-      .product-info {
-        padding: 14px;
+      .hero-reference-action {
+        left: 23%;
+        top: 82%;
+        width: 54%;
+        height: 13%;
       }
-
-      .product-info h3 {
-        font-size: .95rem;
-      }
-
-      .product-info p {
-        font-size: .8rem;
-      }
-
-      .product-price {
-        font-size: 1rem;
-      }
-
-      .product-detail-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .detail-photo {
-        min-height: 330px;
-        height: 330px;
-        padding: 25px;
-        border-radius: 24px 24px 0 0;
-      }
-
-      .detail-photo img {
-        height: 290px;
-      }
-
-      .detail-content {
-        padding: 35px 25px 30px;
-      }
-
-      .detail-content h2 {
-        font-size: 42px;
-      }
-
     }
-
   </style>
-
-<style id="urbantech-tops-styles">
-.urban-tops-section{position:relative;padding:52px clamp(18px,6vw,75px) 28px;overflow:hidden}
-.urban-tops-wrap{width:100%;max-width:1180px;margin:0 auto}
-.urban-tops-heading{text-align:center;margin-bottom:24px}
-.urban-tops-heading p{margin:0 0 8px;color:var(--teal,#20dfc5);font-size:9px;font-weight:700;letter-spacing:4px}
-.urban-tops-heading h2{margin:0;color:var(--cream,#e8e1d1);font-family:"Cormorant Garamond",serif;font-size:clamp(34px,5vw,52px);font-weight:500;line-height:.95}
-.urban-tops-heading h2 span{color:var(--teal,#20dfc5)}
-.urban-tops-tabs{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:22px}
-.urban-top-tab{border:1px solid rgba(32,223,197,.22);border-radius:999px;padding:10px 14px;background:rgba(255,255,255,.025);color:#c3cdc8;font-size:10px;font-weight:600;letter-spacing:.5px;transition:.25s ease}
-.urban-top-tab:hover,.urban-top-tab.active{border-color:rgba(32,223,197,.55);background:rgba(32,223,197,.10);color:var(--teal-light,#72f4df);transform:translateY(-1px)}
-.urban-tops-stage{position:relative;display:grid;grid-template-columns:46px minmax(0,1fr) 46px;align-items:center;gap:10px}
-.urban-tops-viewport{min-width:0;overflow:hidden;border:1px solid rgba(32,223,197,.18);border-radius:28px;background:radial-gradient(circle at 50% 15%,rgba(32,223,197,.10),transparent 35%),linear-gradient(135deg,rgba(7,26,20,.96),rgba(2,8,6,.96));box-shadow:0 18px 55px rgba(0,0,0,.22)}
-.urban-top-card{display:grid;grid-template-columns:minmax(180px,38%) 1fr;min-height:360px}
-.urban-top-image{position:relative;min-height:360px;display:flex;align-items:center;justify-content:center;padding:30px;background:radial-gradient(circle at 50% 50%,rgba(32,223,197,.15),transparent 58%)}
-.urban-top-image img{width:100%;max-width:300px;height:300px;object-fit:contain;filter:drop-shadow(0 22px 22px rgba(0,0,0,.42))}
-.urban-top-rank{position:absolute;top:18px;left:18px;min-width:58px;padding:8px 11px;border:1px solid rgba(32,223,197,.35);border-radius:999px;background:rgba(2,8,6,.72);color:var(--teal-light,#72f4df);font-size:10px;font-weight:800;letter-spacing:1px;text-align:center}
-.urban-top-info{display:flex;flex-direction:column;justify-content:center;padding:38px clamp(24px,5vw,58px)}
-.urban-top-kicker{margin-bottom:8px;color:var(--teal,#20dfc5);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
-.urban-top-brand{color:var(--gray,#9ba9a3);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
-.urban-top-name{margin:5px 0 12px;color:var(--cream,#e8e1d1);font-family:"Cormorant Garamond",serif;font-size:clamp(34px,5vw,54px);font-weight:500;line-height:.92}
-.urban-top-meta{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
-.urban-top-meta span{padding:7px 10px;border:1px solid rgba(255,255,255,.09);border-radius:999px;color:#c3cdc8;font-size:9px}
-.urban-top-price{margin:4px 0 18px;color:var(--teal-light,#72f4df);font-size:22px;font-weight:800}
-.urban-top-description{max-width:560px;margin:0 0 20px;color:var(--gray,#9ba9a3);font-size:11px;line-height:1.7}
-.urban-top-actions{display:flex;gap:9px;flex-wrap:wrap}
-.urban-top-action{border:1px solid rgba(32,223,197,.35);border-radius:999px;padding:11px 16px;background:rgba(32,223,197,.08);color:var(--teal-light,#72f4df);font-size:9px;font-weight:800;letter-spacing:.7px;text-transform:uppercase}
-.urban-top-arrow{width:46px;height:46px;flex:0 0 46px;border:1px solid rgba(32,223,197,.25);border-radius:50%;background:rgba(255,255,255,.025);color:var(--teal-light,#72f4df);font-size:20px;transition:.25s ease}
-.urban-top-arrow:hover{border-color:var(--teal,#20dfc5);background:rgba(32,223,197,.10);transform:scale(1.04)}
-.urban-tops-empty{min-height:300px;display:flex;align-items:center;justify-content:center;padding:40px;text-align:center;color:var(--gray,#9ba9a3);font-size:11px;line-height:1.7}
-.urban-tops-dots{display:flex;justify-content:center;gap:7px;margin-top:14px}
-.urban-top-dot{width:7px;height:7px;border:0;border-radius:50%;padding:0;background:rgba(255,255,255,.16)}
-.urban-top-dot.active{background:var(--teal,#20dfc5);box-shadow:0 0 0 4px rgba(32,223,197,.08)}
-@media(max-width:760px){
-.urban-tops-section{padding-top:38px}
-.urban-tops-tabs{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}
-.urban-tops-tabs::-webkit-scrollbar{display:none}
-.urban-top-tab{flex:0 0 auto;white-space:nowrap}
-.urban-tops-stage{grid-template-columns:1fr}
-.urban-top-arrow{display:none}
-.urban-tops-viewport{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
-.urban-tops-viewport::-webkit-scrollbar{display:none}
-.urban-top-card{grid-template-columns:1fr;min-height:0;scroll-snap-align:center}
-.urban-top-image{min-height:270px;padding:24px 30px 8px}
-.urban-top-image img{height:235px}
-.urban-top-info{padding:18px 24px 28px}
-.urban-top-name{font-size:39px}
-.urban-tops-dots{margin-top:12px}
-}
-</style>
-
 </head>
 
 <body>
 
-  <header class="header">
+<!-- =====================================
+     ICONOS GENERALES
+===================================== -->
 
-    <div class="logo">
-      <a href="#inicio">
-        <span>UrbanTech</span>
-        <small>PERFUMERÍA</small>
-      </a>
-    </div>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  style="position:absolute;width:0;height:0;overflow:hidden"
+  aria-hidden="true">
 
-    <nav class="nav">
-      <a href="#inicio">Inicio</a>
-      <a href="#perfumes">Perfumes</a>
-      <a href="#categorias">Categorías</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
+  <symbol id="ico-home" viewBox="0 0 24 24">
+    <path d="M3 10 12 3l9 7"/>
+    <path d="M5 9v12h14V9"/>
+    <path d="M9 21v-7h6v7"/>
+  </symbol>
+
+  <symbol id="ico-grid" viewBox="0 0 24 24">
+    <rect x="3" y="3" width="7" height="7" rx="1"/>
+    <rect x="14" y="3" width="7" height="7" rx="1"/>
+    <rect x="3" y="14" width="7" height="7" rx="1"/>
+    <rect x="14" y="14" width="7" height="7" rx="1"/>
+  </symbol>
+
+  <symbol id="ico-star" viewBox="0 0 24 24">
+    <path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.2-6.2 3.2 1.2-6.8-5-4.9 6.9-1z"/>
+  </symbol>
+
+  <symbol id="ico-tag" viewBox="0 0 24 24">
+    <path d="M20 13 12 21 3 12V3h9l8 8a2 2 0 0 1 0 2z"/>
+    <circle cx="7.5" cy="7.5" r="1"/>
+  </symbol>
+
+  <symbol id="ico-phone" viewBox="0 0 24 24">
+    <path d="M22 16.9v3a2 2 0 0 1-2.2 2A19 19 0 0 1 3 5.1 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.7l.7 2.8a2 2 0 0 1-.5 2.1L9 10.9a16 16 0 0 0 4.1 4.1l1.3-1.3a2 2 0 0 1 2.1-.5l2.8.7a2 2 0 0 1 2.7 3z"/>
+  </symbol>
+
+  <symbol id="ico-search" viewBox="0 0 24 24">
+    <circle cx="11" cy="11" r="7"/>
+    <path d="m20 20-4-4"/>
+  </symbol>
+
+  <symbol id="ico-cart" viewBox="0 0 24 24">
+    <circle cx="9" cy="21" r="1"/>
+    <circle cx="20" cy="21" r="1"/>
+    <path d="M1 1h4l2.5 13a2 2 0 0 0 2 1.7h10a2 2 0 0 0 2-1.7L23 6H6"/>
+  </symbol>
+
+  <symbol id="ico-female" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="5"/>
+    <path d="M12 13v9m-5-4h10"/>
+  </symbol>
+
+  <symbol id="ico-male" viewBox="0 0 24 24">
+    <circle cx="9" cy="15" r="5"/>
+    <path d="m13 11 8-8m-6 0h6v6"/>
+  </symbol>
+
+  <symbol id="ico-unisex" viewBox="0 0 24 24">
+    <circle cx="11" cy="11" r="5"/>
+    <path d="m15 7 5-5m-5 0h5v5M11 16v6m-4-3h8"/>
+  </symbol>
+
+  <symbol id="ico-diamond" viewBox="0 0 24 24">
+    <path d="M6 3h12l5 7-11 12L1 10z"/>
+    <path d="M1 10h22M6 3l3 7 3 12 3-12 3-7"/>
+  </symbol>
+
+  <symbol id="ico-crown" viewBox="0 0 24 24">
+    <path d="m2 8 5 5 5-8 5 8 5-5-2 12H4z"/>
+    <path d="M4 20h16"/>
+  </symbol>
+
+  <symbol id="ico-whatsapp" viewBox="0 0 24 24">
+    <path d="M20.5 11.7A8.5 8.5 0 0 1 8.2 19.3L3 21l1.7-5.1A8.5 8.5 0 1 1 20.5 11.7z"/>
+    <path d="M8 8.5c.5 3 3 5.5 6 6l1.5-1.5-2-1-1 1a7 7 0 0 1-2.5-2.5l1-1-1-2z"/>
+  </symbol>
+
+</svg>
+
+<!-- =====================================
+     ENCABEZADO
+===================================== -->
+
+<header class="site-header" id="inicio">
+
+  <a
+    class="brand"
+    href="#inicio"
+    aria-label="Urban Tech CR02 Perfumería">
+
+    <span class="brand-symbol">
+      <span class="brand-fallback">UT</span>
+    </span>
+
+    <span class="brand-name">
+      <span>URBAN TECH</span>
+      <small>CR02 PERFUMERÍA</small>
+    </span>
+
+  </a>
+
+  <nav class="main-nav" aria-label="Navegación principal">
+
+    <a class="nav-link active" href="#inicio">
+      <svg class="site-icon">
+        <use href="#ico-home"></use>
+      </svg>
+      Inicio
+    </a>
+
+    <a class="nav-link" href="#catalogo">
+      <svg class="site-icon">
+        <use href="#ico-grid"></use>
+      </svg>
+      Catálogo
+    </a>
+
+    <a class="nav-link" href="#mas-vendidos">
+      <svg class="site-icon">
+        <use href="#ico-star"></use>
+      </svg>
+      Más Vendidos
+    </a>
+
+    <a class="nav-link" href="#ofertas">
+      <svg class="site-icon">
+        <use href="#ico-tag"></use>
+      </svg>
+      Ofertas
+    </a>
+
+    <a class="nav-link" href="#contacto">
+      <svg class="site-icon">
+        <use href="#ico-phone"></use>
+      </svg>
+      Contacto
+    </a>
+
+  </nav>
+
+  <div class="header-actions">
 
     <button
-      class="cart-button"
+      class="icon-button"
+      id="search-toggle"
       type="button"
-      onclick="openCart()"
-    >
-      🛒 <span id="cart-count">0</span>
+      aria-label="Buscar perfumes">
+
+      <svg class="site-icon">
+        <use href="#ico-search"></use>
+      </svg>
+
     </button>
 
-  </header>
+    <span class="header-divider"></span>
 
+    <button
+      class="icon-button"
+      id="cart-toggle"
+      type="button"
+      aria-label="Abrir carrito">
 
-  <section id="inicio" class="hero">
+      <svg class="site-icon">
+        <use href="#ico-cart"></use>
+      </svg>
 
-    <div class="hero-content">
+      <span class="cart-count" id="cart-count">0</span>
 
-      <p class="hero-small">
-        URBAN TECH
-      </p>
+    </button>
 
-      <h1>
-        El aroma que
-        <span>te representa</span>
-      </h1>
+    <button
+      class="mobile-menu-button"
+      id="mobile-menu-toggle"
+      type="button"
+      aria-label="Abrir menú"
+      aria-expanded="false">
+      &#9776;
+    </button>
 
-      <p>
-        Descubre nuestra colección de perfumes
-        para cada estilo y personalidad.
-      </p>
+  </div>
 
-      <div class="hero-buttons">
+</header>
 
-        <a href="#perfumes" class="btn">
-          VER CATÁLOGO
-        </a>
+<!-- =====================================
+     BUSCADOR
+===================================== -->
 
-        <a href="#categorias" class="btn secondary">
-          CATEGORÍAS
-        </a>
+<section class="search-panel" id="search-panel" hidden>
 
-      </div>
+  <form id="search-form">
 
-    </div>
+    <input
+      type="search"
+      id="search-input"
+      placeholder="Buscar tu perfume favorito..."
+      aria-label="Buscar perfume">
 
-  </section>
+    <button type="submit">Buscar</button>
 
+    <button
+      type="button"
+      id="search-close"
+      aria-label="Cerrar búsqueda">
+      &#215;
+    </button>
 
-  <section id="urban-tops" class="urban-tops-section">
-    <div class="urban-tops-wrap">
-      <div class="urban-tops-heading">
-        <p>SELECCIÓN URBAN TECH</p>
-        <h2>Los <span>TOPS</span> de la casa</h2>
-      </div>
-      <div id="urban-top-tabs" class="urban-tops-tabs" role="tablist" aria-label="Categorías TOPS"></div>
-      <div class="urban-tops-stage">
-        <button id="urban-top-prev" class="urban-top-arrow" type="button" aria-label="TOP anterior" onclick="urbanTopMove(-1)">‹</button>
-        <div id="urban-top-viewport" class="urban-tops-viewport"><div id="urban-top-card"></div></div>
-        <button id="urban-top-next" class="urban-top-arrow" type="button" aria-label="TOP siguiente" onclick="urbanTopMove(1)">›</button>
-      </div>
-      <div id="urban-top-dots" class="urban-tops-dots" aria-label="Posiciones TOP"></div>
-    </div>
-  </section>
+  </form>
 
+</section>
 
-  <section id="categorias" class="section">
+<main>
 
-    <div class="section-title">
+<!-- =====================================
+     PORTADA OFICIAL
+     COMPUTADORA + CELULAR
+===================================== -->
 
-      <p>DESCUBRE</p>
+<section
+  class="hero"
+  aria-label="Urban Tech CR02 Perfumería">
+
+  <picture>
+
+    <source
+      media="(max-width: 900px)"
+      srcset="portada-movil.jpg">
+
+    <img
+      class="hero-reference-art"
+      src="portada-franja.jpg"
+      alt="Urban Tech CR02 Perfumería. Fragancias que definen tu estilo."
+      fetchpriority="high">
+
+  </picture>
+
+  <a
+    class="hero-reference-action"
+    href="#catalogo"
+    aria-label="Ver nuestro catálogo">
+  </a>
+
+</section>
+
+<!-- =====================================
+     CATEGORÍAS
+===================================== -->
+
+<section
+  class="categories"
+  aria-label="Categorías de perfumes">
+
+  <a
+    class="category-item"
+    href="#catalogo"
+    data-category="dama">
+
+    <span class="category-icon">
+      <svg class="site-icon">
+        <use href="#ico-female"></use>
+      </svg>
+    </span>
+
+    <span>Perfumes<br>Dama</span>
+
+  </a>
+
+  <a
+    class="category-item"
+    href="#catalogo"
+    data-category="caballero">
+
+    <span class="category-icon">
+      <svg class="site-icon">
+        <use href="#ico-male"></use>
+      </svg>
+    </span>
+
+    <span>Perfumes<br>Caballero</span>
+
+  </a>
+
+  <a
+    class="category-item"
+    href="#catalogo"
+    data-category="unisex">
+
+    <span class="category-icon">
+      <svg class="site-icon">
+        <use href="#ico-unisex"></use>
+      </svg>
+    </span>
+
+    <span>Perfumes<br>Unisex</span>
+
+  </a>
+
+  <a
+    class="category-item"
+    href="#catalogo"
+    data-category="arabe">
+
+    <span class="category-icon">
+      <svg class="site-icon">
+        <use href="#ico-diamond"></use>
+      </svg>
+    </span>
+
+    <span>Perfumería<br>Árabe</span>
+
+  </a>
+
+  <a
+    class="category-item"
+    href="#catalogo"
+    data-category="disenador">
+
+    <span class="category-icon">
+      <svg class="site-icon">
+        <use href="#ico-crown"></use>
+      </svg>
+    </span>
+
+    <span>Perfumería<br>Diseñador</span>
+
+  </a>
+
+  <a
+    class="category-item"
+    href="#catalogo"
+    data-category="nicho">
+
+    <span class="category-icon">
+      <svg class="site-icon">
+        <use href="#ico-star"></use>
+      </svg>
+    </span>
+
+    <span>Perfumería<br>Nicho</span>
+
+  </a>
+
+</section>
+
+<!-- =====================================
+     TOP 5 MÁS VENDIDOS
+===================================== -->
+
+<section class="bestsellers" id="mas-vendidos">
+
+  <div class="top-five-panel">
+
+    <div class="section-heading">
 
       <h2>
-        Nuestras
-        <span>categorías</span>
+        <span>
+          <svg class="site-icon">
+            <use href="#ico-crown"></use>
+          </svg>
+        </span>
+        TOP 5 · Dama
       </h2>
 
-    </div>
-
-    <div class="category-buttons" aria-label="Filtrar perfumes por categoría">
-
-      <button
-        class="btn category-btn active"
-        type="button"
-        data-category="all"
-        onclick="filterCategory('all')"
-      >
-        <span class="category-icon" aria-hidden="true">✦</span>
-        <span>Todos</span>
-      </button>
-
-      <button
-        class="btn category-btn"
-        type="button"
-        data-category="arabes"
-        onclick="filterCategory('arabes')"
-      >
-        <span class="category-icon" aria-hidden="true">◈</span>
-        <span>Árabes</span>
-      </button>
-
-      <button
-        class="btn category-btn"
-        type="button"
-        data-category="disenador"
-        onclick="filterCategory('disenador')"
-      >
-        <span class="category-icon" aria-hidden="true">◇</span>
-        <span>Diseñador</span>
-      </button>
-
-      <button
-        class="btn category-btn"
-        type="button"
-        data-category="niche"
-        onclick="filterCategory('niche')"
-      >
-        <span class="category-icon" aria-hidden="true">⌁</span>
-        <span>Niche</span>
-      </button>
+      <a
+        href="#catalogo"
+        data-filter-gender="dama">
+        Ver todos <span>&#8594;</span>
+      </a>
 
     </div>
 
-  </section>
+    <div
+      class="product-grid top-five-grid"
+      id="top-women">
 
-
-  <section id="perfumes" class="section products-section">
-
-    <div class="section-title">
-
-      <p>COLECCIÓN</p>
-
-      <h2>
-        Nuestros
-        <span>perfumes</span>
-      </h2>
-
-    </div>
-
-    <div class="search-box">
-
-      <input
-        id="search"
-        type="search"
-        placeholder="Buscar perfume o marca..."
-        autocomplete="off"
-        oninput="searchProducts()"
-      >
-
-    </div>
-
-    <div id="products" class="products-grid">
-
-      <div class="loading">
+      <div class="loading-message">
         Cargando perfumes...
       </div>
 
     </div>
 
-  </section>
+  </div>
 
+  <div class="top-five-panel">
 
-  <section id="contacto" class="section contact-section">
-
-    <div class="section-title">
-
-      <p>¿TIENES ALGUNA DUDA?</p>
+    <div class="section-heading">
 
       <h2>
-        Contáctanos
+        <span>
+          <svg class="site-icon">
+            <use href="#ico-crown"></use>
+          </svg>
+        </span>
+        TOP 5 · Caballero
       </h2>
 
-    </div>
-
-    <div class="contact-content">
-
-      <p>
-        Escríbenos por WhatsApp para consultar
-        disponibilidad, precios y realizar tu pedido.
-      </p>
-
       <a
-        id="whatsapp-link"
-        class="btn"
-        href="#"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        ESCRIBIR POR WHATSAPP
+        href="#catalogo"
+        data-filter-gender="caballero">
+        Ver todos <span>&#8594;</span>
       </a>
 
     </div>
 
-  </section>
+    <div
+      class="product-grid top-five-grid"
+      id="top-men">
 
+      <div class="loading-message">
+        Cargando perfumes...
+      </div>
 
-  <footer>
-
-    <div class="logo">
-      <span>UrbanTech</span>
-      <small>PERFUMERÍA</small>
     </div>
 
-    <p>
-      © 2026 UrbanTech Perfumería
-    </p>
+  </div>
 
-  </footer>
+</section>
 
+<!-- =====================================
+     OFERTAS
+===================================== -->
+
+<section class="offers-section" id="ofertas">
+
+  <div class="section-title-row">
+
+    <h2>
+      <span>
+        <svg class="site-icon">
+          <use href="#ico-tag"></use>
+        </svg>
+      </span>
+      Ofertas especiales
+    </h2>
+
+    <span class="gold-line"></span>
+
+  </div>
 
   <div
-    id="cart-modal"
-    class="cart-modal"
-    style="display:none;"
-  >
+    class="product-grid catalog-grid"
+    id="offers-products">
 
-    <div class="cart-box">
+    <div class="loading-message">
+      Cargando ofertas...
+    </div>
 
-      <button
-        class="close-cart"
-        type="button"
-        onclick="closeCart()"
-      >
-        ✕
-      </button>
+  </div>
+
+</section>
+
+<!-- =====================================
+     CATÁLOGO
+===================================== -->
+
+<section class="catalog-section" id="catalogo">
+
+  <div class="catalog-heading">
+
+    <div class="section-title-row">
 
       <h2>
-        Tu carrito
+        <span>
+          <svg class="site-icon">
+            <use href="#ico-diamond"></use>
+          </svg>
+        </span>
+        Nuestro Catálogo
       </h2>
 
-      <div id="cart-items"></div>
-
-      <div class="cart-total">
-        Total:
-        <strong id="cart-total">₡0</strong>
-      </div>
-
-      <button
-        id="checkout-button"
-        class="btn"
-        type="button"
-        onclick="checkoutWhatsApp()"
-      >
-        PEDIR POR WHATSAPP
-      </button>
+      <span class="gold-line"></span>
 
     </div>
 
   </div>
 
+  <!-- FILTROS -->
+
+  <div class="catalog-toolbar">
+
+    <select
+      id="category-filter"
+      aria-label="Filtrar por categoría">
+
+      <option value="">Todas las categorías</option>
+      <option value="dama">Dama</option>
+      <option value="caballero">Caballero</option>
+      <option value="unisex">Unisex</option>
+      <option value="arabe">Perfumería Árabe</option>
+      <option value="disenador">Perfumería Diseñador</option>
+      <option value="nicho">Perfumería Nicho</option>
+
+    </select>
+
+    <select
+      id="gender-filter"
+      aria-label="Filtrar por público">
+
+      <option value="">Todos</option>
+      <option value="dama">Dama</option>
+      <option value="caballero">Caballero</option>
+      <option value="unisex">Unisex</option>
+
+    </select>
+
+    <select
+      id="sort-products"
+      aria-label="Ordenar productos">
+
+      <option value="default">Ordenar por</option>
+      <option value="price-asc">Precio: menor a mayor</option>
+      <option value="price-desc">Precio: mayor a menor</option>
+      <option value="name">Nombre</option>
+
+    </select>
+
+  </div>
+
+  <!-- PRODUCTOS DESDE SUPABASE -->
 
   <div
-    id="product-detail-modal"
-    aria-hidden="true"
-  >
+    class="product-grid catalog-grid"
+    id="catalog-products">
 
-    <div
-      class="product-detail-box"
-      role="dialog"
-      aria-modal="true"
-    >
-
-      <button
-        class="product-detail-close"
-        type="button"
-        onclick="closeProductDetail()"
-        aria-label="Cerrar"
-      >
-        ✕
-      </button>
-
-      <div id="product-detail-body"></div>
-
+    <div class="loading-message">
+      Cargando nuestro catálogo...
     </div>
 
   </div>
 
+  <div
+    class="empty-catalog"
+    id="empty-catalog"
+    hidden>
 
-  <script src="config.js"></script>
-  <script src="products.js"></script>
+    <p>
+      Pronto tendremos más fragancias disponibles.
+    </p>
 
+  </div>
 
-  <script>
+</section>
 
-    "use strict";
+<!-- =====================================
+     CONTACTO
+===================================== -->
 
-    const SUPABASE_URL =
-      (
-        window.SUPABASE_CONFIG?.url ||
-        window.supabaseConfig?.url ||
-        window.SUPABASE_URL ||
-        "https://khvrpnfgkikgysludpod.supabase.co"
-      ).replace(/\/$/, "");
+<section class="contact-section" id="contacto">
 
-    const SUPABASE_KEY =
-      window.SUPABASE_CONFIG?.publishableKey ||
-      window.SUPABASE_CONFIG?.anonKey ||
-      window.supabaseConfig?.publishableKey ||
-      window.SUPABASE_PUBLISHABLE_KEY ||
-      window.SUPABASE_ANON_KEY ||
-      "sb_publishable_nHvdaVoYINUMmTUwmST2LQ_q4O02VnY";
+  <div class="contact-content">
 
-    const WHATSAPP_NUMBER =
-      window.WHATSAPP_NUMBER ||
-      window.SUPABASE_CONFIG?.whatsappNumber ||
-      window.supabaseConfig?.whatsappNumber ||
-      "50670461262";
+    <h2>Urban Tech CR02 Perfumería</h2>
 
-    let catalogProducts = [];
-    let filteredProducts = [];
-    let cart = [];
-    let currentFilter = "all";
-    let currentDetailIndex = -1;
+    <p class="contact-slogan">
+      Fragancias que definen tu estilo.
+    </p>
 
+    <p>Alajuela, Costa Rica</p>
 
-    const PHOTO_OVERRIDES = {
+    <p>Envíos a todo el país</p>
 
-      "fierce men":
-        "https://www.ninurtacr.com/cdn/shop/files/Abercrombie-_-Fitch-Fierce-Cologne-de-100-ml-para-Hombre.jpg?v=1736558588&width=1946",
+    <p>Consultas y pedidos por WhatsApp</p>
 
-      "first instinct men":
-        "https://aromatica.cr/cdn/shop/files/Abercrombie-_-Fitch-First-Instinct-EDT-para-hombre-100-ml-Aromatica-CR-194373762.jpg?v=1729392303&width=1946",
+    <a
+      class="contact-whatsapp"
+      href="https://wa.me/50670461262?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20perfumes."
+      target="_blank"
+      rel="noopener noreferrer">
 
-      "chrome united":
-        "https://aromatica.cr/cdn/shop/files/Chrome-United-EDT-para-hombre-Aromatica-CR-451599344.jpg?v=1750816372&width=1946",
+      Consultar por WhatsApp
 
-      "the most wanted parfum":
-        "https://www.ninurtacr.com/cdn/shop/files/Azzaro-The-Most-Wanted-Parfum-EDP_98f760d8-7ef9-4011-b520-8f785e60b14a.jpg?v=1736558691&width=1946",
+    </a>
 
-      "wanted":
-        "https://aromatica.cr/cdn/shop/files/Azzaro-Wanted-EDT-para-hombre-100-ml-Aromatica-CR.jpg",
+  </div>
 
-      "sisterland pink":
-        "https://aromatica.cr/cdn/shop/files/Benetton-Sisterland-Pink-Raspberry-EDT-para-mujer-80-ml-Aromatica-CR.jpg",
+</section>
 
-      "sisterland green":
-        "https://aromatica.cr/cdn/shop/files/Benetton-Sisterland-Green-Jasmine-EDT-para-mujer-80-ml-Aromatica-CR-187614568.jpg?v=1728933576&width=1946",
+</main>
 
-      "sisterland blue":
-        "https://aromatica.cr/cdn/shop/files/Benetton-Sisterland-Blue-Neroli-EDT-para-mujer-80-ml-Aromatica-CR-187232628.jpg?v=1728876743&width=1445",
+<!-- =====================================
+     CARRITO DE COMPRAS
+===================================== -->
 
-      "hot woman":
-        "https://aromatica.cr/cdn/shop/files/Hot-Woman-EDT-para-mujer-Aromatica-CR-446031565.webp?v=1746985674&width=1946",
+<aside
+  class="cart-panel"
+  id="cart-panel"
+  aria-label="Carrito de compras"
+  hidden>
 
-      "khamrah":
-        "https://www.ninurtacr.com/cdn/shop/files/Lattafa-Khamrah-EDP-de-100-ml-Unisex-_1.jpg?v=1749400345"
+  <div class="cart-header">
 
-    };
+    <h2>Tu carrito</h2>
 
+    <button
+      type="button"
+      id="cart-close"
+      aria-label="Cerrar carrito">
+      &#215;
+    </button>
 
-    function escapeAttribute(value) {
-      return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/"/g, "&quot;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/'/g, "&#39;");
-    }
+  </div>
 
-    function escapeHtml(value) {
+  <div id="cart-items">
+    <p>Tu carrito está vacío.</p>
+  </div>
 
-      return String(value ?? "")
-        .replace(/[&<>"']/g, function(char) {
+  <div class="cart-footer">
 
-          return {
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#039;"
+    <p>
+      Total:
+      <strong id="cart-total">&#8353;0</strong>
+    </p>
 
-          }[char];
+    <a
+      id="checkout-whatsapp"
+      href="https://wa.me/50670461262"
+      target="_blank"
+      rel="noopener noreferrer">
 
-        });
+      Finalizar pedido por WhatsApp
 
-    }
+    </a>
 
+  </div>
 
-    function normalizeText(value) {
+</aside>
 
-      return String(value ?? "")
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .trim();
+<!-- =====================================
+     VISUALIZADOR DE PERFUMES
+===================================== -->
 
-    }
+<dialog
+  class="product-dialog"
+  id="product-dialog">
 
+  <button
+    type="button"
+    class="dialog-close"
+    id="product-dialog-close"
+    aria-label="Cerrar">
+    &#215;
+  </button>
 
-    function money(value) {
-
-      return new Intl.NumberFormat(
-        "es-CR",
-        {
-          style: "currency",
-          currency: "CRC",
-          maximumFractionDigits: 0
-        }
-      ).format(Number(value) || 0);
-
-    }
-
-
-    function normalizeCategory(category) {
-
-      const value =
-        normalizeText(category);
-
-      if (value.includes("arab")) {
-        return "arabes";
-      }
-
-      if (
-        value.includes("disen") ||
-        value.includes("designer")
-      ) {
-        return "disenador";
-      }
-
-      if (
-        value.includes("niche") ||
-        value.includes("nicho")
-      ) {
-        return "niche";
-      }
-
-      return value || "otros";
-
-    }
-
-
-    function getProductImage(product) {
-
-      if (
-        product.image &&
-        String(product.image).trim()
-      ) {
-        return String(product.image).trim();
-      }
+  <div id="product-dialog-content"></div>
 
-      return (
-        PHOTO_OVERRIDES[
-          normalizeText(product.name)
-        ] || ""
-      );
+</dialog>
 
-    }
+<!-- =====================================
+     WHATSAPP FLOTANTE
+===================================== -->
 
+<a
+  class="whatsapp-float"
+  href="https://wa.me/50670461262?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20un%20perfume."
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Hacer pedido por WhatsApp">
 
-    function normalizeProduct(product) {
+  <span class="whatsapp-icon">
 
-      if (
-        !product ||
-        typeof product !== "object"
-      ) {
-        return null;
-      }
+    <svg class="site-icon">
+      <use href="#ico-whatsapp"></use>
+    </svg>
 
-      const name =
-        product.name ??
-        product.nombre ??
-        product.productName ??
-        product.product_name ??
-        "Perfume";
+  </span>
 
-      const brand =
-        product.brand ??
-        product.marca ??
-        "";
+  <span class="whatsapp-label">
+    ¡Haz tu pedido<br>por WhatsApp!
+  </span>
 
-      const presentation =
-        product.presentation ??
-        product.presentacion ??
-        product.size ??
-        product.tamano ??
-        "";
-
-      const category =
-        product.category ??
-        product.categoria ??
-        product.type ??
-        product.tipo ??
-        "";
-
-      const price =
-        Number(
-          product.price ??
-          product.precio ??
-          product.sale_price ??
-          product.precio_venta ??
-          0
-        ) || 0;
-
-      const image =
-        product.image_url ??
-        product.image ??
-        product.imageUrl ??
-        product.photo ??
-        product.photo_url ??
-        product.img ??
-        "";
-
-      const description =
-        product.description ??
-        product.descripcion ??
-        "";
-
-      const notes =
-        product.notes ??
-        product.notas ??
-        "";
-
-      return {
-
-        ...product,
-
-        id:
-          product.id ??
-          product.product_id ??
-          crypto.randomUUID(),
-
-        name:
-          String(name),
-
-        brand:
-          String(brand),
-
-        presentation:
-          String(presentation),
-
-        category:
-          normalizeCategory(category),
-
-        price,
-
-        image:
-          String(image),
-
-        description:
-          String(description),
-
-        notes:
-          String(notes)
-
-      };
-
-    }
-
-
-
-    const URBAN_TOP_CONFIG = [
-      { key: "mas-vendidos", label: "⭐ Más vendidos", limit: 5 },
-      { key: "hombre", label: "👨 Hombre", limit: 3 },
-      { key: "mujer", label: "👩 Mujer", limit: 3 },
-      { key: "frescos", label: "❄️ Frescos", limit: 3 },
-      { key: "dulces", label: "🍯 Dulces", limit: 3 },
-      { key: "amaderados", label: "🌲 Amaderados", limit: 3 }
-    ];
-    let urbanTopSelections = {};
-    let urbanTopCategory = "mas-vendidos";
-    let urbanTopIndex = 0;
-
-    function urbanTopConfig() {
-      return URBAN_TOP_CONFIG.find(function(item) {
-        return item.key === urbanTopCategory;
-      }) || URBAN_TOP_CONFIG[0];
-    }
-
-    function urbanTopProducts() {
-      const config = urbanTopConfig();
-      const selected = urbanTopSelections[urbanTopCategory] || [];
-      return selected.slice(0, config.limit).map(function(id) {
-        return catalogProducts.find(function(product) {
-          return String(product.id) === String(id);
-        });
-      }).filter(Boolean);
-    }
-
-    function urbanTopTabs() {
-      const tabs = document.getElementById("urban-top-tabs");
-      if (!tabs) return;
-      tabs.innerHTML = URBAN_TOP_CONFIG.map(function(item) {
-        return `<button class="urban-top-tab ${item.key === urbanTopCategory ? "active" : ""}" type="button" role="tab" aria-selected="${item.key === urbanTopCategory ? "true" : "false"}" onclick="urbanTopSelect('${item.key}')">${escapeHtml(item.label)}</button>`;
-      }).join("");
-    }
-
-    function urbanTopRender() {
-      const card = document.getElementById("urban-top-card");
-      const dots = document.getElementById("urban-top-dots");
-      if (!card || !dots) return;
-
-      const products = urbanTopProducts();
-      if (!products.length) {
-        card.innerHTML = `<div class="urban-tops-empty"><div><strong>Aún no hay perfumes seleccionados en esta categoría.</strong><br>Puedes administrarlos desde el panel de Administración.</div></div>`;
-        dots.innerHTML = "";
-        urbanTopTabs();
-        return;
-      }
-
-      if (urbanTopIndex >= products.length) urbanTopIndex = products.length - 1;
-      if (urbanTopIndex < 0) urbanTopIndex = 0;
-
-      const product = products[urbanTopIndex];
-      const config = urbanTopConfig();
-      const meta = [];
-      if (product.presentation) meta.push(product.presentation);
-      if (product.category) meta.push(product.category);
-      const image = getProductImage(product) || "https://placehold.co/700x700?text=UrbanTech";
-
-      card.innerHTML = `
-        <article class="urban-top-card">
-          <div class="urban-top-image">
-            <div class="urban-top-rank">TOP ${urbanTopIndex + 1}</div>
-            <img src="${escapeAttribute(image)}" alt="${escapeAttribute(product.name)}" onerror="this.src='https://placehold.co/700x700?text=UrbanTech'">
-          </div>
-          <div class="urban-top-info">
-            <div class="urban-top-kicker">${escapeHtml(config.label)}</div>
-            <div class="urban-top-brand">${escapeHtml(product.brand || "UrbanTech")}</div>
-            <h3 class="urban-top-name">${escapeHtml(product.name)}</h3>
-            ${meta.length ? `<div class="urban-top-meta">${meta.map(function(value){return `<span>${escapeHtml(value)}</span>`;}).join("")}</div>` : ""}
-            <div class="urban-top-price">${money(product.price)}</div>
-            ${product.description ? `<p class="urban-top-description">${escapeHtml(product.description)}</p>` : ""}
-            <div class="urban-top-actions">
-              <button class="urban-top-action" type="button" onclick="urbanTopOpenProduct('${escapeAttribute(String(product.id))}')">Ver perfume</button>
-              <button class="urban-top-action" type="button" onclick="urbanTopAddToCart('${escapeAttribute(String(product.id))}')">Agregar al carrito</button>
-            </div>
-          </div>
-        </article>`;
-
-      dots.innerHTML = products.map(function(_, index) {
-        return `<button class="urban-top-dot ${index === urbanTopIndex ? "active" : ""}" type="button" aria-label="Ir al TOP ${index + 1}" onclick="urbanTopGoTo(${index})"></button>`;
-      }).join("");
-      urbanTopTabs();
-    }
-
-    function urbanTopSelect(key) {
-      urbanTopCategory = key;
-      urbanTopIndex = 0;
-      urbanTopRender();
-    }
-
-    function urbanTopGoTo(index) {
-      const products = urbanTopProducts();
-      if (!products.length) return;
-      urbanTopIndex = Math.max(0, Math.min(index, products.length - 1));
-      urbanTopRender();
-    }
-
-    function urbanTopMove(direction) {
-      const products = urbanTopProducts();
-      if (!products.length) return;
-      urbanTopIndex += direction;
-      if (urbanTopIndex < 0) urbanTopIndex = products.length - 1;
-      if (urbanTopIndex >= products.length) urbanTopIndex = 0;
-      urbanTopRender();
-    }
-
-    function urbanTopOpenProduct(productId) {
-      const index = catalogProducts.findIndex(function(product) {
-        return String(product.id) === String(productId);
-      });
-      if (index >= 0 && typeof openProductDetail === "function") openProductDetail(index);
-    }
-
-    function urbanTopAddToCart(productId) {
-      const product = catalogProducts.find(function(item) {
-        return String(item.id) === String(productId);
-      });
-      if (product && typeof addToCart === "function") addToCart(product);
-    }
-
-
-    let urbanTopTouchX = null;
-
-    function urbanTopTouchStart(event) {
-      if (!event.touches || !event.touches.length) return;
-      urbanTopTouchX = event.touches[0].clientX;
-    }
-
-    function urbanTopTouchEnd(event) {
-      if (urbanTopTouchX === null || !event.changedTouches || !event.changedTouches.length) return;
-      const endX = event.changedTouches[0].clientX;
-      const distance = endX - urbanTopTouchX;
-      urbanTopTouchX = null;
-      if (Math.abs(distance) < 45) return;
-      urbanTopMove(distance < 0 ? 1 : -1);
-    }
-
-    async function loadUrbanTops() {
-      try {
-        const response = await fetch(
-          SUPABASE_URL + "/rest/v1/perfume_tops?select=category,position,product_id&order=position.asc",
-          {
-            method: "GET",
-            headers: {
-              "apikey": SUPABASE_KEY,
-              "Authorization": "Bearer " + SUPABASE_KEY,
-              "Content-Type": "application/json"
-            }
-          }
-        );
-        if (!response.ok) throw new Error("Supabase respondió " + response.status);
-        const rows = await response.json();
-        urbanTopSelections = {};
-        if (Array.isArray(rows)) {
-          rows.forEach(function(row) {
-            if (!urbanTopSelections[row.category]) urbanTopSelections[row.category] = [];
-            urbanTopSelections[row.category][Number(row.position) - 1] = String(row.product_id);
-          });
-        }
-        urbanTopRender();
-      } catch (error) {
-        console.warn("UrbanTech TOPS:", error.message);
-        urbanTopSelections = {};
-        urbanTopRender();
-      }
-    }
-
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      function() {
-
-        loadCart();
-        loadProducts().then(function() {
-          loadUrbanTops();
-        });
-        const urbanTopViewport = document.getElementById("urban-top-viewport");
-        if (urbanTopViewport) {
-          urbanTopViewport.addEventListener("touchstart", urbanTopTouchStart, { passive: true });
-          urbanTopViewport.addEventListener("touchend", urbanTopTouchEnd, { passive: true });
-        }
-        setupWhatsApp();
-        updateCartCount();
-
-      }
-    );
-
-
-    async function loadProducts() {
-
-      const container =
-        document.getElementById("products");
-
-      try {
-
-        container.innerHTML = `
-          <div class="loading">
-            Cargando perfumes...
-          </div>
-        `;
-
-        const endpoint =
-  SUPABASE_URL +
-  "/rest/v1/products" +
-  "?select=*" +
-  "&active=eq.true" +
-  "&order=created_at.desc";
-
-const response = await fetch(endpoint, {
-  method: "GET",
-  headers: {
-    "apikey": SUPABASE_KEY,
-    "Authorization": "Bearer " + SUPABASE_KEY,
-    "Content-Type": "application/json"
-  }
-});
-
-if (!response.ok) {
-  throw new Error(
-    "Supabase respondió " + response.status
-  );
-}
-
-const data = await response.json();
-
-if (!Array.isArray(data)) {
-  throw new Error(
-    "Respuesta inválida de Supabase."
-  );
-}
-
-catalogProducts = data
-  .map(normalizeProduct)
-  .filter(Boolean)
-  .filter(product => product.name);
-
-if (catalogProducts.length === 0) {
-
-  let fallback = null;
-
-  if (Array.isArray(window.PRODUCTS)) {
-    fallback = window.PRODUCTS;
-  } else if (Array.isArray(window.products)) {
-    fallback = window.products;
-  }
-
-  if (fallback) {
-    catalogProducts = fallback
-      .map(normalizeProduct)
-      .filter(Boolean);
-  }
-}
-
-filteredProducts = [...catalogProducts];
-
-renderProducts();
-
-console.log(
-  "UrbanTech:",
-  catalogProducts.length,
-  "productos cargados."
-);
-
-} catch (error) {
-
-  console.error(
-    "Error cargando Supabase:",
-    error
-  );
-
-  let fallback = null;
-
-  if (Array.isArray(window.PRODUCTS)) {
-    fallback = window.PRODUCTS;
-  } else if (Array.isArray(window.products)) {
-    fallback = window.products;
-  }
-
-  if (Array.isArray(fallback)) {
-
-    catalogProducts = fallback
-      .map(normalizeProduct)
-      .filter(Boolean);
-
-    filteredProducts = [...catalogProducts];
-
-    renderProducts();
-
-    return;
-  }
-
-  container.innerHTML = `
-    <div class="error">
-      <h3>No se pudo cargar el catálogo</h3>
-      <p>
-        ${escapeHtml(error.message)}
-      </p>
-    </div>
-  `;
-}
-
-}
-
-
-function renderProducts() {
-
-  const container =
-    document.getElementById("products");
-
-  if (!filteredProducts.length) {
-
-    container.innerHTML = `
-      <div class="empty">
-        <h3>No encontramos perfumes</h3>
-        <p>
-          Prueba con otro nombre,
-          marca o categoría.
-        </p>
-      </div>
-    `;
-
-    return;
-  }
-
-  container.innerHTML =
-    filteredProducts.map(function(product) {
-
-      const realIndex =
-        catalogProducts.indexOf(product);
-
-      const image =
-        getProductImage(product);
-
-      let imageHtml;
-
-      if (image) {
-
-        imageHtml = `
-          <img
-            src="${escapeHtml(image)}"
-            alt="${escapeHtml(product.name)}"
-            loading="lazy"
-            onerror="
-              this.style.display='none';
-              this.parentElement.querySelector('.fallback-photo').style.display='flex';
-            "
-          >
-
-          <div
-            class="product-placeholder fallback-photo"
-            style="display:none;"
-          >
-            🌸
-          </div>
-        `;
-
-      } else {
-
-        imageHtml = `
-          <div class="product-placeholder">
-            🌸
-          </div>
-        `;
-
-      }
-
-      return `
-        <article
-          class="product-card"
-          data-product-id="${escapeHtml(product.id)}"
-          onclick="openProductDetail(${realIndex})"
-        >
-
-          <div class="product-image">
-            ${imageHtml}
-          </div>
-
-          <div class="product-info">
-
-            <span class="product-category">
-              ${escapeHtml(product.category)}
-            </span>
-
-            <small>
-              ${escapeHtml(product.brand)}
-            </small>
-
-            <h3>
-              ${escapeHtml(product.name)}
-            </h3>
-
-            ${
-              product.presentation
-                ? `
-                  <p>
-                    ${escapeHtml(product.presentation)}
-                  </p>
-                `
-                : ""
-            }
-
-            <strong class="product-price">
-              ${money(product.price)}
-            </strong>
-
-            <div class="product-actions">
-
-              <button
-                class="btn add-cart-btn"
-                type="button"
-                onclick="
-                  event.stopPropagation();
-                  addToCartByIndex(${realIndex});
-                "
-              >
-                AGREGAR AL CARRITO
-              </button>
-
-            </div>
-
-          </div>
-
-        </article>
-      `;
-
-    }).join("");
-
-}
-
-
-function filterCategory(category) {
-
-  currentFilter = category || "all";
-
-  document
-    .querySelectorAll(".category-btn")
-    .forEach(function(button) {
-
-      button.classList.toggle(
-        "active",
-        button.dataset.category === currentFilter
-      );
-
-    });
-
-  applyFilters();
-
-}
-
-
-function searchProducts() {
-  applyFilters();
-}
-
-
-function applyFilters() {
-
-  const searchInput =
-    document.getElementById("search");
-
-  const search =
-    normalizeText(
-      searchInput ? searchInput.value : ""
-    );
-
-  filteredProducts =
-    catalogProducts.filter(function(product) {
-
-      const categoryMatch =
-        currentFilter === "all" ||
-        normalizeCategory(product.category) ===
-          currentFilter;
-
-      const text =
-        normalizeText(
-          [
-            product.name,
-            product.brand,
-            product.presentation,
-            product.category,
-            product.description,
-            product.notes
-          ].join(" ")
-        );
-
-      const searchMatch =
-        !search ||
-        text.includes(search);
-
-      return categoryMatch && searchMatch;
-
-    });
-
-  renderProducts();
-
-}
-
-
-function addToCartByIndex(index) {
-
-  const product =
-    catalogProducts[index];
-
-  if (!product) {
-    return;
-  }
-
-  addToCart(product);
-
-}
-
-
-function addToCart(product) {
-
-  const existing =
-    cart.find(function(item) {
-      return String(item.id) === String(product.id);
-    });
+</a>
 
-  if (existing) {
+<!-- =====================================
+     PIE DE PÁGINA
+===================================== -->
 
-    existing.quantity += 1;
+<footer class="site-footer">
 
-  } else {
-
-    cart.push({
-      id: product.id,
-      name: product.name,
-      brand: product.brand,
-      price: Number(product.price) || 0,
-      image: getProductImage(product),
-      quantity: 1
-    });
-
-  }
-
-  saveCart();
-  updateCartCount();
+  <div class="footer-brand">
 
-  openCart();
+    <span class="footer-symbol">UT</span>
 
-}
+    <span>URBAN TECH CR02 PERFUMERÍA</span>
 
+  </div>
 
-function removeFromCart(id) {
+  <p>
+    Fragancias que definen tu estilo.
+  </p>
 
-  cart =
-    cart.filter(function(item) {
-      return String(item.id) !== String(id);
-    });
+  <p>
+    &#169;
+    <span id="current-year">2026</span>
+    Urban Tech CR02 Perfumería.
+    Todos los derechos reservados.
+  </p>
 
-  saveCart();
-  updateCartCount();
-  renderCart();
+</footer>
 
-}
+<!-- =====================================
+     NOTIFICACIONES
+===================================== -->
 
-
-function changeCartQuantity(id, amount) {
-
-  const item =
-    cart.find(function(product) {
-      return String(product.id) === String(id);
-    });
-
-  if (!item) {
-    return;
-  }
-
-  item.quantity += amount;
-
-  if (item.quantity <= 0) {
-    removeFromCart(id);
-    return;
-  }
-
-  saveCart();
-  updateCartCount();
-  renderCart();
-
-}
-
-
-function saveCart() {
-
-  localStorage.setItem(
-    "urbanTechCart",
-    JSON.stringify(cart)
-  );
-
-}
-
-
-function loadCart() {
-
-  try {
-
-    const saved =
-      localStorage.getItem("urbanTechCart");
-
-    cart =
-      saved
-        ? JSON.parse(saved)
-        : [];
-
-    if (!Array.isArray(cart)) {
-      cart = [];
-    }
-
-  } catch (error) {
-
-    cart = [];
-
-  }
-
-}
-
-
-function updateCartCount() {
-
-  const count =
-    cart.reduce(
-      function(total, item) {
-        return total + Number(item.quantity || 0);
-      },
-      0
-    );
-
-  const element =
-    document.getElementById("cart-count");
-
-  if (element) {
-    element.textContent = count;
-  }
-
-}
-
-
-function openCart() {
-
-  const modal =
-    document.getElementById("cart-modal");
-
-  if (!modal) {
-    return;
-  }
-
-  modal.style.display = "flex";
-
-  renderCart();
-
-}
-
-
-function closeCart() {
-
-  const modal =
-    document.getElementById("cart-modal");
-
-  if (modal) {
-    modal.style.display = "none";
-  }
-
-}
-
-
-function renderCart() {
-
-  const container =
-    document.getElementById("cart-items");
-
-  const totalElement =
-    document.getElementById("cart-total");
-
-  if (!container) {
-    return;
-  }
-
-  if (!cart.length) {
-
-    container.innerHTML = `
-      <div class="cart-empty">
-        Tu carrito está vacío.
-      </div>
-    `;
-
-    if (totalElement) {
-      totalElement.textContent = money(0);
-    }
-
-    return;
-  }
-
-  let total = 0;
-
-  container.innerHTML =
-    cart.map(function(item) {
-      const quantity =
-        Number(item.quantity) || 0;
-
-      const subtotal =
-        Number(item.price) * quantity;
-
-      total += subtotal;
-
-      return `
-        <div class="cart-item">
-
-          ${
-            item.image
-              ? `
-                <img
-                  src="${escapeHtml(item.image)}"
-                  alt="${escapeHtml(item.name)}"
-                >
-              `
-              : `
-                <div
-                  style="
-                    width:65px;
-                    height:65px;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                  "
-                >
-                  🌸
-                </div>
-              `
-          }
-
-          <div class="cart-item-info">
-
-            <h4>
-              ${escapeHtml(item.name)}
-            </h4>
-
-            <small>
-              ${escapeHtml(item.brand || "")}
-            </small>
-
-            <div class="cart-item-price">
-              ${money(item.price)}
-            </div>
-
-            <div class="cart-controls">
-
-              <button
-                type="button"
-                onclick="changeCartQuantity('${escapeHtml(item.id)}', -1)"
-              >
-                −
-              </button>
-
-              <span>
-                ${quantity}
-              </span>
-
-              <button
-                type="button"
-                onclick="changeCartQuantity('${escapeHtml(item.id)}', 1)"
-              >
-                +
-              </button>
-
-            </div>
-
-          </div>
-
-          <button
-            class="cart-remove"
-            type="button"
-            onclick="removeFromCart('${escapeHtml(item.id)}')"
-            aria-label="Eliminar"
-          >
-            ✕
-          </button>
-
-        </div>
-      `;
-
-    }).join("");
-
-  if (totalElement) {
-    totalElement.textContent = money(total);
-  }
-
-}
-
-
-function setupWhatsApp() {
-
-  const link =
-    document.getElementById("whatsapp-link");
-
-  if (!link) {
-    return;
-  }
-
-  const number =
-    String(WHATSAPP_NUMBER || "")
-      .replace(/\D/g, "");
-
-  if (!number) {
-    link.href = "#";
-    return;
-  }
-
-  const message =
-    encodeURIComponent(
-      "Hola UrbanTech Perfumería, quiero consultar por sus perfumes."
-    );
-
-  link.href =
-    "https://wa.me/" +
-    number +
-    "?text=" +
-    message;
-
-}
-
-
-function checkoutWhatsApp() {
-
-  if (!cart.length) {
-    alert("Tu carrito está vacío.");
-    return;
-  }
-
-  const number =
-    String(WHATSAPP_NUMBER || "")
-      .replace(/\D/g, "");
-
-  if (!number) {
-    alert(
-      "Configura el número de WhatsApp primero."
-    );
-    return;
-  }
-
-  let message =
-    "Hola UrbanTech Perfumería 👋\n\n" +
-    "Quiero realizar este pedido:\n\n";
-
-  let total = 0;
-
-  cart.forEach(function(item) {
-
-    const subtotal =
-      Number(item.price) *
-      Number(item.quantity);
-
-    total += subtotal;
-
-    message +=
-      "• " +
-      item.name +
-      " x" +
-      item.quantity +
-      " — " +
-      money(subtotal) +
-      "\n";
-
-  });
-
-  message +=
-    "\nTotal: " +
-    money(total) +
-    "\n\n" +
-    "Quedo atento/a para coordinar la entrega.";
-
-  window.open(
-    "https://wa.me/" +
-      number +
-      "?text=" +
-      encodeURIComponent(message),
-    "_blank"
-  );
-
-}
-   function addToCartByProductId(id) {
-
-  const product =
-    catalogProducts.find(function(item) {
-      return String(item.id) === String(id);
-    });
-
-  if (!product) {
-    return;
-  }
-
-  addToCart(product);
-}
-
-
-function openProductDetail(index) {
-
-  const product =
-    catalogProducts[index];
-
-  if (!product) {
-    return;
-  }
-
-  const position =
-    filteredProducts.indexOf(product);
-
-  currentDetailIndex =
-    position >= 0 ? position : 0;
-
-  renderProductDetail();
-
-  const modal =
-    document.getElementById(
-      "product-detail-modal"
-    );
-
-  if (!modal) {
-    return;
-  }
-
-  modal.classList.add("open");
-  modal.setAttribute(
-    "aria-hidden",
-    "false"
-  );
-
-  document.body.style.overflow = "hidden";
-
-  const current =
-    filteredProducts[currentDetailIndex];
-
-  if (current) {
-
-    history.pushState(
-      {
-        product:
-          String(current.id)
-      },
-      "",
-      "#producto=" +
-        encodeURIComponent(
-          current.id
-        )
-    );
-
-  }
-
-}
-
-
-function renderProductDetail() {
-
-  const product =
-    filteredProducts[currentDetailIndex];
-
-  const body =
-    document.getElementById(
-      "product-detail-body"
-    );
-
-  if (!product || !body) {
-    return;
-  }
-
-  const image =
-    getProductImage(product);
-
-  const description =
-    product.description ||
-    "Perfume disponible en UrbanTech Perfumería. Consulta disponibilidad y detalles de entrega.";
-
-  const notes =
-    product.notes ||
-    "Notas no especificadas.";
-
-  const position =
-    currentDetailIndex + 1;
-
-  const total =
-    filteredProducts.length;
-
-  body.innerHTML = `
-
-    <div class="product-detail-grid">
-
-      <div class="detail-photo">
-
-        ${
-          image
-            ? `
-              <img
-                src="${escapeHtml(image)}"
-                alt="${escapeHtml(product.name)}"
-                onerror="
-                  this.style.display='none';
-                  this.parentElement.classList.add('photo-error');
-                "
-              >
-            `
-            : `
-              <div
-  class="product-placeholder"
-  style="
-    width:100%;
-    height:100%;
-    min-height:350px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:80px;
-  "
->
-  🌸
+<div
+  class="toast-message"
+  id="toast-message"
+  role="status"
+  aria-live="polite"
+  hidden>
 </div>
-            `
-        }
-
-      </div>
-
-      <div class="detail-content">
-
-        <div class="detail-brand">
-          ${escapeHtml(product.brand)}
-        </div>
-
-        <h2>
-          ${escapeHtml(product.name)}
-        </h2>
-
-        ${
-          product.presentation
-            ? `
-              <div class="detail-presentation">
-                ${escapeHtml(product.presentation)}
-              </div>
-            `
-            : ""
-        }
-
-        <div class="detail-price">
-          ${money(product.price)}
-        </div>
-
-        <div class="detail-section">
-
-          <h3>
-            Descripción
-          </h3>
-
-          <p>
-            ${escapeHtml(description)}
-          </p>
-
-        </div>
-
-        <div class="detail-section">
-
-          <h3>
-            Notas
-          </h3>
-
-          <p>
-            ${escapeHtml(notes)}
-          </p>
-
-        </div>
-
-        <div class="detail-actions">
-
-          <button
-            class="btn"
-            type="button"
-            onclick="
-              addToCartByProductId('${escapeHtml(product.id)}');
-              closeProductDetail();
-            "
-          >
-            AGREGAR AL CARRITO
-          </button>
-
-        </div>
-
-        <div class="detail-navigation">
-
-          <button
-            type="button"
-            onclick="previousProduct()"
-            ${total <= 1 ? "disabled" : ""}
-          >
-            ← ANTERIOR
-          </button>
-
-          <span>
-            ${position} de ${total}
-          </span>
-
-          <button
-            type="button"
-            onclick="nextProduct()"
-            ${total <= 1 ? "disabled" : ""}
-          >
-            SIGUIENTE →
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-
-function previousProduct() {
-
-  if (!filteredProducts.length) {
-    return;
-  }
-
-  currentDetailIndex =
-    (
-      currentDetailIndex -
-      1 +
-      filteredProducts.length
-    ) %
-    filteredProducts.length;
-
-  renderProductDetail();
-
-}
-
-
-function nextProduct() {
-
-  if (!filteredProducts.length) {
-    return;
-  }
-
-  currentDetailIndex =
-    (
-      currentDetailIndex +
-      1
-    ) %
-    filteredProducts.length;
-
-  renderProductDetail();
-
-}
-
-
-function closeProductDetail() {
-
-  const modal =
-    document.getElementById(
-      "product-detail-modal"
-    );
-
-  if (!modal) {
-    return;
-  }
-
-  modal.classList.remove("open");
-
-  modal.setAttribute(
-    "aria-hidden",
-    "true"
-  );
-
-  document.body.style.overflow = "";
-
-  if (
-    window.location.hash.startsWith(
-      "#producto="
-    )
-  ) {
-
-    history.replaceState(
-      null,
-      "",
-      window.location.pathname +
-      window.location.search
-    );
-
-  }
-
-}
-
-
-document
-  .getElementById("product-detail-modal")
-  ?.addEventListener(
-    "click",
-    function(event) {
-
-      if (
-        event.target.id ===
-        "product-detail-modal"
-      ) {
-
-        closeProductDetail();
-
-      }
-
-    }
-  );
-
-
-document.addEventListener(
-  "keydown",
-  function(event) {
-
-    if (event.key === "Escape") {
-
-      const modal =
-        document.getElementById(
-          "product-detail-modal"
-        );
-
-      if (
-        modal &&
-        modal.classList.contains("open")
-      ) {
-
-        closeProductDetail();
-
-      }
-
-      const cartModal =
-        document.getElementById(
-          "cart-modal"
-        );
-
-      if (
-        cartModal &&
-        cartModal.style.display === "flex"
-      ) {
-
-        closeCart();
-
-      }
-
-    }
-
-  }
-);
-
-
-window.addEventListener(
-  "popstate",
-  function() {
-
-    const modal =
-      document.getElementById(
-        "product-detail-modal"
-      );
-
-    if (
-      modal &&
-      modal.classList.contains("open")
-    ) {
-
-      modal.classList.remove("open");
-
-      modal.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-
-      document.body.style.overflow = "";
-
-    }
-
-  }
-);
-
-
-window.addEventListener(
-  "click",
-  function(event) {
-
-    const cartModal =
-      document.getElementById(
-        "cart-modal"
-      );
-
-    if (
-      cartModal &&
-      event.target === cartModal
-    ) {
-
-      closeCart();
-
-    }
-
-  }
-);
-
-
-(function handleInitialProductHash() {
-
-  const hash =
-    window.location.hash;
-
-  if (
-    !hash.startsWith("#producto=")
-  ) {
-    return;
-  }
-
-  const productId =
-    decodeURIComponent(
-      hash.replace(
-        "#producto=",
-        ""
-      )
-    );
-
-  const waitForProduct =
-    setInterval(function() {
-
-      if (!catalogProducts.length) {
-        return;
-      }
-
-      clearInterval(
-        waitForProduct
-      );
-
-      const index =
-        catalogProducts.findIndex(
-          function(product) {
-            return String(product.id) ===
-              String(productId);
-          }
-        );
-
-      if (index >= 0) {
-        openProductDetail(index);
-      }
-
-    }, 150);
-
-  setTimeout(function() {
-    clearInterval(waitForProduct);
-  }, 10000);
-
-})();
-
-</script>
 
 </body>
 </html>
