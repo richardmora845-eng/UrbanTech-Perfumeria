@@ -1,194 +1,1256 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>UrbanTech · Administración</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#05090c">
+
+<title>Administración | Urban Tech CR02 Perfumería</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-:root{--g:#16a34a;--b:#38bdf8;--ink:#0f172a;--muted:#64748b;--bg:#f8fafc;--card:#fff;--line:#e2e8f0;--danger:#dc2626}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:linear-gradient(135deg,#f0fdf4,#f0f9ff);color:var(--ink)}
-.wrap{max-width:1100px;margin:auto;padding:20px}.brand{font-weight:900;letter-spacing:.12em;font-size:22px}.brand span{color:var(--g)}
-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}.btn{border:0;border-radius:12px;padding:11px 15px;font-weight:800;cursor:pointer}.primary{background:var(--ink);color:white}.green{background:var(--g);color:white}.light{background:white;border:1px solid var(--line)}.danger{background:#fee2e2;color:#991b1b}.hidden{display:none!important}
-.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 10px 30px #0f172a0b;margin-bottom:18px}.login{max-width:430px;margin:8vh auto}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{font-size:13px;font-weight:800;display:block;margin-bottom:6px}input{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:11px;font-size:16px}input[type=checkbox]{width:auto}.full{grid-column:1/-1}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.msg{padding:12px;border-radius:12px;background:#eff6ff;margin:12px 0}.error{background:#fef2f2;color:#991b1b}.success{background:#f0fdf4;color:#166534}.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}.prod{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:white}.prod img{width:100%;height:210px;object-fit:contain;background:#f8fafc}.prod .p{padding:14px}.brandtxt{font-size:12px;color:var(--muted);font-weight:800;text-transform:uppercase}.name{font-weight:900;margin:4px 0}.price{font-weight:900;font-size:19px;margin:8px 0}.small{font-size:12px;color:var(--muted)}.topline{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
-@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.wrap{padding:14px}.card{padding:16px}}
-
-.top-section{border:1px solid var(--line);border-radius:20px;padding:20px;background:#fff;margin-bottom:18px}
-.top-section h2{margin:0 0 5px}
-.top-section .top-desc{font-size:12px;color:var(--muted);margin-bottom:16px}
-.top-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.top-group{border:1px solid var(--line);border-radius:16px;padding:14px;background:#f8fafc}
-.top-group h3{margin:0 0 10px;font-size:15px}
-.top-slot{display:grid;grid-template-columns:78px 1fr;gap:8px;align-items:center;margin-top:8px}
-.top-slot label{margin:0;font-size:11px}
-.top-slot select{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;font-size:14px}
-.top-status{margin-top:10px;font-size:12px;color:var(--muted)}
-@media(max-width:750px){.top-grid{grid-template-columns:1fr}.top-slot{grid-template-columns:68px 1fr}}
-
+:root{
+  --black:#05090c;
+  --panel:#101b21;
+  --cyan:#00d9ff;
+  --green:#a7fa18;
+  --pink:#ff38bd;
+  --white:#f7fafb;
+  --muted:#aab9c2;
+  --border:#26444d;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#071014;
+  color:var(--white);
+  font-family:Montserrat,Arial,sans-serif;
+  font-size:14px;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+[hidden],.hidden{display:none!important}
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+  padding:22px 5%;
+  background:linear-gradient(110deg,#030506,#10212a);
+  border-bottom:1px solid var(--cyan);
+}
+.header h1{
+  margin:0;
+  font-size:24px;
+  font-weight:800;
+  background:linear-gradient(90deg,#fff,var(--cyan),var(--green));
+  background-clip:text;
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.header p{
+  margin:7px 0 0;
+  color:var(--muted);
+  font-size:12px;
+}
+.container{
+  width:min(1120px,94%);
+  margin:25px auto;
+}
+.panel{
+  margin-bottom:23px;
+  padding:25px;
+  border:1px solid var(--border);
+  border-radius:15px;
+  background:var(--panel);
+  box-shadow:0 8px 30px #0004;
+}
+h2{
+  margin:0 0 17px;
+  font-size:23px;
+  color:var(--cyan);
+}
+.login-panel{
+  max-width:440px;
+  margin:65px auto;
+}
+.field{margin-bottom:16px}
+.field label{
+  display:block;
+  margin-bottom:8px;
+  color:#e1ecf0;
+  font-size:12px;
+  font-weight:700;
+}
+.field input,
+.field select,
+.field textarea{
+  display:block;
+  width:100%;
+  min-width:0;
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  outline:none;
+  background:#081115;
+  color:#fff;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:var(--cyan);
+}
+.field textarea{
+  min-height:105px;
+  resize:vertical;
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:18px;
+}
+.actions,.checks{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:13px 0;
+}
+.checks label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+}
+.checks input{accent-color:var(--green)}
+.button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  padding:11px 18px;
+  border:1px solid var(--cyan);
+  border-radius:9px;
+  background:var(--cyan);
+  color:#071014;
+  font-size:12px;
+  font-weight:800;
+}
+.button:hover{background:var(--green);border-color:var(--green)}
+.button.secondary{
+  background:#1a2b32;
+  color:var(--white);
+  border-color:#34515c;
+}
+.button.danger{
+  background:#9c2947;
+  border-color:#9c2947;
+  color:white;
+}
+.button:disabled{
+  opacity:.5;
+  cursor:wait;
+}
+.small-button{
+  min-height:34px;
+  padding:8px 11px;
+  font-size:11px;
+}
+.message{
+  margin:12px 0;
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:#0b1418;
+  color:#e8f4f7;
+  font-size:12px;
+  line-height:1.6;
+  overflow-wrap:anywhere;
+}
+.top-note{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
+}
+.product-list{display:grid;gap:12px}
+.product-row{
+  display:grid;
+  grid-template-columns:80px minmax(0,1fr) auto;
+  align-items:center;
+  gap:15px;
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:#081115;
+}
+.product-row img{
+  width:80px;
+  height:80px;
+  object-fit:contain;
+  border-radius:8px;
+  background:#f0f1f1;
+}
+.product-row h3{
+  margin:0 0 7px;
+  font-size:14px;
+}
+.product-row p{
+  margin:4px 0;
+  color:var(--muted);
+  font-size:11px;
+}
+.photos{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
+  gap:12px;
+  margin:15px 0;
+}
+.photo-card{
+  padding:9px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  text-align:center;
+}
+.photo-card img{
+  width:100%;
+  height:115px;
+  object-fit:contain;
+  background:white;
+  border-radius:6px;
+}
+.photo-card p{
+  font-size:11px;
+  color:var(--muted);
+}
+.photo-card button{margin:3px}
+@media(max-width:650px){
+  .header{padding:17px 4%}
+  .header h1{font-size:19px}
+  .panel{padding:17px}
+  .form-grid{grid-template-columns:1fr}
+  .product-row{
+    grid-template-columns:60px minmax(0,1fr);
+  }
+  .product-row img{width:60px;height:60px}
+  .product-row .actions{grid-column:1/-1}
+  .button{font-size:11px}
+}
 </style>
 </head>
+
 <body>
-<div id="loginView" class="wrap login">
-  <div class="card">
-    <div class="brand">URBAN<span>TECH</span></div><h1>Administración</h1>
-    <p class="small">Panel privado de productos. Inicia sesión con el usuario administrador de Supabase.</p>
-    <form id="loginForm">
-      <label>Correo</label><input id="email" type="email" required autocomplete="username">
-      <label style="margin-top:12px">Contraseña</label><input id="password" type="password" required autocomplete="current-password">
-      <button class="btn primary" style="width:100%;margin-top:16px">Entrar</button>
-    </form><div id="loginMsg"></div>
-  </div>
-</div>
-<div id="appView" class="wrap hidden">
-<header><div><div class="brand">URBAN<span>TECH</span></div><div class="small">Panel de perfumería</div></div><button id="logout" class="btn light">Cerrar sesión</button></header>
-<div id="notice"></div>
 
-<div class="top-section" id="topsCard">
-  <div class="topline">
-    <div>
-      <h2>Administrar TOPS</h2>
-      <div class="top-desc">Selecciona perfumes que ya existen en tu catálogo. No se crean productos nuevos: cada TOP solo guarda la referencia del perfume elegido.</div>
+<header class="header">
+  <div>
+    <h1>URBAN TECH CR02 PERFUMERÍA</h1>
+    <p>Panel privado de administración</p>
+  </div>
+
+  <button
+    id="logout-button"
+    class="button secondary hidden"
+    type="button">
+    Cerrar sesión
+  </button>
+</header>
+
+<main class="container">
+
+<!-- INICIO DE SESIÓN -->
+
+<section id="login-section" class="panel login-panel">
+
+  <h2>Iniciar sesión</h2>
+  <p class="top-note">
+    Ingresá con la cuenta autorizada de Urban Tech.
+  </p>
+
+  <form id="login-form">
+
+    <div class="field">
+      <label for="login-email">Correo electrónico</label>
+      <input
+        id="login-email"
+        type="email"
+        required
+        autocomplete="username">
     </div>
-  </div>
-  <div id="topsGrid" class="top-grid"></div>
-  <div class="actions">
-    <button id="saveTopsBtn" class="btn green" type="button">GUARDAR TOPS</button>
-  </div>
-  <div id="topsStatus" class="top-status"></div>
-</div>
 
-<div class="card" id="seedCard" style="display:none"><div class="topline"><div><h2 style="margin:0 0 5px">Catálogo inicial</h2><div class="small">Tu catálogo está vacío. Puedes cargar los 25 perfumes iniciales de UrbanTech con un toque.</div></div><button id="seedBtn" class="btn green">Cargar 25 perfumes</button></div></div>
-<div class="card"><h2 id="formTitle">Agregar perfume</h2><form id="productForm" class="grid">
-<input id="productId" type="hidden">
-<div><label>Marca</label><input id="brand" required placeholder="Lattafa"></div>
-<div><label>Nombre</label><input id="name" required placeholder="Khamrah"></div>
-<div><label>Precio (₡)</label><input id="price" type="number" min="0" step="500" required placeholder="32500"></div>
-<div><label>Imagen por URL (opcional)</label><input id="imageUrl" type="url" placeholder="https://..."></div>
-<div class="full"><label>O subir imagen desde tu teléfono (opcional)</label><input id="imageFile" type="file" accept="image/*"></div>
-<div><label><input id="active" type="checkbox" checked> Mostrar en la tienda</label></div>
-<div class="actions full"><button class="btn green" type="submit">Guardar perfume</button><button id="cancelBtn" type="button" class="btn light hidden">Cancelar edición</button></div>
-</form></div>
-<div class="card"><div class="topline"><h2 style="margin:0">Productos</h2><input id="search" style="max-width:300px" placeholder="Buscar perfume..."></div><div id="products" class="products" style="margin-top:15px"></div></div>
-</div>
+    <div class="field">
+      <label for="login-password">Contraseña</label>
+      <input
+        id="login-password"
+        type="password"
+        required
+        autocomplete="current-password">
+    </div>
+
+    <button id="login-button" class="button" type="submit">
+      Entrar al panel
+    </button>
+
+  </form>
+
+  <div id="login-message" class="message hidden" role="status"></div>
+</section>
+
+<!-- ADMINISTRACIÓN -->
+
+<section id="admin-section" class="hidden">
+
+<section class="panel">
+
+  <h2 id="form-title">Agregar perfume</h2>
+
+  <p class="top-note">
+    Agregá perfumes, precios y fotografías directamente
+    desde tu celular o computadora.
+  </p>
+
+  <form id="product-form">
+
+    <input id="product-id" type="hidden">
+
+    <div class="form-grid">
+
+      <div class="field">
+        <label for="product-name">Nombre del perfume *</label>
+        <input id="product-name" maxlength="150" required>
+      </div>
+
+      <div class="field">
+        <label for="product-brand">Marca</label>
+        <input id="product-brand" maxlength="100">
+      </div>
+
+      <div class="field">
+        <label for="product-category">Categoría *</label>
+        <select id="product-category" required>
+          <option value="">Cargando categorías...</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="product-gender">Público</label>
+        <select id="product-gender">
+          <option value="">Sin especificar</option>
+          <option value="dama">Dama</option>
+          <option value="caballero">Caballero</option>
+          <option value="unisex">Unisex</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="product-price">Precio regular (₡) *</label>
+        <input id="product-price"
+               type="number" min="0" step="1" required>
+      </div>
+
+      <div class="field">
+        <label for="product-offer-price">Precio de oferta (₡)</label>
+        <input id="product-offer-price"
+               type="number" min="0" step="1">
+      </div>
+
+      <div class="field">
+        <label for="product-stock">Existencias</label>
+        <input id="product-stock"
+               type="number" min="0" step="1" value="0">
+      </div>
+
+      <div class="field">
+        <label for="product-image">
+          Enlace de fotografía (opcional)
+        </label>
+        <input id="product-image"
+               type="url"
+               placeholder="https://...">
+      </div>
+
+      <div class="field">
+        <label for="top-women-order">Posición TOP 5 dama</label>
+        <select id="top-women-order">
+          <option value="">No incluir</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="top-men-order">Posición TOP 5 caballero</label>
+        <select id="top-men-order">
+          <option value="">No incluir</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- FOTOGRAFÍAS -->
+
+    <div class="field">
+      <label for="product-photos">
+        Fotografías desde tu galería (máximo 5)
+      </label>
+
+      <input id="product-photos"
+             type="file"
+             accept="image/jpeg,image/png,image/webp"
+             multiple>
+
+      <p class="top-note">
+        Las fotografías se comprimen automáticamente a WebP.
+        Tamaño máximo por imagen: 15 MB.
+      </p>
+
+      <div id="photos-preview" class="photos"></div>
+    </div>
+
+    <div class="field">
+      <label for="product-description">Descripción</label>
+      <textarea id="product-description"></textarea>
+    </div>
+
+    <div class="checks">
+      <label>
+        <input id="product-active" type="checkbox" checked>
+        Producto visible
+      </label>
+
+      <label>
+        <input id="product-offer" type="checkbox">
+        Es una oferta
+      </label>
+
+      <label>
+        <input id="product-bestseller" type="checkbox">
+        Es más vendido
+      </label>
+    </div>
+
+    <div class="actions">
+      <button id="save-button" class="button" type="submit">
+        Guardar perfume
+      </button>
+
+      <button
+        id="cancel-edit"
+        class="button secondary hidden"
+        type="button">
+        Cancelar edición
+      </button>
+    </div>
+
+    <div id="form-message"
+         class="message hidden"
+         role="status"></div>
+
+  </form>
+</section>
+
+<!-- LISTA DE PRODUCTOS -->
+
+<section class="panel">
+
+  <h2>Productos de la tienda</h2>
+
+  <div id="products-message"
+       class="message hidden"
+       role="status"></div>
+
+  <div id="products-list" class="product-list"></div>
+
+</section>
+
+</section>
+</main>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+
 <script>
-const SUPABASE_URL='https://khvrpnfgkikgysludpod.supabase.co';
-const SUPABASE_PUBLISHABLE_KEY='sb_publishable_nHvdaVoYINUMmTUwmST2LQ_q4O02VnY';
-const db=supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
-const WA='50670461262';
-const INITIAL=[
-['Calvin Klein','CK One',18000,'https://i.makeupstore.de/d/dz/dza3dawryb54.jpg'],['Nautica','Voyage',20000,'https://impressivestore.pk/cdn/shop/files/Nautica_Voyage_For_Men_Edt_100ml_bottle.jpg?v=1772439388'],['Armaf','Club de Nuit Intense Man',30000,'https://perfumes.ec/cdn/shop/files/ArmafClubDeNuitIntenseMan150ml.png?v=1700769337'],['Afnan','9PM',27500,'https://down-my.img.susercontent.com/file/my-11134207-7rash-m42oujwd6is98d'],['Lattafa','Asad',22500,'https://perfumy.pl/hpeciai/09b3a8c68311f1ebb52114dc6d452226/pol_pl_Lattafa-Asad-woda-perfumowana-100-ml-14337_1.jpg'],['Lattafa','Fakhar Black',22500,'https://dxbperfume.co.uk/cdn/shop/files/fakharblack2.jpg?v=1728996571&width=2000'],['Lattafa','Oud for Glory',25000,'https://houseofniche.nl/cdn/shop/products/OudForGlory3.png?v=1697401731&width=1946'],['Lattafa','Khamrah',30000,'https://gulfscents.co.uk/cdn/shop/files/khamrah_lattafa.jpeg-1.jpg?v=1726680261&width=1024'],['Rasasi','Hawas',35000,'https://thearabicscent.com/wp-content/uploads/2025/07/Hawas-For-Him-Rasasi-Eau-de-Parfum-Para-Hombre-600x697.jpg'],['Lattafa','Yara',27500,'https://fathyibrahim.com/cdn/shop/files/s-l1200-1_f17ea1f8-64b1-4246-ab73-5eec33481f05.webp?v=1742215995'],['Lattafa','Yara Candy',27500,'https://reseller.wfragrances.com/cdn/shop/files/yara-candy-bottle.jpg?v=1777540659&width=1445'],['Lattafa','Mayar',26500,'https://fragarabic.com/cdn/shop/files/Mayar_Lattafa_Eau_de_Parfum_Para_Mujer.webp?v=1782724070&width=2048'],['Armaf','Odyssey Mandarin Sky',27500,'https://orioudh.com/cdn/shop/files/odyssey-mandarin-sky-eau-de-parfum-200ml-by-armaf-men-perfume-edp-200ml-armaf-309858-1191457745.jpg?crop=center&height=2048&v=1757063988&width=2048'],['Carolina Herrera','212 VIP Men',35000,'https://theperfumewarehouse.com.au/cdn/shop/files/B2543M.jpg?v=1768209611'],['Carolina Herrera','212 NYC',35000,'https://img.tatacliq.com/images/i8/1348Wx2000H/MP000000013933922_1348Wx2000H_202207271339401.jpeg'],['Carolina Herrera','Good Girl',40000,'https://www.flannels.com/images/products/75163591_l.jpg'],['Ariana Grande','Cloud',35000,'https://ultrafemme.com/media/catalog/product/3/4/349829_812256023289_01_8ce2.png?canvas=500%3A500&fit=bounds&format=jpeg&height=500&optimize=medium&width=500'],['Versace','Bright Crystal',35000,'https://cazanovaonline.mx/cdn/shop/files/2_b5ca7ae9-73cc-4972-923d-4028ec8cc4c4.png?v=1692920591&width=1445'],['Dolce & Gabbana','Light Blue Pour Femme',35000,'https://media.marionnaud.fr/medias/sys_master/prd-images/hfb/h9b/11658578165790/MFR-103508190-front/MFR-103508190-front.png'],['Yves Saint Laurent','Libre',40000,'https://www.sephora.pl/on/demandware.static/-/Sites-masterCatalog_Sephora/default/dw2e04790f/images/hi-res/SKU/SKU_897/483047_swatch.jpg'],['Yves Saint Laurent','Black Opium',40000,'https://www.yslbeauty.de/dw/image/v2/AAQP_PRD/on/demandware.static/-/Sites-ysl-master-catalog/default/dw57601925/Fragrance/Black_Opium/Black%20Opium%20Refresh%20Assets/3614271969477%20BO%20EDP%20150ML.jpg'],['Valentino','Donna Born in Roma',40000,'https://felix.com.pa/cdn/shop/files/1137-LB040200.png?v=1704918319'],['Maison Alhambra','Kismet Angel',22500,'https://muscorient.com/1564-medium_default/kismet-angel-maison-al-hambra.jpg'],['Lattafa','Ana Abiyedh Rouge',25000,'https://dxbperfume.co.uk/cdn/shop/files/abiyedhrouge1.jpg?v=1738075484&width=1600'],['Armaf','Club de Nuit Untold',32500,'https://www.lileparfumee.ca/cdn/shop/files/30_66da2f1d-56b3-4fdc-bdde-73e008d196c9.png?v=1762458452&width=1200']
-];
-const money=n=>new Intl.NumberFormat('es-CR',{style:'currency',currency:'CRC',maximumFractionDigits:0}).format(n);
-const $=id=>document.getElementById(id);
-function notice(t,kind=''){ $('notice').innerHTML=t?`<div class="msg ${kind}">${t}</div>`:''; }
+(() => {
+"use strict";
 
-const TOP_CONFIG=[
-  {key:'mas-vendidos',label:'⭐ TOP 5 MÁS VENDIDOS',limit:5},
-  {key:'hombre',label:'👨 TOP 3 HOMBRE',limit:3},
-  {key:'mujer',label:'👩 TOP 3 MUJER',limit:3},
-  {key:'frescos',label:'❄️ TOP 3 FRESCOS',limit:3},
-  {key:'dulces',label:'🍯 TOP 3 DULCES',limit:3},
-  {key:'amaderados',label:'🌲 TOP 3 AMADERADOS',limit:3}
-];
-let topRows={};
+const $ = selector => document.querySelector(selector);
+const BUCKET = "Perfumes";
 
-function topsStatus(textValue,kind=''){
-  const el=$('topsStatus');
-  if(!el)return;
-  el.className='top-status '+kind;
-  el.textContent=textValue||'';
+let db = null;
+let categories = [];
+let products = [];
+let savedPhotos = [];
+let newPhotos = [];
+
+const loginMessage = $("#login-message");
+const formMessage = $("#form-message");
+const productsMessage = $("#products-message");
+
+function showMessage(element, message) {
+  element.textContent = message;
+  element.classList.remove("hidden");
 }
 
-function topProductOptions(selected=''){
-  return '<option value="">— Seleccionar perfume —</option>'+
-    all.map(p=>{
-      const value=String(p.id);
-      return `<option value="${esc(value)}" ${value===String(selected)?'selected':''}>${esc(p.brand||'')} — ${esc(p.name||'')}</option>`;
-    }).join('');
+function hideMessage(element) {
+  element.textContent = "";
+  element.classList.add("hidden");
 }
 
-function renderTopAdmin(){
-  const grid=$('topsGrid');
-  if(!grid)return;
-  grid.innerHTML=TOP_CONFIG.map(cfg=>{
-    const values=topRows[cfg.key]||[];
-    let slots='';
-    for(let i=0;i<cfg.limit;i++){
-      slots+=`<div class="top-slot"><label>TOP ${i+1}</label><select data-top-category="${cfg.key}" data-top-position="${i+1}">${topProductOptions(values[i]||'')}</select></div>`;
-    }
-    return `<div class="top-group"><h3>${cfg.label}</h3>${slots}</div>`;
-  }).join('');
+function escapeHTML(value = "") {
+  return String(value ?? "").replace(
+    /[&<>"']/g,
+    character => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[character]
+  );
 }
 
-async function loadTopAdmin(){
-  const {data,error}=await db.from('perfume_tops').select('category,position,product_id').order('position',{ascending:true});
-  if(error){
-    topRows={};
-    renderTopAdmin();
-    topsStatus('No se pudieron cargar los TOPS. Si la tabla aún no existe, ejecuta el SQL indicado.','error');
+function money(value) {
+  return "₡" + Math.round(
+    Number(value) || 0
+  ).toLocaleString("es-CR");
+}
+
+function setLoggedIn(ok) {
+  $("#login-section").classList.toggle("hidden", ok);
+  $("#admin-section").classList.toggle("hidden", !ok);
+  $("#logout-button").classList.toggle("hidden", !ok);
+}
+
+/* ==========================================
+   CATEGORÍAS
+========================================== */
+
+async function loadCategories() {
+  const { data, error } = await db
+    .from("categories")
+    .select("id,name,is_active,sort_order")
+    .eq("is_active", true)
+    .order("sort_order", { ascending: true });
+
+  if (error) throw error;
+
+  categories = data || [];
+
+  $("#product-category").innerHTML =
+    '<option value="">Seleccioná una categoría</option>' +
+    categories.map(category => `
+      <option value="${escapeHTML(category.id)}">
+        ${escapeHTML(category.name)}
+      </option>
+    `).join("");
+}
+
+/* ==========================================
+   LISTAR PRODUCTOS
+========================================== */
+
+async function loadProducts() {
+  hideMessage(productsMessage);
+
+  const list = $("#products-list");
+  list.textContent = "Cargando productos...";
+
+  const { data, error } = await db
+    .from("products")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    list.textContent = "";
+    showMessage(productsMessage, error.message);
     return;
   }
-  topRows={};
-  (data||[]).forEach(row=>{
-    if(!topRows[row.category])topRows[row.category]=[];
-    topRows[row.category][Number(row.position)-1]=String(row.product_id);
-  });
-  renderTopAdmin();
-  topsStatus('');
+
+  products = data || [];
+
+  if (!products.length) {
+    list.textContent = "Todavía no hay productos.";
+    return;
+  }
+
+  list.innerHTML = products.map(product => {
+    const category = categories.find(
+      item => item.id === product.category_id
+    );
+
+    const image = product.image_url
+      ? `<img src="${escapeHTML(product.image_url)}"
+              alt="${escapeHTML(product.name)}">`
+      : `<div style="width:75px;height:75px;background:#27343a;border-radius:7px"></div>`;
+
+    return `
+      <article class="product-row">
+
+        ${image}
+
+        <div>
+          <h3>${escapeHTML(product.name)}</h3>
+          <p>${escapeHTML(product.brand || "")}</p>
+          <p>
+            ${escapeHTML(category?.name || "Sin categoría")}
+            · ${money(product.price)}
+          </p>
+          <p>
+            Existencias: ${Number(product.stock) || 0}
+            · ${product.is_active ? "Visible" : "Oculto"}
+          </p>
+        </div>
+
+        <div class="actions">
+          <button
+            class="button small-button"
+            type="button"
+            data-edit="${escapeHTML(product.id)}">
+            Editar
+          </button>
+
+          <button
+            class="button danger small-button"
+            type="button"
+            data-delete="${escapeHTML(product.id)}">
+            Eliminar
+          </button>
+        </div>
+
+      </article>
+    `;
+  }).join("");
 }
 
-async function saveTopAdmin(){
-  const btn=$('saveTopsBtn');
-  const selects=[...document.querySelectorAll('[data-top-category][data-top-position]')];
-  const rows=selects.map(select=>({
-    category:select.dataset.topCategory,
-    position:Number(select.dataset.topPosition),
-    product_id:select.value||null
-  })).filter(row=>row.product_id);
+/* ==========================================
+   FOTOGRAFÍAS
+========================================== */
 
-  btn.disabled=true;
-  topsStatus('Guardando TOPS...');
+function clearNewPhotos() {
+  newPhotos.forEach(photo => {
+    URL.revokeObjectURL(photo.preview);
+  });
 
-  try{
-    for(const cfg of TOP_CONFIG){
-      const categoryRows=rows.filter(row=>row.category===cfg.key);
-      const {error:deleteError}=await db.from('perfume_tops').delete().eq('category',cfg.key);
-      if(deleteError)throw deleteError;
-      if(categoryRows.length){
-        const {error:insertError}=await db.from('perfume_tops').insert(categoryRows);
-        if(insertError)throw insertError;
-      }
+  newPhotos = [];
+  $("#product-photos").value = "";
+}
+
+function renderPhotos() {
+  const area = $("#photos-preview");
+  area.innerHTML = "";
+
+  savedPhotos.forEach((url, index) => {
+    const card = document.createElement("div");
+    card.className = "photo-card";
+
+    const img = document.createElement("img");
+    img.src = url;
+    img.alt = "Fotografía del producto";
+    card.append(img);
+
+    const title = document.createElement("p");
+    title.textContent =
+      index === 0 ? "Principal" : "Fotografía " + (index + 1);
+
+    card.append(title);
+
+    if (index !== 0) {
+      const main = document.createElement("button");
+      main.type = "button";
+      main.className = "button secondary small-button";
+      main.textContent = "Principal";
+
+      main.onclick = () => {
+        savedPhotos.splice(index, 1);
+        savedPhotos.unshift(url);
+        $("#product-image").value = savedPhotos[0] || "";
+        renderPhotos();
+      };
+
+      card.append(main);
     }
-    await loadTopAdmin();
-    topsStatus('TOPS guardados correctamente.','success');
-    notice('TOPS guardados correctamente.','success');
-  }catch(error){
-    topsStatus('No se pudieron guardar los TOPS: '+error.message,'error');
-    notice(error.message,'error');
-  }finally{
-    btn.disabled=false;
+
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "button danger small-button";
+    remove.textContent = "Quitar";
+
+    remove.onclick = () => {
+      savedPhotos.splice(index, 1);
+      $("#product-image").value = savedPhotos[0] || "";
+      renderPhotos();
+    };
+
+    card.append(remove);
+    area.append(card);
+  });
+
+  newPhotos.forEach((photo, index) => {
+    const card = document.createElement("div");
+    card.className = "photo-card";
+
+    const img = document.createElement("img");
+    img.src = photo.preview;
+    img.alt = "Nueva fotografía";
+    card.append(img);
+
+    const title = document.createElement("p");
+    title.textContent = "Nueva fotografía";
+    card.append(title);
+
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "button danger small-button";
+    remove.textContent = "Quitar";
+
+    remove.onclick = () => {
+      URL.revokeObjectURL(photo.preview);
+      newPhotos.splice(index, 1);
+      renderPhotos();
+    };
+
+    card.append(remove);
+    area.append(card);
+  });
+}
+
+$("#product-photos").addEventListener("change", event => {
+  const files = Array.from(event.target.files);
+
+  if (
+    savedPhotos.length +
+    newPhotos.length +
+    files.length > 5
+  ) {
+    showMessage(
+      formMessage,
+      "Máximo cinco fotografías por perfume."
+    );
+    event.target.value = "";
+    return;
+  }
+
+  for (const file of files) {
+    if (
+      !["image/jpeg", "image/png", "image/webp"]
+        .includes(file.type)
+    ) {
+      showMessage(
+        formMessage,
+        "Solo se permiten imágenes JPG, PNG o WebP."
+      );
+      continue;
+    }
+
+    if (file.size > 15 * 1024 * 1024) {
+      showMessage(
+        formMessage,
+        "Una fotografía supera los 15 MB."
+      );
+      continue;
+    }
+
+    newPhotos.push({
+      file,
+      preview: URL.createObjectURL(file)
+    });
+  }
+
+  event.target.value = "";
+  renderPhotos();
+});
+
+/* ==========================================
+   COMPRIMIR Y SUBIR IMÁGENES
+========================================== */
+
+async function compressPhoto(file) {
+  if (file.size > 15 * 1024 * 1024) {
+    throw new Error("Una fotografía supera los 15 MB.");
+  }
+
+  const bitmap = await createImageBitmap(file);
+
+  const scale = Math.min(
+    1,
+    1200 / Math.max(bitmap.width, bitmap.height)
+  );
+
+  const canvas = document.createElement("canvas");
+
+  canvas.width = Math.max(
+    1,
+    Math.round(bitmap.width * scale)
+  );
+
+  canvas.height = Math.max(
+    1,
+    Math.round(bitmap.height * scale)
+  );
+
+  canvas.getContext("2d").drawImage(
+    bitmap,
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+  bitmap.close();
+
+  const blob = await new Promise(resolve => {
+    canvas.toBlob(resolve, "image/webp", 0.78);
+  });
+
+  if (!blob) {
+    throw new Error("No se pudo comprimir la fotografía.");
+  }
+
+  return blob;
+}
+
+async function uploadPhotos(photos) {
+  const urls = [];
+
+  for (const photo of photos) {
+    const blob = await compressPhoto(photo.file);
+
+    const path =
+      "catalogo/" + crypto.randomUUID() + ".webp";
+
+    const { error } = await db.storage
+      .from(BUCKET)
+      .upload(path, blob, {
+        contentType: "image/webp",
+        upsert: false
+      });
+
+    if (error) throw error;
+
+    const { data } = db.storage
+      .from(BUCKET)
+      .getPublicUrl(path);
+
+    urls.push(data.publicUrl);
+  }
+
+  return urls;
+}
+
+/* ==========================================
+   RESTABLECER FORMULARIO
+========================================== */
+
+function resetForm() {
+  $("#product-form").reset();
+  $("#product-id").value = "";
+  $("#product-stock").value = "0";
+  $("#product-active").checked = true;
+
+  $("#form-title").textContent = "Agregar perfume";
+  $("#save-button").textContent = "Guardar perfume";
+  $("#cancel-edit").classList.add("hidden");
+
+  savedPhotos = [];
+  clearNewPhotos();
+  renderPhotos();
+  hideMessage(formMessage);
+}
+
+/* ==========================================
+   EDITAR PRODUCTO
+========================================== */
+
+function editProduct(product) {
+  resetForm();
+
+  $("#product-id").value = product.id;
+  $("#product-name").value = product.name || "";
+  $("#product-brand").value = product.brand || "";
+  $("#product-category").value = product.category_id || "";
+  $("#product-gender").value = product.gender || "";
+  $("#product-price").value = product.price ?? "";
+  $("#product-offer-price").value =
+    product.offer_price ?? "";
+  $("#product-stock").value = product.stock ?? 0;
+  $("#product-image").value = product.image_url || "";
+  $("#product-description").value =
+    product.description || "";
+
+  $("#product-active").checked =
+    Boolean(product.is_active);
+
+  $("#product-offer").checked =
+    Boolean(product.is_offer);
+
+  $("#product-bestseller").checked =
+    Boolean(product.is_bestseller);
+
+  $("#top-women-order").value =
+    product.top_women_order || "";
+
+  $("#top-men-order").value =
+    product.top_men_order || "";
+
+  savedPhotos =
+    Array.isArray(product.images) && product.images.length
+      ? [...product.images]
+      : product.image_url
+        ? [product.image_url]
+        : [];
+
+  renderPhotos();
+
+  $("#form-title").textContent = "Editar perfume";
+  $("#save-button").textContent = "Guardar cambios";
+  $("#cancel-edit").classList.remove("hidden");
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/* ==========================================
+   GUARDAR PRODUCTO
+========================================== */
+
+async function saveProduct(event) {
+  event.preventDefault();
+  hideMessage(formMessage);
+
+  const button = $("#save-button");
+  button.disabled = true;
+
+  try {
+    const name = $("#product-name").value.trim();
+    const category = $("#product-category").value;
+    const price = Number($("#product-price").value);
+    const stock = Number($("#product-stock").value);
+
+    const rawOffer = $("#product-offer-price").value;
+    const offerPrice =
+      rawOffer === "" ? null : Number(rawOffer);
+
+    const isOffer = $("#product-offer").checked;
+
+    if (!name) {
+      throw new Error("Ingresá el nombre del perfume.");
+    }
+
+    if (!category) {
+      throw new Error("Seleccioná una categoría.");
+    }
+
+    if (!Number.isFinite(price) || price < 0) {
+      throw new Error("Precio inválido.");
+    }
+
+    if (!Number.isInteger(stock) || stock < 0) {
+      throw new Error("Existencias inválidas.");
+    }
+
+    if (
+      offerPrice !== null &&
+      (!Number.isFinite(offerPrice) ||
+       offerPrice < 0 ||
+       offerPrice >= price)
+    ) {
+      throw new Error(
+        "El precio de oferta debe ser menor que el regular."
+      );
+    }
+
+    if (isOffer && (offerPrice === null || offerPrice <= 0)) {
+      throw new Error(
+        "Activá la oferta e ingresá un precio válido."
+      );
+    }
+
+    const manual = $("#product-image").value.trim();
+
+    let photos = [...savedPhotos];
+
+    if (manual && !photos.includes(manual)) {
+      photos.unshift(manual);
+    }
+
+    if (photos.length + newPhotos.length > 5) {
+      throw new Error("Máximo cinco fotografías.");
+    }
+
+    if (newPhotos.length) {
+      showMessage(
+        formMessage,
+        "Comprimiendo y subiendo fotografías..."
+      );
+
+      const urls = await uploadPhotos(newPhotos);
+      photos.push(...urls);
+    }
+
+    const product = {
+      name,
+      brand: $("#product-brand").value.trim() || null,
+      description:
+        $("#product-description").value.trim() || null,
+
+      category_id: category,
+      gender: $("#product-gender").value || null,
+
+      price,
+      offer_price: offerPrice,
+      image_url: photos[0] || null,
+      images: photos,
+      stock,
+
+      is_active: $("#product-active").checked,
+      is_offer: isOffer,
+      is_bestseller: $("#product-bestseller").checked,
+
+      top_women_order: $("#top-women-order").value
+        ? Number($("#top-women-order").value)
+        : null,
+
+      top_men_order: $("#top-men-order").value
+        ? Number($("#top-men-order").value)
+        : null
+    };
+
+    const id = $("#product-id").value;
+
+    const query = db.from("products");
+
+    const { error } = id
+      ? await query.update(product).eq("id", id)
+      : await query.insert(product);
+
+    if (error) throw error;
+
+    resetForm();
+    await loadProducts();
+
+    showMessage(
+      formMessage,
+      id
+        ? "Producto actualizado correctamente."
+        : "Producto agregado correctamente."
+    );
+
+  } catch (error) {
+    console.error(error);
+
+    showMessage(
+      formMessage,
+      "No se pudo guardar: " + error.message
+    );
+
+  } finally {
+    button.disabled = false;
   }
 }
 
-$('saveTopsBtn').addEventListener('click',saveTopAdmin);
+/* ==========================================
+   ELIMINAR PRODUCTO
+========================================== */
 
-async function load(){
- const {data,error}=await db.from('products').select('*').order('created_at',{ascending:false});
- if(error){notice('No se pudieron cargar los productos. Verifica que la sesión sea de administrador.','error');return []}
- $('seedCard').style.display=data.length?'none':'block'; render(data); await loadTopAdmin(); return data;
+async function deleteProduct(id) {
+  if (!confirm(
+    "¿Seguro que querés eliminar este perfume?"
+  )) {
+    return;
+  }
+
+  const { error } = await db
+    .from("products")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    showMessage(productsMessage, error.message);
+    return;
+  }
+
+  await loadProducts();
+
+  showMessage(
+    productsMessage,
+    "Producto eliminado correctamente."
+  );
 }
-let all=[];
-function render(data){all=data;const q=$('search').value.toLowerCase();const rows=data.filter(x=>(x.brand+' '+x.name).toLowerCase().includes(q));$('products').innerHTML=rows.map(p=>`<article class="prod"><img src="${p.image_url||'https://placehold.co/600x600?text=UrbanTech'}" onerror="this.src='https://placehold.co/600x600?text=UrbanTech'"><div class="p"><div class="brandtxt">${esc(p.brand)}</div><div class="name">${esc(p.name)}</div><div class="price">${money(p.price)}</div><div class="small">${p.active?'Visible en la tienda':'Oculto'}</div><div class="actions"><button class="btn light" onclick="edit('${p.id}')">Editar</button><button class="btn ${p.active?'danger':'green'}" onclick="toggle('${p.id}',${!p.active})">${p.active?'Ocultar':'Mostrar'}</button><button class="btn danger" onclick="del('${p.id}')">Eliminar</button></div></div></article>`).join('')||'<p class="small">No hay coincidencias.</p>'}
-function esc(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
-window.edit=id=>{const p=all.find(x=>x.id===id);if(!p)return;$('productId').value=p.id;$('brand').value=p.brand;$('name').value=p.name;$('price').value=p.price;$('imageUrl').value=p.image_url||'';$('active').checked=p.active;$('formTitle').textContent='Editar perfume';$('cancelBtn').classList.remove('hidden');scrollTo({top:0,behavior:'smooth'})};
-window.toggle=async(id,val)=>{const {error}=await db.from('products').update({active:val}).eq('id',id);if(error)notice(error.message,'error');else await load()};
-window.del=async id=>{if(!confirm('¿Eliminar este perfume?'))return;const {error}=await db.from('products').delete().eq('id',id);if(error)notice(error.message,'error');else await load()};
-$('search').addEventListener('input',()=>render(all));
-$('cancelBtn').onclick=()=>reset();function reset(){$('productForm').reset();$('productId').value='';$('active').checked=true;$('formTitle').textContent='Agregar perfume';$('cancelBtn').classList.add('hidden')}
-$('productForm').onsubmit=async e=>{e.preventDefault();notice('Guardando...');let image=$('imageUrl').value.trim()||null;const file=$('imageFile').files[0];if(file){const ext=(file.name.split('.').pop()||'jpg').toLowerCase();const path=`products/${crypto.randomUUID()}.${ext}`;const up=await db.storage.from('UrbanTech').upload(path,file,{contentType:file.type||'image/jpeg'});if(up.error){notice('Error al subir la imagen: '+up.error.message,'error');return}image=db.storage.from('UrbanTech').getPublicUrl(path).data.publicUrl}
-const payload={brand:$('brand').value.trim(),name:$('name').value.trim(),price:Number($('price').value),image_url:image,active:$('active').checked};const id=$('productId').value;const res=id?await db.from('products').update(payload).eq('id',id):await db.from('products').insert(payload);if(res.error){notice(res.error.message,'error');return}notice('Producto guardado correctamente.','success');reset();await load()};
-$('seedBtn').onclick=async()=>{if(!confirm('¿Cargar los 25 perfumes iniciales?'))return;$('seedBtn').disabled=true;const rows=INITIAL.map(x=>({brand:x[0],name:x[1],price:x[2],image_url:x[3],active:true}));const {error}=await db.from('products').insert(rows);if(error)notice(error.message,'error');else{notice('Los 25 perfumes fueron cargados.','success');await load()}$('seedBtn').disabled=false};
-$('logout').onclick=()=>db.auth.signOut();
-async function start(){const {data:{session}}=await db.auth.getSession();if(session){$('loginView').classList.add('hidden');$('appView').classList.remove('hidden');await load()}else{$('loginView').classList.remove('hidden');$('appView').classList.add('hidden')}}
-$('loginForm').onsubmit=async e=>{e.preventDefault();$('loginMsg').innerHTML='';const {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error){$('loginMsg').innerHTML='<div class="msg error">Correo o contraseña incorrectos.</div>'}else start()};
-db.auth.onAuthStateChange(()=>setTimeout(start,0));start();
-</script></body></html>
+
+/* ==========================================
+   INICIO DE SESIÓN
+========================================== */
+
+async function handleLogin(event) {
+  event.preventDefault();
+  hideMessage(loginMessage);
+
+  const button = $("#login-button");
+  button.disabled = true;
+
+  try {
+    const { error } = await db.auth.signInWithPassword({
+      email: $("#login-email").value.trim(),
+      password: $("#login-password").value
+    });
+
+    if (error) throw error;
+
+    await showAdmin();
+
+  } catch (error) {
+    showMessage(loginMessage, error.message);
+  } finally {
+    button.disabled = false;
+  }
+}
+
+/* ==========================================
+   MOSTRAR ADMINISTRACIÓN
+========================================== */
+
+async function showAdmin() {
+  setLoggedIn(true);
+
+  try {
+    await loadCategories();
+    await loadProducts();
+  } catch (error) {
+    showMessage(
+      productsMessage,
+      error.message
+    );
+  }
+}
+
+/* ==========================================
+   CERRAR SESIÓN
+========================================== */
+
+async function logout() {
+  const { error } = await db.auth.signOut();
+
+  if (error) {
+    alert("No se pudo cerrar sesión: " + error.message);
+    return;
+  }
+
+  resetForm();
+  setLoggedIn(false);
+}
+
+/* ==========================================
+   INICIALIZAR SUPABASE
+========================================== */
+
+async function initialize() {
+  if (
+    !window.supabase ||
+    !window.SUPABASE_URL ||
+    !window.SUPABASE_ANON_KEY
+  ) {
+    showMessage(
+      loginMessage,
+      "Falta la configuración de Supabase en config.js."
+    );
+    return;
+  }
+
+  db = window.supabase.createClient(
+    window.SUPABASE_URL,
+    window.SUPABASE_ANON_KEY
+  );
+
+  $("#login-form").addEventListener(
+    "submit",
+    handleLogin
+  );
+
+  $("#product-form").addEventListener(
+    "submit",
+    saveProduct
+  );
+
+  $("#logout-button").addEventListener(
+    "click",
+    logout
+  );
+
+  $("#cancel-edit").addEventListener(
+    "click",
+    resetForm
+  );
+
+  $("#products-list").addEventListener(
+    "click",
+    async event => {
+      const edit = event.target.closest("[data-edit]");
+      const del = event.target.closest("[data-delete]");
+
+      if (edit) {
+        const { data, error } = await db
+          .from("products")
+          .select("*")
+          .eq("id", edit.dataset.edit)
+          .single();
+
+        if (error) {
+          showMessage(
+            productsMessage,
+            error.message
+          );
+        } else {
+          editProduct(data);
+        }
+      }
+
+      if (del) {
+        await deleteProduct(del.dataset.delete);
+      }
+    }
+  );
+
+  const { data, error } = await db.auth.getSession();
+
+  if (error) {
+    showMessage(loginMessage, error.message);
+    return;
+  }
+
+  if (data.session) {
+    await showAdmin();
+  } else {
+    setLoggedIn(false);
+  }
+
+  db.auth.onAuthStateChange((event, session) => {
+    if (event === "SIGNED_OUT" || !session) {
+      setLoggedIn(false);
+    }
+  });
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener(
+    "DOMContentLoaded",
+    initialize
+  );
+} else {
+  initialize();
+}
+
+})();
+</script>
+
+</body>
+</html>
+
